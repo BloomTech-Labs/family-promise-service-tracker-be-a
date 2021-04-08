@@ -1,6 +1,6 @@
 const express = require('express');
 const authRequired = require('../middleware/authRequired');
-const Profiles = require('./profileModel');
+const DB = require('../utils/db-helper');
 const router = express.Router();
 
 /**
@@ -63,7 +63,7 @@ const router = express.Router();
  *        $ref: '#/components/responses/UnauthorizedError'
  */
 router.get('/', authRequired, function (req, res) {
-  Profiles.findAll()
+  DB.findAll('profiles')
     .then((profiles) => {
       res.status(200).json(profiles);
     })
@@ -110,7 +110,7 @@ router.get('/', authRequired, function (req, res) {
  */
 router.get('/:id', authRequired, function (req, res) {
   const id = String(req.params.id);
-  Profiles.findById(id)
+  DB.findById('profiles', id)
     .then((profile) => {
       if (profile) {
         res.status(200).json(profile);
@@ -164,10 +164,10 @@ router.post('/', authRequired, async (req, res) => {
   if (profile) {
     const id = profile.id || 0;
     try {
-      await Profiles.findById(id).then(async (pf) => {
+      await DB.findById('profiles', id).then(async (pf) => {
         if (pf == undefined) {
           //profile not found so lets insert it
-          await Profiles.create(profile).then((profile) =>
+          await DB.create('profiles', profile).then((profile) =>
             res
               .status(200)
               .json({ message: 'profile created', profile: profile[0] })
@@ -222,9 +222,9 @@ router.put('/', authRequired, (req, res) => {
   const profile = req.body;
   if (profile) {
     const id = profile.id || 0;
-    Profiles.findById(id)
+    DB.findById('profiles', id)
       .then(
-        Profiles.update(id, profile)
+        DB.update('profiles', id, profile)
           .then((updated) => {
             res
               .status(200)
@@ -278,8 +278,8 @@ router.put('/', authRequired, (req, res) => {
 router.delete('/:id', (req, res) => {
   const id = req.params.id;
   try {
-    Profiles.findById(id).then((profile) => {
-      Profiles.remove(profile.id).then(() => {
+    DB.findById('profiles', id).then((profile) => {
+      DB.remove('profiles', profile.id).then(() => {
         res
           .status(200)
           .json({ message: `Profile '${id}' was deleted.`, profile: profile });
