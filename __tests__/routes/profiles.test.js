@@ -1,10 +1,11 @@
 const request = require('supertest');
 const express = require('express');
-const Profiles = require('../../api/profile/profileModel');
+const DB = require('../../api/utils/db-helper');
 const profileRouter = require('../../api/profile/profileRouter');
 const server = express();
 server.use(express.json());
 
+jest.mock('../../api/utils/db-helper');
 jest.mock('../../api/profile/profileModel');
 // mock the auth middleware completely
 jest.mock('../../api/middleware/authRequired', () =>
@@ -20,18 +21,18 @@ describe('profiles router endpoints', () => {
 
   describe('GET /profiles', () => {
     it('should return 200', async () => {
-      Profiles.findAll.mockResolvedValue([]);
+      DB.findAll.mockResolvedValue([]);
       const res = await request(server).get('/profiles');
 
       expect(res.status).toBe(200);
       expect(res.body.length).toBe(0);
-      expect(Profiles.findAll.mock.calls.length).toBe(1);
+      expect(DB.findAll.mock.calls.length).toBe(1);
     });
   });
 
   describe('GET /profiles/:id', () => {
     it('should return 200 when profile found', async () => {
-      Profiles.findById.mockResolvedValue({
+      DB.findById.mockResolvedValue({
         id: 'd376de0577681ca93614',
         name: 'Bob Smith',
         email: 'bob@example.com',
@@ -40,11 +41,11 @@ describe('profiles router endpoints', () => {
 
       expect(res.status).toBe(200);
       expect(res.body.name).toBe('Bob Smith');
-      expect(Profiles.findById.mock.calls.length).toBe(1);
+      expect(DB.findById.mock.calls.length).toBe(1);
     });
 
     it('should return 404 when no user found', async () => {
-      Profiles.findById.mockResolvedValue();
+      DB.findById.mockResolvedValue();
       const res = await request(server).get('/profiles/d376de0577681ca93614');
 
       expect(res.status).toBe(404);
@@ -60,15 +61,15 @@ describe('profiles router endpoints', () => {
         avatarUrl:
           'https://s3.amazonaws.com/uifaces/faces/twitter/hermanobrother/128.jpg',
       };
-      Profiles.findById.mockResolvedValue(undefined);
-      Profiles.create.mockResolvedValue([
+      DB.findById.mockResolvedValue(undefined);
+      DB.create.mockResolvedValue([
         Object.assign({ id: 'd376de0577681ca93614' }, profile),
       ]);
       const res = await request(server).post('/profile').send(profile);
 
       expect(res.status).toBe(200);
       expect(res.body.profile.id).toBe('d376de0577681ca93614');
-      expect(Profiles.create.mock.calls.length).toBe(1);
+      expect(DB.create.mock.calls.length).toBe(1);
     });
   });
 
@@ -81,13 +82,13 @@ describe('profiles router endpoints', () => {
         avatarUrl:
           'https://s3.amazonaws.com/uifaces/faces/twitter/hermanobrother/128.jpg',
       };
-      Profiles.findById.mockResolvedValue(profile);
-      Profiles.update.mockResolvedValue([profile]);
+      DB.findById.mockResolvedValue(profile);
+      DB.update.mockResolvedValue([profile]);
 
       const res = await request(server).put('/profile/').send(profile);
       expect(res.status).toBe(200);
       expect(res.body.profile.name).toBe('Louie Smith');
-      expect(Profiles.update.mock.calls.length).toBe(1);
+      expect(DB.update.mock.calls.length).toBe(1);
     });
   });
 });
