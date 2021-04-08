@@ -1,14 +1,18 @@
-# Basic Node API Scaffold
+# Family Promise Service Tracker
 
-Welcome to your `Basic Node API Repository`. Use this to start your own Greenfield Project using nodejs, express and common industry standards.
+[Family Promise](https://familypromise.org/) helps local communities coordinate their compassion to address the root causes of family homelessness. They tap existing local resources to empower families towards economic stability. Families come to them in crisis; they help them rebuild their lives with new skills and ongoing support. They address the issue holistically, providing prevention services before families reach crisis, shelter and case management when they become homeless, and stabilization programs once they have secured housing to ensure they remain independent.
 
-This repository assumes a handful of industry practices and standards. We strive to keep you on the bleeding edge of the industry and as a result, we have made some opinions for you so that you don't have to; you're welcome.
+Family Promise needs a way to track and visualize the services they provide external to the shelter to gain actionable insights.
 
-Read more at <https://docs.labs.lambdaschool.com/labs-api-strarter/>
+Our goal is to build a generalizable monitoring and evaluation (M&E) platform that meets Family Promise's needs, with an eye toward additional potential use cases that would be useful for many other organizations.
+
+## Status
+Current Roadmap in [Notion](https://www.notion.so/Roadmap-Family-Promise-Service-Tracker-Labs-33-301d3f1b37564f11b6e0a399a5ca8365), all activity tracked in [Trello](https://trello.com/b/8Y9zYr3n/family-promise-service-tracker-labs-33).
 
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=labs-api-starter&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=labs-api-starter)
 
 ## Requirements
+Details on the Labs Node Scaffolding here: <https://docs.labs.lambdaschool.com/labs-api-strarter/>
 
 Labs teams must follow all [Labs Engineering Standards](https://labs.lambdaschool.com/topics/node-js/).
 
@@ -59,10 +63,5 @@ There are 3 options to get postgresql installed locally [Choose one]:
 - run: `npm run tests` to confirm all is setup and tests pass.
 - run: `npm run watch:dev` to start nodemon in local dev enviornment.
 
-> Make sure to update the details of the app name, description and version in
-> the `package.json` and `config/jsdoc.js` files.
 
-## Contributing
 
-See the [contributing doc](https://github.com/Lambda-School-Labs/labs-api-starter/blob/main/CONTRIBUTING.md)
-for more info.

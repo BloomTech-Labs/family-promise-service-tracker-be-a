@@ -2,10 +2,10 @@ module.exports = {
   definition: {
     openapi: '3.0.1',
     info: {
-      title: 'Lambda Labs Starter API',
+      title: 'Family Promise Service Tracker',
       version: '1.0.0',
       description:
-        'A basic API server to act as a starting point for Labs projects',
+        'A monitoring and evaluation platform for services provided to the community',
       license: {
         name: 'MIT',
         url: 'https://en.wikipedia.org/wiki/MIT_License',
