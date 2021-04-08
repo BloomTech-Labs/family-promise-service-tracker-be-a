@@ -12,7 +12,7 @@ const config_result = dotenv.config();
 if (process.env.NODE_ENV != 'production' && config_result.error) {
   throw config_result.error;
 }
-
+const authRequired = require('./middleware/authRequired');
 const swaggerSpec = swaggerJSDoc(jsdocConfig);
 const swaggerUIOptions = {
   explorer: true,
@@ -46,10 +46,11 @@ app.use(
 app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use('/api/*', authRequired);
 
 // application routes
 app.use('/', indexRouter);
-app.use(['/profile', '/profiles'], profileRouter);
+app.use(['/api/profile', '/api/profiles'], profileRouter);
 app.use('/data', dsRouter);
 
 // catch 404 and forward to error handler
