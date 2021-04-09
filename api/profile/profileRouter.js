@@ -159,13 +159,24 @@ router.get('/:id', function (req, res) {
  *                  $ref: '#/components/schemas/Profile'
  */
 router.post('/', async (req, res) => {
-  const profile = req.body;
+  let profile = req.body;
   if (profile) {
     const id = profile.id || 0;
     try {
       await DB.findById('profiles', id).then(async (pf) => {
         if (pf == undefined) {
           //profile not found so lets insert it
+
+          // check if avatar url is included, if not create temp
+          if (!profile.avatarUrl) {
+            profile = {
+              ...profile,
+              avatarUrl: `https://avatars.dicebear.com/api/initials/${encodeURIComponent(
+                profile.name
+              )}.svg`,
+            };
+          }
+
           await DB.create('profiles', profile).then((profile) =>
             res
               .status(200)
