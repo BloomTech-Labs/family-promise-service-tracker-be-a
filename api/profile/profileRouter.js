@@ -1,6 +1,7 @@
 const express = require('express');
 const DB = require('../utils/db-helper');
 const router = express.Router();
+const { canEditProfile } = require('../middleware/authorization');
 
 /**
  * @swagger
@@ -228,17 +229,17 @@ router.post('/', async (req, res) => {
  *                profile:
  *                  $ref: '#/components/schemas/Profile'
  */
-router.put('/:id', (req, res) => {
-  const profile = req.body;
-  if (profile) {
-    const id = profile.id || 0;
+router.put('/:id', canEditProfile, (req, res) => {
+  const update = req.body;
+  if (update) {
+    const id = req.params.id;
     DB.findById('profiles', id)
       .then(
-        DB.update('profiles', id, profile)
+        DB.update('profiles', id, update)
           .then((updated) => {
             res
               .status(200)
-              .json({ message: 'profile created', profile: updated[0] });
+              .json({ message: 'profile updated', profile: updated[0] });
           })
           .catch((err) => {
             res.status(500).json({
