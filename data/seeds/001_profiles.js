@@ -1,9 +1,9 @@
 const profiles = [
   {
-    id: '00uk9lxaulDasdfYOiB4H5d6',
-    email: 'bg_user@gmadffil.com',
+    id: '00uk9lxaulDYOiB4H5d6',
+    email: 'bg_user@gmail.com',
     name: 'bg_user basic',
-    role: 'unassigned',
+    role: 'administrator',
     avatarUrl: `https://avatars.dicebear.com/api/initials/${encodeURIComponent(
       'bg_user basic'
     )}.svg`,
