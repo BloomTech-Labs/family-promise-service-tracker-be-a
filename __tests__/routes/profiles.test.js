@@ -85,7 +85,9 @@ describe('profiles router endpoints', () => {
       DB.findById.mockResolvedValue(profile);
       DB.update.mockResolvedValue([profile]);
 
-      const res = await request(server).put('/profile/').send(profile);
+      const res = await request(server)
+        .put('/profile/d376de0577681ca93614')
+        .send(profile);
       expect(res.status).toBe(200);
       expect(res.body.profile.name).toBe('Louie Smith');
       expect(DB.update.mock.calls.length).toBe(1);
