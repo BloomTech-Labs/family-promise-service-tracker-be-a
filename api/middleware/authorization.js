@@ -19,6 +19,4 @@ const canEditProfile = async (req, res, next) => {
   }
 };
 
-module.exports = {
-  canEditProfile,
-};
+module.exports = canEditProfile;

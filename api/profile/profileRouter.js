@@ -1,7 +1,7 @@
 const express = require('express');
 const DB = require('../utils/db-helper');
 const router = express.Router();
-const { canEditProfile } = require('../middleware/authorization');
+const canEditProfile = require('../middleware/authorization');
 
 /**
  * @swagger

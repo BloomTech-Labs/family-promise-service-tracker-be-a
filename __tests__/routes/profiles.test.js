@@ -11,6 +11,9 @@ jest.mock('../../api/profile/profileModel');
 jest.mock('../../api/middleware/authRequired', () =>
   jest.fn((req, res, next) => next())
 );
+jest.mock('../../api/middleware/authorization', () =>
+  jest.fn((req, res, next) => next())
+);
 
 describe('profiles router endpoints', () => {
   beforeAll(() => {
