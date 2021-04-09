@@ -6,7 +6,7 @@ Path|Method|Requirements|Authorization
 ---|-----|-------------|-----
 /api/profiles| GET | none | none
 /api/profiles/:id| GET | none | none
-/api/profiles/:id| PUT | any desired edits as key:value json pair | Admin can edit role, name, avatarUrl. Other users can edit their own name and avatarUrls, will receive 401 if they attempt to edit other fields or other users. 
+/api/profiles/:id| PUT | any desired edits as key:value json pair | Admin can edit role, name, avatarUrl of any user. Other users can edit their own name and avatarUrls, will receive 401 if they attempt to edit other fields or other users. 
 
 #### Stubbed Endpoints
 We were asked to stub some endpoints for user managementL 
