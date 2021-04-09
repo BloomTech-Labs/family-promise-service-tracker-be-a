@@ -1,7 +1,7 @@
 const express = require('express');
 const DB = require('../utils/db-helper');
 const router = express.Router();
-const canEditProfile = require('../middleware/authorization');
+const { requireAdmin, canEditProfile } = require('../middleware/authorization');
 
 /**
  * @swagger
@@ -159,41 +159,43 @@ router.get('/:id', function (req, res) {
  *                profile:
  *                  $ref: '#/components/schemas/Profile'
  */
-router.post('/', async (req, res) => {
-  let profile = req.body;
-  if (profile) {
-    const id = profile.id || 0;
-    try {
-      await DB.findById('profiles', id).then(async (pf) => {
-        if (pf == undefined) {
-          //profile not found so lets insert it
-
-          // check if avatar url is included, if not create temp
-          if (!profile.avatarUrl) {
-            profile = {
-              ...profile,
-              avatarUrl: `https://avatars.dicebear.com/api/initials/${encodeURIComponent(
-                profile.name
-              )}.svg`,
-            };
-          }
-
-          await DB.create('profiles', profile).then((profile) =>
-            res
-              .status(200)
-              .json({ message: 'profile created', profile: profile[0] })
-          );
-        } else {
-          res.status(400).json({ message: 'profile already exists' });
-        }
-      });
-    } catch (e) {
-      console.error(e);
-      res.status(500).json({ message: e.message });
-    }
-  } else {
-    res.status(404).json({ message: 'Profile missing' });
-  }
+router.post('/', requireAdmin, async (req, res) => {
+  res.status(200).json({
+    message: 'Stubbed method for creating users - no data was submitted',
+  });
+  // Keeping logic here for easier addition when needed
+  // let profile = req.body;
+  // if (profile) {
+  //   const id = profile.id || 0;
+  //   try {
+  //     await DB.findById('profiles', id).then(async (pf) => {
+  //       if (pf == undefined) {
+  //         //profile not found so lets insert it
+  //         // check if avatar url is included, if not create temp
+  //         if (!profile.avatarUrl) {
+  //           profile = {
+  //             ...profile,
+  //             avatarUrl: `https://avatars.dicebear.com/api/initials/${encodeURIComponent(
+  //               profile.name
+  //             )}.svg`,
+  //           };
+  //         }
+  //         await DB.create('profiles', profile).then((profile) =>
+  //           res
+  //             .status(200)
+  //             .json({ message: 'profile created', profile: profile[0] })
+  //         );
+  //       } else {
+  //         res.status(400).json({ message: 'profile already exists' });
+  //       }
+  //     });
+  //   } catch (e) {
+  //     console.error(e);
+  //     res.status(500).json({ message: e.message });
+  //   }
+  // } else {
+  //   res.status(404).json({ message: 'Profile missing' });
+  // }
 });
 /**
  * @swagger
@@ -286,22 +288,25 @@ router.put('/:id', canEditProfile, (req, res) => {
  *                profile:
  *                  $ref: '#/components/schemas/Profile'
  */
-router.delete('/:id', (req, res) => {
-  const id = req.params.id;
-  try {
-    DB.findById('profiles', id).then((profile) => {
-      DB.remove('profiles', profile.id).then(() => {
-        res
-          .status(200)
-          .json({ message: `Profile '${id}' was deleted.`, profile: profile });
-      });
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: `Could not delete profile with ID: ${id}`,
-      error: err.message,
-    });
-  }
+router.delete('/:id', requireAdmin, (req, res) => {
+  res.status(200).json({
+    message: 'Stubbed method for deleting users - no data was deleted',
+  });
+  // const id = req.params.id;
+  // try {
+  //   DB.findById('profiles', id).then((profile) => {
+  //     DB.remove('profiles', profile.id).then(() => {
+  //       res
+  //         .status(200)
+  //         .json({ message: `Profile '${id}' was deleted.`, profile: profile });
+  //     });
+  //   });
+  // } catch (err) {
+  //   res.status(500).json({
+  //     message: `Could not delete profile with ID: ${id}`,
+  //     error: err.message,
+  //   });
+  // }
 });
 
 module.exports = router;

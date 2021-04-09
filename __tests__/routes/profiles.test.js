@@ -7,13 +7,16 @@ server.use(express.json());
 
 jest.mock('../../api/utils/db-helper');
 jest.mock('../../api/profile/profileModel');
-// mock the auth middleware completely
+
+// mock the auth middlewares completely
 jest.mock('../../api/middleware/authRequired', () =>
   jest.fn((req, res, next) => next())
 );
-jest.mock('../../api/middleware/authorization', () =>
-  jest.fn((req, res, next) => next())
-);
+
+jest.mock('../../api/middleware/authorization', () => ({
+  requireAdmin: (req, res, next) => next(),
+  canEditProfile: (req, res, next) => next(),
+}));
 
 describe('profiles router endpoints', () => {
   beforeAll(() => {
@@ -57,22 +60,17 @@ describe('profiles router endpoints', () => {
   });
 
   describe('POST /profile', () => {
-    it('should return 200 when profile is created', async () => {
+    it('should return 200 with stubbed message', async () => {
       const profile = {
         name: 'Louie Smith',
         email: 'louie@example.com',
         avatarUrl:
           'https://s3.amazonaws.com/uifaces/faces/twitter/hermanobrother/128.jpg',
       };
-      DB.findById.mockResolvedValue(undefined);
-      DB.create.mockResolvedValue([
-        Object.assign({ id: 'd376de0577681ca93614' }, profile),
-      ]);
-      const res = await request(server).post('/profile').send(profile);
 
+      const res = await request(server).post('/profile').send(profile);
       expect(res.status).toBe(200);
-      expect(res.body.profile.id).toBe('d376de0577681ca93614');
-      expect(DB.create.mock.calls.length).toBe(1);
+      expect(res.body.message).toMatch(/Stubbed method for creating users/);
     });
   });
 
