@@ -9,8 +9,6 @@ Our goal is to build a generalizable monitoring and evaluation (M&E) platform th
 ## Status
 Current Roadmap in [Notion](https://www.notion.so/Roadmap-Family-Promise-Service-Tracker-Labs-33-301d3f1b37564f11b6e0a399a5ca8365), all activity tracked in [Trello](https://trello.com/b/8Y9zYr3n/family-promise-service-tracker-labs-33).
 
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=labs-api-starter&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=labs-api-starter)
-
 ## Requirements
 Details on the Labs Node Scaffolding here: <https://docs.labs.lambdaschool.com/labs-api-strarter/>
 
