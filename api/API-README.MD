@@ -15,12 +15,32 @@ Path|Method|Requirements|Authorization
 /api/profiles|POST| {tbd} | Admin will receive stub response, Non-admin will receive 401
 /api/profiles/:id| DELETE | none | Admin will receive stub response, Non-admin will receive 401
 
-Example JSON profile object for edit action:
+Current Profile object returned:
+```
+{
+    name: string,
+    avatarUrl: string,
+    role: string,
+}
+```
+Once we build out programs, object will include program data as well:
+```
+{
+    name: string,
+    avatarUrl: string,
+    role: string,
+    programs: [array of program objects]
+}
+```
+
+Example JSON profile object for edit/create action:
 
 ```
 {
-    "name": "Sal Servicer",
-    "avatarUrl": "https://link.com/img.jpg",
+    name: string,
+    role: enum[administrator|program_manager|service_provider|unassigned],
+    avatarUrl: string,
+    programs: [array of program_ids]
 }
 ```
 
@@ -35,6 +55,28 @@ Path|Method|Requirements|Authorization
 /api/programs|POST| {tbd}| admin
 /api/programs/:id| PUT | id, any edits | admin or program manager of this program 
 /api/programs/:id| DELETE | none | admin or program manager of this program 
+
+program object returned on GET requests:
+```
+{
+    id:int,
+    name:string,
+    type:string,
+    description:string,
+    program_managers:[array of profile objects]
+}
+```
+To create or edit program:
+```
+{
+    name:string,
+    type:string,
+    description:string,
+}
+```
+ID will be generated automatically for new programs, should be included in URL param for edits. 
+
+According to UX docs, assigning Users to Programs will happen on the user object and not on Program object.
 
 ### Services
 Path|Method|Requirements|Authorization
