@@ -1,5 +1,6 @@
 const express = require('express');
 const DB = require('../utils/db-helper');
+const Profiles = require('./profileModel');
 const router = express.Router();
 const { requireAdmin, canEditProfile } = require('../middleware/authorization');
 
@@ -63,7 +64,7 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *        $ref: '#/components/responses/UnauthorizedError'
  */
 router.get('/', function (req, res) {
-  DB.findAll('profiles')
+  Profiles.findAll('profiles')
     .then((profiles) => {
       res.status(200).json(profiles);
     })
@@ -110,7 +111,7 @@ router.get('/', function (req, res) {
  */
 router.get('/:id', function (req, res) {
   const id = String(req.params.id);
-  DB.findById('profiles', id)
+  Profiles.findById(id)
     .then((profile) => {
       if (profile) {
         res.status(200).json(profile);

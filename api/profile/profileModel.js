@@ -1,4 +1,31 @@
 const DB = require('../utils/db-helper');
+const knex = require('../../data/db-config');
+
+const findAll = async () => {
+  return await knex('profiles')
+    .leftJoin('programs_users', {
+      'profiles.id': 'programs_users.profile_id',
+    })
+    .leftJoin('programs', {
+      'programs_users.program_id': 'programs.id',
+    })
+    .select(knex.raw('profiles.*, json_agg(programs.*) as programs'))
+    .groupBy('profiles.id');
+};
+
+const findById = async (id) => {
+  return await knex('profiles')
+    .leftJoin('programs_users', {
+      'profiles.id': 'programs_users.profile_id',
+    })
+    .leftJoin('programs', {
+      'programs_users.program_id': 'programs.id',
+    })
+    .select(knex.raw('profiles.*, json_agg(programs.*) as programs'))
+    .where({ 'profiles.id': id })
+    .groupBy('profiles.id')
+    .first();
+};
 
 const findOrCreateProfile = async (profileObj) => {
   const foundProfile = await DB.findById('profiles', profileObj.id).then(
@@ -21,5 +48,7 @@ const findOrCreateProfile = async (profileObj) => {
 };
 
 module.exports = {
+  findAll,
+  findById,
   findOrCreateProfile,
 };
