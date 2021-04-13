@@ -3,9 +3,18 @@ exports.up = (knex) => {
     .raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"')
     .createTable('profiles', function (table) {
       table.string('id').notNullable().unique().primary();
-      table.string('email');
-      table.string('name');
+      table.string('email', 128).notNullable().unique();
+      table.string('name', 128).notNullable();
       table.string('avatarUrl');
+      table
+        .enu('role', [
+          'administrator',
+          'program_manager',
+          'service_provider',
+          'unassigned',
+        ])
+        .notNullable()
+        .defaultsTo('unassigned');
       table.timestamps(true, true);
     });
 };

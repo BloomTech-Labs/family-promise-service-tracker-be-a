@@ -7,6 +7,13 @@ const findOrCreateProfile = async (profileObj) => {
   if (foundProfile) {
     return foundProfile;
   } else {
+    // create temp avaturl with initials of name
+    profileObj = {
+      ...profileObj,
+      avatarUrl: `https://avatars.dicebear.com/api/initials/${encodeURIComponent(
+        profileObj.name
+      )}.svg`,
+    };
     return await DB.create('profiles', profileObj).then((newProfile) => {
       return newProfile ? newProfile[0] : newProfile;
     });
