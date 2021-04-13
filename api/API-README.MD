@@ -15,21 +15,30 @@ Path|Method|Requirements|Authorization
 /api/profiles|POST| {tbd} | Admin will receive stub response, Non-admin will receive 401
 /api/profiles/:id| DELETE | none | Admin will receive stub response, Non-admin will receive 401
 
-Current Profile object returned:
+Profile object returned
 ```
 {
+    id: string,
+    email: string,
     name: string,
     avatarUrl: string,
     role: string,
-}
-```
-Once we build out programs, object will include program data as well:
-```
-{
-    name: string,
-    avatarUrl: string,
-    role: string,
-    programs: [array of program objects]
+    created_at: DateTime string,
+    updated_at, DateTime string,
+    programs: [
+      {
+        id: string,
+        name: string,
+        type: string,
+        description: string
+      },
+      {
+        id: string,
+        name: string,
+        type: string,
+        description: string
+      }
+    ]
 }
 ```
 
