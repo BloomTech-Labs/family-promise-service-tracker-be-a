@@ -1,6 +1,7 @@
 const express = require('express');
 const DB = require('../utils/db-helper');
 const router = express.Router();
+const { requireAdmin } = require('../middleware/authorization');
 
 router.get('/', (req, res) => {
   DB.findAll('programs')
@@ -46,7 +47,7 @@ router.post('/type', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', requireAdmin, (req, res) => {
   DB.create('programs', req.body)
     .then((newProgram) => {
       res.status(201).json(newProgram);
@@ -56,7 +57,7 @@ router.post('/', (req, res) => {
     });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', requireAdmin, (req, res) => {
   DB.update('programs', req.params.id, req.body)
     .then((editedProgram) => {
       res.status(200).json(editedProgram);
@@ -66,7 +67,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', requireAdmin, (req, res) => {
   const { id } = req.params;
 
   DB.remove('programs', id)
