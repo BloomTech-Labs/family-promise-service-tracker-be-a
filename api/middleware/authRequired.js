@@ -1,6 +1,6 @@
 const createError = require('http-errors');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
-const oktaVerifierConfig = require('../../config/okta');
+const { oktaVerifierConfig } = require('../../config/okta');
 const Profiles = require('../profile/profileModel');
 const oktaJwtVerifier = new OktaJwtVerifier(oktaVerifierConfig.config);
 
