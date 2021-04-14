@@ -64,7 +64,7 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *        $ref: '#/components/responses/UnauthorizedError'
  */
 router.get('/', function (req, res) {
-  Profiles.findAll('profiles')
+  Profiles.findAll()
     .then((profiles) => {
       res.status(200).json(profiles);
     })
@@ -238,11 +238,11 @@ router.put('/:id', canEditProfile, (req, res) => {
     const id = req.params.id;
     DB.findById('profiles', id)
       .then(
-        DB.update('profiles', id, update)
+        Profiles.update(id, update)
           .then((updated) => {
             res
               .status(200)
-              .json({ message: 'profile updated', profile: updated[0] });
+              .json({ message: 'profile updated', profile: updated });
           })
           .catch((err) => {
             res.status(500).json({
