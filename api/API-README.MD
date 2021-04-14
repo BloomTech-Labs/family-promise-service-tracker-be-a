@@ -1,21 +1,21 @@
 # API Endpoints
 Server is deployed at: https://fp-service-tracker.herokuapp.com/
+
+All endpoints except for index require a valid Okta token for authorization. The authorization specfications for each table below refer to authorization beyond having a valid token.
+
 ## Completed
 ### Users
 Path|Method|Requirements|Authorization
 ---|-----|-------------|-----
 /api/profiles| GET | none | none
 /api/profiles/:id| GET | none | none
-/api/profiles/:id| PUT | any desired edits as key:value json pair | Admin can edit role, name, avatarUrl of any user. Other users can edit their own name and avatarUrls, will receive 401 if they attempt to edit other fields or other users. 
+/api/profiles/:id| PUT | any desired edits as key:value json pair. See below for details | Admin can edit role, name, avatarUrl, and programs of any user. Other users can edit their own name and avatarUrls, will receive 401 if they attempt to edit other fields or other users. 
+/api/profiles|POST| STUBBED RESPONSE | Admin will receive stub response, Non-admin will receive 401
+/api/profiles/:id| DELETE | STUBBED RESPONSE | Admin will receive stub response, Non-admin will receive 401
 
-#### Stubbed Endpoints
-We were asked to stub some endpoints for user managementL 
-Path|Method|Requirements|Authorization
----|-----|-------------|-----
-/api/profiles|POST| {tbd} | Admin will receive stub response, Non-admin will receive 401
-/api/profiles/:id| DELETE | none | Admin will receive stub response, Non-admin will receive 401
+We were asked to hold off on allowing access to Create/Delete functions, so those are stubbed responses for now. 
 
-Profile object returned
+Profile object:
 ```
 {
     id: string,
@@ -42,17 +42,34 @@ Profile object returned
 }
 ```
 
-Example JSON profile object for edit/create action:
+For Editing a given profile, including their assigned programs, submit only the fields that you would like to change. The programs field accepts an array of program IDs. 
 
+Change name and avatar:
 ```
 {
-    name: string,
-    role: enum[administrator|program_manager|service_provider|unassigned],
-    avatarUrl: string,
-    programs: [array of program_ids]
+    "name": "New Nancy",
+    "avatarUrl": "http://example.com/path/to/img/.jpg"
 }
 ```
-
+Change role and progams:
+```
+{
+    "role":"program_manager",
+    "programs":["program_id_4","program_id_8"]
+}
+```
+Note that if you include a programs field it will overwrite any prior assignments. To delete all assignments, include an empty array:
+```
+{
+    "programs": []
+}
+```
+If user was already assigned to program x, and you want to also add them to program y, you must include both x and y in the programs field:
+```
+{
+    "programs": ["x","y"]
+}
+```
 ## TODO
 Route documentation
 

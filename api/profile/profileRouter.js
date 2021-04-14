@@ -13,7 +13,8 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *        - id
  *        - email
  *        - name
- *        - avatarUrl
+ *        - role
+ *
  *      properties:
  *        id:
  *          type: string
@@ -25,11 +26,47 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *        avatarUrl:
  *          type: string
  *          description: public url of profile avatar
+ *        role:
+ *          type: string
+ *          enum: [administrator|program_manager|service_provider|unnassigned]
+ *        created_at:
+ *          type: string
+ *          format: date-time
+ *        updated_at:
+ *          type: string
+ *          format: date-time
+ *        programs:
+ *          type: array
+ *          items:
+ *            type: object
+ *            properties:
+ *              id:
+ *                type: string
+ *              name:
+ *                type: string
+ *              type:
+ *                type: string
+ *              description:
+ *                type: string
  *      example:
  *        id: '00uhjfrwdWAQvD8JV4x6'
  *        email: 'frank@example.com'
  *        name: 'Frank Martinez'
  *        avatarUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/hermanobrother/128.jpg'
+ *        role: administrator
+ *        created_at: 2021-04-13T18:47:08.529Z
+ *        updated_at: 2021-04-13T18:47:08.529Z
+ *        programs:
+ *          - id: '49365015-1fea-4b56-a635-638388df5c64'
+ *            name: 'Prevention'
+ *            type: 'Prevention'
+ *            description: 'This is the prevention program'
+ *          - id: 'ee313f99-22cf-4a1b-b073-3d6b5c625004'
+ *            name: 'Sheltering'
+ *            type: 'Sheltering'
+ *            description: 'This is the sheltering program'
+ *
+ *
  *
  * /profiles:
  *  get:
@@ -52,11 +89,32 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *                - id: '00uhjfrwdWAQvD8JV4x6'
  *                  email: 'frank@example.com'
  *                  name: 'Frank Martinez'
- *                  avatarUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/hermanobrother/128.jpg'
+ *                  avatarUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/herm.jpg'
+ *                  role: administrator
+ *                  created_at: 2021-04-13T18:47:08.529Z
+ *                  updated_at: 2021-04-13T18:47:08.529Z
+ *                  programs:
+ *                   - id: '49365015-1fea-4b56-a635-638388df5c64'
+ *                     name: 'Prevention'
+ *                     type: 'Prevention'
+ *                     description: 'This is the prevention program'
+ *                   - id: 'ee313f99-22cf-4a1b-b073-3d6b5c625004'
+ *                     name: 'Sheltering'
+ *                     type: 'Sheltering'
+ *                     description: 'This is the sheltering program'
  *                - id: '013e4ab94d96542e791f'
  *                  email: 'cathy@example.com'
  *                  name: 'Cathy Warmund'
  *                  avatarUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/geneseleznev/128.jpg'
+ *                  role: program_manager
+ *                  created_at: 2021-04-13T18:47:08.529Z
+ *                  updated_at: 2021-04-13T18:47:08.529Z
+ *                  programs:
+ *                   - id: '49365015-1fea-4b56-a635-638388df5c64'
+ *                     name: 'Prevention'
+ *                     type: 'Prevention'
+ *                     description: 'This is the prevention program'
+ *
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  *      403:
