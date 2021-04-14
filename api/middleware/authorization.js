@@ -11,18 +11,20 @@ const requireAdmin = (req, res, next) => {
 const canEditProfile = async (req, res, next) => {
   try {
     if (
-      // adminstrators can edit anyone's Name, Avatar, Role, but no other info
+      // adminstrators cannot edit profile id or email
+      // but can edit any other fields
       (req.profile.role == 'administrator') &
       !req.body.id &
       !req.body.email
     ) {
       next();
     } else if (
-      // users can edit their own Name and Avatar, but no other info
+      // users can only edit their own Name and Avatar
       (req.profile.id == req.params.id) &
       !req.body.id &
       !req.body.email &
-      !req.body.role
+      !req.body.role &
+      !req.body.programs
     ) {
       next();
     } else {
