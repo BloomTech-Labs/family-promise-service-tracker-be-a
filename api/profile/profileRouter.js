@@ -1,5 +1,4 @@
 const express = require('express');
-const DB = require('../utils/db-helper');
 const Profiles = require('./profileModel');
 const router = express.Router();
 const { requireAdmin, canEditProfile } = require('../middleware/authorization');
@@ -236,7 +235,7 @@ router.put('/:id', canEditProfile, (req, res) => {
   const update = req.body;
   if (update) {
     const id = req.params.id;
-    DB.findById('profiles', id)
+    Profiles.findById('profiles', id)
       .then(
         Profiles.update(id, update)
           .then((updated) => {
