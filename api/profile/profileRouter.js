@@ -12,7 +12,8 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *      required:
  *        - id
  *        - email
- *        - name
+ *        - firstName
+ *        - lastName
  *        - role
  *
  *      properties:
@@ -21,7 +22,9 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *          description: This is a foreign key (the okta user ID)
  *        email:
  *          type: string
- *        name:
+ *        firstName:
+ *          type: string
+ *        lastName:
  *          type: string
  *        avatarUrl:
  *          type: string
@@ -51,7 +54,8 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *      example:
  *        id: '00uhjfrwdWAQvD8JV4x6'
  *        email: 'frank@example.com'
- *        name: 'Frank Martinez'
+ *        firstName: 'Frank'
+ *        lastName: 'Martinez'
  *        avatarUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/hermanobrother/128.jpg'
  *        role: administrator
  *        created_at: 2021-04-13T18:47:08.529Z
@@ -88,7 +92,8 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *              example:
  *                - id: '00uhjfrwdWAQvD8JV4x6'
  *                  email: 'frank@example.com'
- *                  name: 'Frank Martinez'
+ *                  firstName: 'Frank'
+ *                  lastName: 'Martinez'
  *                  avatarUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/herm.jpg'
  *                  role: administrator
  *                  created_at: 2021-04-13T18:47:08.529Z
@@ -104,7 +109,8 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *                     description: 'This is the sheltering program'
  *                - id: '013e4ab94d96542e791f'
  *                  email: 'cathy@example.com'
- *                  name: 'Cathy Warmund'
+ *                  firstName: 'Cathy'
+ *                  lastName: 'Warmund'
  *                  avatarUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/geneseleznev/128.jpg'
  *                  role: program_manager
  *                  created_at: 2021-04-13T18:47:08.529Z
@@ -221,39 +227,6 @@ router.post('/', requireAdmin, async (req, res) => {
   res.status(200).json({
     message: 'Stubbed method for creating users - no data was submitted',
   });
-  // Keeping logic here for easier addition when needed
-  // let profile = req.body;
-  // if (profile) {
-  //   const id = profile.id || 0;
-  //   try {
-  //     await DB.findById('profiles', id).then(async (pf) => {
-  //       if (pf == undefined) {
-  //         //profile not found so lets insert it
-  //         // check if avatar url is included, if not create temp
-  //         if (!profile.avatarUrl) {
-  //           profile = {
-  //             ...profile,
-  //             avatarUrl: `https://avatars.dicebear.com/api/initials/${encodeURIComponent(
-  //               profile.name
-  //             )}.svg`,
-  //           };
-  //         }
-  //         await DB.create('profiles', profile).then((profile) =>
-  //           res
-  //             .status(200)
-  //             .json({ message: 'profile created', profile: profile[0] })
-  //         );
-  //       } else {
-  //         res.status(400).json({ message: 'profile already exists' });
-  //       }
-  //     });
-  //   } catch (e) {
-  //     console.error(e);
-  //     res.status(500).json({ message: e.message });
-  //   }
-  // } else {
-  //   res.status(404).json({ message: 'Profile missing' });
-  // }
 });
 /**
  * @swagger
@@ -350,21 +323,6 @@ router.delete('/:id', requireAdmin, (req, res) => {
   res.status(200).json({
     message: 'Stubbed method for deleting users - no data was deleted',
   });
-  // const id = req.params.id;
-  // try {
-  //   DB.findById('profiles', id).then((profile) => {
-  //     DB.remove('profiles', profile.id).then(() => {
-  //       res
-  //         .status(200)
-  //         .json({ message: `Profile '${id}' was deleted.`, profile: profile });
-  //     });
-  //   });
-  // } catch (err) {
-  //   res.status(500).json({
-  //     message: `Could not delete profile with ID: ${id}`,
-  //     error: err.message,
-  //   });
-  // }
 });
 
 module.exports = router;
