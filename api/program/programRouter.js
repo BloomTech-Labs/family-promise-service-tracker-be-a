@@ -14,9 +14,15 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  DB.findById('programs', req.params.id)
-    .then((programs) => {
-      res.status(200).json(programs);
+  const { id } = req.params;
+
+  DB.findById('programs', id)
+    .then((program) => {
+      if (program) {
+        res.status(200).json(program);
+      } else {
+        res.status(404).json({ error: `Program ${id} not found` });
+      }
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
