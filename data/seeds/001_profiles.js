@@ -3,7 +3,7 @@ const profiles = [
     id: '00uk9lxaulDYOiB4H5d6',
     email: 'bg_user@gmail.com',
     firstName: 'bg_user',
-    lastNane: 'basic',
+    lastName: 'basic',
     role: 'administrator',
     avatarUrl: `https://avatars.dicebear.com/api/initials/${encodeURIComponent(
       'bg_user basic'
