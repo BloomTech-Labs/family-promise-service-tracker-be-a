@@ -2,7 +2,7 @@ exports.up = function (knex) {
   return knex.schema.createTable('programs_users', (tbl) => {
     tbl.increments('id').primary();
     tbl
-      .string('program_id', 128)
+      .integer('program_id', 128)
       .unsigned()
       .notNullable()
       .references('id')

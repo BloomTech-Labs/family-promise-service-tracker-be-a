@@ -11,7 +11,7 @@ const requireAdmin = (req, res, next) => {
 const canEditProfile = async (req, res, next) => {
   try {
     if (
-      // adminstrators cannot edit profile id or email
+      // administrators cannot edit profile id or email
       // but can edit any other fields
       (req.profile.role == 'administrator') &
       !req.body.id &
