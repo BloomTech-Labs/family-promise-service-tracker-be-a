@@ -4,7 +4,8 @@ exports.up = (knex) => {
     .createTable('profiles', function (table) {
       table.string('id').notNullable().unique().primary();
       table.string('email', 128).notNullable().unique();
-      table.string('name', 128).notNullable();
+      table.string('firstName', 128).notNullable();
+      table.string('lastName', 128).notNullable();
       table.string('avatarUrl');
       table
         .enu('role', [

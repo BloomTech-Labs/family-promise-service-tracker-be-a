@@ -1,5 +1,5 @@
-const DB = require('../utils/db-helper');
 const knex = require('../../data/db-config');
+const { okta } = require('../../config/okta');
 
 const findAll = async () => {
   return await knex('profiles')
@@ -42,6 +42,7 @@ const update = async (id, updates) => {
           .update(profile)
           .transacting(trx);
       }
+
       // if request includes a programs array,
       // first wipe existing associations
       if (programs) {
@@ -63,9 +64,17 @@ const update = async (id, updates) => {
           )
           .transacting(trx);
       }
+      // if updating name fields, push changes to okta as well
+      // errors returned here will cancel postgres transaction
+      if (profile.firstName || profile.lastName) {
+        let user = await okta.getUser(id);
+        profile.firstName ? (user.profile.firstName = profile.firstName) : '';
+        profile.lastName ? (user.profile.lastName = profile.lastName) : '';
+        await user.update();
+      }
     });
-    // if transaction hasn't failed out, return
-    // promise with updated profile object
+    // if transaction hasn't failed at any point,
+    // return promise with updated profile object
     return await findById(id);
   } catch (err) {
     // if transaction fails, forward the error
@@ -74,27 +83,8 @@ const update = async (id, updates) => {
   }
 };
 
-const findOrCreateProfile = async (profileObj) => {
-  const foundProfile = await findById(profileObj.id).then((profile) => profile);
-  if (foundProfile) {
-    return foundProfile;
-  } else {
-    // create temp avaturl with initials of name
-    profileObj = {
-      ...profileObj,
-      avatarUrl: `https://avatars.dicebear.com/api/initials/${encodeURIComponent(
-        profileObj.name
-      )}.svg`,
-    };
-    return await DB.create('profiles', profileObj).then((newProfile) => {
-      return newProfile ? newProfile[0] : newProfile;
-    });
-  }
-};
-
 module.exports = {
   findAll,
   findById,
   update,
-  findOrCreateProfile,
 };

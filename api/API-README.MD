@@ -24,7 +24,8 @@ Profile object:
 {
     id: string,
     email: string,
-    name: string,
+    firstName: string,
+    lastName: string,
     avatarUrl: string,
     role: string,
     created_at: DateTime string,
@@ -52,7 +53,7 @@ Change name and avatar:
 
 ```
 {
-    "name": "New Nancy",
+    "firstName": "Nancy",
     "avatarUrl": "http://example.com/path/to/img/.jpg"
 }
 ```
