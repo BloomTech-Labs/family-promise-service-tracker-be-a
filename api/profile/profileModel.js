@@ -1,5 +1,7 @@
 const DB = require('../utils/db-helper');
 const knex = require('../../data/db-config');
+const { okta } = require('../../config/okta');
+const splitNameField = require('../utils/splitNameField');
 
 const findAll = async () => {
   return await knex('profiles')
@@ -27,6 +29,14 @@ const findById = async (id) => {
     .first();
 };
 
+const updateOktaName = async (oktaId, newName) => {
+  let user = await okta.getUser(oktaId);
+  const { firstName, lastName } = splitNameField(newName);
+  user.profile.firstName = firstName;
+  user.profile.lastName = lastName;
+  return await user.update();
+};
+
 const update = async (id, updates) => {
   const { programs, ...profile } = updates;
 
@@ -42,6 +52,7 @@ const update = async (id, updates) => {
           .update(profile)
           .transacting(trx);
       }
+
       // if request includes a programs array,
       // first wipe existing associations
       if (programs) {
@@ -63,9 +74,14 @@ const update = async (id, updates) => {
           )
           .transacting(trx);
       }
+      // if updating name, push changes to okta as well
+      // errors returned here will cancel postgres transaction
+      if (profile.name) {
+        await updateOktaName(id, profile.name);
+      }
     });
-    // if transaction hasn't failed out, return
-    // promise with updated profile object
+    // if transaction hasn't failed at any point,
+    // return promise with updated profile object
     return await findById(id);
   } catch (err) {
     // if transaction fails, forward the error
