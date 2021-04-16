@@ -1,10 +1,11 @@
 const express = require('express');
 const DB = require('../utils/db-helper');
+const Programs = require('./programModel');
 const router = express.Router();
 const { requireAdmin } = require('../middleware/authorization');
 
 router.get('/', (req, res) => {
-  DB.findAll('programs')
+  Programs.findAll()
     .then((programs) => {
       res.status(200).json(programs);
     })
@@ -16,7 +17,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const { id } = req.params;
 
-  DB.findById('programs', id)
+  Programs.findById(id)
     .then((program) => {
       if (program) {
         res.status(200).json(program);
@@ -32,7 +33,7 @@ router.get('/:id', (req, res) => {
 router.post('/name', (req, res) => {
   const { name } = req.body;
 
-  DB.findBy('programs', { name: name })
+  Programs.findBy({ name: name })
     .then((program) => {
       res.status(200).json(program);
     })
@@ -44,7 +45,7 @@ router.post('/name', (req, res) => {
 router.post('/type', (req, res) => {
   const { type } = req.body;
 
-  DB.findBy('programs', { type: type })
+  Programs.findBy({ type: type })
     .then((program) => {
       res.status(200).json(program);
     })
