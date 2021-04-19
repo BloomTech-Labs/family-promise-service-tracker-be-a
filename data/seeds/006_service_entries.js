@@ -20,6 +20,5 @@ const entries = [...new Array(20)].map(() => ({
 }));
 
 exports.seed = function (knex) {
-  console.log(entries[0]);
   return knex('service_entries').insert(entries);
 };
