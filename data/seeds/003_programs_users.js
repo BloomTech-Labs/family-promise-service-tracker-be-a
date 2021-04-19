@@ -1,11 +1,11 @@
 const assignments = [
   {
     program_id: '1',
-    profile_id: '00ulthapbasdfErVUwVJy4x6',
+    profile_id: '00ulthapbErVUwVJy4x6',
   },
   {
     program_id: '2',
-    profile_id: '00ulthapbasdfErVUwVJy4x6',
+    profile_id: '00ulthapbErVUwVJy4x6',
   },
   {
     program_id: '1',
@@ -14,11 +14,5 @@ const assignments = [
 ];
 
 exports.seed = function (knex) {
-  // Deletes ALL existing entries
-  return knex('programs_users')
-    .del()
-    .then(function () {
-      // Inserts seed entries
-      return knex('programs_users').insert(assignments);
-    });
+  return knex('programs_users').insert(assignments);
 };

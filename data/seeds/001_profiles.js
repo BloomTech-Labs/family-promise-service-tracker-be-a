@@ -20,7 +20,7 @@ const profiles = [
     )}.svg`,
   },
   {
-    id: '00ulthapbasdfErVUwVJy4x6',
+    id: '11ulthapbErVUwVJy7x9',
     email: 'llama002@maildrop.cc',
     firstName: 'Patty',
     lastName: 'Program',
@@ -30,7 +30,7 @@ const profiles = [
     )}.svg`,
   },
   {
-    id: '00ulthaasdfgaspbErVUwVJy4x6',
+    id: '22ulthapbErVUwVJy2x2',
     email: 'llama003@maildrop.cc',
     firstName: 'Sally',
     lastName: 'Service',
@@ -52,11 +52,5 @@ const profiles = [
 ];
 
 exports.seed = function (knex) {
-  // Deletes ALL existing entries
-  return knex('profiles')
-    .del()
-    .then(function () {
-      // Inserts seed entries
-      return knex('profiles').insert(profiles);
-    });
+  return knex('profiles').insert(profiles);
 };
