@@ -2,7 +2,7 @@ const express = require('express');
 const ServiceTypes = require('./serviceTypeModel');
 const DB = require('../utils/db-helper');
 const router = express.Router();
-const { requireAdmin } = require('../middleware/authorization')
+const { requireAdmin } = require('../middleware/authorization');
 
 router.get('/', (req, res) => {
   ServiceTypes.findAll()
