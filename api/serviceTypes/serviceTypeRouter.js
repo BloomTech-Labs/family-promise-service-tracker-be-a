@@ -28,4 +28,14 @@ router.get('/:id', (req, res) => {
     });
 });
 
+router.post('/', (req, res) => {
+  ServiceTypes.create(req.body)
+    .then((newServiceType) => {
+      res.status(201).json(newServiceType);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 module.exports = router;
