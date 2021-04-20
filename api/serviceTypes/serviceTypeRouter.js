@@ -39,6 +39,37 @@ router.post('/', (req, res) => {
     });
 });
 
+router.put('/:id', (req, res) => {
+  const update = req.body;
+
+  if (Object.keys(update).length > 0) {
+    const id = req.params.id;
+    DB.findById('service_types', id)
+      .then(
+        ServiceTypes.update(id, update)
+          .then((updated) => {
+            res
+              .status(200)
+              .json({ message: 'Service type updated', service_type: updated });
+          })
+          .catch((err) => {
+            res.status(500).json({
+              message: `Could not update service type '${id}'`,
+              error: err.message,
+            });
+          })
+      )
+      .catch((err) => {
+        res.status(404).json({
+          message: `Could not find service type '${id}'`,
+          error: err.message,
+        });
+      });
+  } else {
+    res.status(400).json({ message: 'Update request not valid' });
+  }
+});
+
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
 
