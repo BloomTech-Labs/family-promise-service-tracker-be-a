@@ -145,25 +145,77 @@ status object returned on GET requests:
 ```
 
 To create or edit a status:
+
 ```
 {
     "name":"Desired change as string"
 }
 ```
 
+## Service Types
+
+| Path                  | Method | Requirements  | Authorization |
+| --------------------- | ------ | ------------- | ------------- |
+| /api/service_types    | GET    | none          | none          |
+| /api/service_type/:id | GET    | none          | none          |
+| /api/service          | POST   | {tbd}         | must be admin |
+| /api/service/:id      | PUT    | id, any edits | must be admin |
+| /api/service/:id      | DELETE | none          | must be admin |
+
+Service Type object returned on GET requests:
+
+```
+{
+    id:int,
+    name:string,
+    description: string,
+    program_id: int,
+    service_providers: array of profile objects
+    created_at:datetime string,
+    updated_at:datetime string,
+}
+```
+
+To create a service type:
+
+```
+{
+    "name":"Bus Fare",
+    "description":"Weekly bus fare allowance",
+    "program_id":3,
+    "service_providers":["provider_id_1","provider_id_2"]
+}
+```
+
+To edit a service type, provide only the fields you wish to change:
+
+```
+{
+    "name":"Bus Fare"
+}
+```
+
+To edit the associated service providers, provide the full list of service providers you would like associated. As with assigning programs to users on the /profiles routes, the service providers array you provide will overwrite any existing associations.
+
+E.g. To remove all associations, provide an empty array:
+
+```
+{
+    "service_providers": []
+}
+```
+
+If user X was already assigned to this service type, and you want to also add user Y, you must include both X and Y in the service providers field:
+
+```
+{
+    "service_providers": ["x","y"]
+}
+```
+
 ## TODO
 
 Route documentation
-
-### Services
-
-| Path             | Method | Requirements  | Authorization                                    |
-| ---------------- | ------ | ------------- | ------------------------------------------------ |
-| /api/services    | GET    | none          | none                                             |
-| /api/service/:id | GET    | none          | none                                             |
-| /api/service     | POST   | {tbd}         | must be admin or program manager                 |
-| /api/service/:id | PUT    | id, any edits | must be admin or program manager of service_type |
-| /api/service/:id | DELETE | none          | must be admin or program manager of service_type |
 
 ### Service Logs
 
