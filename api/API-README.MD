@@ -4,9 +4,9 @@ Server is deployed at: https://fp-service-tracker.herokuapp.com/
 
 All endpoints except for index require a valid Okta token for authorization. The authorization specfications for each table below refer to authorization beyond having a valid token.
 
-## Completed
+# Completed
 
-### Users
+## Users
 
 | Path              | Method | Requirements                                                    | Authorization                                                                                                                                                                             |
 | ----------------- | ------ | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -83,7 +83,7 @@ If user was already assigned to program x, and you want to also add them to prog
 }
 ```
 
-### Programs
+## Programs
 
 | Path               | Method | Requirements                 | Authorization                            |
 | ------------------ | ------ | ---------------------------- | ---------------------------------------- |
@@ -120,6 +120,36 @@ To create or edit program:
 ID will be generated automatically for new programs, should be included in URL param for edits.
 
 According to UX docs, assigning Users to Programs will happen on the user object and not on Program object.
+
+## Statuses
+
+All routes work with /api/status or /api/statuses
+
+| Path              | Method | Requirements              | Authorization |
+| ----------------- | ------ | ------------------------- | ------------- |
+| /api/statuses     | GET    | none                      | none          |
+| /api/status/:id   | GET    | none                      | none          |
+| /api/status       | POST   | name                      | admin         |
+| /api/programs/:id | PUT    | desired edit as key:value | admin         |
+| /api/programs/:id | DELETE | none                      | admin         |
+
+status object returned on GET requests:
+
+```
+{
+    id:int,
+    name:string,
+    created_at:datetime,
+    updated_at:datetime
+}
+```
+
+To create or edit a status:
+```
+{
+    "name":"Desired change as string"
+}
+```
 
 ## TODO
 
