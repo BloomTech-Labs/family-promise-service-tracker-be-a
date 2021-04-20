@@ -1,5 +1,6 @@
 const express = require('express');
 const ServiceTypes = require('./serviceTypeModel');
+const DB = require('../utils/db-helper');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -32,6 +33,26 @@ router.post('/', (req, res) => {
   ServiceTypes.create(req.body)
     .then((newServiceType) => {
       res.status(201).json(newServiceType);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+
+  DB.remove('service_types', id)
+    .then((count) => {
+      if (count > 0) {
+        res
+          .status(200)
+          .json({ message: `Service Type ${id} has been removed` });
+      } else {
+        res
+          .status(404)
+          .json({ message: `Service Type ${id} could not be found` });
+      }
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
