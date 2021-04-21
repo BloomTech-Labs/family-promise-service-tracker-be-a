@@ -3,10 +3,10 @@ const knex = require('../../data/db-config');
 
 const isAssignedToProgram = async (profile, program) => {
   const programs = await knex('programs_users')
-    .select('program_id')
+    .pluck('program_id')
     .where({ profile_id: profile.id });
 
-  return programs.map((p) => p.program_id).includes(program);
+  return programs.includes(program);
 };
 
 const requireAdmin = (req, res, next) => {
@@ -17,15 +17,25 @@ const requireAdmin = (req, res, next) => {
   }
 };
 
-const canCreateServiceType = async (req, res, next) => {
+const canCrudServiceType = async (req, res, next) => {
+  // admins can always create service types
   if (req.profile.role == 'administrator') {
     next();
+
+    // program managers can only create service types for
+    // programs they are associated with
   } else if (req.profile.role == 'program_manager') {
     try {
-      const canCrud = await isAssignedToProgram(
-        req.profile,
-        req.body.program_id
-      );
+      // if this is create, the program is in req body
+      // otherwise need to look up the service_type to
+      // get the program id
+      const program = req.body.program_id
+        ? [req.body.program_id]
+        : await knex('service_types')
+            .pluck('program_id')
+            .where({ id: req.params.id });
+
+      const canCrud = await isAssignedToProgram(req.profile, program[0]);
       canCrud
         ? next()
         : next(
@@ -34,10 +44,12 @@ const canCreateServiceType = async (req, res, next) => {
               'User not authorized to update services on this program'
             )
           );
+      // since multiple areas could fail here, pass it along directly
     } catch (err) {
-      throw new Error(err);
+      next(createError(500, err));
     }
   } else {
+    // no other user role can create or edit service types
     next(
       createError(
         401,
@@ -77,5 +89,5 @@ const canEditProfile = async (req, res, next) => {
 module.exports = {
   requireAdmin,
   canEditProfile,
-  canCreateServiceType,
+  canCrudServiceType,
 };
