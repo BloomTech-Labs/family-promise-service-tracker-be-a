@@ -33,7 +33,10 @@ router.get('/:id', (req, res) => {
 router.post('/', requireAdmin, (req, res) => {
   ServiceTypes.create(req.body)
     .then((newServiceType) => {
-      res.status(201).json(newServiceType);
+      res.status(201).json({
+        message: 'New service type created',
+        service_type: newServiceType,
+      });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
