@@ -2,7 +2,7 @@ const express = require('express');
 const ServiceTypes = require('./serviceTypeModel');
 const DB = require('../utils/db-helper');
 const router = express.Router();
-const { requireAdmin } = require('../middleware/authorization');
+const { canCrudServiceType } = require('../middleware/authorization');
 
 router.get('/', (req, res) => {
   ServiceTypes.findAll()
@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', requireAdmin, (req, res) => {
+router.post('/', canCrudServiceType, (req, res) => {
   ServiceTypes.create(req.body)
     .then((newServiceType) => {
       res.status(201).json(newServiceType);
@@ -40,7 +40,7 @@ router.post('/', requireAdmin, (req, res) => {
     });
 });
 
-router.put('/:id', requireAdmin, (req, res) => {
+router.put('/:id', canCrudServiceType, (req, res) => {
   const update = req.body;
 
   if (Object.keys(update).length > 0) {
@@ -71,7 +71,7 @@ router.put('/:id', requireAdmin, (req, res) => {
   }
 });
 
-router.delete('/:id', requireAdmin, (req, res) => {
+router.delete('/:id', canCrudServiceType, (req, res) => {
   const { id } = req.params;
 
   DB.remove('service_types', id)

@@ -154,13 +154,13 @@ To create or edit a status:
 
 ## Service Types
 
-| Path                  | Method | Requirements  | Authorization |
-| --------------------- | ------ | ------------- | ------------- |
-| /api/service_types    | GET    | none          | none          |
-| /api/service_type/:id | GET    | none          | none          |
-| /api/service          | POST   | {tbd}         | must be admin |
-| /api/service/:id      | PUT    | id, any edits | must be admin |
-| /api/service/:id      | DELETE | none          | must be admin |
+| Path                  | Method | Requirements  | Authorization                                                                       |
+| --------------------- | ------ | ------------- | ----------------------------------------------------------------------------------- |
+| /api/service_types    | GET    | none          | none                                                                                |
+| /api/service_type/:id | GET    | none          | none                                                                                |
+| /api/service          | POST   | {tbd}         | must be admin or a program manager of the program associated with this service type |
+| /api/service/:id      | PUT    | id, any edits | must be admin or a program manager of the program associated with this service type |
+| /api/service/:id      | DELETE | none          | must be admin or a program manager of the program associated with this service type |
 
 Service Type object returned on GET requests:
 
