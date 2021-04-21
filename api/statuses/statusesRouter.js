@@ -32,7 +32,7 @@ router.get('/:id', (req, res) => {
 router.post('/', requireAdmin, (req, res) => {
   DB.create('statuses', req.body)
     .then((newStatus) => {
-      res.status(201).json(newStatus);
+      res.status(201).json({ message: 'Status created', status: newStatus });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
@@ -42,7 +42,10 @@ router.post('/', requireAdmin, (req, res) => {
 router.put('/:id', requireAdmin, (req, res) => {
   DB.update('statuses', req.params.id, req.body)
     .then((editedStatus) => {
-      res.status(200).json(editedStatus);
+      res.status(200).json({
+        message: `Status ${req.params.id} updated`,
+        status: editedStatus[0],
+      });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
