@@ -16,7 +16,7 @@ jest.mock('../../api/middleware/authorization', () => ({
   requireAdmin: (req, res, next) => next(),
 }));
 
-describe('profiles router endpoints', () => {
+describe('status router endpoints', () => {
   beforeAll(() => {
     // This is the module/route being tested
     server.use(['/status', '/statuses'], statusRouter);
@@ -35,7 +35,7 @@ describe('profiles router endpoints', () => {
   });
 
   describe('GET /statuses/:id', () => {
-    it('should return 200 when profile found', async () => {
+    it('should return 200 when status found', async () => {
       DB.findById.mockResolvedValue({
         id: '1',
         name: 'In Progress',
@@ -47,7 +47,7 @@ describe('profiles router endpoints', () => {
       expect(DB.findById.mock.calls.length).toBe(1);
     });
 
-    it('should return 404 when no user found', async () => {
+    it('should return 404 when no status found', async () => {
       DB.findById.mockResolvedValue();
       const res = await request(server).get('/status/7');
 
@@ -58,11 +58,10 @@ describe('profiles router endpoints', () => {
 
   describe('POST /status', () => {
     it('should return 201 with new status', async () => {
-      const status = {
-        name: 'Needs Attention',
-      };
+      const status = { name: 'Needs Attention' };
       DB.create.mockResolvedValue(status);
       const res = await request(server).post('/status').send(status);
+
       expect(res.status).toBe(201);
       expect(res.body.message).toMatch(/Status created/);
       expect(res.body.status.name).toBe('Needs Attention');
@@ -70,16 +69,12 @@ describe('profiles router endpoints', () => {
     });
   });
 
-  describe('PUT /profile', () => {
+  describe('PUT /status/:id', () => {
     it('should return 200 when status is updated', async () => {
-      const status = {
-        id: '5',
-        name: 'Needs Attention',
-      };
-
+      const status = { id: '5', name: 'Needs Attention' };
       DB.update.mockResolvedValue([status]);
-
       const res = await request(server).put('/status/5').send(status);
+
       expect(res.status).toBe(200);
       expect(res.body.message).toBe('Status 5 updated');
       expect(res.body.status.name).toBe('Needs Attention');
