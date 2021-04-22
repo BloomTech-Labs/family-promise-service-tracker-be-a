@@ -2,7 +2,7 @@ const express = require('express');
 const DB = require('../utils/db-helper');
 const Programs = require('./programModel');
 const router = express.Router();
-const { requireAdmin } = require('../middleware/authorization');
+const { canCrudServiceType } = require('../middleware/authorization');
 
 router.get('/', (req, res) => {
   Programs.findAll()
@@ -54,7 +54,7 @@ router.post('/type', (req, res) => {
     });
 });
 
-router.post('/', requireAdmin, (req, res) => {
+router.post('/', canCrudServiceType, (req, res) => {
   DB.create('programs', req.body)
     .then((newProgram) => {
       res.status(201).json(newProgram);
@@ -64,7 +64,7 @@ router.post('/', requireAdmin, (req, res) => {
     });
 });
 
-router.put('/:id', requireAdmin, (req, res) => {
+router.put('/:id', canCrudServiceType, (req, res) => {
   DB.update('programs', req.params.id, req.body)
     .then((editedProgram) => {
       res.status(200).json(editedProgram);
@@ -74,7 +74,7 @@ router.put('/:id', requireAdmin, (req, res) => {
     });
 });
 
-router.delete('/:id', requireAdmin, (req, res) => {
+router.delete('/:id', canCrudServiceType, (req, res) => {
   const { id } = req.params;
 
   DB.remove('programs', id)

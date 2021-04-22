@@ -24,6 +24,7 @@ const profileRouter = require('./profile/profileRouter');
 const programRouter = require('./program/programRouter');
 const statusRouter = require('./statuses/statusesRouter');
 const serviceTypeRouter = require('./serviceTypes/serviceTypeRouter');
+const serviceEntryRouter = require('./serviceEntries/serviceEntriesRouter');
 const dsRouter = require('./dsService/dsRouter');
 
 const app = express();
@@ -57,6 +58,7 @@ app.use(['/api/profile', '/api/profiles'], profileRouter);
 app.use(['/api/program', '/api/programs'], programRouter);
 app.use(['/api/status', '/api/statuses'], statusRouter);
 app.use(['/api/service_type', '/api/service_types'], serviceTypeRouter);
+app.use(['/api/service_entry', '/api/service_entries'], serviceEntryRouter);
 app.use('/data', dsRouter);
 
 // catch 404 and forward to error handler

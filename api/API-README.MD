@@ -2,7 +2,7 @@
 
 Server is deployed at: https://fp-service-tracker.herokuapp.com/
 
-All endpoints except for index require a valid Okta token for authorization. The authorization specfications for each table below refer to authorization beyond having a valid token.
+All endpoints except for index require a valid Okta token for authorization. The authorization specifications for each table below refer to authorization beyond having a valid token.
 
 # Completed
 
@@ -154,13 +154,13 @@ To create or edit a status:
 
 ## Service Types
 
-| Path                  | Method | Requirements  | Authorization                                                                       |
-| --------------------- | ------ | ------------- | ----------------------------------------------------------------------------------- |
-| /api/service_types    | GET    | none          | none                                                                                |
-| /api/service_type/:id | GET    | none          | none                                                                                |
-| /api/service          | POST   | {tbd}         | must be admin or a program manager of the program associated with this service type |
-| /api/service/:id      | PUT    | id, any edits | must be admin or a program manager of the program associated with this service type |
-| /api/service/:id      | DELETE | none          | must be admin or a program manager of the program associated with this service type |
+| Path                   | Method | Requirements     | Authorization                                                                       |
+| ---------------------- | ------ | ---------------- | ----------------------------------------------------------------------------------- |
+| /api/service_types     | GET    | none             | none                                                                                |
+| /api/service_types/:id | GET    | none             | none                                                                                |
+| /api/service_types     | POST   | name, program_id | must be admin or a program manager of the program associated with this service type |
+| /api/service_types/:id | PUT    | id, any edits    | must be admin or a program manager of the program associated with this service type |
+| /api/service_types/:id | DELETE | none             | must be admin or a program manager of the program associated with this service type |
 
 Service Type object returned on GET requests:
 
@@ -212,6 +212,18 @@ If user X was already assigned to this service type, and you want to also add us
     "service_providers": ["x","y"]
 }
 ```
+
+## Service Entries
+
+| Path                     | Method | Requirements                                         | Authorization                                                                              |
+| ------------------------ | ------ | ---------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| /api/service_entries     | GET    | none                                                 | none                                                                                       |
+| /api/service_entries/:id | GET    | none                                                 | none                                                                                       |
+| /api/service_entries     | POST   | service_type_id, provided_at, status_id, provider_id | must be admin or a program manager or a service provider associated with this service type |
+| /api/service_entries/:id | PUT    | id, any edits                                        | must be admin or a program manager or a service provider associated with this service type |
+| /api/service_entries/:id | DELETE | none                                                 | must be admin or a program manager or a service provider associated with this service type |
+
+Need to finish authorization for service provider middleware
 
 ## TODO
 
