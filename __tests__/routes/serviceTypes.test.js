@@ -15,8 +15,7 @@ jest.mock('../../api/middleware/authRequired', () =>
 );
 
 jest.mock('../../api/middleware/authorization', () => ({
-  requireAdmin: (req, res, next) => next(),
-  canEditProfile: (req, res, next) => next(),
+  canCrudServiceType: (req, res, next) => next(),
 }));
 
 describe('service types router endpoints', () => {
