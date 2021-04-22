@@ -35,7 +35,8 @@
     ],
     "collectCoverageFrom": [
       "**/*.js"
-    ]
+    ],
+    "globalSetup": "./config/globalTestSetup"
   },
   "nodemonConfig": {
     "exec": "npm run start",

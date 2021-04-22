@@ -25,8 +25,8 @@ module.exports = {
   test: {
     client: 'pg',
     connection: process.env.DEV_DATABASE_URL,
-    migrations: { directory: '../data/migrations' },
-    seeds: { directory: '../data/seeds' },
+    migrations: { directory: './data/migrations' },
+    seeds: { directory: './data/seeds' },
   },
 
   production: {
