@@ -37,8 +37,17 @@
     "collectCoverageFrom": [
       "**/*.js"
     ],
-    "globalSetup": "./config/jest/globalSetup",
-    "globalTeardown": "./config/jest/globalTeardown"
+    "projects": [
+      {
+        "displayName":"Routes",
+        "testMatch":["/**/routes/*.js"]
+      },
+      {
+        "displayName":"Models",
+        "testMatch":["<rootDir>/**/models/*.js"],
+        "runner":"jest-serial-runner"
+      }
+    ]
   },
   "nodemonConfig": {
     "exec": "npm run start",
@@ -83,6 +92,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.3.0",
     "jest": "^25.2.4",
+    "jest-serial-runner": "^1.1.0",
     "lint-staged": "^10.4.2",
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5",

@@ -1,14 +1,24 @@
 const ServiceType = require('../../api/serviceTypes/serviceTypeModel');
+const knex = require('../../data/db-config');
 
 describe('Service Type Model Methods', () => {
   beforeAll(async () => {
     jest.clearAllMocks();
+    try {
+      await knex.migrate.rollback();
+      await knex.migrate.latest();
+      await knex.seed.run();
+    } catch (e) {
+      console.warn(e);
+      process.exit(1);
+    }
   });
 
   afterAll(async () => {
-    // kill the database connection after tests
+    // kill the database connections after tests
     // have run to make sure Jest can exit
-    ServiceType.knex.destroy();
+    await knex.destroy();
+    await ServiceType.knex.destroy();
   });
 
   describe('ServiceType.findAll', () => {
