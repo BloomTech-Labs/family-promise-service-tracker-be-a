@@ -23,7 +23,10 @@ describe('Require Admin middleware', () => {
         role: 'not_an_admin',
       },
     };
+
     requireAdmin(mockRequest, mockResponse, nextFunction);
+
+    expect(nextFunction).toHaveBeenCalledTimes(1);
     expect(nextFunction).toHaveBeenCalledWith(
       createError(401, 'User not authorized to perform this action')
     );
@@ -40,6 +43,8 @@ describe('Require Admin middleware', () => {
     };
 
     requireAdmin(mockRequest, mockResponse, nextFunction);
+
+    expect(nextFunction).toHaveBeenCalledTimes(1);
     expect(nextFunction).not.toHaveBeenCalledWith(
       createError(401, 'User not authorized to perform this action')
     );
