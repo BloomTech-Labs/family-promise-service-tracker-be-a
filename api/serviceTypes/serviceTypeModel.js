@@ -96,6 +96,7 @@ const update = async (id, updates) => {
 };
 
 module.exports = {
+  knex,
   findAll,
   findById,
   create,
