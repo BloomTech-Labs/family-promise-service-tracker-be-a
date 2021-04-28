@@ -1,5 +1,5 @@
 const knex = require('../../data/db-config');
-//const { okta } = require('../../config/okta');
+const { okta } = require('../../config/okta');
 
 const findAll = async () => {
   return await knex('profiles')
@@ -66,12 +66,12 @@ const update = async (id, updates) => {
       }
       // if updating name fields, push changes to okta as well
       // errors returned here will cancel postgres transaction
-      // if (profile.firstName || profile.lastName) {
-      //   let user = await okta.getUser(id);
-      //   profile.firstName ? (user.profile.firstName = profile.firstName) : '';
-      //   profile.lastName ? (user.profile.lastName = profile.lastName) : '';
-      //   await user.update();
-      // }
+      if (profile.firstName || profile.lastName) {
+        let user = await okta.getUser(id);
+        profile.firstName ? (user.profile.firstName = profile.firstName) : '';
+        profile.lastName ? (user.profile.lastName = profile.lastName) : '';
+        await user.update();
+      }
     });
     // if transaction hasn't failed at any point,
     // return promise with updated profile object
