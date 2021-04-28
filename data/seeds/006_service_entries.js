@@ -1,6 +1,10 @@
 const faker = require('faker');
 
-const providers = ['00uk9lxaulDYOiB4H5d6', '22ulthapbErVUwVJy2x2'];
+const providers = [
+  '00uk9lxaulDYOiB4H5d6',
+  '00unr48onuAmU9sxK5d6',
+  '00unr8nm2sJkxkcrH5d6',
+];
 
 const getRand = (max) => {
   return Math.floor(Math.random() * max) + 1;
@@ -16,7 +20,7 @@ const entries = [...new Array(20)].map(() => ({
     '{{address.streetAddress}}, {{address.city}}, {{address.stateAbbr}} {{address.zipCode}}'
   ),
   status_id: getRand(4),
-  provider_id: providers[getRand(2) - 1],
+  provider_id: providers[getRand(3) - 1],
 }));
 
 exports.seed = function (knex) {
