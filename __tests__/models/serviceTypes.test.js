@@ -51,7 +51,7 @@ describe('Service Type Model Methods', () => {
         name: 'Brand New Service',
         description: 'A good service for good people',
         program_id: 1,
-        service_providers: ['22ulthapbErVUwVJy2x2'],
+        service_providers: ['00uk9lxaulDYOiB4H5d6'],
       });
 
       // test the returned object
