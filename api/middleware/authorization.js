@@ -1,13 +1,5 @@
 const createError = require('http-errors');
-const knex = require('../../data/db-config');
-
-const isAssignedToProgram = async (profile, program) => {
-  const programs = await knex('programs_users')
-    .pluck('program_id')
-    .where({ profile_id: profile.id });
-
-  return programs.includes(program);
-};
+const { isAssignedToProgram, getProgramFromServiceType } = require('./models');
 
 const requireAdmin = (req, res, next) => {
   if (req.profile.role == 'administrator') {
@@ -31,9 +23,7 @@ const canCrudServiceType = async (req, res, next) => {
       // get the program id
       const program = req.body.program_id
         ? [req.body.program_id]
-        : await knex('service_types')
-            .pluck('program_id')
-            .where({ id: req.params.id });
+        : getProgramFromServiceType(req.params.id);
 
       const canCrud = await isAssignedToProgram(req.profile, program[0]);
       canCrud
@@ -90,4 +80,5 @@ module.exports = {
   requireAdmin,
   canEditProfile,
   canCrudServiceType,
+  isAssignedToProgram,
 };
