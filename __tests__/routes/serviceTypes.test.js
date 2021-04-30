@@ -61,13 +61,13 @@ describe('service types router endpoints', () => {
 
   describe('POST /service_type', () => {
     it('should return 201 with created service type', async () => {
-      const service = {
+      const serviceType = {
         name: 'Bus Pass',
         description: 'Monthly bus pass allowance',
         program: 1,
       };
-      ServiceTypes.create.mockResolvedValue(service);
-      const res = await request(server).post('/service_type').send(service);
+      ServiceTypes.create.mockResolvedValue(serviceType);
+      const res = await request(server).post('/service_type').send(serviceType);
       expect(res.status).toBe(201);
       expect(res.body.message).toMatch(/New service type created/);
       expect(ServiceTypes.create.mock.calls.length).toBe(1);
