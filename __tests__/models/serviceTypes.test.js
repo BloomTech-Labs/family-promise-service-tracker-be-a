@@ -1,13 +1,12 @@
 const ServiceType = require('../../api/serviceTypes/serviceTypeModel');
-const knex = require('../../data/db-config');
 
 describe('Service Type Model Methods', () => {
   beforeAll(async () => {
     jest.clearAllMocks();
     try {
-      await knex.migrate.rollback();
-      await knex.migrate.latest();
-      await knex.seed.run();
+      await ServiceType.knex.migrate.rollback();
+      await ServiceType.knex.migrate.latest();
+      await ServiceType.knex.seed.run();
     } catch (e) {
       console.warn(e);
       process.exit(1);
@@ -17,7 +16,6 @@ describe('Service Type Model Methods', () => {
   afterAll(async () => {
     // kill the database connections after tests
     // have run to make sure Jest can exit
-    await knex.destroy();
     await ServiceType.knex.destroy();
   });
 
