@@ -29,6 +29,8 @@ Labs teams must follow all [Labs Engineering Standards](https://labs.lambdaschoo
 - `DEV_DATABASE_URL` - connection string for local postgres database
 - `OKTA_URL_ISSUER` - The complete issuer URL for verifying okta access tokens. `https://example.okta.com/oauth2/default`
 - `OKTA_CLIENT_ID` - the okta client ID.
+- `OKTA_ORG_URL` - The base url for the Okta org
+- `OKTA_API_TOKEN` - Okta API token
 
 See .env.sample for example values
 
@@ -61,5 +63,7 @@ There are 3 options to get postgresql installed locally [Choose one]:
 - run: `npm run tests` to confirm all is setup and tests pass.
 - run: `npm run watch:dev` to start nodemon in local dev enviornment.
 
-
+### Additional documentation
+The current API documentation is found in /api/API-README.md
+List of known issues is found in /known-defects.md
 

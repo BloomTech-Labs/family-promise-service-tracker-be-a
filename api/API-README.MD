@@ -222,29 +222,3 @@ If user X was already assigned to this service type, and you want to also add us
 | /api/service_entries     | POST   | service_type_id, provided_at, status_id, provider_id | must be admin or a program manager or a service provider associated with this service type |
 | /api/service_entries/:id | PUT    | id, any edits                                        | must be admin or a program manager or a service provider associated with this service type |
 | /api/service_entries/:id | DELETE | none                                                 | must be admin or a program manager or a service provider associated with this service type |
-
-Need to finish authorization for service provider middleware
-
-## TODO
-
-Route documentation
-
-### Service Logs
-
-| Path                  | Method | Requirements              | Authorization                                                       |
-| --------------------- | ------ | ------------------------- | ------------------------------------------------------------------- |
-| /api/service_logs     | GET    | optional query params TBD | none                                                                |
-| /api/service_logs/:id | GET    | none                      | none                                                                |
-| /api/service_logs     | POST   | {tbd}                     | Admin, PM, or Service Provider assigned to appropriate service_type |
-| /api/service_logs/:id | PUT    | id, any edits             | Admin, PM, or Service Provider assigned to appropriate service_type |
-| /api/service_logs/:id | DELETE | none                      | Admin, PM, or Service Provider assigned to appropriate service_type |
-
-### Recipients
-
-| Path                | Method | Requirements  | Authorization |
-| ------------------- | ------ | ------------- | ------------- |
-| /api/recipients     | GET    | none          | none          |
-| /api/recipients/:id | GET    | none          | none          |
-| /api/recipients     | POST   | {tbd}         | none          |
-| /api/recipients/:id | PUT    | id, any edits | none          |
-| /api/recipients/:id | DELETE | none          | none          |
