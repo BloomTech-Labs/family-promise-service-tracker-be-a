@@ -64,6 +64,6 @@ There are 3 options to get postgresql installed locally [Choose one]:
 - run: `npm run watch:dev` to start nodemon in local dev enviornment.
 
 ### Additional documentation
-The current API documentation is found in /api/API-README.md
-List of known issues is found in /known-defects.md
+- The current API documentation is found in /api/API-README.md
+- List of known issues is found in /known-defects.md
 
