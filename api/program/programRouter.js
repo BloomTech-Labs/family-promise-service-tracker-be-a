@@ -78,8 +78,12 @@ router.delete('/:id', canCrudServiceType, (req, res) => {
   const { id } = req.params;
 
   DB.remove('programs', id)
-    .then(() => {
-      res.status(200).json({ message: `Program ${id} has been removed` });
+    .then((count) => {
+      if (count > 0) {
+        res.status(200).json({ message: `Program ${id} has been removed` });
+      } else {
+        res.status(404).json({ message: `Program ${id} could not be found` });
+      }
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
