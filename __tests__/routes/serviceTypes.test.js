@@ -22,6 +22,9 @@ describe('service types router endpoints', () => {
   beforeAll(() => {
     // This is the module/route being tested
     server.use(['/service_type', '/service_types'], serviceTypeRouter);
+  });
+
+  beforeEach(() => {
     jest.clearAllMocks();
   });
 
@@ -84,6 +87,26 @@ describe('service types router endpoints', () => {
       expect(res.status).toBe(200);
       expect(res.body.service_type.name).toBe('Rental Assistance');
       expect(ServiceTypes.update.mock.calls.length).toBe(1);
+    });
+  });
+
+  describe('DELETE /service_type/:id', () => {
+    it('should return 200 when service_type is deleted', async () => {
+      DB.remove.mockResolvedValue(1);
+      const res = await request(server).delete('/service_type/5');
+
+      expect(res.status).toBe(200);
+      expect(res.body.message).toBe('Service Type 5 has been removed');
+      expect(DB.remove.mock.calls.length).toBe(1);
+    });
+
+    it('should return 404 when service_type id is invalid', async () => {
+      DB.remove.mockResolvedValue(0);
+      const res = await request(server).delete('/service_type/5');
+
+      expect(res.status).toBe(404);
+      expect(res.body.message).toBe('Service Type 5 could not be found');
+      expect(DB.remove.mock.calls.length).toBe(1);
     });
   });
 });
