@@ -20,6 +20,9 @@ describe('status router endpoints', () => {
   beforeAll(() => {
     // This is the module/route being tested
     server.use(['/status', '/statuses'], statusRouter);
+  });
+
+  beforeEach(() => {
     jest.clearAllMocks();
   });
 
@@ -79,6 +82,26 @@ describe('status router endpoints', () => {
       expect(res.body.message).toBe('Status 5 updated');
       expect(res.body.status.name).toBe('Needs Attention');
       expect(DB.update.mock.calls.length).toBe(1);
+    });
+  });
+
+  describe('DELETE /status/:id', () => {
+    it('should return 200 when status is deleted', async () => {
+      DB.remove.mockResolvedValue(1);
+      const res = await request(server).delete('/status/5');
+
+      expect(res.status).toBe(200);
+      expect(res.body.message).toBe('Status 5 has been removed');
+      expect(DB.remove.mock.calls.length).toBe(1);
+    });
+
+    it('should return 404 when status id is invalid', async () => {
+      DB.remove.mockResolvedValue(0);
+      const res = await request(server).delete('/status/5');
+
+      expect(res.status).toBe(404);
+      expect(res.body.message).toBe('Status 5 could not be found');
+      expect(DB.remove.mock.calls.length).toBe(1);
     });
   });
 });

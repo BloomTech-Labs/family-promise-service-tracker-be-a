@@ -52,8 +52,16 @@ router.delete('/:id', (req, res) => {
   const { id } = req.params;
 
   DB.remove('service_entries', id)
-    .then(() => {
-      res.status(200).json({ message: `Entry ${id} has been removed` });
+    .then((count) => {
+      if (count > 0) {
+        res
+          .status(200)
+          .json({ message: `Service Entry ${id} has been removed` });
+      } else {
+        res
+          .status(404)
+          .json({ message: `Service Entry ${id} could not be found` });
+      }
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
