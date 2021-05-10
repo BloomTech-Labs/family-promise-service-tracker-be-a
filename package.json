@@ -39,17 +39,23 @@
     ],
     "projects": [
       {
-        "displayName":"Routes",
-        "testMatch":["/**/__tests__/routes/*.js"]
+        "displayName": "Routes",
+        "testMatch": [
+          "/**/__tests__/routes/*.js"
+        ]
       },
       {
-        "displayName":"Models",
-        "testMatch":["/**/__tests__/models/*.js"],
-        "runner":"jest-serial-runner"
+        "displayName": "Models",
+        "testMatch": [
+          "/**/__tests__/models/*.js"
+        ],
+        "runner": "jest-serial-runner"
       },
       {
-        "displayName":"Middleware",
-        "testMatch":["/**/__tests__/middleware/*.js"]
+        "displayName": "Middleware",
+        "testMatch": [
+          "/**/__tests__/middleware/*.js"
+        ]
       }
     ]
   },
