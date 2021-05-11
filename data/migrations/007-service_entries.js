@@ -9,7 +9,9 @@ exports.up = function (knex) {
       .inTable('service_types');
     tbl.datetime('provided_at').notNullable();
     tbl.text('notes');
-    tbl.integer('quantity');
+    tbl.string('unit').notNullable();
+    tbl.integer('quantity').notNullable();
+    tbl.decimal('value').notNullable();
     tbl
       .integer('recipient_id')
       .unsigned()

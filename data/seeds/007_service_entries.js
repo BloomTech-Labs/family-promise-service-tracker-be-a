@@ -6,6 +6,8 @@ const providers = [
   '00unr8nm2sJkxkcrH5d6',
 ];
 
+const units = ['Bus Fare', 'Food Assistance', 'Childcare', 'Rental Assistance'];
+
 const getRand = (max) => {
   return Math.floor(Math.random() * max) + 1;
 };
@@ -14,7 +16,9 @@ const entries = [...new Array(20)].map(() => ({
   service_type_id: getRand(3),
   provided_at: faker.date.past(),
   notes: faker.lorem.sentence(),
-  quantity: 1,
+  unit: units[getRand(4) - 1],
+  quantity: getRand(8),
+  value: getRand(100),
   recipient_id: getRand(19),
   status_id: getRand(4),
   provider_id: providers[getRand(3) - 1],
