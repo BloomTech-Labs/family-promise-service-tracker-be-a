@@ -15,8 +15,9 @@ exports.up = function (knex) {
       .unsigned()
       .notNullable()
       .references('id')
-      .inTable('recipients');
-    tbl.string('location');
+      .inTable('recipients')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
     tbl
       .integer('status_id')
       .unsigned()
