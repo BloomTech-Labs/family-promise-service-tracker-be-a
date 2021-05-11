@@ -16,7 +16,10 @@
     "coverage": "CI=true npx jest --coverage --detectOpenHandles --forceExit",
     "rollback": "npm run knex migrate:rollback",
     "migrate": "npm run knex migrate:latest",
-    "seed": "npm run knex seed:run"
+    "seed": "npm run knex seed:run",
+    "migrateh": "npx heroku run npm run knex migrate:latest -a fp-service-tracker",
+    "rollbackh": "npx heroku run npm run knex migrate:rollback -a fp-service-tracker",
+    "seedh": "npx heroku run npm run knex seed:run -a fp-service-tracker"
   },
   "lint-staged": {
     "api/**/*.js": [
