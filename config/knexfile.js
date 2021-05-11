@@ -10,6 +10,12 @@ if (process.env.DATABASE_URL) {
   pg.defaults.ssl = { rejectUnauthorized: false };
 }
 
+// if you would like to use a separate DB for testing,
+// make sure to set your TEST_DATABASE_URL in env
+const testDBUrl = process.env.TEST_DATABASE_URL
+  ? process.env.TEST_DATABASE_URL
+  : process.env.DEV_DATABASE_URL;
+
 module.exports = {
   development: {
     client: 'pg',
@@ -24,7 +30,7 @@ module.exports = {
 
   test: {
     client: 'pg',
-    connection: process.env.DEV_DATABASE_URL,
+    connection: testDBUrl,
     migrations: { directory: './data/migrations' },
     seeds: { directory: './data/seeds' },
   },
