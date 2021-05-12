@@ -7,6 +7,9 @@ exports.seed = async function (knex) {
     'ALTER SEQUENCE service_entries_id_seq RESTART WITH 1; TRUNCATE service_entries CASCADE'
   );
   await knex.raw(
+    'ALTER SEQUENCE service_entries_id_seq RESTART WITH 1; TRUNCATE recipients CASCADE'
+  );
+  await knex.raw(
     'ALTER SEQUENCE service_types_id_seq RESTART WITH 1; TRUNCATE service_types CASCADE'
   );
   await knex.raw(

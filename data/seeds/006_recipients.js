@@ -16,7 +16,6 @@ const getRand = (max) => {
 
 const recipients = [
   {
-    id: 1,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
@@ -28,7 +27,6 @@ const recipients = [
     household_size: Number(getRand(15)),
   },
   {
-    id: 2,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
@@ -40,7 +38,6 @@ const recipients = [
     household_size: Number(getRand(15)),
   },
   {
-    id: 3,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
@@ -52,7 +49,6 @@ const recipients = [
     household_size: Number(getRand(15)),
   },
   {
-    id: 4,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
@@ -64,7 +60,6 @@ const recipients = [
     household_size: Number(getRand(15)),
   },
   {
-    id: 5,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
@@ -76,7 +71,6 @@ const recipients = [
     household_size: Number(getRand(15)),
   },
   {
-    id: 6,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
@@ -88,7 +82,6 @@ const recipients = [
     household_size: Number(getRand(15)),
   },
   {
-    id: 7,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
@@ -100,7 +93,6 @@ const recipients = [
     household_size: Number(getRand(15)),
   },
   {
-    id: 8,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
@@ -112,7 +104,6 @@ const recipients = [
     household_size: Number(getRand(15)),
   },
   {
-    id: 9,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
@@ -124,7 +115,6 @@ const recipients = [
     household_size: Number(getRand(15)),
   },
   {
-    id: 10,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
@@ -136,7 +126,6 @@ const recipients = [
     household_size: Number(getRand(15)),
   },
   {
-    id: 11,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
@@ -148,7 +137,6 @@ const recipients = [
     household_size: Number(getRand(15)),
   },
   {
-    id: 12,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
@@ -160,7 +148,6 @@ const recipients = [
     household_size: Number(getRand(15)),
   },
   {
-    id: 13,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
@@ -172,7 +159,6 @@ const recipients = [
     household_size: Number(getRand(15)),
   },
   {
-    id: 14,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
@@ -184,7 +170,6 @@ const recipients = [
     household_size: Number(getRand(15)),
   },
   {
-    id: 15,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
@@ -196,7 +181,6 @@ const recipients = [
     household_size: Number(getRand(15)),
   },
   {
-    id: 16,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
@@ -208,7 +192,6 @@ const recipients = [
     household_size: Number(getRand(15)),
   },
   {
-    id: 17,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
@@ -220,7 +203,6 @@ const recipients = [
     household_size: Number(getRand(15)),
   },
   {
-    id: 18,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
@@ -232,7 +214,6 @@ const recipients = [
     household_size: Number(getRand(15)),
   },
   {
-    id: 19,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
@@ -244,7 +225,6 @@ const recipients = [
     household_size: Number(getRand(15)),
   },
   {
-    id: 20,
     name: faker.name.findName(),
     age: Number(getRand(121)),
     ethnicity: ethnicities[getRand(5) - 1],
