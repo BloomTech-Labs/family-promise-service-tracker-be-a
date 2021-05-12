@@ -178,10 +178,11 @@ router.get('/getServiceProviders', function (req, res) {
     .then((serviceProviders) => {
       res.status(200).json(serviceProviders);
     })
-    .catch((err) => {
+    .catch(() => {
       res.status(404).json({ error: 'No Service Providers Found' });
     });
 });
+
 router.get('/:id', function (req, res) {
   const id = String(req.params.id);
   Profiles.findById(id)
