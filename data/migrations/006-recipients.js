@@ -3,23 +3,24 @@ exports.up = (knex) => {
     tbl.increments('id').primary();
     tbl.string('name').notNullable();
     tbl.integer('age').notNullable();
-    tbl.enu('ethnicity', [
-      'american_indian/alaska_native',
+    tbl.enu('race', [
+      'indian_native_alaskan',
       'asian',
-      'black/african_american',
-      'hawiian/pacific_islander',
+      'black',
+      'hawaiian_pacific_islander',
       'white',
     ]);
-    // add drop down for sub ethnicity categories ? example: (hispanic/latino or not hispanic or latino)
-    // todo: inclusive gender table
-    tbl.string('address', 128); // address to use if currently in homeless shelter?
+    tbl.enu('gender', ['male', 'female', 'nonbinary']);
+    // todo: how to add include value? (hispanic/latino or not hispanic or latino)
+    // todo: add LGBTQ+ status? "Do recipient identify as LGBTQ+? Answer: boolean"
+    // todo: foreign key to other recipient id (children, etc)
+    // todo: household characteristics? generational?
+    tbl.string('address', 128);
     tbl.string('city', 128).notNullable();
     tbl.string('state', 128).notNullable();
     tbl.string('zip_code').notNullable();
     tbl.boolean('veteran_status').notNullable();
     tbl.integer('household_size').notNullable();
-    // todo: household characteristics? generational?
-    // todo: foreign key to other recipient id (children, etc)
     tbl.timestamps(true, true);
   });
 };
