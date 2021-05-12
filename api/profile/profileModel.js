@@ -27,6 +27,12 @@ const findById = async (id) => {
     .first();
 };
 
+const findServiceProviders = () => {
+  return knex('profiles')
+    .select('firstName', 'lastName')
+    .where('role', 'service_provider');
+};
+
 const update = async (id, updates) => {
   const { programs, ...profile } = updates;
 
@@ -87,4 +93,5 @@ module.exports = {
   findAll,
   findById,
   update,
+  findServiceProviders,
 };
