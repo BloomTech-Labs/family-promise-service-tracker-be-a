@@ -1,12 +1,14 @@
 const faker = require('faker');
 
 const ethnicities = [
-  'american_indian/alaska_native',
+  'indian_native_alaskan',
   'asian',
-  'black/african_american',
-  'hawiian/pacific_islander',
+  'black',
+  'hawaiian_pacific_islander',
   'white',
 ];
+
+const genders = ['male', 'female', 'nonbinary'];
 
 const getRand = (max) => {
   return Math.floor(Math.random() * max) + 1;
@@ -18,7 +20,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
@@ -29,7 +32,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
@@ -40,7 +44,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
@@ -51,7 +56,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
@@ -62,7 +68,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
@@ -73,7 +80,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
@@ -84,7 +92,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
@@ -95,7 +104,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
@@ -106,7 +116,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
@@ -117,7 +128,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
@@ -128,7 +140,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
@@ -139,7 +152,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
@@ -150,7 +164,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
@@ -161,7 +176,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
@@ -172,7 +188,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
@@ -183,7 +200,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
@@ -194,7 +212,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
@@ -205,7 +224,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
@@ -216,7 +236,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
@@ -227,7 +248,8 @@ const recipients = [
   {
     name: faker.name.findName(),
     age: Number(getRand(121)),
-    ethnicity: ethnicities[getRand(5) - 1],
+    race: ethnicities[getRand(5) - 1],
+    gender: genders[getRand(3) - 1],
     address: faker.fake(`{{address.streetAddress}}`),
     city: faker.fake(`{{address.city}}`),
     state: faker.fake(`{{address.stateAbbr}}`),
