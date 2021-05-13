@@ -11,7 +11,7 @@ exports.up = (knex) => {
       'hawaiian_pacific_islander',
       'white',
     ]);
-    tbl.enu(['hispanic', 'not_hispanic']);
+    tbl.enu('ethnicity', ['hispanic', 'not_hispanic']);
     tbl.enu('gender', ['male', 'female', 'nonbinary']);
     tbl.string('address', 128);
     tbl.string('city', 128).notNullable();
