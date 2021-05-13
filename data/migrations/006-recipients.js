@@ -13,7 +13,7 @@ exports.up = (knex) => {
     ]);
     tbl.enu('ethnicity', ['hispanic', 'not_hispanic']);
     tbl.enu('gender', ['male', 'female', 'nonbinary']);
-    tbl.string('address', 128);
+    tbl.string('address', 128).notNullable();
     tbl.string('city', 128).notNullable();
     tbl.string('state', 128).notNullable();
     tbl.string('zip_code').notNullable();
