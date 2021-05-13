@@ -1,7 +1,8 @@
 exports.up = (knex) => {
   return knex.schema.createTable('recipients', function (tbl) {
     tbl.increments('id').primary();
-    tbl.string('name').notNullable();
+    tbl.string('first_name').notNullable();
+    tbl.string('last_name').notNullable();
     tbl.integer('age').notNullable();
     tbl.enu('race', [
       'indian_native_alaskan',
@@ -10,17 +11,15 @@ exports.up = (knex) => {
       'hawaiian_pacific_islander',
       'white',
     ]);
+    tbl.enu('ethnicity', ['hispanic', 'not_hispanic']);
     tbl.enu('gender', ['male', 'female', 'nonbinary']);
-    // todo: how to add include value? (hispanic/latino or not hispanic or latino)
-    // todo: add LGBTQ+ status? "Do recipient identify as LGBTQ+? Answer: boolean"
-    // todo: foreign key to other recipient id (children, etc)
-    // todo: household characteristics? generational?
-    tbl.string('address', 128);
+    tbl.string('address', 128).notNullable();
     tbl.string('city', 128).notNullable();
     tbl.string('state', 128).notNullable();
     tbl.string('zip_code').notNullable();
     tbl.boolean('veteran_status').notNullable();
     tbl.integer('household_size').notNullable();
+    tbl.text('household_characteristics');
     tbl.timestamps(true, true);
   });
 };
