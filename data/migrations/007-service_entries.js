@@ -12,6 +12,10 @@ exports.up = function (knex) {
     tbl.string('unit').notNullable();
     tbl.integer('quantity').notNullable().unsigned();
     tbl.decimal('value').notNullable().unsigned();
+    tbl.string('address', 128).notNullable();
+    tbl.string('city', 128).notNullable();
+    tbl.string('state', 128).notNullable();
+    tbl.string('zip_code').notNullable();
     tbl
       .integer('recipient_id')
       .unsigned()
