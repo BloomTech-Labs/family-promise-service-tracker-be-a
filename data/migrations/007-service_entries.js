@@ -10,8 +10,8 @@ exports.up = function (knex) {
     tbl.datetime('provided_at').notNullable();
     tbl.text('notes');
     tbl.string('unit').notNullable();
-    tbl.integer('quantity').notNullable();
-    tbl.decimal('value').notNullable();
+    tbl.integer('quantity').notNullable().unsigned();
+    tbl.decimal('value').notNullable().unsigned();
     tbl
       .integer('recipient_id')
       .unsigned()
