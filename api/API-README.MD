@@ -250,8 +250,8 @@ All routes work with /api/recipient or /api/recipients
 | ------------------ | ------ | ------------------------------------------------- | ---------------------------------------- |
 | /api/recipients    | GET    | none                                              | none                                     |
 | /api/recipient/:id | GET    | none                                              | none                                     |
-| /api/recipient     | POST   | name, age, city, state, zip_code, veteran_status, | admin, program_manager, service_provider |
-|                    |        | household_size                                    |                                          |
+| /api/recipient     | POST   | first_name, last_name, age, household_id          | admin, program_manager, service_provider |
+|                    |        | veteran_status                                    |                                          |
 | /api/recipient/:id | PUT    | desired edit as key:value                         | admin, program_manager                   |
 | /api/recipient/:id | DELETE | none                                              | admin                                    |
 
@@ -289,5 +289,46 @@ To create or edit a recipient:
     "zip_code":"Desired change as a string",
     "veteran_status":"Desired change as a boolean",
     "household_size":"Desired change as an integer"
+}
+```
+
+## Households
+
+All routes work with /api/household or /api/households
+
+| Path               | Method | Requirements                                      | Authorization                            |
+| ------------------ | ------ | ------------------------------------------------- | ---------------------------------------- |
+| /api/households    | GET    | none                                              | none                                     |
+| /api/household/:id | GET    | none                                              | none                                     |
+| /api/household     | POST   | address, city, state, zip_code, household_size    | admin, program_manager, service_provider |
+| /api/household/:id | PUT    | desired edit as key:value                         | admin, program_manager                   |
+| /api/household/:id | DELETE | none                                              | admin                                    |
+
+Recipient object returned on GET requests:
+
+```
+{
+    id:int,
+    address:string - 128 char,
+    city:string - 128 char,
+    state:string - 128 char,
+    zip_code:string,
+    household_size:int,
+    household_characteristics:json object
+    created_at:datetime string,
+    updated_at:datetime string
+}
+```
+
+To create or edit a recipient:
+
+```
+{
+    "address":"Desired change as a string",
+    "city":"Desired change as a string",
+    "state":"Desired change as a string",
+    "zip_code":"Desired change as a string",
+    "household_size":"Desired change as an integer"
+    "household_characteristics":"Desired change as json object"
 }
 ```
