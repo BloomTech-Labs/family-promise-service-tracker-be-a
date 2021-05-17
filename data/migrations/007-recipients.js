@@ -13,13 +13,15 @@ exports.up = (knex) => {
     ]);
     tbl.enu('ethnicity', ['hispanic', 'not_hispanic']);
     tbl.enu('gender', ['male', 'female', 'nonbinary']);
-    tbl.string('address', 128).notNullable();
-    tbl.string('city', 128).notNullable();
-    tbl.string('state', 128).notNullable();
-    tbl.string('zip_code').notNullable();
     tbl.boolean('veteran_status').notNullable();
-    tbl.integer('household_size').notNullable();
-    tbl.text('household_characteristics');
+    tbl
+      .integer('household_id')
+      .unsigned()
+      .notNullable()
+      .references('id')
+      .inTable('households')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
     tbl.timestamps(true, true);
   });
 };
