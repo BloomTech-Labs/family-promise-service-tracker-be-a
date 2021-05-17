@@ -1,8 +1,18 @@
 const createError = require('http-errors');
 const { isAssignedToProgram, getProgramFromServiceType } = require('./models');
 
+// Requires role of admin to apply
 const requireAdmin = (req, res, next) => {
   if (req.profile.role == 'administrator') {
+    next();
+  } else {
+    next(createError(401, 'User not authorized to perform this action'));
+  }
+};
+
+// Requires role of program_manager to apply
+const requireProgramManager = (req, res, next) => {
+  if (req.profile.role == 'program_manager') {
     next();
   } else {
     next(createError(401, 'User not authorized to perform this action'));
@@ -78,6 +88,7 @@ const canEditProfile = async (req, res, next) => {
 
 module.exports = {
   requireAdmin,
+  requireProgramManager,
   canEditProfile,
   canCrudServiceType,
   isAssignedToProgram,
