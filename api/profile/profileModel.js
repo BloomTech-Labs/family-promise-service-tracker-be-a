@@ -29,7 +29,7 @@ const findById = async (id) => {
 
 const findServiceProviders = () => {
   return knex('profiles')
-    .select('firstName', 'lastName')
+    .select('id', 'firstName', 'lastName')
     .where('role', 'service_provider');
 };
 
