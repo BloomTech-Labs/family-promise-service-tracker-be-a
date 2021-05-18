@@ -260,16 +260,14 @@ Recipient object returned on GET requests:
 ```
 {
     id:int,
-    name:string,
+    first_name:string,
+    last_name:string,
     age:int,
     race:array of race objects,
+    ethnicity:array of ethnicity objects,
     gender:array of gender objects,
-    address:string - 128 char,
-    city:string - 128 char,
-    state:string - 128 char,
-    zip_code:string,
     veteran_status:boolean,
-    household_size:int,
+    household_id:int,
     created_at:datetime string,
     updated_at:datetime string
 }
@@ -279,16 +277,13 @@ To create or edit a recipient:
 
 ```
 {
-    "name":"Desired change as a string",
+    "firs_name":"Desired change as a string",
+    "last_name":"Desired change as a string",
     "age":"Desired change as an integer",
     "race":"Desired change as an enum",
+    "ethnicity":"Desired change as an enum",
     "gender":"Desired change as an enum",
-    "address":"Desired change as a string",
-    "city":"Desired change as a string",
-    "state":"Desired change as a string",
-    "zip_code":"Desired change as a string",
-    "veteran_status":"Desired change as a boolean",
-    "household_size":"Desired change as an integer"
+    "veteran_status":"Desired change as a boolean"
 }
 ```
 
