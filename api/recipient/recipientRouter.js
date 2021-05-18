@@ -2,11 +2,14 @@ const express = require('express');
 const DB = require('../utils/db-helper');
 // const Recipients = require('./recipientModel');
 const router = express.Router();
-const { requireAdmin } = require('../middleware/authorization');
+const {
+  requireAdmin,
+  requireProgramManager,
+} = require('../middleware/authorization');
 
 // GET - View all recipients
+// All users can view all recipients
 router.get('/', (req, res) => {
-
   DB.findAll('recipients')
     .then((recipients) => {
       res.status(200).json(recipients);
@@ -17,23 +20,25 @@ router.get('/', (req, res) => {
 });
 
 // GET - View recipient by ID
+// All users can view recipients by ID
 router.get('/:id', (req, res) => {
-    const { id } = req.params;
+  const { id } = req.params;
 
-    DB.findById('recipients', id)
-       .then((recipient) => {
-          if (recipient) {
-            res.status(200).json(recipient);
-          } else {
-            res.status(404).json({ error: `Recipient ${id} not found` });
-          }
-       })
-       .catch((err) => {
-          res.status(500).json({ error: err.message });
-       });
+  DB.findById('recipients', id)
+    .then((recipient) => {
+      if (recipient) {
+        res.status(200).json(recipient);
+      } else {
+        res.status(404).json({ error: `Recipient ${id} not found` });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
 });
 
 // POST - Create new recipient
+// All users can add a new recipient
 router.post('/', (req, res) => {
   DB.create('recipients', req.body)
     .then((newRecipient) => {
@@ -45,7 +50,8 @@ router.post('/', (req, res) => {
 });
 
 // PUT - Update recipient by ID
-router.put('/:id', (req, res) => {
+// Only Admin and Program Managers can update recipient by ID
+router.put('/:id', requireAdmin, requireProgramManager, (req, res) => {
   DB.update('recipients', req.params.id, req.body)
     .then((editedRecipient) => {
       res.status(200).json({
@@ -59,6 +65,7 @@ router.put('/:id', (req, res) => {
 });
 
 // DELETE - Remove recipient by ID
+// Only Admin can remove recipient by ID
 router.delete('/:id', requireAdmin, (req, res) => {
   const { id } = req.params;
 
@@ -69,10 +76,10 @@ router.delete('/:id', requireAdmin, (req, res) => {
       } else {
         res.status(404).json({ message: `Recipient ${id} could not be found` });
       }
-     })
-     .catch((err) => {
-        res.status(500).json({ error: err.message });
-     });
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
 });
 
 module.exports = router;
