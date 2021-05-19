@@ -1,9 +1,10 @@
 const express = require('express');
 const DB = require('../utils/db-helper');
+const ServiceEntries = require('./serviceEntriesModel');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  DB.findAll('service_entries')
+  ServiceEntries.findAll('service_entries')
     .then((entries) => {
       res.status(200).json(entries);
     })
