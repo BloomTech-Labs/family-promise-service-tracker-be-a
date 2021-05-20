@@ -15,8 +15,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-
-  DB.findById('service_entries', id)
+  ServiceEntries.findById(id)
     .then((entry) => {
       if (entry) {
         res.status(200).json(entry);
@@ -31,6 +30,9 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   DB.create('service_entries', req.body)
+    .then((response) => {
+      return ServiceEntries.findById(response[0].id);
+    })
     .then((newEntry) => {
       res.status(201).json(newEntry);
     })
@@ -40,7 +42,7 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  DB.update('service_entries', req.params.id, req.body)
+  ServiceEntries.update(req.params.id, req.body)
     .then((editedEntry) => {
       res.status(200).json(editedEntry);
     })
@@ -51,7 +53,6 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
-
   DB.remove('service_entries', id)
     .then((count) => {
       if (count > 0) {
