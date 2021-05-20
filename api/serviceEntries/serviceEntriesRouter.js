@@ -31,7 +31,6 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   DB.create('service_entries', req.body)
     .then((response) => {
-      console.log(response);
       return ServiceEntries.findById(response[0].id);
     })
     .then((newEntry) => {
