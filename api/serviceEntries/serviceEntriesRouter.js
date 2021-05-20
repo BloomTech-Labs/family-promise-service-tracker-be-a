@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  DB.create('service_entries', req.body)
+  ServiceEntries.create('service_entries', req.body)
     .then((newEntry) => {
       res.status(201).json(newEntry);
     })
