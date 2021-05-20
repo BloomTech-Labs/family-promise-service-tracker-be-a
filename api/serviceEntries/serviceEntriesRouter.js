@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const { id } = req.params;
 
-  DB.findById('service_entries', id)
+  ServiceEntries.findById(id)
     .then((entry) => {
       if (entry) {
         res.status(200).json(entry);
