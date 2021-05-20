@@ -50,8 +50,9 @@ const findById = async (id) => {
 };
 
 // need to return the single newly created service_entry **only
-const create = async () => {
+const create = async (object) => {
   return await knex('service_entries')
+    .insert(object)
     .leftJoin('recipients', {
       'service_entries.recipient_id': 'recipients.id',
     })
@@ -71,11 +72,24 @@ const create = async () => {
       'recipients.id',
       'service_types.id',
       'statuses.id'
-    );
+    )
+    .returning('*');
+};
+
+// Can only update service_entries data in table on front end
+// Can't update "extra" data that's tacked onto the responses
+// Can't edit: first_name, last_name, service_type_name, status_name
+const update = (id, object) => {
+  return knex('service_entries')
+    .where({ id: id })
+    .first()
+    .update(object)
+    .returning('*');
 };
 
 module.exports = {
   findAll,
   findById,
   create,
+  update,
 };
