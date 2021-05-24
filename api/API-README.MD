@@ -30,7 +30,7 @@ Profile object:
 
 ```
 {
-    id: string,
+    id: string (okta id),
     email: string,
     firstName: string,
     lastName: string,
@@ -242,18 +242,98 @@ If user X was already assigned to this service type, and you want to also add us
 | /api/service_entries/:id | DELETE | none                                                 | must be admin or a program manager or a service provider |
 |                          |        |                                                      | associated with this service type                        |
 
+```
+{
+    service_type_id: int
+    provided_at: DateTime string,
+    notes: text,
+    unit: string,
+    quantity: int,
+    value: decimal,
+    address: string,
+    city: string,
+    state: string,
+    zip_code: string,
+    recipient_id: int,
+    status_id: int,
+    provider_id: string (okta id)
+}
+```
+
+Service Entries Object on POST requests:
+
+```
+{
+    "message": "Service Entry created",
+    "newEntry": [
+        {
+            service_type_id: int
+            provided_at: DateTime string,
+            notes: text,
+            unit: string,
+            quantity: int,
+            value: decimal,
+            address: string,
+            city: string,
+            state: string,
+            zip_code: string,
+            recipient_id: int,
+            status_id: int,
+            provider_id: string (okta id)
+            created_at: DateTime string,
+            updated_at: DateTime string,
+            first_name: string,
+            last_name: string,
+            service_type_name: string,
+            status_name: string
+        }
+    ]
+}
+```
+
+Service Entries Object on PUT requests:
+
+```
+{
+    "message": "Service Entry (id) updated",
+    "editedEntry": [
+        {
+            service_type_id: int
+            provided_at: DateTime string,
+            notes: text,
+            unit: string,
+            quantity: int,
+            value: decimal,
+            address: string,
+            city: string,
+            state: string,
+            zip_code: string,
+            recipient_id: int,
+            status_id: int,
+            provider_id: string (okta id)
+            created_at: DateTime string,
+            updated_at: DateTime string,
+            first_name: string,
+            last_name: string,
+            service_type_name: string,
+            status_name: string
+        }
+    ]
+}
+```
+
 ## Recipients
 
 All routes work with /api/recipient or /api/recipients
 
-| Path               | Method | Requirements                                      | Authorization                            |
-| ------------------ | ------ | ------------------------------------------------- | ---------------------------------------- |
-| /api/recipients    | GET    | none                                              | none                                     |
-| /api/recipient/:id | GET    | none                                              | none                                     |
-| /api/recipient     | POST   | first_name, last_name, age, household_id          | admin, program_manager, service_provider |
-|                    |        | veteran_status                                    |                                          |
-| /api/recipient/:id | PUT    | desired edit as key:value                         | admin, program_manager                   |
-| /api/recipient/:id | DELETE | none                                              | admin                                    |
+| Path               | Method | Requirements                             | Authorization                            |
+| ------------------ | ------ | ---------------------------------------- | ---------------------------------------- |
+| /api/recipients    | GET    | none                                     | none                                     |
+| /api/recipient/:id | GET    | none                                     | none                                     |
+| /api/recipient     | POST   | first_name, last_name, age, household_id | admin, program_manager, service_provider |
+|                    |        | veteran_status                           |                                          |
+| /api/recipient/:id | PUT    | desired edit as key:value                | admin, program_manager                   |
+| /api/recipient/:id | DELETE | none                                     | admin                                    |
 
 Recipient object returned on GET requests:
 
@@ -277,7 +357,7 @@ To create or edit a recipient:
 
 ```
 {
-    "firs_name":"Desired change as a string",
+    "first_name":"Desired change as a string",
     "last_name":"Desired change as a string",
     "age":"Desired change as an integer",
     "race":"Desired change as an enum",
@@ -291,13 +371,13 @@ To create or edit a recipient:
 
 All routes work with /api/household or /api/households
 
-| Path               | Method | Requirements                                      | Authorization                            |
-| ------------------ | ------ | ------------------------------------------------- | ---------------------------------------- |
-| /api/households    | GET    | none                                              | none                                     |
-| /api/household/:id | GET    | none                                              | none                                     |
-| /api/household     | POST   | address, city, state, zip_code, household_size    | admin, program_manager, service_provider |
-| /api/household/:id | PUT    | desired edit as key:value                         | admin, program_manager                   |
-| /api/household/:id | DELETE | none                                              | admin                                    |
+| Path               | Method | Requirements                                   | Authorization                            |
+| ------------------ | ------ | ---------------------------------------------- | ---------------------------------------- |
+| /api/households    | GET    | none                                           | none                                     |
+| /api/household/:id | GET    | none                                           | none                                     |
+| /api/household     | POST   | address, city, state, zip_code, household_size | admin, program_manager, service_provider |
+| /api/household/:id | PUT    | desired edit as key:value                      | admin, program_manager                   |
+| /api/household/:id | DELETE | none                                           | admin                                    |
 
 Recipient object returned on GET requests:
 
@@ -332,13 +412,12 @@ To create or edit a recipient:
 
 All routes work with /api/metric or /api/metrics
 
-| Path                         | Method | Requirements                                      | Authorization                            |
-| ---------------------------- | ------ | ------------------------------------------------- | ---------------------------------------- |
-| /api/metrics/recipientscount | GET    | none                                              | none                                     |
-| /api/metrics/servicescount   | GET    | none                                              | none                                     |
-| /api/metrics/recipientsweek  | GET    | none                                              | none                                     |
-| /api/metrics/servicesweek    | GET    | none                                              | none                                     |
-
+| Path                         | Method | Requirements | Authorization |
+| ---------------------------- | ------ | ------------ | ------------- |
+| /api/metrics/recipientscount | GET    | none         | none          |
+| /api/metrics/servicescount   | GET    | none         | none          |
+| /api/metrics/recipientsweek  | GET    | none         | none          |
+| /api/metrics/servicesweek    | GET    | none         | none          |
 
 Metric object returned on GET requests:
 

@@ -34,7 +34,10 @@ router.post('/', (req, res) => {
       return ServiceEntries.findById(response[0].id);
     })
     .then((newEntry) => {
-      res.status(201).json(newEntry);
+      res.status(201).json({
+        message: `Service Entry created`,
+        newEntry,
+      });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
@@ -42,9 +45,15 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  ServiceEntries.update(req.params.id, req.body)
+  DB.update('service_entries', req.params.id, req.body)
+    .then((response) => {
+      return ServiceEntries.findById(response[0].id);
+    })
     .then((editedEntry) => {
-      res.status(200).json(editedEntry);
+      res.status(200).json({
+        message: `Service Entry ${req.params.id} updated`,
+        editedEntry,
+      });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
