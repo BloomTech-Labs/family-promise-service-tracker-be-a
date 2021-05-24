@@ -28,6 +28,7 @@ const serviceEntryRouter = require('./serviceEntries/serviceEntriesRouter');
 const dsRouter = require('./dsService/dsRouter');
 const recipientRouter = require('./recipient/recipientRouter');
 const householdRouter = require('./household/householdRouter');
+const metricsRouter = require('./metrics/metricsRouter');
 
 const app = express();
 
@@ -64,6 +65,7 @@ app.use(['/api/service_entry', '/api/service_entries'], serviceEntryRouter);
 app.use('/data', dsRouter);
 app.use(['/api/recipient', '/api/recipients'], recipientRouter);
 app.use(['/api/household', '/api/households'], householdRouter);
+app.use(['/api/metric', '/api/metrics'], metricsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
