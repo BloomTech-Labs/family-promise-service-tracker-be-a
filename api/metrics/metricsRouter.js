@@ -2,8 +2,8 @@ const express = require('express');
 const Metric = require('./metricsModel');
 const router = express.Router();
 
-router.get('/recipientcount', (req, res) => {
-  Metric.findAllUniqueRecipients('recipients')
+router.get('/recipientscount', (req, res) => {
+  Metric.findAllUniqueRecipients()
     .then((recipients) => {
       res.status(200).json(recipients);
     })
@@ -13,7 +13,7 @@ router.get('/recipientcount', (req, res) => {
 });
 
 router.get('/servicescount', (req, res) => {
-  Metric.findAllUniqueRecipients('services')
+  Metric.findAllUniqueServices()
     .then((services) => {
       res.status(200).json(services);
     })
@@ -23,7 +23,7 @@ router.get('/servicescount', (req, res) => {
 });
 
 router.get('/recipientsweek', (req, res) => {
-  Metric.newRecipientsLastWeek('new_recipients')
+  Metric.newRecipientsLastWeek()
     .then((new_recipients) => {
       res.status(200).json(new_recipients);
     })
@@ -33,7 +33,7 @@ router.get('/recipientsweek', (req, res) => {
 });
 
 router.get('/servicesweek', (req, res) => {
-  Metric.findAllUniqueRecipients('new_service_entries')
+  Metric.newServicesLastWeek()
     .then((new_service_entries) => {
       res.status(200).json(new_service_entries);
     })

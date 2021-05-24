@@ -327,3 +327,23 @@ To create or edit a recipient:
     "household_characteristics":"Desired change as json object"
 }
 ```
+
+## Metrics
+
+All routes work with /api/metric or /api/metrics
+
+| Path               | Method | Requirements                                      | Authorization                            |
+| ------------------ | ------ | ------------------------------------------------- | ---------------------------------------- |
+| /api/metrics/recipientscount   | GET    | none                                  | none                                     |
+| /api/metrics/servicescount   | GET    | none                                  | none                                     |
+| /api/metrics/recipientsweek   | GET    | none                                  | none                                     |
+| /api/metrics/servicesweek  | GET    | none                                  | none                                     |
+
+
+Metric object returned on GET requests:
+
+```
+    {
+        count:int
+    }
+```

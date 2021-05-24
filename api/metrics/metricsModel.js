@@ -1,20 +1,20 @@
 const knex = require('../../data/db-config');
 
-const findAllUniqueRecipients = async () => {
+const findAllUniqueRecipients = () => {
   return knex('recipients').count('id');
 };
 
-const findAllUniqueServices = async () => {
+const findAllUniqueServices = () => {
   return knex('service_entries').count('id');
 };
 
-const newRecipientsLastWeek = async () => {
+const newRecipientsLastWeek = () => {
   return knex('recipients')
     .count('id')
     .where('created_at', '>', '2021-05-17T00:00:00Z');
 };
 
-const newServicesLastWeek = async () => {
+const newServicesLastWeek = () => {
   return knex('service_entries')
     .count('id')
     .where('created_at', '>', '2021-05-17T00:00:00Z');
