@@ -332,18 +332,18 @@ To create or edit a recipient:
 
 All routes work with /api/metric or /api/metrics
 
-| Path               | Method | Requirements                                      | Authorization                            |
-| ------------------ | ------ | ------------------------------------------------- | ---------------------------------------- |
-| /api/metrics/recipientscount   | GET    | none                                  | none                                     |
-| /api/metrics/servicescount   | GET    | none                                  | none                                     |
-| /api/metrics/recipientsweek   | GET    | none                                  | none                                     |
-| /api/metrics/servicesweek  | GET    | none                                  | none                                     |
+| Path                         | Method | Requirements                                      | Authorization                            |
+| ---------------------------- | ------ | ------------------------------------------------- | ---------------------------------------- |
+| /api/metrics/recipientscount | GET    | none                                              | none                                     |
+| /api/metrics/servicescount   | GET    | none                                              | none                                     |
+| /api/metrics/recipientsweek  | GET    | none                                              | none                                     |
+| /api/metrics/servicesweek    | GET    | none                                              | none                                     |
 
 
 Metric object returned on GET requests:
 
 ```
-    {
-        count:int
-    }
+{
+    count:int
+}
 ```
