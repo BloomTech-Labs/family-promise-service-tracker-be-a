@@ -9,20 +9,13 @@ below refer to authorization beyond having a valid token.
 
 ## Users
 
-| Path              | Method | Requirements                   | Authorization                        |
-| ----------------- | ------ | ------------------------------ | ------------------------------------ |
-| /api/profiles     | GET    | none                           | none                                 |
-| /api/profiles/:id | GET    | none                           | none                                 |
-| /api/profiles/:id | PUT    | any desired edits as key:value | Admin can edit role, name,           |
-|                   |        | json pair. See below for       | avatarUrl, and programs of any user. |
-|                   |        | details.                       | Other users can edit their own name  |
-|                   |        |                                | and avatarUrls, will receive 401 if  |
-|                   |        |                                | they attempt to editother fields or  |
-|                   |        |                                | other users.                         |
-| /api/profiles     | POST   | STUBBED RESPONSE               | Admin will receive stub response,    |
-|                   |        |                                | Non-admin will receive 401           |
-| /api/profiles/:id | DELETE | STUBBED RESPONSE               | Admin will receive stub response,    |
-|                   |        |                                | Non-admin will receive 401           |
+| Path              | Method | Requirements                                                     | Authorization                                                                                                                                                                             |
+| ----------------- | ------ | ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| /api/profiles     | GET    | none                                                             |                                                                                                                                                                                           |
+| /api/profiles/:id | GET    | none                                                             |                                                                                                                                                                                           |
+| /api/profiles/:id | PUT    | any desired edits as key:value json pair. See below for details. | Admin can edit role, name, avatarUrl, and programs of any user. Other users can edit their own name and avatarUrls, will receive 401 if they attempt to edit other fields or other users. |
+| /api/profiles     | POST   | STUBBED RESPONSE                                                 | Admin will receive stub response, Non-admin will receive 401                                                                                                                              |
+| /api/profiles/:id | DELETE | STUBBED RESPONSE                                                 | Admin will receive stub response, Non-admin will receive 401                                                                                                                              |
 
 We were asked to hold off on allowing access to Create/Delete functions, so those are stubbed responses for now.
 
@@ -96,17 +89,15 @@ you must include both x and y in the programs field:
 
 ## Programs
 
-| Path               | Method | Requirements                 | Authorization               |
-| ------------------ | ------ | ---------------------------- | --------------------------- |
-| /api/programs      | GET    | none                         | none                        |
-| /api/programs/:id  | GET    | none                         | none                        |
-| /api/programs/name | POST   | name                         | none                        |
-| /api/programs/type | POST   | type                         | none                        |
-| /api/programs      | POST   | name, type, description      | admin                       |
-| /api/programs/:id  | PUT    | any edits as key:value pairs | admin or program manager of |
-|                    |        |                              | this program                |
-| /api/programs/:id  | DELETE | none                         | admin or program manager of |
-|                    |        |                              | this program                |
+| Path               | Method | Requirements                 | Authorization                            |
+| ------------------ | ------ | ---------------------------- | ---------------------------------------- |
+| /api/programs      | GET    | none                         | none                                     |
+| /api/programs/:id  | GET    | none                         | none                                     |
+| /api/programs/name | POST   | name                         | none                                     |
+| /api/programs/type | POST   | type                         | none                                     |
+| /api/programs      | POST   | name, type, description      | admin                                    |
+| /api/programs/:id  | PUT    | any edits as key:value pairs | admin or program manager of this program |
+| /api/programs/:id  | DELETE | none                         | admin or program manager of this program |
 
 program object returned on GET requests:
 
@@ -167,16 +158,13 @@ To create or edit a status:
 
 ## Service Types
 
-| Path                   | Method | Requirements     | Authorization                                     |
-| ---------------------- | ------ | ---------------- | ------------------------------------------------- |
-| /api/service_types     | GET    | none             | none                                              |
-| /api/service_types/:id | GET    | none             | none                                              |
-| /api/service_types     | POST   | name, program_id | must be admin or a program manager of the program |
-|                        |        |                  | associated with this service type                 |
-| /api/service_types/:id | PUT    | id, any edits    | must be admin or a program manager of the program |
-|                        |        |                  | associated with this service type                 |
-| /api/service_types/:id | DELETE | none             | must be admin or a program manager of the program |
-|                        |        |                  | associated with this service type                 |
+| Path                   | Method | Requirements     | Authorization                                                                       |
+| ---------------------- | ------ | ---------------- | ----------------------------------------------------------------------------------- |
+| /api/service_types     | GET    | none             | none                                                                                |
+| /api/service_types/:id | GET    | none             | none                                                                                |
+| /api/service_types     | POST   | name, program_id | must be admin or a program manager of the program associated with this service type |
+| /api/service_types/:id | PUT    | id, any edits    | must be admin or a program manager of the program associated with this service type |
+| /api/service_types/:id | DELETE | none             | must be admin or a program manager of the program associated with this service type |
 
 Service Type object returned on GET requests:
 
@@ -231,29 +219,25 @@ If user X was already assigned to this service type, and you want to also add us
 
 ## Service Entries
 
-| Path                     | Method | Requirements                                         | Authorization                                            |
-| ------------------------ | ------ | ---------------------------------------------------- | -------------------------------------------------------- |
-| /api/service_entries     | GET    | none                                                 | none                                                     |
-| /api/service_entries/:id | GET    | none                                                 | none                                                     |
-| /api/service_entries     | POST   | service_type_id, provided_at, status_id, provider_id | must be admin or a program manager                       |
-|                          |        |                                                      | or a service provider associated with this service type  |
-| /api/service_entries/:id | PUT    | id, any edits                                        | must be admin or a program manager or a service provider |
-|                          |        |                                                      | associated with this service type                        |
-| /api/service_entries/:id | DELETE | none                                                 | must be admin or a program manager or a service provider |
-|                          |        |                                                      | associated with this service type                        |
+| Path                     | Method | Requirements                                         | Authorization                                                                              |
+| ------------------------ | ------ | ---------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| /api/service_entries     | GET    | none                                                 | none                                                                                       |
+| /api/service_entries/:id | GET    | none                                                 | none                                                                                       |
+| /api/service_entries     | POST   | service_type_id, provided_at, status_id, provider_id | must be admin or a program manager or a service provider associated with this service type |
+| /api/service_entries/:id | PUT    | id, any edits                                        | must be admin or a program manager or a service provider associated with this service type |
+| /api/service_entries/:id | DELETE | none                                                 | must be admin or a program manager or a service provider associated with this service type |
 
 ## Recipients
 
 All routes work with /api/recipient or /api/recipients
 
-| Path               | Method | Requirements                                      | Authorization                            |
-| ------------------ | ------ | ------------------------------------------------- | ---------------------------------------- |
-| /api/recipients    | GET    | none                                              | none                                     |
-| /api/recipient/:id | GET    | none                                              | none                                     |
-| /api/recipient     | POST   | first_name, last_name, age, household_id          | admin, program_manager, service_provider |
-|                    |        | veteran_status                                    |                                          |
-| /api/recipient/:id | PUT    | desired edit as key:value                         | admin, program_manager                   |
-| /api/recipient/:id | DELETE | none                                              | admin                                    |
+| Path               | Method | Requirements                                             | Authorization                            |
+| ------------------ | ------ | -------------------------------------------------------- | ---------------------------------------- |
+| /api/recipients    | GET    | none                                                     | none                                     |
+| /api/recipient/:id | GET    | none                                                     | none                                     |
+| /api/recipient     | POST   | first_name, last_name, age, household_id, veteran_status | admin, program_manager, service_provider |
+| /api/recipient/:id | PUT    | desired edit as key:value                                | admin, program_manager                   |
+| /api/recipient/:id | DELETE | none                                                     | admin                                    |
 
 Recipient object returned on GET requests:
 
@@ -291,13 +275,13 @@ To create or edit a recipient:
 
 All routes work with /api/household or /api/households
 
-| Path               | Method | Requirements                                      | Authorization                            |
-| ------------------ | ------ | ------------------------------------------------- | ---------------------------------------- |
-| /api/households    | GET    | none                                              | none                                     |
-| /api/household/:id | GET    | none                                              | none                                     |
-| /api/household     | POST   | address, city, state, zip_code, household_size    | admin, program_manager, service_provider |
-| /api/household/:id | PUT    | desired edit as key:value                         | admin, program_manager                   |
-| /api/household/:id | DELETE | none                                              | admin                                    |
+| Path               | Method | Requirements                                   | Authorization                            |
+| ------------------ | ------ | ---------------------------------------------- | ---------------------------------------- |
+| /api/households    | GET    | none                                           | none                                     |
+| /api/household/:id | GET    | none                                           | none                                     |
+| /api/household     | POST   | address, city, state, zip_code, household_size | admin, program_manager, service_provider |
+| /api/household/:id | PUT    | desired edit as key:value                      | admin, program_manager                   |
+| /api/household/:id | DELETE | none                                           | admin                                    |
 
 Recipient object returned on GET requests:
 
@@ -332,13 +316,12 @@ To create or edit a recipient:
 
 All routes work with /api/metric or /api/metrics
 
-| Path                         | Method | Requirements                                      | Authorization                            |
-| ---------------------------- | ------ | ------------------------------------------------- | ---------------------------------------- |
-| /api/metrics/recipientscount | GET    | none                                              | none                                     |
-| /api/metrics/servicescount   | GET    | none                                              | none                                     |
-| /api/metrics/recipientsweek  | GET    | none                                              | none                                     |
-| /api/metrics/servicesweek    | GET    | none                                              | none                                     |
-
+| Path                         | Method | Requirements | Authorization |
+| ---------------------------- | ------ | ------------ | ------------- |
+| /api/metrics/recipientscount | GET    | none         | none          |
+| /api/metrics/servicescount   | GET    | none         | none          |
+| /api/metrics/recipientsweek  | GET    | none         | none          |
+| /api/metrics/servicesweek    | GET    | none         | none          |
 
 Metric object returned on GET requests:
 
