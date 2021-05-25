@@ -23,7 +23,7 @@ Profile object:
 
 ```
 {
-    id: string,
+    id: string (okta id),
     email: string,
     firstName: string,
     lastName: string,
@@ -227,6 +227,86 @@ If user X was already assigned to this service type, and you want to also add us
 | /api/service_entries/:id | PUT    | id, any edits                                        | must be admin or a program manager or a service provider associated with this service type |
 | /api/service_entries/:id | DELETE | none                                                 | must be admin or a program manager or a service provider associated with this service type |
 
+```
+{
+    service_type_id: int
+    provided_at: DateTime string,
+    notes: text,
+    unit: string,
+    quantity: int,
+    value: decimal,
+    address: string,
+    city: string,
+    state: string,
+    zip_code: string,
+    recipient_id: int,
+    status_id: int,
+    provider_id: string (okta id)
+}
+```
+
+Service Entries Object on POST requests:
+
+```
+{
+    "message": "Service Entry created",
+    "newEntry": [
+        {
+            service_type_id: int
+            provided_at: DateTime string,
+            notes: text,
+            unit: string,
+            quantity: int,
+            value: decimal,
+            address: string,
+            city: string,
+            state: string,
+            zip_code: string,
+            recipient_id: int,
+            status_id: int,
+            provider_id: string (okta id)
+            created_at: DateTime string,
+            updated_at: DateTime string,
+            first_name: string,
+            last_name: string,
+            service_type_name: string,
+            status_name: string
+        }
+    ]
+}
+```
+
+Service Entries Object on PUT requests:
+
+```
+{
+    "message": "Service Entry (id) updated",
+    "editedEntry": [
+        {
+            service_type_id: int
+            provided_at: DateTime string,
+            notes: text,
+            unit: string,
+            quantity: int,
+            value: decimal,
+            address: string,
+            city: string,
+            state: string,
+            zip_code: string,
+            recipient_id: int,
+            status_id: int,
+            provider_id: string (okta id)
+            created_at: DateTime string,
+            updated_at: DateTime string,
+            first_name: string,
+            last_name: string,
+            service_type_name: string,
+            status_name: string
+        }
+    ]
+}
+```
+
 ## Recipients
 
 All routes work with /api/recipient or /api/recipients
@@ -261,7 +341,7 @@ To create or edit a recipient:
 
 ```
 {
-    "firs_name":"Desired change as a string",
+    "first_name":"Desired change as a string",
     "last_name":"Desired change as a string",
     "age":"Desired change as an integer",
     "race":"Desired change as an enum",
