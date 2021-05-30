@@ -38,9 +38,10 @@ const findById = async (id) => {
     })
     .select(
       knex.raw(
-        'service_entries.*, recipients.first_name, recipients.last_name, service_types.name as service_type_name, statuses.name as status_name'
+        'service_entries.*, to_json(recipients.*) as recipient, to_json(service_types.*) as service_type, to_json(statuses.*) as status'
       )
     )
+    .first()
     .groupBy(
       'service_entries.id',
       'recipients.id',
