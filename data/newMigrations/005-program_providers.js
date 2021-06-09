@@ -1,0 +1,26 @@
+exports.up = function (knex) {
+    return knex.schema.createTable('program_providers', (tbl) => {
+      tbl.increments('id').primary();
+      tbl
+      .integer('program_id', 128)
+      .unsigned()
+      .notNullable()
+      .references('id')
+      .inTable('programs')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+      tbl
+      .string('provider_id', 128)
+      .unsigned()
+      .notNullable()
+      .references('id')
+      .inTable('providers')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+      tbl.timestamps(true, true);
+    });
+};
+  
+exports.down = function (knex) {
+    return knex.schema.dropTableIfExists('program_providers');
+};
