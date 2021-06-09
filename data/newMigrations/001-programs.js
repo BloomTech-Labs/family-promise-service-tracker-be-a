@@ -4,8 +4,7 @@ exports.up = function (knex) {
         tbl.increments('program_id').primary();
         tbl.string('program_name', 255).notNullable().unique();
         tbl.string('program_description', 1000).notNullable();
-        tbl.timestamp('created_at').defaultTo(knex.fn.now());
-        tbl.timestamp('updated_at').defaultTo(knex.fn.now());
+        tbl.timestamps(false, true);
     });
 };
   
