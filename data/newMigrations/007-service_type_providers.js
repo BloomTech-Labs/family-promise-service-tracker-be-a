@@ -8,7 +8,7 @@ exports.up = function (knex) {
             .references('service_type_id')
             .inTable('service_types')
             .onUpdate('CASCADE')
-            .onDelete('CASCADE');
+            .onDelete('RESTRICT');
         tbl
             .string('provider_id')
             .unsigned()
@@ -16,7 +16,7 @@ exports.up = function (knex) {
             .references('provider_id')
             .inTable('providers')
             .onUpdate('CASCADE')
-            .onDelete('CASCADE');
+            .onDelete('RESTRICT');
         tbl.timestamps(true, true);
     });
 };
