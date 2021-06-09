@@ -1,6 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.createTable('locations', function (tbl) {
-    tbl.integer('location_id').notNullable();
+    tbl.increments('location_id').primary();
     tbl.string('location_name').notNullable();
     tbl.string('location_description').notNullable();
     tbl.string('address').notNullable();
