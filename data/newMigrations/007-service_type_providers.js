@@ -2,21 +2,21 @@ exports.up = function (knex) {
     return knex.schema.createTable('service_type_providers', (tbl) => {
         tbl.increments('service_type_provider_id').primary();
         tbl
-        .integer('service_type_id')
-        .unsigned()
-        .notNullable()
-        .references('service_type_id')
-        .inTable('service_types')
-        .onUpdate('CASCADE')
-        .onDelete('CASCADE');
+            .integer('service_type_id')
+            .unsigned()
+            .notNullable()
+            .references('service_type_id')
+            .inTable('service_types')
+            .onUpdate('CASCADE')
+            .onDelete('CASCADE');
         tbl
-        .string('provider_id')
-        .unsigned()
-        .notNullable()
-        .references('provider_id')
-        .inTable('providers')
-        .onUpdate('CASCADE')
-        .onDelete('CASCADE');
+            .string('provider_id')
+            .unsigned()
+            .notNullable()
+            .references('provider_id')
+            .inTable('providers')
+            .onUpdate('CASCADE')
+            .onDelete('CASCADE');
         tbl.timestamps(true, true);
     });
 };
