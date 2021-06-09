@@ -5,7 +5,7 @@ exports.up = function (knex) {
       .integer('program_id', 128)
       .unsigned()
       .notNullable()
-      .references('id')
+      .references('program_id')
       .inTable('programs')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
@@ -13,7 +13,7 @@ exports.up = function (knex) {
       .string('provider_id', 128)
       .unsigned()
       .notNullable()
-      .references('id')
+      .references('provider_id')
       .inTable('providers')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
