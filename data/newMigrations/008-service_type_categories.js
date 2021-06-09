@@ -1,9 +1,19 @@
 exports.up = function (knex) {
   return knex.schema.createTable('service_types_categories', (tbl) => {
     tbl.increments('service_type_category_id').primary();
-    tbl.foreign('service_category_id').references('service_categories.service_category_id');
-    tbl.foreign('service_type_id').references('service_types.service_type_id');
-    table.timestamps(true, true);
+    tbl.integer('service_category_id', 128)
+      .unsigned()
+      .notNullable()
+      .onUpdate('RESTRICT')
+      .onDelete('RESTRICT')
+      .references('service_categories.service_category_id');
+    tbl.integer('service_type_id', 128)
+      .unsigned()
+      .notNullable()
+      .onUpdate('RESTRICT')
+      .onDelete('RESTRICT')
+      .references('service_types.service_type_id');
+    tbl.timestamps(true, true);
   });
 };
 
