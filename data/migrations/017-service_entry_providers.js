@@ -1,13 +1,13 @@
-exports.up = function (knex) {
-  return knex.schema.createTable('service_entry_recipients', (tbl) => {
-    tbl.increments('service_entry_provider_id').primary();
+exports.up = (knex) => {
+  return knex.schema.createTable('service_entry_providers', function (tbl) {
+    tbl.increments('service_entry_provider_id');
     tbl
       .uuid('service_entry_id')
       .notNullable()
       .unsigned()
       .references('service_entry_id')
       .inTable('service_entries')
-      .onUpdate('CASCADE')
+      .onUpdate('RESTRICT')
       .onDelete('RESTRICT');
     tbl
       .uuid('provider_id')
@@ -15,12 +15,12 @@ exports.up = function (knex) {
       .unsigned()
       .references('provider_id')
       .inTable('providers')
-      .onUpdate('CASCADE')
+      .onUpdate('RESTRICT')
       .onDelete('RESTRICT');
     tbl.timestamps(true, true);
   });
 };
 
-exports.down = function (knex) {
-  return knex.schema.dropTableIfExists('service_entry_recipients');
+exports.down = (knex) => {
+  return knex.schema.dropTableIfExists('service_entry_providers');
 };
