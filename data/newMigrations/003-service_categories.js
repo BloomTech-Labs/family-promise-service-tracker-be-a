@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 exports.up = function (knex) {
     return knex.schema.createTable('service_categories', tbl => {
         tbl.increments('service_category_id');
