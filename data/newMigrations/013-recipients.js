@@ -24,9 +24,9 @@ exports.up = (knex) => {
             .inTable('races')
             .onUpdate('RESTRICT')
             .onDelete('RESTRICT');
-        tbl.integer('ethnicity').notNullable()
+        tbl.integer('ethnicity_id').notNullable()
             .unsigned()
-            .references('ethnicity')
+            .references('ethnicity_id')
             .inTable('ethnicities')
             .onUpdate('RESTRICT')
             .onDelete('RESTRICT');
