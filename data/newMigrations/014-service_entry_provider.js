@@ -1,13 +1,13 @@
 exports.up = (knex) => {
     return knex.schema.createTable('service_entry_providers', function (tbl) {
-        tbl.increments('service_entry_provider_id').primary();
-        tbl.int('service_entry_id')
+        tbl.increments('service_entry_provider_id');
+        tbl.integer('service_entry_id').notNullable()
             .unsigned()
             .references('services_entry_id')
             .inTable('service_entries')
             .onUpdate('RESTRICT')
             .onDelete('RESTRICT');
-        tbl.int('provider_id')
+        tbl.integer('provider_id').notNullable()
             .unsigned()
             .references('provider_id')
             .inTable('providers')
