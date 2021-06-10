@@ -2,7 +2,7 @@ exports.up = function (knex) {
   return knex.schema.createTable('phone_numbers', (tbl) => {
     tbl.increments('phone_number_id').primary();
     tbl
-      .integer('recipient_id')
+      .uuid('recipient_id')
       .notNullable()
       .unsigned()
       .references('recipient_id')
