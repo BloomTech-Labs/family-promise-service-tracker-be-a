@@ -8,7 +8,7 @@ exports.up = function (knex) {
       .references('recipient_id')
       .inTable('recipients')
       .onUpdate('CASCADE')
-      .onDelete('CASCADE');
+      .onDelete('RESTRICT');
     tbl.string('email_address', 255);
     tbl.string('email_address_description');
     tbl.timestamps(true, true);
