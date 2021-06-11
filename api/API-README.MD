@@ -5,6 +5,57 @@ Server is deployed at: https://fp-service-tracker.herokuapp.com/
 All endpoints except for index require a valid Okta token for authorization. The authorization specifications for each table
 below refer to authorization beyond having a valid token.
 
+# Service Entry Type JSON Model Specifications: Service Type Model, and Service Entry Data
+
+## Model Made By Program Manager (service_type_entry_model in the service_types table)
+### service_type_entry_model in the service_types table
+
+```json
+{
+    "default_fields": [
+        "cost": {
+            "type": "number",
+            "desc": "cost in dollars"
+        }, # ask about this
+        "duration": {
+            "type": "int"
+            "desc": "how long you saw recipient in minutes"
+        },
+        "notes": {
+            "type": "string",
+            "desc": "anything notable that doesn't fit"
+        },
+        "status": {
+            "type": "string",
+            "display": "selection"
+            "desc": "Is this service entry completed",
+            "options": ["Completed", "Pending", "In Progress"]
+            },
+        ]
+    ,
+    "custom_fields": [
+        "Days of week worked":  {
+            "type": "string",
+            "display": "checkbox"
+            "desc": "Days the recipient worked this week",
+            "options": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        },
+    ]
+}
+
+```
+
+## JSON Data from Service Entry
+
+{
+"default_fields": {
+"cost": 5,
+"duration": 30,
+"notes": "Recipient reported being excited about a new job opportunity",
+"
+}
+}
+
 # Completed
 
 ## Users
