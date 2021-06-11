@@ -1,9 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.createTable('households', function (tbl) {
-    tbl
-      .uuid('household_id')
-      .primary()
-      .defaultTo(knex.raw('gen_random_uuid ()'));
+    tbl.uuid('household_id').primary();
     tbl.string('household_name', 255).notNullable();
     tbl.integer('household_size').notNullable();
     tbl.integer('household_income').notNullable();

@@ -2,7 +2,7 @@ exports.up = function (knex) {
   return knex.schema.createTable('service_entry_recipients', (tbl) => {
     tbl.increments('service_entry_provider_id').primary();
     tbl
-      .uuid('service_entry_id')
+      .integer('service_entry_id')
       .notNullable()
       .unsigned()
       .references('service_entry_id')
@@ -10,7 +10,7 @@ exports.up = function (knex) {
       .onUpdate('CASCADE')
       .onDelete('RESTRICT');
     tbl
-      .uuid('provider_id')
+      .integer('provider_id')
       .notNullable()
       .unsigned()
       .references('provider_id')

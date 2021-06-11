@@ -2,7 +2,7 @@ exports.up = function (knex) {
   return knex.schema.createTable('email_addresses', (tbl) => {
     tbl.increments('email_address_id').primary();
     tbl
-      .uuid('recipient_id')
+      .integer('recipient_id')
       .notNullable()
       .unsigned()
       .references('recipient_id')
