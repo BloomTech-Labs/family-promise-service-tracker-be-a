@@ -2,69 +2,69 @@ const knex = require('../../data/db-config');
 const { okta } = require('../../config/okta');
 
 const findAll = async () => {
-  return await knex('profiles')
-    .leftJoin('programs_users', {
-      'profiles.id': 'programs_users.profile_id',
+  return await knex('providers')
+    .leftJoin('program_providers', {
+      'providers.provider_id': 'program_providers.provider_id',
     })
     .leftJoin('programs', {
-      'programs_users.program_id': 'programs.id',
+      'program_providers.program_id': 'programs.program_id',
     })
-    .select(knex.raw('profiles.*, json_agg(programs.*) as programs'))
-    .groupBy('profiles.id');
+    .select(knex.raw('providers.*, json_agg(programs.*) as programs'))
+    .groupBy('providers.provider_id');
 };
 
 const findById = async (id) => {
-  return await knex('profiles')
-    .leftJoin('programs_users', {
-      'profiles.id': 'programs_users.profile_id',
+  return await knex('providers')
+    .leftJoin('program_providers', {
+      'providers.provider_id': 'program_providers.provider_id',
     })
     .leftJoin('programs', {
-      'programs_users.program_id': 'programs.id',
+      'program_providers.program_id': 'programs.program_id',
     })
-    .select(knex.raw('profiles.*, json_agg(programs.*) as programs'))
-    .where({ 'profiles.id': id })
-    .groupBy('profiles.id')
+    .select(knex.raw('providers.*, json_agg(programs.*) as programs'))
+    .where({ 'providers.provider_id': id })
+    .groupBy('providers.provider_id')
     .first();
 };
 
 const findServiceProviders = () => {
-  return knex('profiles')
-    .select('id', 'firstName', 'lastName')
+  return knex('providers')
+    .select('provider_id', 'provider_first_name', 'provider_last_name')
     .where('role', 'service_provider');
 };
 
 const update = async (id, updates) => {
-  const { programs, ...profile } = updates;
+  const { programs, ...provider } = updates;
 
   try {
     // set up a postgres transaction to make sure
     // we're not making partial updates
     await knex.transaction(async (trx) => {
-      // only make updates to profile table if there are any
-      if (Object.keys(profile).length > 0) {
-        await knex('profiles')
+      // only make updates to provider table if there are any
+      if (Object.keys(provider).length > 0) {
+        await knex('providers')
           .where({ id })
           .first()
-          .update(profile)
+          .update(provider)
           .transacting(trx);
       }
 
       // if request includes a programs array,
       // first wipe existing associations
       if (programs) {
-        await knex('programs_users')
-          .where('profile_id', id)
+        await knex('program_providers')
+          .where('provider_id', id)
           .delete()
           .transacting(trx);
       }
       // then insert new associations if there are any
       if (programs && programs.length > 0) {
-        await knex('programs_users')
+        await knex('program_providers')
           .insert(
             programs.map((p) => {
               return {
                 program_id: p,
-                profile_id: id,
+                provider_id: id,
               };
             })
           )
@@ -72,10 +72,10 @@ const update = async (id, updates) => {
       }
       // if updating name fields, push changes to okta as well
       // errors returned here will cancel postgres transaction
-      if (profile.firstName || profile.lastName) {
+      if (provider.provider_first_name || provider.provider_last_name) {
         let user = await okta.getUser(id);
-        profile.firstName ? (user.profile.firstName = profile.firstName) : '';
-        profile.lastName ? (user.profile.lastName = profile.lastName) : '';
+        provider.provider_first_name ? (user.provider.firstName = provider.provider_first_name) : '';
+        provider.provider_last_name ? (user.provider.lastName = provider.provider_last_name) : '';
         await user.update();
       }
     });
