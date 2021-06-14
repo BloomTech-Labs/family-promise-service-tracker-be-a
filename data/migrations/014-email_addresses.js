@@ -16,5 +16,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTablesIfExists('email_addresses');
+  return knex.schema.dropTableIfExists('email_addresses');
 };
