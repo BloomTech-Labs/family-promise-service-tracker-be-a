@@ -1,15 +1,17 @@
 const knex = require('../../data/db-config');
 
-const isAssignedToProgram = async (profile, program) => {
-  const programs = await knex('programs_users')
+const isAssignedToProgram = async (provider, program) => {
+  const programs = await knex('program_providers')
     .pluck('program_id')
-    .where({ profile_id: profile.id });
+    .where({ provider_id: provider.id });
 
   return programs.includes(program);
 };
 
 const getProgramFromServiceType = async (serviceTypeId) => {
-  await knex('service_types').pluck('program_id').where({ id: serviceTypeId });
+  await knex('service_types')
+    .pluck('program_id')
+    .where({ service_type_id: serviceTypeId });
 };
 
 module.exports = {
