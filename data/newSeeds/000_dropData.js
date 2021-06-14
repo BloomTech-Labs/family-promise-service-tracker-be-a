@@ -1,3 +1,8 @@
-exports.seed = async function (knex) {
-  // Truncate instead of delete all tables to wipe PKs
+const { clean } = require('knex-cleaner');
+
+exports.seed = function (knex) {
+  return clean(knex, {
+    mode: 'truncate',
+    ignoreTables: ['knex_migrations', 'knex_migrations_lock'],
+  });
 };
