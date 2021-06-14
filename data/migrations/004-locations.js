@@ -8,6 +8,7 @@ exports.up = function (knex) {
     tbl.string('city').notNullable();
     tbl.string('state').notNullable();
     tbl.string('zip').notNullable();
+    tbl.string('county').notNullable();
     tbl.string('country').notNullable();
     tbl.timestamps(true, true);
   });
