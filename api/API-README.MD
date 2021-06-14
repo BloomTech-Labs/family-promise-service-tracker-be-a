@@ -8,6 +8,7 @@ below refer to authorization beyond having a valid token.
 # Service Entry Type JSON Model Specifications: Service Type Model, and Service Entry Data
 
 ## Model Made By Program Manager (service_type_entry_model in the service_types table)
+
 ### service_type_entry_model in the service_types table
 
 ```json
@@ -23,23 +24,31 @@ below refer to authorization beyond having a valid token.
         },
         "notes": {
             "type": "string",
+            "required:": false
             "desc": "anything notable that doesn't fit"
         },
         "status": {
             "type": "string",
-            "display": "selection"
+            "display": "selection",
             "desc": "Is this service entry completed",
             "options": ["Completed", "Pending", "In Progress"]
             },
         ]
     ,
     "custom_fields": [
-        "Days of week worked":  {
+        "Days of week with shelter":  {
             "type": "string",
-            "display": "checkbox"
-            "desc": "Days the recipient worked this week",
-            "options": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+            "display": "checkbox",
+            "required": true,
+            "desc": "Days the recipient had shelter this week",
+            "options": ["Monday", "Tuesday", "Wednesday", "Thur,sday", "Friday", "Saturday", "Sunday"],
+            "expects": "array of strings"
         },
+        "Select favroite animal": {
+            "type": "string",
+            "display": "dropDown",
+
+        }
     ]
 }
 
