@@ -1,6 +1,18 @@
 const providers = [
   {
-    provider_id: 'd49e0c39-010f-481c-862a-df8c193ed7ac',
+    provider_id: '00uk9lxaulDYOiB4H5d6',
+    role: 'Administrator',
+    provider_first_name: 'BG_User',
+    provider_last_name: 'Basic',
+    provider_email: 'bg_user@gmail.com',
+    provider_phone_number: '123-456-7894',
+    employee_id: 'A002',
+    provider_avatar_url: `https://avatars.dicebear.com/api/initials/${encodeURIComponent(
+      'bg_user basic'
+    )}.svg`,
+  },
+  {
+    provider_id: '00unr5lzndqVF13jP5d6',
     role: 'Administrator',
     provider_first_name: 'Abigail',
     provider_last_name: 'Administrator',
@@ -12,7 +24,7 @@ const providers = [
     )}.svg`,
   },
   {
-    provider_id: '3c5f8ea6-1df4-47c2-b468-99d377486ea3',
+    provider_id: '00unr48onuAmU9sxK5d6',
     role: 'Program Manager',
     provider_first_name: 'Patty',
     provider_last_name: 'Program',
@@ -24,7 +36,7 @@ const providers = [
     )}.svg`,
   },
   {
-    provider_id: '2d9f744c-b035-484f-9cc0-e9b718c9286c',
+    provider_id: '00unr8nm2sJkxkcrH5d6',
     role: 'Service Provider',
     provider_first_name: 'Sally',
     provider_last_name: 'Service',
@@ -33,6 +45,18 @@ const providers = [
     employee_id: 'SP001',
     provider_avatar_url: `https://avatars.dicebear.com/api/initials/${encodeURIComponent(
       'Sally Service'
+    )}.svg`,
+  },
+  {
+    provider_id: '00unr3s3m2zHx70ck5d6',
+    role: 'Unassigned',
+    provider_first_name: 'Gary',
+    provider_last_name: 'Jerry',
+    provider_email: 'fp.servicetracker+unassigned@gmail.com',
+    provider_phone_number: '123-456-7893',
+    employee_id: 'U001',
+    provider_avatar_url: `https://avatars.dicebear.com/api/initials/${encodeURIComponent(
+      'Gary Jerry'
     )}.svg`,
   },
 ];

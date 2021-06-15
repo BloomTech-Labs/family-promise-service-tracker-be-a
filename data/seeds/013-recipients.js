@@ -8,8 +8,8 @@ const recipients = [
     recipient_veteran_status: false,
     household_id: 'x', //need uuid
     gender_id: 1,
-    rade_id: 1,
-    ethnicity_id: 1
+    race_id: 1,
+    ethnicity_id: 1,
   },
   {
     recipient_id: '81a40c69-b004-4cc8-b6a5-424cbab89b8d',
@@ -20,8 +20,8 @@ const recipients = [
     recipient_veteran_status: false,
     household_id: 'x', //need uuid
     gender_id: 1,
-    rade_id: 1,
-    ethnicity_id: 1
+    race_id: 1,
+    ethnicity_id: 1,
   },
   {
     recipient_id: '1b1639f9-a614-4d15-93d8-1d0b27ca12a6',
@@ -32,8 +32,8 @@ const recipients = [
     recipient_veteran_status: false,
     household_id: 'x', //need uuid
     gender_id: 1,
-    rade_id: 1,
-    ethnicity_id: 1
+    race_id: 1,
+    ethnicity_id: 1,
   },
 ];
 
