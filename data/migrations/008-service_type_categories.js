@@ -1,5 +1,5 @@
 exports.up = function (knex) {
-  return knex.schema.createTable('service_types_categories', (tbl) => {
+  return knex.schema.createTable('service_type_categories', (tbl) => {
     tbl.increments('service_type_category_id').primary();
     tbl
       .integer('service_category_id', 128)
@@ -22,5 +22,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTableIfExists('service_types_categories');
+  return knex.schema.dropTableIfExists('service_type_categories');
 };
