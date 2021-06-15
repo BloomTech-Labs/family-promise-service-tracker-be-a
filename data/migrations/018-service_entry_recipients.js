@@ -10,11 +10,11 @@ exports.up = function (knex) {
       .onUpdate('CASCADE')
       .onDelete('RESTRICT');
     tbl
-      .uuid('provider_id')
+      .uuid('recipient_id')
       .notNullable()
       .unsigned()
-      .references('provider_id')
-      .inTable('providers')
+      .references('recipient_id')
+      .inTable('recipients')
       .onUpdate('CASCADE')
       .onDelete('RESTRICT');
     tbl.timestamps(true, true);
