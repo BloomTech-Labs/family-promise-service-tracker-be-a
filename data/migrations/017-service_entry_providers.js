@@ -10,7 +10,7 @@ exports.up = (knex) => {
       .onUpdate('RESTRICT')
       .onDelete('RESTRICT');
     tbl
-      .uuid('provider_id')
+      .string('provider_id')
       .notNullable()
       .unsigned()
       .references('provider_id')
