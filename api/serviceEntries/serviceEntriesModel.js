@@ -2,51 +2,59 @@ const knex = require('../../data/db-config');
 
 const findAll = async () => {
   return await knex('service_entries')
+    .leftJoin('service_entry_recipients', {
+      'service_entries.service_entry_id':
+        'service_entry_recipients.service_entry_id',
+    })
     .leftJoin('recipients', {
-      'service_entries.recipient_id': 'recipients.id',
+      'service_entry_recipients.recipient_id': 'recipients.recipient_id',
     })
-    .rightJoin('service_types', {
-      'service_entries.service_type_id': 'service_types.id',
+    .leftJoin('service_types', {
+      'service_entries.service_type_id': 'service_types.service_type_id',
     })
-    .rightJoin('statuses', {
-      'service_entries.status_id': 'statuses.id',
+    .leftJoin('locations', {
+      'service_entries.location_id': 'locations.location_id',
     })
     .select(
       knex.raw(
-        'service_entries.*, to_json(recipients.*) as recipient, to_json(service_types.*) as service_type, to_json(statuses.*) as status'
+        'service_entries.*, to_json(recipients.*) as recipient, to_json(service_types.*) as service_type, to_json(locations.*) as location'
       )
     )
     .groupBy(
-      'service_entries.id',
-      'recipients.id',
-      'service_types.id',
-      'statuses.id'
+      'service_entries.service_entry_id',
+      'recipients.recipient_id',
+      'service_types.service_type_id',
+      'locations.location_id'
     );
 };
 
 const findById = async (id) => {
   return await knex('service_entries')
-    .where({ 'service_entries.id': id })
+    .where({ 'service_entries.service_entry_id': id })
+    .leftJoin('service_entry_recipients', {
+      'service_entries.service_entry_id':
+        'service_entry_recipients.service_entry_id',
+    })
     .leftJoin('recipients', {
-      'service_entries.recipient_id': 'recipients.id',
+      'service_entry_recipients.recipient_id': 'recipients.recipient_id',
     })
-    .rightJoin('service_types', {
-      'service_entries.service_type_id': 'service_types.id',
+    .leftJoin('service_types', {
+      'service_entries.service_type_id': 'service_types.service_type_id',
     })
-    .rightJoin('statuses', {
-      'service_entries.status_id': 'statuses.id',
+    .leftJoin('locations', {
+      'service_entries.location_id': 'locations.location_id',
     })
     .select(
       knex.raw(
-        'service_entries.*, to_json(recipients.*) as recipient, to_json(service_types.*) as service_type, to_json(statuses.*) as status'
+        'service_entries.*, to_json(recipients.*) as recipient, to_json(service_types.*) as service_type, to_json(locations.*) as location'
       )
     )
     .first()
     .groupBy(
-      'service_entries.id',
-      'recipients.id',
-      'service_types.id',
-      'statuses.id'
+      'service_entries.service_entry_id',
+      'recipients.recipient_id',
+      'service_types.service_type_id',
+      'locations.location_id'
     );
 };
 
@@ -66,4 +74,3 @@ module.exports = {
   findById,
   update,
 };
-
