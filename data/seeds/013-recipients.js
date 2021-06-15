@@ -6,10 +6,10 @@ const recipients = [
     recipient_last_name: 'ross',
     recipient_date_of_birth: '1970-10-12',
     recipient_veteran_status: false,
-    household_id: 'x', //need uuid
+    household_id: '457c9ef0-2386-40e1-9c32-c9b953f17da7',
     gender_id: 1,
-    rade_id: 1,
-    ethnicity_id: 1
+    race_id: 1,
+    ethnicity_id: 1,
   },
   {
     recipient_id: '81a40c69-b004-4cc8-b6a5-424cbab89b8d',
@@ -18,10 +18,10 @@ const recipients = [
     recipient_last_name: 'ross1',
     recipient_date_of_birth: '1970-10-12',
     recipient_veteran_status: false,
-    household_id: 'x', //need uuid
+    household_id: 'ad8df54d-0c0d-4fb3-9ad8-bf50a64255ff',
     gender_id: 1,
-    rade_id: 1,
-    ethnicity_id: 1
+    race_id: 1,
+    ethnicity_id: 1,
   },
   {
     recipient_id: '1b1639f9-a614-4d15-93d8-1d0b27ca12a6',
@@ -30,10 +30,10 @@ const recipients = [
     recipient_last_name: 'ross2',
     recipient_date_of_birth: '1970-10-12',
     recipient_veteran_status: false,
-    household_id: 'x', //need uuid
+    household_id: 'd696b55e-fdf4-446f-a8a6-dcebaeaabef4',
     gender_id: 1,
-    rade_id: 1,
-    ethnicity_id: 1
+    race_id: 1,
+    ethnicity_id: 1,
   },
 ];
 
