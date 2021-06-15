@@ -17,9 +17,11 @@
     "rollback": "npm run knex migrate:rollback",
     "migrate": "npm run knex migrate:latest",
     "seed": "npm run knex seed:run",
+    "reset": "npm run rollback && npm run migrate && npm run seed",
     "migrateh": "npx heroku run npm run knex migrate:latest -a fp-service-tracker",
     "rollbackh": "npx heroku run npm run knex migrate:rollback -a fp-service-tracker",
-    "seedh": "npx heroku run npm run knex seed:run -a fp-service-tracker"
+    "seedh": "npx heroku run npm run knex seed:run -a fp-service-tracker",
+    "reseth": "npm run rollbackh && npm run migrateh && npm run seedh"
   },
   "lint-staged": {
     "api/**/*.js": [
@@ -116,4 +118,3 @@
     "supertest": "^4.0.2"
   }
 }
-
