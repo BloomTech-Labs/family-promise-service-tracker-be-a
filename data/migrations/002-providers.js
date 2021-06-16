@@ -1,6 +1,7 @@
 exports.up = (knex) => {
   return knex.schema.createTable('providers', (tbl) => {
-    tbl.uuid('provider_id').primary().defaultTo(knex.raw('gen_random_uuid ()'));
+    tbl.string('provider_id').primary();
+    // Does not autofill an id, we use the id that Okta generates
     tbl.string('role').notNullable();
     tbl.string('provider_first_name').notNullable();
     tbl.string('provider_last_name').notNullable();
