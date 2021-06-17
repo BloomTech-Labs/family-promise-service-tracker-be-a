@@ -1,10 +1,10 @@
 const db = require('../../data/db-config');
 
 module.exports = {
-  findAll
+  getAll
 };
 
-function findAll() {
+function getAll() {
   return db('recipients')
     .select(
       'recipient_id',
