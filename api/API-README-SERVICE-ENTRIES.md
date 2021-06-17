@@ -97,29 +97,8 @@ service_type_entry_model: {
     }
 
 ```
-```json
-{
-    "data": [
-        {
-            "recipient_id": 123,
-            "recipient_date_of_birth": "1980-06-01",
-            "recipient_veteran_status": true
-        },
-        {
-            "recipient_id": 44,
-            "recipient_date_of_birth": "1975-06-01",
-            "recipient_veteran_status": true
-        },
-        {
-            "recipient_id": 1263,
-            "recipient_date_of_birth": "1980-06-01",
-            "recipient_veteran_status": false
-        },
-    ]
-    
-}
-```
-## JSON Data from Service Entry
+
+## JSON Data from service_entry_data
 ```json
 {
 "default_fields": {
