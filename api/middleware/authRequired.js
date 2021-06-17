@@ -1,7 +1,7 @@
 const createError = require('http-errors');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
 const { oktaVerifierConfig, okta } = require('../../config/okta');
-const Profiles = require('../provider/providerModel');
+const Providers = require('../provider/providerModel');
 const DB = require('../utils/db-helper');
 const oktaJwtVerifier = new OktaJwtVerifier(oktaVerifierConfig.config);
 
@@ -40,14 +40,14 @@ const authRequired = async (req, res, next) => {
       oktaVerifierConfig.expectedAudience
     );
     // if valid, check if user profile already exists
-    const profile = await Profiles.findById(verify.claims.sub);
+    const profile = await Providers.findById(verify.claims.sub);
     if (profile) {
       req.profile = profile;
     } else {
       // if profile doesn't already exist, create one
       const profileObj = await makeProfileObj(verify.claims.sub);
       const newProfile = await DB.create('profiles', profileObj);
-      req.profile = await Profiles.findById(newProfile[0].id);
+      req.profile = await Providers.findById(newProfile[0].id);
     }
     next();
   } catch (err) {
