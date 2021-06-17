@@ -67,7 +67,7 @@ app.use('/data', dsRouter);
 app.use(['/api/recipient', '/api/recipients'], recipientRouter);
 app.use(['/api/household', '/api/households'], householdRouter);
 app.use(['/api/metric', '/api/metrics'], metricsRouter);
-app.use(['/api/veteran', '/api/veterans', veteransRouter]);
+app.use(['/api/veteran', '/api/veterans'], veteransRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -4,7 +4,7 @@ module.exports = {
   findAll
 };
 
-const findAll = () => {
+function findAll() {
   return db('recipients')
     .select(
       'recipient_id',
