@@ -17,10 +17,10 @@ beforeAll( async () => {
   await db.migrate.rollback();
   await db.migrate.latest();
   server.use(['/veteran', '/veterans'], veteranRouter);
-})
+});
 beforeEach( async () => {
   await db.seed.run();
-})
+});
 
 describe('veteran router endpoints', () => {
   // GET - findAll
