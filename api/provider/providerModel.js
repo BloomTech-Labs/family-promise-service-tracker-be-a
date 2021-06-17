@@ -74,8 +74,12 @@ const update = async (id, updates) => {
       // errors returned here will cancel postgres transaction
       if (provider.provider_first_name || provider.provider_last_name) {
         let user = await okta.getUser(id);
-        provider.provider_first_name ? (user.provider.firstName = provider.provider_first_name) : '';
-        provider.provider_last_name ? (user.provider.lastName = provider.provider_last_name) : '';
+        provider.provider_first_name
+          ? (user.provider.firstName = provider.provider_first_name)
+          : '';
+        provider.provider_last_name
+          ? (user.provider.lastName = provider.provider_last_name)
+          : '';
         await user.update();
       }
     });
