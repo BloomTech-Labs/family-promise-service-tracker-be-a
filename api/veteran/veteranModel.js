@@ -2,10 +2,10 @@ const db = require('../../data/db-config');
 
 module.exports = {
   findAll
-}
+};
 
-const findAll = async () => {
-  return await db('recipients')
+const findAll = () => {
+  return db('recipients')
     .select(
       'recipient_id',
       'recipient_first_name',
@@ -14,5 +14,5 @@ const findAll = async () => {
       'recipient_date_of_birth',
       'recipient_veteran_status'
     )
-    .where({ 'recipient_veteran_status': true })
-}
+    .where({ 'recipient_veteran_status': true });
+};
