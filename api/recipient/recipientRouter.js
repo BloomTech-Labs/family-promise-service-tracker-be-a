@@ -1,6 +1,6 @@
 const express = require('express');
 const DB = require('../utils/db-helper');
-// const Recipients = require('./recipientModel');
+const Recipients = require('./recipientModel');
 const router = express.Router();
 const {
   requireAdmin,
@@ -30,6 +30,21 @@ router.get('/:id', (req, res) => {
         res.status(200).json(recipient);
       } else {
         res.status(404).json({ error: `Recipient ${id} not found` });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+router.post('/findRecipient', (req, res) => {
+  const { firstName, middleName, lastName } = req.body;
+  Recipients.findByName(firstName, middleName, lastName)
+    .then((recipient) => {
+      if (recipient) {
+        res.status(200).json(recipient);
+      } else {
+        res.status(404).json({ error: `Recipient not found` });
       }
     })
     .catch((err) => {
