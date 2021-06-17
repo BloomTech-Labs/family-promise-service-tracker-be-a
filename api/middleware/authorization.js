@@ -3,7 +3,7 @@ const { isAssignedToProgram, getProgramFromServiceType } = require('./models');
 
 // Requires role of admin to apply
 const requireAdmin = (req, res, next) => {
-  if (req.profile.role == 'administrator') {
+  if (req.profile.role == 'Administrator') {
     next();
   } else {
     next(createError(401, 'User not authorized to perform this action'));
@@ -12,7 +12,7 @@ const requireAdmin = (req, res, next) => {
 
 // Requires role of program_manager to apply
 const requireProgramManager = (req, res, next) => {
-  if (req.profile.role == 'program_manager') {
+  if (req.profile.role == 'Program Manager') {
     next();
   } else {
     next(createError(401, 'User not authorized to perform this action'));
@@ -21,12 +21,12 @@ const requireProgramManager = (req, res, next) => {
 
 const canCrudServiceType = async (req, res, next) => {
   // admins can always create service types
-  if (req.profile.role == 'administrator') {
+  if (req.profile.role == 'Administrator') {
     next();
 
     // program managers can only create service types for
     // programs they are associated with
-  } else if (req.profile.role == 'program_manager') {
+  } else if (req.profile.role == 'Program Manager') {
     try {
       // if this is create, the program is in req body
       // otherwise need to look up the service_type to
@@ -64,7 +64,7 @@ const canEditProfile = async (req, res, next) => {
     if (
       // administrators cannot edit profile id or email
       // but can edit any other fields
-      (req.profile.role == 'administrator') &
+      (req.profile.role == 'Administrator') &
       !req.body.id &
       !req.body.email
     ) {
