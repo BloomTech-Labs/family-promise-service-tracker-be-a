@@ -46,8 +46,8 @@ const authRequired = async (req, res, next) => {
     } else {
       // if profile doesn't already exist, create one
       const providerObj = await makeProfileObj(verify.claims.sub);
-      const newProfile = await DB.create('Providers', providerObj);
-      req.profile = await Providers.findById(newProfile[0].id);
+      const newProvider = await DB.create('Providers', providerObj);
+      req.profile = await Providers.findById(newProvider[0].id);
     }
     next();
   } catch (err) {
