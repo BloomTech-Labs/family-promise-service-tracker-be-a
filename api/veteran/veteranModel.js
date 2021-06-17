@@ -14,5 +14,5 @@ const findAll = async () => {
       'recipient_date_of_birth',
       'recipient_veteran_status'
     )
-    .where({'recipient_veteran_status': true})
+    .where({ 'recipient_veteran_status': true })
 }
