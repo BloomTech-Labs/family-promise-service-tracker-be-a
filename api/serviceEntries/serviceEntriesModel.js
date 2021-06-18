@@ -1,5 +1,37 @@
 const knex = require('../../data/db-config');
 
+const create = async (serviceEntries) => {
+  let newServiceEntriesId;
+  try {
+    await knex.transaction(async (trx) => {
+      const createdServiceEntries = await trx('service_entries')
+        .insert([
+          { service_type_id: serviceEntries.service_type_id },
+          { location_id: serviceEntries.location_id },
+          { service_time: serviceEntries.service_time },
+          { service_date: serviceEntries.service_date },
+          { service_entry_data: serviceEntries.service_entry },
+        ])
+        .returning('*');
+
+      newServiceEntriesId = createdServiceEntries[0].service_entry_id;
+
+      await trx('service_entry_providers').insert([
+        { service_entry_id: newServiceEntriesId },
+        { provider_id: serviceEntries.provider_id },
+      ]);
+      await trx('service_entry_recipients').insert([
+        { service_entry_id: newServiceEntriesId },
+        { recipient_id: serviceEntries.recipient_id },
+      ]);
+    });
+
+    return await findById(newServiceEntriesId);
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 const findAll = async () => {
   return await knex('service_entries')
     .leftJoin('service_entry_recipients', {
@@ -70,6 +102,7 @@ const update = (id, object) => {
 };
 
 module.exports = {
+  create,
   findAll,
   findById,
   update,
