@@ -25,7 +25,7 @@ const findById = async (id) => {
   return await knex('households')
     .where({ 'households.household_id': id })
     .leftJoin('locations', {
-      'households.household_id': 'locations.household_id',
+      'households.location_id': 'locations.location_id',
     })
     .select(
       knex.raw(
