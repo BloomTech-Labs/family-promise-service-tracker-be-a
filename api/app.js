@@ -29,7 +29,6 @@ const dsRouter = require('./dsService/dsRouter');
 const recipientRouter = require('./recipient/recipientRouter');
 const householdRouter = require('./household/householdRouter');
 const metricsRouter = require('./metrics/metricsRouter');
-const veteransRouter = require('./veteran/veteranRouter');
 const locationRouter = require('./location/locationRouter');
 
 const app = express();
@@ -68,7 +67,6 @@ app.use('/data', dsRouter);
 app.use(['/api/recipient', '/api/recipients'], recipientRouter);
 app.use(['/api/household', '/api/households'], householdRouter);
 app.use(['/api/metric', '/api/metrics'], metricsRouter);
-app.use(['/api/veteran', '/api/veterans'], veteransRouter);
 app.use(['/api/location', '/api/locations'], locationRouter);
 
 // catch 404 and forward to error handler
