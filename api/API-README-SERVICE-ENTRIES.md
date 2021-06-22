@@ -35,6 +35,13 @@ You will need to pull both the model, and the data and combine them for the fron
 
 <br>
 <br>
+
+## Why is it split up between default and custom?
+
+---
+
+When getting together with the DS team, it was decided it would be easier if they had a certain set of fields they always knew were going to be accessible for every new service type.
+
 <br>
 <br>
 
@@ -69,7 +76,7 @@ You will need to pull both the model, and the data and combine them for the fron
 | `name_of_field`    | This is the name that should be rendered next to the field in the Frontend                                       |
 | `description`      | A description of what this field should have in it                                                               |
 | `data_type`        | One of the choices in the above table, it should effect form field validation                                    |
-| `required`         | Specify if the want this required to be filled out, should effect form validation (True/False, default to False) |
+| `required`         | Specify if the want this required to be filled out, should effect form validation (true/false, default to false) |
 | `display_field_as` | One of the choices in the above table. `dropdown` allows one choice. ``checkbox` allows several choices.         |
 | `options`          | An array, it contains the choices used for the `dropdown` or `checkboxes`.                                       |
 
@@ -91,15 +98,15 @@ service_type_entry_model: {
           "description": "How long did this event last in minutes?",
           "data_type": "number",
           "required": true,
-          "display_field_as": "text_entry",
+          "display_field_as": "entry",
           "options": null,
         },
         {
           "name_of_field": "Notes",
-          "description": "Notes on how this event.",
-          "data_type": "test",
+          "description": "Notes on how the service event went.",
+          "data_type": "text",
           "required": false,
-          "display_field_as": "text_entry",
+          "display_field_as": "entry",
           "options": null,
         },
         {
@@ -121,7 +128,7 @@ service_type_entry_model: {
         },
       ],
       "custom": [
-         {
+         { // Example of a custom field
           "name_of_field": "Days of week with shelter",
           "description": "Days the recipient had shelter (not on the street)",
           "data_type": "string",
@@ -134,17 +141,32 @@ service_type_entry_model: {
 
 ```
 
-## JSON Data from service_entry_data
+<br>
+
+## Specifications for the `service_entry_data` (in the `service_entries` table)
+
+---
+
+The service entry data, is what the Service Provider actually records, it is what frontend sends back.
+It is again split up into default and custom. However, it is more barebones consisting of just the field name and the data.
+
+<br>
+
+#### Here is an example of what might be sent to the backend (based on the above schema):
 
 ```json
-{
-"default_fields": {
-    "cost": 5,
-    "duration": 30,
-    "notes": "Recipient reported being excited about a new job opportunity",
-    "days of week with..." : ["monday", "thursday"],
-    "status": "pending"
 
+service_entry_data: {
+  "default": [
+      { "Cost/Value": 5 },
+      { "Duration": 30 },
+      { "Notes": "Recipient reported being excited about a new job opportunity" },
+      { "Status": "Completed" },
+      { "Success Rating" : 4 }
+    ],
+  "custom": [
+    { "Days of week with shelter": ["Monday", "Thursday", "Friday"] }
+  ]
 }
 
 ```
