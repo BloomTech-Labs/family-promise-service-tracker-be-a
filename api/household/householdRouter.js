@@ -1,6 +1,7 @@
 const express = require('express');
 const DB = require('../utils/db-helper');
 const router = express.Router();
+const Households = require('./householdModel');
 const { requireAdmin } = require('../middleware/authorization');
 
 // GET - View all households
@@ -33,7 +34,10 @@ router.get('/:id', (req, res) => {
 
 // POST - Create new household
 router.post('/', (req, res) => {
-  DB.create('households', req.body)
+  Households.create('households', req.body)
+    .then((response) => {
+      return Households.findById(response[0].household_id);
+    })
     .then((newHousehold) => {
       res.status(201).json({ message: 'Household created', newHousehold });
     })
