@@ -50,10 +50,14 @@ router.get('/:id', (req, res) => {
 
 router.post('/findRecipient', (req, res) => {
   const { firstName, middleName, lastName } = req.body;
-  Recipients.findByName(firstName, middleName, lastName)
-    .then((recipient) => {
-      if (recipient) {
-        res.status(200).json(recipient);
+  Recipients.findAll({
+    'r.recipient_first_name': firstName,
+    'r.recipient_middle_name': middleName,
+    'r.recipient_last_name': lastName
+  })
+    .then((recipients) => {
+      if (recipients) {
+        res.status(200).json(recipients);
       } else {
         res.status(404).json({ error: `Recipient not found` });
       }
