@@ -19,6 +19,16 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/veterans', (req, res) => {
+  Recipients.findAll({ 'r.recipient_veteran_status': true })
+    .then(recipients => {
+      res.status(200).json(recipients);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 // GET - View recipient by ID
 // All users can view recipients by ID
 router.get('/:id', (req, res) => {
@@ -37,15 +47,6 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.get('/veterans', (req, res) => {
-  Recipients.findAll({ 'r.recipient_veteran_status': true })
-    .then(recipients => {
-      res.status(200).json(recipients);
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
-});
 
 router.post('/findRecipient', (req, res) => {
   const { firstName, middleName, lastName } = req.body;
