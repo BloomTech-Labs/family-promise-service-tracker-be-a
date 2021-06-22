@@ -64,7 +64,7 @@ Change role and progams:
 
 ```
 {
-    "role":"program_manager",
+    "role":"Program Manager",
     "programs":["program_id_4","program_id_8"]
 }
 ```
@@ -107,7 +107,7 @@ program object returned on GET requests:
     name:string,
     type:string,
     description:string,
-    program_managers:[array of profile objects]
+    Program Managers:[array of profile objects]
 }
 ```
 
@@ -315,8 +315,8 @@ All routes work with /api/recipient or /api/recipients
 | ------------------ | ------ | -------------------------------------------------------- | ---------------------------------------- |
 | /api/recipients    | GET    | none                                                     | none                                     |
 | /api/recipient/:id | GET    | none                                                     | none                                     |
-| /api/recipient     | POST   | first_name, last_name, age, household_id, veteran_status | admin, program_manager, service_provider |
-| /api/recipient/:id | PUT    | desired edit as key:value                                | admin, program_manager                   |
+| /api/recipient     | POST   | first_name, last_name, age, household_id, veteran_status | admin, Program Manager, Service Provider |
+| /api/recipient/:id | PUT    | desired edit as key:value                                | admin, Program Manager                   |
 | /api/recipient/:id | DELETE | none                                                     | admin                                    |
 
 Recipient object returned on GET requests:
@@ -359,8 +359,8 @@ All routes work with /api/household or /api/households
 | ------------------ | ------ | ---------------------------------------------- | ---------------------------------------- |
 | /api/households    | GET    | none                                           | none                                     |
 | /api/household/:id | GET    | none                                           | none                                     |
-| /api/household     | POST   | address, city, state, zip_code, household_size | admin, program_manager, service_provider |
-| /api/household/:id | PUT    | desired edit as key:value                      | admin, program_manager                   |
+| /api/household     | POST   | address, city, state, zip_code, household_size | admin, Program Manager, Service Provider |
+| /api/household/:id | PUT    | desired edit as key:value                      | admin, Program Manager                   |
 | /api/household/:id | DELETE | none                                           | admin                                    |
 
 Recipient object returned on GET requests:

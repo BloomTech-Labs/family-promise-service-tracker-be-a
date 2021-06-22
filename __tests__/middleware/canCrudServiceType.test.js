@@ -25,7 +25,7 @@ describe('canCrudServiceType middleware', () => {
         email: 'bg_user@gmail.com',
         firstName: 'bg_user',
         lastName: 'basic',
-        role: 'administrator',
+        role: 'Administrator',
       },
     };
     canCrudServiceType(mockRequest, mockResponse, nextFunction);
@@ -40,7 +40,7 @@ describe('canCrudServiceType middleware', () => {
         email: 'bg_user@gmail.com',
         firstName: 'bg_user',
         lastName: 'basic',
-        role: 'program_manager',
+        role: 'Program Manager',
       },
       body: {
         program_id: 1,
@@ -60,7 +60,7 @@ describe('canCrudServiceType middleware', () => {
         email: 'bg_user@gmail.com',
         firstName: 'bg_user',
         lastName: 'basic',
-        role: 'program_manager',
+        role: 'Program Manager',
       },
       body: {
         program_id: 1,
@@ -75,14 +75,14 @@ describe('canCrudServiceType middleware', () => {
     );
   });
 
-  it('should return a 401 with a service_provider profile', async () => {
+  it('should return a 401 with a Service Provider profile', async () => {
     mockRequest = {
       profile: {
         id: '00uk9lxaulDYOiB4H5d6',
         email: 'bg_user@gmail.com',
         firstName: 'bg_user',
         lastName: 'basic',
-        role: 'service_provider',
+        role: 'Service Provider',
       },
     };
     canCrudServiceType(mockRequest, mockResponse, nextFunction);

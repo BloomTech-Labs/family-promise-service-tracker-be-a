@@ -1,7 +1,7 @@
 const createError = require('http-errors');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
 const { oktaVerifierConfig, okta } = require('../../config/okta');
-const Profiles = require('../profile/profileModel');
+const Providers = require('../provider/providerModel');
 const DB = require('../utils/db-helper');
 const oktaJwtVerifier = new OktaJwtVerifier(oktaVerifierConfig.config);
 
@@ -10,11 +10,11 @@ const makeProfileObj = async (id) => {
     const oktaUser = await okta.getUser(id);
 
     return {
-      id: id,
-      email: oktaUser.profile.email,
-      firstName: oktaUser.profile.firstName,
-      lastName: oktaUser.profile.lastName,
-      avatarUrl: `https://avatars.dicebear.com/api/initials/${oktaUser.profile.firstName}%20${oktaUser.profile.lastName}.svg`,
+      provider_id: id,
+      provider_email: oktaUser.profile.email,
+      provider_first_name: oktaUser.profile.firstName,
+      provider_last_name: oktaUser.profile.lastName,
+      provider_avatar_url: `https://avatars.dicebear.com/api/initials/${oktaUser.profile.firstName}%20${oktaUser.profile.lastName}.svg`,
     };
   } catch (err) {
     throw new Error(err);
@@ -40,14 +40,14 @@ const authRequired = async (req, res, next) => {
       oktaVerifierConfig.expectedAudience
     );
     // if valid, check if user profile already exists
-    const profile = await Profiles.findById(verify.claims.sub);
+    const profile = await Providers.findById(verify.claims.sub);
     if (profile) {
       req.profile = profile;
     } else {
       // if profile doesn't already exist, create one
-      const profileObj = await makeProfileObj(verify.claims.sub);
-      const newProfile = await DB.create('profiles', profileObj);
-      req.profile = await Profiles.findById(newProfile[0].id);
+      const providerObj = await makeProfileObj(verify.claims.sub);
+      const newProvider = await DB.create('Providers', providerObj);
+      req.profile = await Providers.findById(newProvider[0].id);
     }
     next();
   } catch (err) {

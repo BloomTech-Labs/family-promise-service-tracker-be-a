@@ -38,7 +38,7 @@ describe('Require Admin middleware', () => {
         email: 'bg_user@gmail.com',
         firstName: 'bg_user',
         lastName: 'basic',
-        role: 'administrator',
+        role: 'Administrator',
       },
     };
 
