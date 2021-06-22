@@ -10,7 +10,7 @@ const {
 // GET - View all recipients
 // All users can view all recipients
 router.get('/', (req, res) => {
-  Recipients.findAll('recipients')
+  Recipients.findAll()
     .then((recipients) => {
       res.status(200).json(recipients);
     })
