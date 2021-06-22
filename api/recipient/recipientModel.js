@@ -1,6 +1,6 @@
 const knex = require('../../data/db-config');
 
-const findAll = (filter = {}) => {
+const findAll = () => {
   return knex('recipients as r')
     .leftJoin('households as h', 'r.household_id', 'h.household_id')
     .leftJoin('genders as g', 'r.gender_id', 'g.gender_id')
@@ -14,8 +14,7 @@ const findAll = (filter = {}) => {
       'e.ethnicity',
       'h.household_name',
       'l.zip'
-    )
-    .where(filter);
+    );
 };
 
 const findByName = async (firstName, middleName, lastName) => {

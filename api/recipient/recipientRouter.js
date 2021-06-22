@@ -10,18 +10,8 @@ const {
 // GET - View all recipients
 // All users can view all recipients
 router.get('/', (req, res) => {
-  Recipients.findAll()
+  Recipients.findAll('recipients')
     .then((recipients) => {
-      res.status(200).json(recipients);
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
-});
-
-router.get('/veterans', (req, res) => {
-  Recipients.findAll({ 'r.recipient_veteran_status': true })
-    .then(recipients => {
       res.status(200).json(recipients);
     })
     .catch((err) => {
@@ -46,7 +36,6 @@ router.get('/:id', (req, res) => {
       res.status(500).json({ error: err.message });
     });
 });
-
 
 router.post('/findRecipient', (req, res) => {
   const { firstName, middleName, lastName } = req.body;
