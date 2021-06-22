@@ -51,15 +51,15 @@ When getting together with the DS team, it was decided it would be easier if the
 
 <br>
 
-| data_type  | Backend Expects | Description                                            |
-| :--------- | :-------------- | :----------------------------------------------------- |
-| `currency` | `number`        | For prices, etc.                                       |
-| `quantity` | `number`        | For non price quantities, ex: number of blankets, etc. |
-| `number`   | `number`        | For general number entry                               |
-| `date`     | `string`        | For dates: Use Date Picker                             |
-| `time`     | `string`        | For times: Use Time Picker                             |
-| `text`     | `string`        | For free-form text entry                               |
-| `boolean`  | `boolean`       | For true/false options                                 |
+| data_type  | Backend Expects | Description                                              |
+| :--------- | :-------------- | :------------------------------------------------------- |
+| `currency` | `number`        | For prices, etc.                                         |
+| `quantity` | `number`        | For non price quantities, ex: number of blankets, etc.   |
+| `number`   | `number`        | For general number entry                                 |
+| `date`     | `string`        | For dates: Use Date Picker                               |
+| `time`     | `string`        | For times: Use Time Picker                               |
+| `text`     | `string`        | For free-form text entry                                 |
+| `boolean`  | `boolean`       | For true/false options. Should be displayed as dropdown. |
 
 <br>
 
@@ -112,7 +112,7 @@ service_type_entry_model: {
         {
           "name_of_field": "Status",
           "description": "What is the status of this event?",
-          "data_type": "string",
+          "data_type": "text",
           "required": false,
           "display_field_as": "dropdown",
           "options":["Completed", "Pending", "In Progress", "Follow Up Required"] ,
@@ -131,7 +131,7 @@ service_type_entry_model: {
          { // Example of a custom field
           "name_of_field": "Days of week with shelter",
           "description": "Days the recipient had shelter (not on the street)",
-          "data_type": "string",
+          "data_type": "text",
           "required": true,
           "display_field_as": "checkbox",
           "options": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
