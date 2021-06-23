@@ -1,6 +1,6 @@
 const request = require('supertest');
 const express = require('express');
-const veteranRouter = require('../../api/veteran/veteranRouter');
+const recipientRouter = require('../../api/recipient/recipientRouter');
 const db = require('../../data/db-config');
 const server = express();
 
@@ -16,7 +16,7 @@ const server = express();
 beforeAll(async () => {
   await db.migrate.rollback();
   await db.migrate.latest();
-  server.use(['/veteran', '/veterans'], veteranRouter);
+  server.use(['/recipient', '/recipients'], recipientRouter);
 });
 beforeEach(async () => {
   await db.seed.run();
@@ -24,19 +24,19 @@ beforeEach(async () => {
 
 describe('veteran router endpoints', () => {
   // GET - findAll
-  describe('[GET] /veterans', () => {
+  describe('[GET] /recipient/veterans', () => {
     it('status 200', async () => {
-      const res = await request(server).get('/veteran');
+      const res = await request(server).get('/recipient/veterans');
       console.log(res)
       expect(res.status).toBe(200);
     });
     it('should return all vets', async () => {
-      const res = await request(server).get('/veteran');
+      const res = await request(server).get('/recipient/veterans');
       // num of veterans in seed file
       expect(res.body.length).toBe(2);
     });
     it('should have correct values present', async () => {
-      const res = await request(server).get('/veteran');
+      const res = await request(server).get('/recipient/veterans');
       for (const veteran in res.body.data) {
         expect(veteran).toHaveProperty('recipient_id');
         expect(veteran).toHaveProperty('recipient_date_of_birth');

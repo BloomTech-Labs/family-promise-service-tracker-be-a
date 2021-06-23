@@ -10,8 +10,18 @@ const {
 // GET - View all recipients
 // All users can view all recipients
 router.get('/', (req, res) => {
-  Recipients.findAll('recipients')
+  Recipients.findAll()
     .then((recipients) => {
+      res.status(200).json(recipients);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+router.get('/veterans', (req, res) => {
+  Recipients.findAll({ 'r.recipient_veteran_status': true })
+    .then(recipients => {
       res.status(200).json(recipients);
     })
     .catch((err) => {
@@ -37,12 +47,17 @@ router.get('/:id', (req, res) => {
     });
 });
 
+
 router.post('/findRecipient', (req, res) => {
   const { firstName, middleName, lastName } = req.body;
-  Recipients.findByName(firstName, middleName, lastName)
-    .then((recipient) => {
-      if (recipient) {
-        res.status(200).json(recipient);
+  Recipients.findAll({
+    'r.recipient_first_name': firstName,
+    'r.recipient_middle_name': middleName,
+    'r.recipient_last_name': lastName
+  })
+    .then((recipients) => {
+      if (recipients) {
+        res.status(200).json(recipients);
       } else {
         res.status(404).json({ error: `Recipient not found` });
       }
