@@ -11,7 +11,7 @@ exports.up = (knex) => {
     tbl.boolean('recipient_veteran_status').notNullable();
     tbl
       .uuid('household_id')
-      .notNullable()
+      // .notNullable() These are commented out since the create new recipient transaction is not complete
       .unsigned()
       .references('household_id')
       .inTable('households')
@@ -19,7 +19,7 @@ exports.up = (knex) => {
       .onDelete('RESTRICT');
     tbl
       .integer('gender_id')
-      .notNullable()
+      // .notNullable()
       .unsigned()
       .references('gender_id')
       .inTable('genders')
@@ -27,7 +27,7 @@ exports.up = (knex) => {
       .onDelete('RESTRICT');
     tbl
       .integer('race_id')
-      .notNullable()
+      // .notNullable()
       .unsigned()
       .references('race_id')
       .inTable('races')
@@ -35,7 +35,7 @@ exports.up = (knex) => {
       .onDelete('RESTRICT');
     tbl
       .integer('ethnicity_id')
-      .notNullable()
+      // .notNullable()
       .unsigned()
       .references('ethnicity_id')
       .inTable('ethnicities')
