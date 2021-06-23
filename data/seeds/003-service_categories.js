@@ -10,6 +10,11 @@ const service_categories = [
       'All services related to providing assistance for housing.',
   },
   {
+    service_category_name: 'Financial',
+    service_category_description:
+      'All services related to providing non-housing related financial assistance.',
+  },
+  {
     service_category_name: 'Food',
     service_category_description:
       'All services related to providing food/meal assistance.',
@@ -18,6 +23,10 @@ const service_categories = [
     service_category_name: 'Education',
     service_category_description:
       'All services related to Education and upskilling.',
+  },
+  {
+    service_category_name: 'Health',
+    service_category_description: 'All services related to Health.',
   },
 ];
 
