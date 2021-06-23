@@ -1,57 +1,73 @@
+const defaultFields = [
+  {
+    name_of_field: 'Cost/Value',
+    description: 'Cost/Value in dollars/quantity',
+    data_type: 'number',
+    required: false,
+    display_field_as: 'entry',
+    options: null,
+  },
+  {
+    name_of_field: 'Duration',
+    description: 'How long did this event last in minutes?',
+    data_type: 'number',
+    required: true,
+    display_field_as: 'entry',
+    options: null,
+  },
+  {
+    name_of_field: 'Notes',
+    description: 'Notes on how the service event went.',
+    data_type: 'text',
+    required: false,
+    display_field_as: 'entry',
+    options: null,
+  },
+  {
+    name_of_field: 'Status',
+    description: 'What is the status of this event?',
+    data_type: 'text',
+    required: false,
+    display_field_as: 'dropdown',
+    options: ['Completed', 'Pending', 'In Progress', 'Follow Up Required'],
+  },
+  {
+    name_of_field: 'Success Rating',
+    description: 'How successful was this?',
+    data_type: 'number',
+    required: true,
+    display_field_as: 'dropdown',
+    options: [0, 1, 2, 3, 4, 5],
+  },
+];
+
 const service_types = [
+  {
+    service_type_id: 999,
+    program_id: 1,
+    service_type_name: 'New Service Type',
+    service_type_description: 'Give your service providers a decription',
+    service_type_entry_model: {
+      default: defaultFields,
+      custom: [
+        {
+          name_of_field: 'What do you want this field called?',
+          description: 'Add a description!',
+          data_type: 'text',
+          required: true,
+          display_field_as: 'entry',
+          options: null,
+        },
+      ],
+    },
+  },
   {
     program_id: 1,
     service_type_name: 'Bus Tokens',
     service_type_description:
       'Provide recipient with a set amount of bus tokens',
     service_type_entry_model: {
-      default: [
-        {
-          name_of_field: 'Cost/Value',
-          description: 'Cost/Value in dollars/quantity',
-          data_type: 'number',
-          required: false,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Duration',
-          description: 'How long did this event last in minutes?',
-          data_type: 'number',
-          required: true,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Notes',
-          description: 'Notes on how the service event went.',
-          data_type: 'text',
-          required: false,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Status',
-          description: 'What is the status of this event?',
-          data_type: 'text',
-          required: false,
-          display_field_as: 'dropdown',
-          options: [
-            'Completed',
-            'Pending',
-            'In Progress',
-            'Follow Up Required',
-          ],
-        },
-        {
-          name_of_field: 'Success Rating',
-          description: 'How successful was this?',
-          data_type: 'number',
-          required: true,
-          display_field_as: 'dropdown',
-          options: [0, 1, 2, 3, 4, 5],
-        },
-      ],
+      default: defaultFields,
       custom: [
         {
           name_of_field: 'Bus Service Provider',
@@ -75,53 +91,7 @@ const service_types = [
     service_type_description:
       'Provide recipient experiencing financial hardship with funds to help pay current month of rent',
     service_type_entry_model: {
-      default: [
-        {
-          name_of_field: 'Cost/Value',
-          description: 'Cost/Value in dollars/quantity',
-          data_type: 'number',
-          required: false,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Duration',
-          description: 'How long did this event last in minutes?',
-          data_type: 'number',
-          required: true,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Notes',
-          description: 'Notes on how the service event went.',
-          data_type: 'text',
-          required: false,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Status',
-          description: 'What is the status of this event?',
-          data_type: 'text',
-          required: false,
-          display_field_as: 'dropdown',
-          options: [
-            'Completed',
-            'Pending',
-            'In Progress',
-            'Follow Up Required',
-          ],
-        },
-        {
-          name_of_field: 'Success Rating',
-          description: 'How successful was this?',
-          data_type: 'number',
-          required: true,
-          display_field_as: 'dropdown',
-          options: [0, 1, 2, 3, 4, 5],
-        },
-      ],
+      default: defaultFields,
       custom: [
         {
           name_of_field: 'Date rent is due',
@@ -150,53 +120,7 @@ const service_types = [
     service_type_description:
       'Provide recipient experiencing food insecurity with food delivery',
     service_type_entry_model: {
-      default: [
-        {
-          name_of_field: 'Cost/Value',
-          description: 'Cost/Value in dollars/quantity',
-          data_type: 'number',
-          required: false,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Duration',
-          description: 'How long did this event last in minutes?',
-          data_type: 'number',
-          required: true,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Notes',
-          description: 'Notes on how the service event went.',
-          data_type: 'text',
-          required: false,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Status',
-          description: 'What is the status of this event?',
-          data_type: 'text',
-          required: false,
-          display_field_as: 'dropdown',
-          options: [
-            'Completed',
-            'Pending',
-            'In Progress',
-            'Follow Up Required',
-          ],
-        },
-        {
-          name_of_field: 'Success Rating',
-          description: 'How successful was this?',
-          data_type: 'number',
-          required: true,
-          display_field_as: 'dropdown',
-          options: [0, 1, 2, 3, 4, 5],
-        },
-      ],
+      default: defaultFields,
       custom: [
         {
           name_of_field: 'Food for what amount of persons?',
@@ -238,53 +162,7 @@ const service_types = [
     service_type_name: 'Bus Passes',
     service_type_description: 'Provide recipient with a bus pass',
     service_type_entry_model: {
-      default: [
-        {
-          name_of_field: 'Cost/Value',
-          description: 'Cost/Value in dollars/quantity',
-          data_type: 'number',
-          required: false,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Duration',
-          description: 'How long did this event last in minutes?',
-          data_type: 'number',
-          required: true,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Notes',
-          description: 'Notes on how the service event went.',
-          data_type: 'text',
-          required: false,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Status',
-          description: 'What is the status of this event?',
-          data_type: 'text',
-          required: false,
-          display_field_as: 'dropdown',
-          options: [
-            'Completed',
-            'Pending',
-            'In Progress',
-            'Follow Up Required',
-          ],
-        },
-        {
-          name_of_field: 'Success Rating',
-          description: 'How successful was this?',
-          data_type: 'number',
-          required: true,
-          display_field_as: 'dropdown',
-          options: [0, 1, 2, 3, 4, 5],
-        },
-      ],
+      default: defaultFields,
       custom: [
         {
           name_of_field: 'Bus Service Provider',
@@ -324,53 +202,7 @@ const service_types = [
     service_type_description:
       'Provide recipient with mental health counseling session at the Mental Health Clinic',
     service_type_entry_model: {
-      default: [
-        {
-          name_of_field: 'Cost/Value',
-          description: 'Cost/Value in dollars/quantity',
-          data_type: 'number',
-          required: false,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Duration',
-          description: 'How long did this event last in minutes?',
-          data_type: 'number',
-          required: true,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Notes',
-          description: 'Notes on how the service event went.',
-          data_type: 'text',
-          required: false,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Status',
-          description: 'What is the status of this event?',
-          data_type: 'text',
-          required: false,
-          display_field_as: 'dropdown',
-          options: [
-            'Completed',
-            'Pending',
-            'In Progress',
-            'Follow Up Required',
-          ],
-        },
-        {
-          name_of_field: 'Success Rating',
-          description: 'How successful was this?',
-          data_type: 'number',
-          required: true,
-          display_field_as: 'dropdown',
-          options: [0, 1, 2, 3, 4, 5],
-        },
-      ],
+      default: defaultFields,
       custom: [
         {
           name_of_field: 'Visible emotional state of client',
@@ -405,53 +237,7 @@ const service_types = [
     service_type_description:
       'Provide recipient with classes to learn skills required to prevent return to homelessness',
     service_type_entry_model: {
-      default: [
-        {
-          name_of_field: 'Cost/Value',
-          description: 'Cost/Value in dollars/quantity',
-          data_type: 'number',
-          required: false,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Duration',
-          description: 'How long did this event last in minutes?',
-          data_type: 'number',
-          required: true,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Notes',
-          description: 'Notes on how the service event went.',
-          data_type: 'text',
-          required: false,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Status',
-          description: 'What is the status of this event?',
-          data_type: 'text',
-          required: false,
-          display_field_as: 'dropdown',
-          options: [
-            'Completed',
-            'Pending',
-            'In Progress',
-            'Follow Up Required',
-          ],
-        },
-        {
-          name_of_field: 'Success Rating',
-          description: 'How successful was this?',
-          data_type: 'number',
-          required: true,
-          display_field_as: 'dropdown',
-          options: [0, 1, 2, 3, 4, 5],
-        },
-      ],
+      default: defaultFields,
       custom: [
         {
           name_of_field: 'Which life skills were covered?',
@@ -496,53 +282,7 @@ const service_types = [
     service_type_description:
       'Provide recipient with funding to help secure rental apartment after homelessness',
     service_type_entry_model: {
-      default: [
-        {
-          name_of_field: 'Cost/Value',
-          description: 'Cost/Value in dollars/quantity',
-          data_type: 'number',
-          required: false,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Duration',
-          description: 'How long did this event last in minutes?',
-          data_type: 'number',
-          required: true,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Notes',
-          description: 'Notes on how the service event went.',
-          data_type: 'text',
-          required: false,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Status',
-          description: 'What is the status of this event?',
-          data_type: 'text',
-          required: false,
-          display_field_as: 'dropdown',
-          options: [
-            'Completed',
-            'Pending',
-            'In Progress',
-            'Follow Up Required',
-          ],
-        },
-        {
-          name_of_field: 'Success Rating',
-          description: 'How successful was this?',
-          data_type: 'number',
-          required: true,
-          display_field_as: 'dropdown',
-          options: [0, 1, 2, 3, 4, 5],
-        },
-      ],
+      default: defaultFields,
       custom: [
         {
           name_of_field: 'What was the security deposit for?',

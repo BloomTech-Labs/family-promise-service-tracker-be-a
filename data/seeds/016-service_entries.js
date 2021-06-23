@@ -9,7 +9,7 @@ const {
 const { service_types } = require('./006-service_types');
 
 const service_entries = fakeServiceEntryIds.map((id) => {
-  const serviceTypeNumToUse = getRand(service_types.length);
+  const serviceTypeNumToUse = getRand(service_types.length - 1);
   return {
     service_entry_id: id,
     service_type_id: serviceTypeNumToUse,
@@ -24,10 +24,9 @@ const service_entries = fakeServiceEntryIds.map((id) => {
           Notes: faker.lorem.paragraph(),
         },
         {
-          Status:
-            service_types[0].service_type_entry_model.default[3].options[
-              getRandWithZero(4)
-            ],
+          Status: ['Completed', 'Pending', 'In Progress', 'Follow Up Required'][
+            getRandWithZero(4)
+          ],
         },
         { 'Success Rating': getRandWithZero(6) },
       ],
