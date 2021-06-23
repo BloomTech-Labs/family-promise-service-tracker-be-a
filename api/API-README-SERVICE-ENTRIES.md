@@ -22,6 +22,9 @@ For example:
 Yes! So the nice thing about using the native JSON capabilites built into PostgreSQL, is that there is a way to query the JSON. However, there is a special syntax to access that information. Here is some [documentation regarding JSON in PostgreSQL](https://www.postgresql.org/docs/current/datatype-json.html).
 <br>
 <br>
+[_Here's a good video on how to use the JSONB queries in raw SQL_](https://youtu.be/yrxCZLAN63E?t=476)
+<br>
+<br>
 
 ## Why are there two different jsonb columns?
 
@@ -148,25 +151,30 @@ service_type_entry_model: {
 ---
 
 The service entry data, is what the Service Provider actually records, it is what frontend sends back.
-It is again split up into default and custom. However, it is more barebones consisting of just the field name and the data.
+
+Here we are splitting our data into default, and custom once more. However, this time inside of default/custom, it's just an object with **key** being the `name_of_field` specified by the model and the **value** being the collected data.
+
+By sticking with just objects for the data, everything can be referenced with dot notation.
 
 <br>
 
-#### Here is an example of what might be sent to the backend (based on the above schema):
+### Here is an example of what might be sent to the backend (based on the above schema):
 
 ```json
 
 service_entry_data: {
-  "default": [
-      { "Cost/Value": 5 },
-      { "Duration": 30 },
-      { "Notes": "Recipient reported being excited about a new job opportunity" },
-      { "Status": "Completed" },
-      { "Success Rating" : 4 }
-    ],
-  "custom": [
-    { "Days of week with shelter": ["Monday", "Thursday", "Friday"] }
-  ]
+  "default":
+      {
+        "Cost/Value": 5,
+        "Duration": 30,
+        "Notes": "Recipient reported being excited about a new job opportunity",
+        "Status": "Completed",
+        "Success Rating" : 4
+      },
+  "custom":
+    {
+      "Days of week with shelter": ["Monday", "Thursday", "Friday"]
+    }
 }
 
 ```
