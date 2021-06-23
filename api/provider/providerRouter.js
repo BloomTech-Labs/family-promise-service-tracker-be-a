@@ -126,15 +126,12 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *      403:
  *        $ref: '#/components/responses/UnauthorizedError'
  */
-router.get('/', function (req, res) {
+router.get('/', (req, res, next) => {
   Providers.findAll()
     .then((providers) => {
       res.status(200).json(providers);
     })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({ message: err.message });
-    });
+    .catch(next);
 });
 
 /**
@@ -173,7 +170,7 @@ router.get('/', function (req, res) {
  *        description: 'Profile not found'
  */
 
-router.get('/getServiceProviders', function (req, res) {
+router.get('/getServiceProviders', (req, res) => {
   Providers.findServiceProviders()
     .then((serviceProviders) => {
       res.status(200).json(serviceProviders);
@@ -183,7 +180,7 @@ router.get('/getServiceProviders', function (req, res) {
     });
 });
 
-router.get('/:id', function (req, res) {
+router.get('/:id', (req, res, next) => {
   const id = String(req.params.id);
   Providers.findById(id)
     .then((provider) => {
@@ -193,9 +190,7 @@ router.get('/:id', function (req, res) {
         res.status(404).json({ error: 'ProfileNotFound' });
       }
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 /**

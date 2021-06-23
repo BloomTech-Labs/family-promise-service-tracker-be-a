@@ -4,17 +4,15 @@ const Programs = require('./programModel');
 const router = express.Router();
 const { canCrudServiceType } = require('../middleware/authorization');
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   Programs.findAll()
     .then((programs) => {
       res.status(200).json(programs);
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
   const { id } = req.params;
 
   Programs.findById(id)
@@ -25,56 +23,46 @@ router.get('/:id', (req, res) => {
         res.status(404).json({ error: `Program ${id} not found` });
       }
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
-router.post('/name', (req, res) => {
+router.post('/name', (req, res, next) => {
   const { name } = req.body;
 
   Programs.findBy({ name: name })
     .then((program) => {
       res.status(200).json(program);
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
-router.post('/type', (req, res) => {
+router.post('/type', (req, res, next) => {
   const { type } = req.body;
 
   Programs.findBy({ type: type })
     .then((program) => {
       res.status(200).json(program);
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
-router.post('/', canCrudServiceType, (req, res) => {
+router.post('/', canCrudServiceType, (req, res, next) => {
   DB.create('programs', req.body)
     .then((newProgram) => {
       res.status(201).json(newProgram);
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
-router.put('/:id', canCrudServiceType, (req, res) => {
+router.put('/:id', canCrudServiceType, (req, res, next) => {
   DB.update('programs', req.params.id, req.body)
     .then((editedProgram) => {
       res.status(200).json(editedProgram);
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
-router.delete('/:id', canCrudServiceType, (req, res) => {
+router.delete('/:id', canCrudServiceType, (req, res, next) => {
   const { id } = req.params;
 
   DB.remove('programs', id)
@@ -85,9 +73,7 @@ router.delete('/:id', canCrudServiceType, (req, res) => {
         res.status(404).json({ message: `Program ${id} could not be found` });
       }
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 module.exports = router;

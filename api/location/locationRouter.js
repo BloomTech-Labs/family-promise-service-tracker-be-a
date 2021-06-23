@@ -4,18 +4,16 @@ const router = express.Router();
 const { requireAdmin } = require('../middleware/authorization');
 
 // GET - View all locations
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   DB.findAll('locations')
     .then((locations) => {
       res.status(200).json(locations);
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 // GET - View Location by ID
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
   const { id } = req.params;
 
   DB.findById('locations', id)
@@ -26,24 +24,20 @@ router.get('/:id', (req, res) => {
         res.status(404).json({ error: `Location ${id} not found` });
       }
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 // POST - Create new Location
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   DB.create('locations', req.body)
     .then((newLocation) => {
       res.status(201).json({ message: 'Location created', newLocation });
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 // PUT - Update Location by ID
-router.put('/:id', (req, res) => {
+router.put('/:id', (req, res, next) => {
   DB.update('locations', req.params.id, req.body)
     .then((editedLocation) => {
       res.status(200).json({
@@ -51,13 +45,11 @@ router.put('/:id', (req, res) => {
         editedLocation,
       });
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 // DELETE - Remove Location by ID - *only Admins can delete locations
-router.delete('/:id', requireAdmin, (req, res) => {
+router.delete('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;
 
   DB.remove('locations', id)
@@ -68,9 +60,7 @@ router.delete('/:id', requireAdmin, (req, res) => {
         res.status(404).json({ message: `Location ${id} could not be found` });
       }
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 module.exports = router;
