@@ -71,6 +71,9 @@ app.use(['/api/location', '/api/locations'], locationRouter);
 app.use((err, req, res, next) => { // eslint-disable-line
   res.status(err.status || 500).json({
     message: err.message,
+    // when actually deployed for use do not
+    // send err.stack, because that can have
+    // security issues
     stack: err.stack,
   });
 });
