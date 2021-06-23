@@ -1,6 +1,6 @@
 const knex = require('../../data/db-config');
 
-const findAll = () => {
+const findAll = (filter = {}) => {
   return knex('recipients as r')
     .leftJoin('households as h', 'r.household_id', 'h.household_id')
     .leftJoin('genders as g', 'r.gender_id', 'g.gender_id')
@@ -14,7 +14,8 @@ const findAll = () => {
       'e.ethnicity',
       'h.household_name',
       'l.zip'
-    );
+    )
+    .where(filter);
 };
 
 module.exports = {
