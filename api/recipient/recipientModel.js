@@ -24,7 +24,6 @@ const create = async (recipients) => {
     await knex.transaction(async (trx) => {
       const createdRecipients = await trx('recipients')
         .insert([
-          { recipient_id: recipients.recipient_id },
           { recipient_first_name: recipients.recipient_first_name },
           { recipient_middle_name: recipients.recipient_middle_name },
           { recipient_last_name: recipients.recipient_last_name },
