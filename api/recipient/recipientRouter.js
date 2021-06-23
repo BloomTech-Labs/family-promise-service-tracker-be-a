@@ -70,7 +70,7 @@ router.post('/findRecipient', (req, res) => {
 // POST - Create new recipient
 // All users can add a new recipient
 router.post('/', (req, res) => {
-  DB.create('recipients', req.body)
+  Recipients.create('recipients', req.body)
     .then((newRecipient) => {
       res.status(201).json({ message: 'Recipient created', newRecipient });
     })
