@@ -3,17 +3,15 @@ const DB = require('../utils/db-helper');
 const router = express.Router();
 const { requireAdmin } = require('../middleware/authorization');
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   DB.findAll('statuses')
     .then((statuses) => {
       res.status(200).json(statuses);
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
   const { id } = req.params;
 
   DB.findById('statuses', id)
@@ -24,22 +22,18 @@ router.get('/:id', (req, res) => {
         res.status(404).json({ error: `Status ${id} not found` });
       }
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
-router.post('/', requireAdmin, (req, res) => {
+router.post('/', requireAdmin, (req, res, next) => {
   DB.create('statuses', req.body)
     .then((newStatus) => {
       res.status(201).json({ message: 'Status created', status: newStatus });
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
-router.put('/:id', requireAdmin, (req, res) => {
+router.put('/:id', requireAdmin, (req, res, next) => {
   DB.update('statuses', req.params.id, req.body)
     .then((editedStatus) => {
       res.status(200).json({
@@ -47,12 +41,10 @@ router.put('/:id', requireAdmin, (req, res) => {
         status: editedStatus[0],
       });
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
-router.delete('/:id', requireAdmin, (req, res) => {
+router.delete('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;
 
   DB.remove('statuses', id)
@@ -63,9 +55,7 @@ router.delete('/:id', requireAdmin, (req, res) => {
         res.status(404).json({ message: `Status ${id} could not be found` });
       }
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 module.exports = router;

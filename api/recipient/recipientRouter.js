@@ -9,29 +9,25 @@ const {
 
 // GET - View all recipients
 // All users can view all recipients
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   Recipients.findAll()
     .then((recipients) => {
       res.status(200).json(recipients);
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
-router.get('/veterans', (req, res) => {
+router.get('/veterans', (req, res, next) => {
   Recipients.findAll({ 'r.recipient_veteran_status': true })
     .then(recipients => {
       res.status(200).json(recipients);
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 // GET - View recipient by ID
 // All users can view recipients by ID
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
   const { id } = req.params;
 
   DB.findById('recipients', id)
@@ -42,13 +38,11 @@ router.get('/:id', (req, res) => {
         res.status(404).json({ error: `Recipient ${id} not found` });
       }
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 
-router.post('/findRecipient', (req, res) => {
+router.post('/findRecipient', (req, res, next) => {
   const { firstName, middleName, lastName } = req.body;
   Recipients.findAll({
     'r.recipient_first_name': firstName,
@@ -62,26 +56,22 @@ router.post('/findRecipient', (req, res) => {
         res.status(404).json({ error: `Recipient not found` });
       }
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 // POST - Create new recipient
 // All users can add a new recipient
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   Recipients.create('recipients', req.body)
     .then((newRecipient) => {
       res.status(201).json({ message: 'Recipient created', newRecipient });
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 // PUT - Update recipient by ID
 // Only Admin and Program Managers can update recipient by ID
-router.put('/:id', requireAdmin, requireProgramManager, (req, res) => {
+router.put('/:id', requireAdmin, requireProgramManager, (req, res, next) => {
   DB.update('recipients', req.params.id, req.body)
     .then((editedRecipient) => {
       res.status(200).json({
@@ -89,14 +79,12 @@ router.put('/:id', requireAdmin, requireProgramManager, (req, res) => {
         editedRecipient,
       });
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 // DELETE - Remove recipient by ID
 // Only Admin can remove recipient by ID
-router.delete('/:id', requireAdmin, (req, res) => {
+router.delete('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;
 
   DB.remove('recipients', id)
@@ -107,9 +95,7 @@ router.delete('/:id', requireAdmin, (req, res) => {
         res.status(404).json({ message: `Recipient ${id} could not be found` });
       }
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 module.exports = router;

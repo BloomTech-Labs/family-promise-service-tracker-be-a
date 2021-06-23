@@ -3,17 +3,15 @@ const DB = require('../utils/db-helper');
 const ServiceEntries = require('./serviceEntriesModel');
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   ServiceEntries.findAll('service_entries')
     .then((entries) => {
       res.status(200).json(entries);
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
   const { id } = req.params;
   ServiceEntries.findById(id)
     .then((entry) => {
@@ -23,12 +21,10 @@ router.get('/:id', (req, res) => {
         res.status(404).json({ error: `Entry ${id} not found` });
       }
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   DB.create('service_entries', req.body)
     .then((response) => {
       return ServiceEntries.findById(response[0].id);
@@ -39,12 +35,10 @@ router.post('/', (req, res) => {
         newEntry,
       });
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', (req, res, next) => {
   DB.update('service_entries', req.params.id, req.body)
     .then((response) => {
       return ServiceEntries.findById(response[0].id);
@@ -55,12 +49,10 @@ router.put('/:id', (req, res) => {
         editedEntry,
       });
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res, next) => {
   const { id } = req.params;
   DB.remove('service_entries', id)
     .then((count) => {
@@ -74,9 +66,7 @@ router.delete('/:id', (req, res) => {
           .json({ message: `Service Entry ${id} could not be found` });
       }
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 module.exports = router;

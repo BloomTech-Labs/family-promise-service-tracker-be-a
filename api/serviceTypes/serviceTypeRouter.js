@@ -4,17 +4,15 @@ const DB = require('../utils/db-helper');
 const router = express.Router();
 const { canCrudServiceType } = require('../middleware/authorization');
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   ServiceTypes.findAll()
     .then((statuses) => {
       res.status(200).json(statuses);
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
   const { id } = req.params;
 
   ServiceTypes.findById(id)
@@ -25,12 +23,10 @@ router.get('/:id', (req, res) => {
         res.status(404).json({ error: `Service Type ${id} not found` });
       }
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
-router.post('/', canCrudServiceType, (req, res) => {
+router.post('/', canCrudServiceType, (req, res, next) => {
   ServiceTypes.create(req.body)
     .then((newServiceType) => {
       res.status(201).json({
@@ -38,9 +34,7 @@ router.post('/', canCrudServiceType, (req, res) => {
         service_type: newServiceType,
       });
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 router.put('/:id', canCrudServiceType, (req, res) => {
@@ -74,7 +68,7 @@ router.put('/:id', canCrudServiceType, (req, res) => {
   }
 });
 
-router.delete('/:id', canCrudServiceType, (req, res) => {
+router.delete('/:id', canCrudServiceType, (req, res, next) => {
   const { id } = req.params;
 
   DB.remove('service_types', id)
@@ -89,9 +83,7 @@ router.delete('/:id', canCrudServiceType, (req, res) => {
           .json({ message: `Service Type ${id} could not be found` });
       }
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 module.exports = router;

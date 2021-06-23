@@ -5,18 +5,16 @@ const Households = require('./householdModel');
 const { requireAdmin } = require('../middleware/authorization');
 
 // GET - View all households
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   DB.findAll('households')
     .then((households) => {
       res.status(200).json(households);
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 // GET - View household by ID
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
   const { id } = req.params;
 
   DB.findById('households', id)
@@ -27,13 +25,11 @@ router.get('/:id', (req, res) => {
         res.status(404).json({ error: `Household ${id} not found` });
       }
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 // POST - Create new household
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   Households.create('households', req.body)
     .then((response) => {
       return Households.findById(response[0].household_id);
@@ -41,13 +37,11 @@ router.post('/', (req, res) => {
     .then((newHousehold) => {
       res.status(201).json({ message: 'Household created', newHousehold });
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 // PUT - Update household by ID
-router.put('/:id', (req, res) => {
+router.put('/:id', (req, res, next) => {
   DB.update('households', req.params.id, req.body)
     .then((editedHousehold) => {
       res.status(200).json({
@@ -55,13 +49,11 @@ router.put('/:id', (req, res) => {
         editedHousehold,
       });
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 // DELETE - Remove household by ID
-router.delete('/:id', requireAdmin, (req, res) => {
+router.delete('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;
 
   DB.remove('households', id)
@@ -72,9 +64,7 @@ router.delete('/:id', requireAdmin, (req, res) => {
         res.status(404).json({ message: `Household ${id} could not be found` });
       }
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch(next);
 });
 
 module.exports = router;
