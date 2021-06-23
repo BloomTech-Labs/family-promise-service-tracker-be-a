@@ -36,34 +36,14 @@ const create = async (recipients) => {
       newRecipientsId = createdRecipients[0].recipient_id;
     });
 
-    return await findById(newRecipientsId);
+    return findById(newRecipientsId);
   } catch (err) {
     throw new Error(err);
   }
 };
 
-const findById = async (id) => {
-  return await knex('recipients')
-    .where({ 'recipients.recipients_id': id })
-    .leftJoin('households', {
-      'recipients.household_id': 'households.household_id',
-    })
-    .leftJoin('genders', {
-      'recipients.gender_id': 'genders.gender_id',
-    })
-    .leftJoin('races', {
-      'recipients.race_id': 'races.race_id',
-    })
-    .leftJoin('ethnicities', {
-      'recipients.ethnicity_id': 'ethnicities.ethnicity_id',
-    })
-    .select(
-      knex.raw(
-        'recipients.*, to_json(households.*) as household, to_json(genders.*) as gender, to_json(races.*) as race, to_json(ethnicities.*) as ethnicity'
-      )
-    )
-    .first()
-    .groupBy('recipients.recipient_id');
+const findById = (id) => {
+  return findAll({ 'r.recipient_id': id }).first();
 };
 
 module.exports = {
