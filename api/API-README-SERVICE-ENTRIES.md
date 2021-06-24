@@ -1,5 +1,9 @@
 # JSON Layout/Specifications for Service Entries
 
+#### 👉👉 **_Please Right Click The File Name And Select "Open Preview" For The Best Experience_**
+
+<br>
+
 This document lays out the formatting for the JSON that is located in the `jsonb` columns known as `service_type_entry_model` in the `service_types` table and `service_entry_data` in the `service_entries` tables.
 
 We are laying out this documentation so that the JSON remains consistent, and ideally, frontend can create fields dynamically by mapping through the JSON.
@@ -15,17 +19,97 @@ For example:
 - Child care: May want a field to list a partnering day care, and checkboxes to specify on what days of the week a client needs day care service.
 - Bus transportation: May want a dropdown of which bus service a pass was provided for (ex: City Bus, County Bus, Greyhound, etc.)
 
-## But what about SQL queries, can we write still queries to access the information?
+## But what about SQL queries, can we still write queries to access the information?
 
 ---
 
 Yes! So the nice thing about using the native JSON capabilites built into PostgreSQL, is that there is a way to query the JSON. However, there is a special syntax to access that information. Here is some [documentation regarding JSON in PostgreSQL](https://www.postgresql.org/docs/current/datatype-json.html).
 <br>
 <br>
-[_Here's a good video on how to use the JSONB queries in raw SQL_](https://youtu.be/yrxCZLAN63E?t=476)
+[_Here's a good video on how to use the JSONB queries in raw SQL_](https://youtu.be/yrxCZLAN63E?t=476). It goes from basic to advanced.
 <br>
 <br>
 
+### Example Query:
+
+- In raw SQL: Return the status options that are available in the service_type_entry_model
+
+```SQL
+--- Easiest way, relies on array location being known:
+SELECT DISTINCT
+	SERVICE_TYPE_ENTRY_MODEL -> 'default' -> 3 -> 'options'
+		AS STATUS_CHOICES
+FROM SERVICE_TYPES
+
+
+--- Same as above, different writing style:
+SELECT DISTINCT
+	SERVICE_TYPE_ENTRY_MODEL #> '{default, 3, options}'
+		AS STATUS_CHOICES
+FROM SERVICE_TYPES
+
+
+--- Hardest Way, does not care about the array index:
+SELECT DEFAULT_FIELDS -> 'options' AS STATUS_CHOICES
+FROM
+	(SELECT
+	 	DISTINCT
+	 		JSONB_ARRAY_ELEMENTS(SERVICE_TYPE_ENTRY_MODEL -> 'default')
+	 	AS DEFAULT_FIELDS
+		FROM "service_types") AS CHOICE
+WHERE DEFAULT_FIELDS ->> 'name_of_field' = 'Status'
+```
+
+- In JavaScript:
+
+  **Hint: Use backticks in raw, it'll let you do line breaks and format more nicely**
+
+```JS
+// Using as much of the built in knex as possible:
+const getStatusChoices = async() => {
+  return await knex
+    .select(knex.raw(`default_fields -> 'options' AS status_choices`))
+    .from(
+      knex
+        .select(
+          knex.raw(`
+            DISTINCT jsonb_array_elements(service_type_entry_model -> 'default') AS default_fields
+          `)
+        )
+        .from('service_types')
+        .as('choice')
+    )
+    .where(knex.raw(`default_fields ->> 'name_of_field' = 'Status'`))
+    .first();
+};
+
+// Returns the following JSON from Postman:
+  {
+    "status_choices": [
+      "Completed",
+        "Pending",
+        "In Progress",
+        "Follow Up Required"
+    ]
+  }
+
+
+// You can also just slap in a raw SQL query and deal with it that way:
+const getStatusChoices = async() => {
+  const { rows } = await knex.raw(`
+  SELECT DISTINCT
+	  SERVICE_TYPE_ENTRY_MODEL -> 'default' -> 3 -> 'options'
+		  AS STATUS_CHOICES
+  FROM SERVICE_TYPES
+  `);
+  return rows[0];
+};
+
+// Returns the same result as above
+```
+
+<br>
+<br>
 ## Why are there two different jsonb columns?
 
 ---
