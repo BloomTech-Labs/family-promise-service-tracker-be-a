@@ -42,7 +42,7 @@ SELECT DISTINCT
 FROM SERVICE_TYPES
 
 
---- Same as above, different writing style:
+--- Same as above, different writing style (preview displays incorrect):
 SELECT DISTINCT
 	SERVICE_TYPE_ENTRY_MODEL #> '{default, 3, options}'
 		AS STATUS_CHOICES
