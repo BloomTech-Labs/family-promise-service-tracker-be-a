@@ -86,7 +86,7 @@ const getStatusChoices = async() => {
 // Returns the following JSON from Postman:
   {
     "status_choices": [
-      "Completed",
+        "Completed",
         "Pending",
         "In Progress",
         "Follow Up Required"
