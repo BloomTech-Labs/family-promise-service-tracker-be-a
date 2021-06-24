@@ -7,13 +7,18 @@ Family Promise needs a way to track and visualize the services they provide exte
 Our goal is to build a generalizable monitoring and evaluation (M&E) platform that meets Family Promise's needs, with an eye toward additional potential use cases that would be useful for many other organizations.
 
 ## Status
-Current Roadmap in [Notion](https://www.notion.so/Roadmap-Family-Promise-Service-Tracker-Labs-33-301d3f1b37564f11b6e0a399a5ca8365), all activity tracked in [Trello](https://trello.com/b/8Y9zYr3n/family-promise-service-tracker-labs-33).
+***Needs Updating*** Current Roadmap in [Notion](https://www.notion.so/Roadmap-Family-Promise-Service-Tracker-Labs-33-301d3f1b37564f11b6e0a399a5ca8365), all activity tracked in [Trello](https://trello.com/b/8Y9zYr3n/family-promise-service-tracker-labs-33).
 
 ## Requirements
 Details on the Labs Node Scaffolding here: <https://docs.labs.lambdaschool.com/labs-api-strarter/>
 
 Labs teams must follow all [Labs Engineering Standards](https://labs.lambdaschool.com/topics/node-js/).
 
+## Documentation
+- The documentation for how to work with the JSONB column used for Service Entry data and type models, check out /docs/API-README-SERVICE-ENTRIES.md
+- The current API documentation is found in /docs/API-README.md
+- List of known issues is found in docs/known-defects.md
+- Pull Request Template found in docs/pull_request_template.md
 
 ## Getting Started
 
@@ -50,6 +55,7 @@ There are 3 options to get postgresql installed locally [Choose one]:
     - You will need to create a database manually using a client.
     - Make sure to update the DATABASE_URL connection string with the values for username/password, databasename and server port (if not 5432).
 3. Setup a free account at [ElephantSQL](https://www.elephantsql.com/plans.html)
+    - **_Downside_**: JSONB column displays as `[object Object]`, so not good when testing/creating JSON queries
     - Sign up for a free `Tiney Turtle` plan
     - copy the URL to the DATABASE_URL .env variable
     - make sure to add `?ssl=true` to the end of this url
@@ -63,8 +69,3 @@ There are 3 options to get postgresql installed locally [Choose one]:
 - run: `npm run knex seed:run` to populate your db with some data.
 - run: `npm run tests` to confirm all is setup and tests pass.
 - run: `npm run watch:dev` to start nodemon in local dev enviornment.
-
-### Additional documentation
-- The current API documentation is found in /api/API-README.md
-- List of known issues is found in /known-defects.md
-
