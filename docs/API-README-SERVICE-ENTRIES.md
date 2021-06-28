@@ -173,12 +173,20 @@ When getting together with the DS team, it was decided it would be easier if the
 service_type_entry_model: {
       "default": [
         {
-          "name_of_field": "Cost/Value",
-          "description": "Cost/Value in dollars/quantity",
+          "name_of_field": "Value/Quantity",
+          "description": "Enter the amount of Value/Quantity",
           "data_type": "number",
           "required": false,
           "display_field_as": "entry",
           "options": null,
+        },
+        {
+          "name_of_field": "Unit of Value/Quantity",
+          "description": "What is the Unit for the Value/Quantity",
+          "data_type": "text",
+          "required": false,
+          "display_field_as": "dropdown",
+          "options":["Dollars", "Boxes", "Cans", "Blankets", "Tokens", "Passes", "Other (specify in Notes)"] ,
         },
         {
           "name_of_field": "Duration",

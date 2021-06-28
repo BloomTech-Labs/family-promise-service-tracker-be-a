@@ -18,7 +18,16 @@ const service_entries = fakeServiceEntryIds.map((id) => {
     service_time: faker.time.recent('abbr'),
     service_entry_data: {
       default: {
-        'Cost/Value': getRandWithZero(80),
+        'Value/Quantity': getRandWithZero(80),
+        'Unit of Value/Quantity': [
+          'Dollars',
+          'Boxes',
+          'Cans',
+          'Blankets',
+          'Tokens',
+          'Passes',
+          'Other (specify in Notes)',
+        ][getRandWithZero(6)],
         Duration: getRand(116) + 4, // So duration will always be at least 5 minutes
         Notes: faker.lorem.paragraph(),
         Status: ['Completed', 'Pending', 'In Progress', 'Follow Up Required'][
