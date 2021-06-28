@@ -4,6 +4,9 @@ As of end of Labs 35:
 
 - Due to change of backend schema, many model functions still do not work. They still have to be re-written and updated. 
 
+- Provider endpoint PUTS do not work. Commented out some of that documentation.
+
+- Get All Service Entries model needs to be paired down. With 500 service entries, backend sends almost 80k lines back currently. Reduce redundant data sent to frontend.
 
 
 As of May 28, last day of Labs34 cohort:

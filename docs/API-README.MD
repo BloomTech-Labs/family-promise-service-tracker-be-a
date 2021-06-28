@@ -101,11 +101,10 @@ you must include both x and y in the programs field:
 | ------------------ | ------ | ---------------------------- | ---------------------------------------- |
 | /api/programs      | GET    | none                         | none                                     |
 | /api/programs/:id  | GET    | none                         | none                                     |
-| /api/programs/name | POST   | name                         | none                                     |
-| /api/programs/type | POST   | type                         | none                                     |
-| /api/programs      | POST   | name, type, description      | admin                                    |
-| /api/programs/:id  | PUT    | any edits as key:value pairs | admin or program manager of this program |
-| /api/programs/:id  | DELETE | none                         | admin or program manager of this program |
+| ~~/api/programs/name~~ | ~~POST~~   | ~~name~~                         | ~~none~~                                     |
+| ~~/api/programs~~      | ~~POST~~   | ~~name, type, description~~      | ~~admin~~                                    |
+| ~~/api/programs/:id~~  | ~~PUT~~    | ~~any edits as key:value pairs~~ | ~~admin or program manager of this program~~ |
+| ~~/api/programs/:id~~  | ~~DELETE~~ | ~~none~~                         | ~~admin or program manager of this program~~ |
 
 program object returned on GET requests:
 
@@ -120,24 +119,31 @@ program object returned on GET requests:
 }
 ```
 
-To create or edit program:
+<!-- To create or edit program:
 
 ```
 {
-    program_name:string,
+    rogram_name:string,
     program_description:string,
 }
 ```
 
 ID will be generated automatically for new programs, should be included in URL param for edits.
 
-According to UX docs, assigning Users to Programs will happen on the user object and not on Program object.
+According to UX docs, assigning Users to Programs will happen on the user object and not on Program object. -->
 
 ## Statuses
 
-All routes work with /api/status or /api/statuses
+~~All routes work with /api/status or /api/statuses~~
 
-| Path              | Method | Requirements              | Authorization |
+Statuses are now part of the new service_entry_data JSON, 
+status can be accessed using knex query for JSON as noted in [API-REAMDME-SERVICE-ENTRIES.md]('./API-README-SERVICE-ENTRIES.md')
+
+```JS
+
+```
+
+<!-- | Path              | Method | Requirements              | Authorization |
 | ----------------- | ------ | ------------------------- | ------------- |
 | /api/statuses     | GET    | none                      | none          |
 | /api/status/:id   | GET    | none                      | none          |
@@ -162,7 +168,7 @@ To create or edit a status:
 {
     "name":"Desired change as a string"
 }
-```
+``` -->
 
 ## Service Types
 
