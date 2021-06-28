@@ -137,7 +137,7 @@ According to UX docs, assigning Users to Programs will happen on the user object
 ~~All routes work with /api/status or /api/statuses~~
 
 Statuses are now part of the new service_entry_data JSON,
-status can be accessed using knex query for JSON as noted in [API-REAMDME-SERVICE-ENTRIES.md]('/API-README-SERVICE-ENTRIES.md')
+status can be accessed using knex query for JSON as noted in [API-REAMDME-SERVICE-ENTRIES.md](API-README-SERVICE-ENTRIES.md)
 
 <!-- | Path              | Method | Requirements              | Authorization |
 | ----------------- | ------ | ------------------------- | ------------- |
@@ -176,7 +176,7 @@ To create or edit a status:
 | ~~/api/service_types/:id~~ | ~~PUT~~    | ~~id, any edits~~    | ~~must be admin or a program manager of the program associated with this service type~~ |
 | ~~/api/service_types/:id~~ | ~~DELETE~~ | ~~none~~             | ~~must be admin or a program manager of the program associated with this service type~~ |
 
-**_Please refer to [API-README-SERVICE-ENTRIES.md]('/API-README-SERVICE-ENTRIES.md')_**
+**_Please refer to [API-README-SERVICE-ENTRIES.md](API-README-SERVICE-ENTRIES.md)_**
 
 Service Type object returned on GET requests:
 
@@ -248,7 +248,7 @@ NOT WORKING
 | ~~/api/service_entries/:id~~ | ~~PUT~~    | ~~id, any edits~~                                        | ~~must be admin or a program manager or a service provider associated with this service type~~ |
 | ~~/api/service_entries/:id~~ | ~~DELETE~~ | ~~none~~                                                 | ~~must be admin or a program manager or a service provider associated with this service type~~ |
 
-**_Please refer to [API-README-SERVICE-ENTRIES.md]('/API-README-SERVICE-ENTRIES.md')_**
+**_Please refer to [API-README-SERVICE-ENTRIES.md](API-README-SERVICE-ENTRIES.md)_**
 
 ```JS
 {
