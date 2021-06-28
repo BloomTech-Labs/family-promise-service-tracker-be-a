@@ -9,13 +9,13 @@ below refer to authorization beyond having a valid token.
 
 ## Users
 
-| Path               | Method | Requirements                                                     | Authorization                                                                                                                                                                             |
-| ------------------ | ------ | ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| /api/providers     | GET    | none                                                             |                                                                                                                                                                                           |
-| /api/providers/:id | GET    | none                                                             |                                                                                                                                                                                           |
-| PUTs not working ~~/api/providers/:id~~ | ~~PUT~~   | ~~any desired edits as key:value json pair. See below for details.~~ | ~~Admin can edit role, name, avatarUrl, and programs of any user. Other users can edit their own name and avatarUrls, will receive 401 if they attempt to edit other fields or other users.~~ |
-| /api/providers     | POST   | STUBBED RESPONSE                                                 | Admin will receive stub response, Non-admin will receive 401                                                                                                                              |
-| /api/providers/:id | DELETE | STUBBED RESPONSE                                                 | Admin will receive stub response, Non-admin will receive 401                                                                                                                              |
+| Path                                    | Method  | Requirements                                                         | Authorization                                                                                                                                                                                 |
+| --------------------------------------- | ------- | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| /api/providers                          | GET     | none                                                                 |                                                                                                                                                                                               |
+| /api/providers/:id                      | GET     | none                                                                 |                                                                                                                                                                                               |
+| PUTs not working ~~/api/providers/:id~~ | ~~PUT~~ | ~~any desired edits as key:value json pair. See below for details.~~ | ~~Admin can edit role, name, avatarUrl, and programs of any user. Other users can edit their own name and avatarUrls, will receive 401 if they attempt to edit other fields or other users.~~ |
+| /api/providers                          | POST    | STUBBED RESPONSE                                                     | Admin will receive stub response, Non-admin will receive 401                                                                                                                                  |
+| /api/providers/:id                      | DELETE  | STUBBED RESPONSE                                                     | Admin will receive stub response, Non-admin will receive 401                                                                                                                                  |
 
 We were asked to hold off on allowing access to Create/Delete functions, so those are stubbed responses for now.
 
@@ -52,7 +52,7 @@ Provider object:
 }
 ```
 
-<!-- 
+<!--
 
 THESE DO NOT CURRENTLY WORK
 
@@ -97,10 +97,10 @@ you must include both x and y in the programs field:
 
 ## Programs
 
-| Path               | Method | Requirements                 | Authorization                            |
-| ------------------ | ------ | ---------------------------- | ---------------------------------------- |
-| /api/programs      | GET    | none                         | none                                     |
-| /api/programs/:id  | GET    | none                         | none                                     |
+| Path                   | Method     | Requirements                     | Authorization                                |
+| ---------------------- | ---------- | -------------------------------- | -------------------------------------------- |
+| /api/programs          | GET        | none                             | none                                         |
+| /api/programs/:id      | GET        | none                             | none                                         |
 | ~~/api/programs/name~~ | ~~POST~~   | ~~name~~                         | ~~none~~                                     |
 | ~~/api/programs~~      | ~~POST~~   | ~~name, type, description~~      | ~~admin~~                                    |
 | ~~/api/programs/:id~~  | ~~PUT~~    | ~~any edits as key:value pairs~~ | ~~admin or program manager of this program~~ |
@@ -115,7 +115,7 @@ program object returned on GET requests:
     program_description:string,
     created_at: DateTime string,
     updated_at, DateTime string,
-    users:[array of provider objects] 
+    users:[array of provider objects]
 }
 ```
 
@@ -136,12 +136,8 @@ According to UX docs, assigning Users to Programs will happen on the user object
 
 ~~All routes work with /api/status or /api/statuses~~
 
-Statuses are now part of the new service_entry_data JSON, 
-status can be accessed using knex query for JSON as noted in [API-REAMDME-SERVICE-ENTRIES.md]('./API-README-SERVICE-ENTRIES.md')
-
-```JS
-
-```
+Statuses are now part of the new service_entry_data JSON,
+status can be accessed using knex query for JSON as noted in [API-REAMDME-SERVICE-ENTRIES.md]('/API-README-SERVICE-ENTRIES.md')
 
 <!-- | Path              | Method | Requirements              | Authorization |
 | ----------------- | ------ | ------------------------- | ------------- |
@@ -172,22 +168,25 @@ To create or edit a status:
 
 ## Service Types
 
-| Path                   | Method | Requirements     | Authorization                                                                       |
-| ---------------------- | ------ | ---------------- | ----------------------------------------------------------------------------------- |
-| /api/service_types     | GET    | none             | none                                                                                |
-| /api/service_types/:id | GET    | none             | none                                                                                |
-| /api/service_types     | POST   | name, program_id | must be admin or a program manager of the program associated with this service type |
-| /api/service_types/:id | PUT    | id, any edits    | must be admin or a program manager of the program associated with this service type |
-| /api/service_types/:id | DELETE | none             | must be admin or a program manager of the program associated with this service type |
+| Path                       | Method     | Requirements         | Authorization                                                                           |
+| -------------------------- | ---------- | -------------------- | --------------------------------------------------------------------------------------- |
+| /api/service_types         | GET        | none                 | none                                                                                    |
+| /api/service_types/:id     | GET        | none                 | none                                                                                    |
+| ~~/api/service_types~~     | ~~POST~~   | ~~name, program_id~~ | ~~must be admin or a program manager of the program associated with this service type~~ |
+| ~~/api/service_types/:id~~ | ~~PUT~~    | ~~id, any edits~~    | ~~must be admin or a program manager of the program associated with this service type~~ |
+| ~~/api/service_types/:id~~ | ~~DELETE~~ | ~~none~~             | ~~must be admin or a program manager of the program associated with this service type~~ |
+
+**_Please refer to [API-README-SERVICE-ENTRIES.md]('/API-README-SERVICE-ENTRIES.md')_**
 
 Service Type object returned on GET requests:
 
 ```
 {
-    id:int,
-    name:string,
-    description:string,
+    service_type_id:int,
     program_id:int,
+    service_type_name:string,
+    service_type_description:string,
+    service_type_entry_model: Object containing the default and custom field information
     service_providers: array of profile objects
     created_at:datetime string,
     updated_at:datetime string,
@@ -195,129 +194,74 @@ Service Type object returned on GET requests:
 ```
 
 To create a service type:
+service_type_id: 999 is currently a "model" that can be used as a base for new service types, if needed.
 
-```
-{
-    "name":"Bus Fare",
-    "description":"Weekly bus fare allowance",
-    "program_id":3,
-    "service_providers":["provider_id_1","provider_id_2"]
-}
-```
-
-To edit a service type, provide only the fields you wish to change:
-
-```
-{
-    "name":"Bus Fare"
-}
+```JS
+NOT WORKING
+// {
+//     "service_type_name":"Bus Fare",
+//     "service_type_description":"Weekly bus fare allowance",
+//     service_type_entry_model: Object containing the default and custom field information,
+//     "program_id":3,
+// }
 ```
 
-To edit the associated service providers, provide the full list of service providers you would like associated. As with assigning programs to users on the /profiles routes, the service providers array you provide will overwrite any existing associations.
+~~To edit a service type, provide only the fields you wish to change:~~
 
-E.g. To remove all associations, provide an empty array:
+```JS
+NOT WORKING
 
+// {
+//     "name":"Bus Fare"
+// }
 ```
-{
-    "service_providers": []
-}
+
+~~To edit the associated service providers, provide the full list of service providers you would like associated. As with assigning programs to users on the /profiles routes, the service providers array you provide will overwrite any existing associations.~~
+
+~~E.g. To remove all associations, provide an empty array:~~
+
+```JS
+NOT WORKING
+// {
+//     "service_providers": []
+// }
 ```
 
-If user X was already assigned to this service type, and you want to also add user Y, you must include both X and Y in the service providers field:
+~~If user X was already assigned to this service type, and you want to also add user Y, you must include both X and Y in the service providers field:~~
 
-```
-{
-    "service_providers": ["x","y"]
-}
+```JS
+// NOT WORKING
+// {
+//     "service_providers": ["x","y"]
+// }
 ```
 
 ## Service Entries
 
-| Path                     | Method | Requirements                                         | Authorization                                                                              |
-| ------------------------ | ------ | ---------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| /api/service_entries     | GET    | none                                                 | none                                                                                       |
-| /api/service_entries/:id | GET    | none                                                 | none                                                                                       |
-| /api/service_entries     | POST   | service_type_id, provided_at, status_id, provider_id | must be admin or a program manager or a service provider associated with this service type |
-| /api/service_entries/:id | PUT    | id, any edits                                        | must be admin or a program manager or a service provider associated with this service type |
-| /api/service_entries/:id | DELETE | none                                                 | must be admin or a program manager or a service provider associated with this service type |
+**Getting all entries sends too much data to FE**
 
-```
+| Path                         | Method     | Requirements                                             | Authorization                                                                                  |
+| ---------------------------- | ---------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| /api/service_entries         | GET        | none                                                     | none                                                                                           |
+| /api/service_entries/:id     | GET        | none                                                     | none                                                                                           |
+| ~~/api/service_entries~~     | ~~POST~~   | ~~service_type_id, provided_at, status_id, provider_id~~ | ~~must be admin or a program manager or a service provider associated with this service type~~ |
+| ~~/api/service_entries/:id~~ | ~~PUT~~    | ~~id, any edits~~                                        | ~~must be admin or a program manager or a service provider associated with this service type~~ |
+| ~~/api/service_entries/:id~~ | ~~DELETE~~ | ~~none~~                                                 | ~~must be admin or a program manager or a service provider associated with this service type~~ |
+
+**_Please refer to [API-README-SERVICE-ENTRIES.md]('/API-README-SERVICE-ENTRIES.md')_**
+
+```JS
 {
-    service_type_id: int
-    provided_at: DateTime string,
-    notes: text,
-    unit: string,
-    quantity: int,
-    value: decimal,
-    address: string,
-    city: string,
-    state: string,
-    zip_code: string,
-    recipient_id: int,
-    status_id: int,
-    provider_id: string (okta id)
-}
-```
-
-Service Entries Object on POST requests:
-
-```
-{
-    "message": "Service Entry created",
-    "newEntry": [
-        {
-            service_type_id: int
-            provided_at: DateTime string,
-            notes: text,
-            unit: string,
-            quantity: int,
-            value: decimal,
-            address: string,
-            city: string,
-            state: string,
-            zip_code: string,
-            recipient_id: int,
-            status_id: int,
-            provider_id: string (okta id)
-            created_at: DateTime string,
-            updated_at: DateTime string,
-            first_name: string,
-            last_name: string,
-            service_type_name: string,
-            status_name: string
-        }
-    ]
-}
-```
-
-Service Entries Object on PUT requests:
-
-```
-{
-    "message": "Service Entry (id) updated",
-    "editedEntry": [
-        {
-            service_type_id: int
-            provided_at: DateTime string,
-            notes: text,
-            unit: string,
-            quantity: int,
-            value: decimal,
-            address: string,
-            city: string,
-            state: string,
-            zip_code: string,
-            recipient_id: int,
-            status_id: int,
-            provider_id: string (okta id)
-            created_at: DateTime string,
-            updated_at: DateTime string,
-            first_name: string,
-            last_name: string,
-            service_type_name: string,
-            status_name: string
-        }
-    ]
+    service_entry_id: uuid,
+    service_type_id: int,
+    location_id: int
+    service_date: datestring,
+    service_time: datestring,
+    service_entry_data: refer to readme,
+    created_at:datetime string,
+    updated_at:datetime string,
+    recipient: recipient object,
+    service_type: service_type object,
 }
 ```
 
@@ -325,33 +269,40 @@ Service Entries Object on PUT requests:
 
 All routes work with /api/recipient or /api/recipients
 
-| Path               | Method | Requirements                                             | Authorization                            |
-| ------------------ | ------ | -------------------------------------------------------- | ---------------------------------------- |
-| /api/recipients    | GET    | none                                                     | none                                     |
-| /api/recipient/:id | GET    | none                                                     | none                                     |
-| /api/recipient     | POST   | first_name, last_name, age, household_id, veteran_status | admin, Program Manager, Service Provider |
-| /api/recipient/:id | PUT    | desired edit as key:value                                | admin, Program Manager                   |
-| /api/recipient/:id | DELETE | none                                                     | admin                                    |
+| Path                     | Method     | Requirements                                                 | Authorization                                |
+| ------------------------ | ---------- | ------------------------------------------------------------ | -------------------------------------------- |
+| /api/recipients          | GET        | none                                                         | none                                         |
+| /api/recipients/veterans | GET        | none                                                         | none                                         |
+| ~~/api/recipient/:id~~   | ~~GET~~    | ~~none~~                                                     | ~~none~~                                     |
+| ~~/api/recipient~~       | ~~POST~~   | ~~first_name, last_name, age, household_id, veteran_status~~ | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/recipient/:id~~   | ~~PUT~~    | ~~desired edit as key:value~~                                | ~~admin, Program Manager~~                   |
+| ~~/api/recipient/:id~~   | ~~DELETE~~ | ~~none~~                                                     | ~~admin~~                                    |
 
 Recipient object returned on GET requests:
 
-```
+```JS
 {
-    id:int,
-    first_name:string,
-    last_name:string,
-    age:int,
-    race:array of race objects,
-    ethnicity:array of ethnicity objects,
-    gender:array of gender objects,
-    veteran_status:boolean,
-    household_id:int,
+    recipient_id:uuid,
+    recipient_first_name:string,
+    recipient_middle_name: string,
+    recipient_last_name:string,
+    recipient_date_of_birth:string,
+    recipient_veteran_status:boolean,
+    household_id:uuid,
+    gender_id: int,
+    race_id: int,
+    ethnicity_id: int,
     created_at:datetime string,
     updated_at:datetime string
+    race:string,
+    gender: string,
+    ethnicity:string,
+    household_name: string,
+    zip: string
 }
 ```
 
-To create or edit a recipient:
+<!-- To create or edit a recipient:
 
 ```
 {
@@ -363,46 +314,31 @@ To create or edit a recipient:
     "gender":"Desired change as an enum",
     "veteran_status":"Desired change as a boolean"
 }
-```
+``` -->
 
 ## Households
 
 All routes work with /api/household or /api/households
 
-| Path               | Method | Requirements                                   | Authorization                            |
-| ------------------ | ------ | ---------------------------------------------- | ---------------------------------------- |
-| /api/households    | GET    | none                                           | none                                     |
-| /api/household/:id | GET    | none                                           | none                                     |
-| /api/household     | POST   | address, city, state, zip_code, household_size | admin, Program Manager, Service Provider |
-| /api/household/:id | PUT    | desired edit as key:value                      | admin, Program Manager                   |
-| /api/household/:id | DELETE | none                                           | admin                                    |
+| Path                   | Method     | Requirements                  | Authorization                                |
+| ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
+| /api/households        | GET        | none                          | none                                         |
+| ~~/api/household/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/household~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/household/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/household/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
 
 Recipient object returned on GET requests:
 
-```
+```JS
 {
-    id:int,
-    address:string - 128 char,
-    city:string - 128 char,
-    state:string - 128 char,
-    zip_code:string,
+    household_id:int,
+    household_name: string
     household_size:int,
-    household_characteristics:json object
+    household_income: int,
+    location_id: int,
     created_at:datetime string,
     updated_at:datetime string
-}
-```
-
-To create or edit a recipient:
-
-```
-{
-    "address":"Desired change as a string",
-    "city":"Desired change as a string",
-    "state":"Desired change as a string",
-    "zip_code":"Desired change as a string",
-    "household_size":"Desired change as an integer"
-    "household_characteristics":"Desired change as json object"
 }
 ```
 
@@ -410,12 +346,12 @@ To create or edit a recipient:
 
 All routes work with /api/metric or /api/metrics
 
-| Path                         | Method | Requirements | Authorization |
-| ---------------------------- | ------ | ------------ | ------------- |
-| /api/metrics/recipientscount | GET    | none         | none          |
-| /api/metrics/servicescount   | GET    | none         | none          |
-| /api/metrics/recipientsweek  | GET    | none         | none          |
-| /api/metrics/servicesweek    | GET    | none         | none          |
+| Path                                           | Method | Requirements | Authorization |
+| ---------------------------------------------- | ------ | ------------ | ------------- |
+| /api/metrics/recipientscount                   | GET    | none         | none          |
+| /api/metrics/servicescount                     | GET    | none         | none          |
+| HARDCODED DATE ~~/api/metrics/recipientsweek~~ | GET    | none         | none          |
+| HARDCODED DATE ~~/api/metrics/servicesweek~~   | GET    | none         | none          |
 
 Metric object returned on GET requests:
 

@@ -2,12 +2,25 @@
 
 As of end of Labs 35:
 
-- Due to change of backend schema, many model functions still do not work. They still have to be re-written and updated. 
+- Due to change of backend schema, Many/Most model functions still do not work properly. They still have to be re-written and updated.
 
-- Provider endpoint PUTS do not work. Commented out some of that documentation.
+- Check the API-README, did strikethrough on endpoints not working properly.
 
-- Get All Service Entries model needs to be paired down. With 500 service entries, backend sends almost 80k lines back currently. Reduce redundant data sent to frontend.
+- Get All Service Entries model needs to be paired down. With 500 service entries, backend sends over 70k lines back currently. Reduce redundant data sent to frontend.
 
+- When creating endpoint/model for updating service_entry_type_models, should do a transaction to edit the service_entry_data. So that names continue to match, also to add fields. Shouldn't delete fields that already exist if possible, better to update names if possible, don't want to lose data.
+
+- Recommendations:
+
+  - Start fixing the endpoints/models in the API Readme.
+  - Work on new endpoints needed.
+  - Work on needed middleware
+  - Work on tests
+
+- More questions? Feel free to reach out to me on Lambda's slack (@Jay Ponce de Leon) or github (@jaypdl)
+
+<br>
+<br>
 
 As of May 28, last day of Labs34 cohort:
 
