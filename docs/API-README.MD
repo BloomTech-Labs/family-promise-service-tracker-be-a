@@ -9,44 +9,52 @@ below refer to authorization beyond having a valid token.
 
 ## Users
 
-| Path              | Method | Requirements                                                     | Authorization                                                                                                                                                                             |
-| ----------------- | ------ | ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| /api/profiles     | GET    | none                                                             |                                                                                                                                                                                           |
-| /api/profiles/:id | GET    | none                                                             |                                                                                                                                                                                           |
-| /api/profiles/:id | PUT    | any desired edits as key:value json pair. See below for details. | Admin can edit role, name, avatarUrl, and programs of any user. Other users can edit their own name and avatarUrls, will receive 401 if they attempt to edit other fields or other users. |
-| /api/profiles     | POST   | STUBBED RESPONSE                                                 | Admin will receive stub response, Non-admin will receive 401                                                                                                                              |
-| /api/profiles/:id | DELETE | STUBBED RESPONSE                                                 | Admin will receive stub response, Non-admin will receive 401                                                                                                                              |
+| Path               | Method | Requirements                                                     | Authorization                                                                                                                                                                             |
+| ------------------ | ------ | ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| /api/providers     | GET    | none                                                             |                                                                                                                                                                                           |
+| /api/providers/:id | GET    | none                                                             |                                                                                                                                                                                           |
+| PUTs not working ~~/api/providers/:id~~ | ~~PUT~~   | ~~any desired edits as key:value json pair. See below for details.~~ | ~~Admin can edit role, name, avatarUrl, and programs of any user. Other users can edit their own name and avatarUrls, will receive 401 if they attempt to edit other fields or other users.~~ |
+| /api/providers     | POST   | STUBBED RESPONSE                                                 | Admin will receive stub response, Non-admin will receive 401                                                                                                                              |
+| /api/providers/:id | DELETE | STUBBED RESPONSE                                                 | Admin will receive stub response, Non-admin will receive 401                                                                                                                              |
 
 We were asked to hold off on allowing access to Create/Delete functions, so those are stubbed responses for now.
 
-Profile object:
+Provider object:
 
 ```
 {
-    id: string (okta id),
-    email: string,
-    firstName: string,
-    lastName: string,
-    avatarUrl: string,
+    provider_id: string (okta id),
     role: string,
+    provider_first_name: string,
+    provider_last_name: string,
+    provider_email: string,
+    provider_phone_number: string,
+    employee_id: string
+    provider_avatar_url: string,
     created_at: DateTime string,
     updated_at, DateTime string,
     programs: [
       {
-        id: string,
-        name: string,
-        type: string,
-        description: string
+        program_id: string,
+        program_name: string,
+        program_description: string,
+        created_at: DateTime string,
+        updated_at, DateTime string
       },
       {
-        id: string,
-        name: string,
-        type: string,
-        description: string
+        program_id: string,
+        program_name: string,
+        program_description: string,
+        created_at: DateTime string,
+        updated_at, DateTime string
       }
     ]
 }
 ```
+
+<!-- 
+
+THESE DO NOT CURRENTLY WORK
 
 For Editing a given profile, including their assigned programs, submit only the fields that you would like to change.
 The programs field accepts an array of program IDs.
@@ -85,7 +93,7 @@ you must include both x and y in the programs field:
 {
     "programs": ["x","y"]
 }
-```
+``` -->
 
 ## Programs
 
@@ -103,11 +111,12 @@ program object returned on GET requests:
 
 ```
 {
-    id:int,
-    name:string,
-    type:string,
-    description:string,
-    Program Managers:[array of profile objects]
+    program_id:int,
+    program_name:string,
+    program_description:string,
+    created_at: DateTime string,
+    updated_at, DateTime string,
+    users:[array of provider objects] 
 }
 ```
 
@@ -115,9 +124,8 @@ To create or edit program:
 
 ```
 {
-    name:string,
-    type:string,
-    description:string,
+    program_name:string,
+    program_description:string,
 }
 ```
 
