@@ -227,10 +227,12 @@ router.get('/:id', (req, res, next) => {
  *                provider:
  *                  $ref: '#/components/schemas/Profile'
  */
-router.post('/', requireAdmin, async (req, res) => {
-  res.status(200).json({
-    message: 'Stubbed method for creating users - no data was submitted',
-  });
+router.post('/', requireAdmin, async (req, res, next) => {
+  Providers.addProvider(req.body)
+    .then((providers) => {
+      res.status(201).json(providers);
+    })
+    .catch(next);
 });
 /**
  * @swagger

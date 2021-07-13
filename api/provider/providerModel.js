@@ -33,6 +33,11 @@ const findServiceProviders = () => {
     .where('role', 'service_provider');
 };
 
+const addProvider = async (provider) => {
+  await knex('providers').insert(provider);
+  return findServiceProviders();
+};
+
 const update = async (id, updates) => {
   const { programs, ...provider } = updates;
 
@@ -96,6 +101,7 @@ const update = async (id, updates) => {
 module.exports = {
   findAll,
   findById,
+  addProvider,
   update,
   findServiceProviders,
 };

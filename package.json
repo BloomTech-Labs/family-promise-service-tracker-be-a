@@ -114,7 +114,7 @@
     "jest-serial-runner": "^1.1.0",
     "lint-staged": "^10.4.2",
     "nodemon": "^2.0.4",
-    "prettier": "^2.0.5",
+    "prettier": "2.3.2",
     "supertest": "^4.0.2"
   }
 }
