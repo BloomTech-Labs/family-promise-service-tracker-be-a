@@ -65,6 +65,8 @@ router.put('/:id', canCrudServiceType, (req, res, next) => {
 router.delete('/:id', canCrudServiceType, (req, res, next) => {
   const { id } = req.params;
 
+
+  // removeProgram was added to db-helper to reflect the new scheme change
   DB.removeProgram('programs', id)
     .then((count) => {
       if (count > 0) {
