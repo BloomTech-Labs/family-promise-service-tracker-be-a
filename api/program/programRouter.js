@@ -65,7 +65,7 @@ router.put('/:id', canCrudServiceType, (req, res, next) => {
 router.delete('/:id', canCrudServiceType, (req, res, next) => {
   const { id } = req.params;
 
-  DB.remove('programs', id)
+  DB.removeProgram('programs', id)
     .then((count) => {
       if (count > 0) {
         res.status(200).json({ message: `Program ${id} has been removed` });
