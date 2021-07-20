@@ -34,7 +34,26 @@ const findServiceProviders = () => {
 };
 
 const addProvider = async (provider) => {
-  await knex('providers').insert(provider);
+  console.log(provider);
+  const programProviderEntries = [];
+  provider.programs.forEach(async (program_name) => {
+    const [program_entry] = await knex('programs')
+      .select('program_id', 'program_name')
+      .where('program_name', program_name);
+    console.log(program_entry);
+    programProviderEntries.push(program_entry);
+  });
+  console.log('programProviderEntries: ', programProviderEntries);
+  // const [programs] = knex('program_providers').select('');
+  // await knex('providers').insert({
+  //   provider_first_name: provider.provider_first_name,
+  //   provider_last_name: provider.provider_last_name,
+  //   role: provider.role,
+  // });
+
+  // for each program
+  // - get program id
+  // - create entry in program_providers
   return findServiceProviders();
 };
 

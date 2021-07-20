@@ -1,5 +1,4 @@
 version: '3'
-
 services:
   pg:
     image: postgres
@@ -18,7 +17,6 @@ services:
     networks:
       - postgres
     restart: always
-
   pgadmin:
     container_name: pgadmin_labs
     image: dpage/pgadmin4
@@ -33,7 +31,6 @@ services:
     networks:
       - postgres
     restart: unless-stopped
-  
 networks:
   postgres:
     driver: bridge

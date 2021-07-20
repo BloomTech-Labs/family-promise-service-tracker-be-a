@@ -188,7 +188,10 @@ router.get('/:id', (req, res, next) => {
         res.status(404).json({ error: 'ProfileNotFound' });
       }
     })
-    .catch(next);
+    .catch((err) => {
+      console.log(err);
+      next();
+    });
 });
 
 /**
@@ -227,13 +230,16 @@ router.get('/:id', (req, res, next) => {
  *                provider:
  *                  $ref: '#/components/schemas/Profile'
  */
-router.post('/', requireAdmin, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
+  console.log('POST endpoint touched');
   Providers.addProvider(req.body)
     .then((providers) => {
+      console.log(providers);
       res.status(201).json(providers);
     })
     .catch(next);
 });
+
 /**
  * @swagger
  * /provider:
