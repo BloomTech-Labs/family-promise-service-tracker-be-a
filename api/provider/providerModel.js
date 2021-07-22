@@ -36,24 +36,27 @@ const findServiceProviders = () => {
 const addProvider = async (provider) => {
   console.log(provider);
   const programProviderEntries = [];
-  provider.programs.forEach(async (program_name) => {
-    const [program_entry] = await knex('programs')
-      .select('program_id', 'program_name')
-      .where('program_name', program_name);
-    console.log(program_entry);
-    programProviderEntries.push(program_entry);
+  // look up the objection framework to make this an atomic transaction
+  // const trx = await knex.startTransaction();
+  const ins = await knex('providers').insert({
+    provider_first_name: provider.provider_first_name,
+    provider_last_name: provider.provider_last_name,
+    role: provider.role,
+    // needs an Okta ID to be provided HERE, or we can sub in a uuid in the meantime
   });
-  console.log('programProviderEntries: ', programProviderEntries);
-  // const [programs] = knex('program_providers').select('');
-  // await knex('providers').insert({
-  //   provider_first_name: provider.provider_first_name,
-  //   provider_last_name: provider.provider_last_name,
-  //   role: provider.role,
-  // });
-
-  // for each program
-  // - get program id
-  // - create entry in program_providers
+  console.log(ins);
+  provider.programs.forEach(async (program_name) => {
+    await knex('programs')
+      .select('program_id', 'program_name')
+      .where('program_name', program_name)
+      .then(function (pN) {
+        console.log(pN['0']);
+        console.log(Object.keys(pN['0']));
+        programProviderEntries.push(pN['0']);
+        console.log('programProviderEntries: ', programProviderEntries);
+      });
+    console.log('inside', programProviderEntries);
+  });
   return findServiceProviders();
 };
 
