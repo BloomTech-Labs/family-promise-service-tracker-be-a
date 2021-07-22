@@ -24,6 +24,10 @@ const remove = async (table, id) => {
   return await knex(table).where({ id }).del();
 };
 
+const removeProgram = async (table, program_id) => {
+  return await knex(table).where({ program_id }).del();
+};
+
 module.exports = {
   knex,
   findAll,
@@ -32,4 +36,5 @@ module.exports = {
   create,
   update,
   remove,
+  removeProgram,
 };
