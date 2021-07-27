@@ -34,7 +34,6 @@ const findServiceProviders = () => {
 };
 
 const addProvider = async (provider) => {
-  console.log(provider);
   const programProviderEntries = [];
   // look up the objection framework to make this an atomic transaction
   // const trx = await knex.startTransaction();
@@ -44,18 +43,13 @@ const addProvider = async (provider) => {
     role: provider.role,
     // needs an Okta ID to be provided HERE, or we can sub in a uuid in the meantime
   });
-  console.log(ins);
   provider.programs.forEach(async (program_name) => {
     await knex('programs')
       .select('program_id', 'program_name')
       .where('program_name', program_name)
       .then(function (pN) {
-        console.log(pN['0']);
-        console.log(Object.keys(pN['0']));
         programProviderEntries.push(pN['0']);
-        console.log('programProviderEntries: ', programProviderEntries);
       });
-    console.log('inside', programProviderEntries);
   });
   return findServiceProviders();
 };
