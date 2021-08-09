@@ -8,7 +8,7 @@ exports.up = function (knex) {
       .references('service_entry_id')
       .inTable('service_entries')
       .onUpdate('CASCADE')
-      .onDelete('RESTRICT');
+      .onDelete('CASCADE');
     tbl
       .uuid('recipient_id')
       .notNullable()
@@ -16,7 +16,7 @@ exports.up = function (knex) {
       .references('recipient_id')
       .inTable('recipients')
       .onUpdate('CASCADE')
-      .onDelete('RESTRICT');
+      .onDelete('CASCADE');
     tbl.timestamps(true, true);
   });
 };

@@ -101,9 +101,14 @@ const update = (id, object) => {
     .returning('*');
 };
 
+const deleteRecord = (id) => {
+  return knex('service_entries').where('service_entry_id', id).del();
+};
+
 module.exports = {
   create,
   findAll,
   findById,
   update,
+  deleteRecord,
 };

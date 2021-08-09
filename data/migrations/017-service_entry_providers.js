@@ -7,16 +7,16 @@ exports.up = (knex) => {
       .unsigned()
       .references('service_entry_id')
       .inTable('service_entries')
-      .onUpdate('RESTRICT')
-      .onDelete('RESTRICT');
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
     tbl
       .string('provider_id')
       .notNullable()
       .unsigned()
       .references('provider_id')
       .inTable('providers')
-      .onUpdate('RESTRICT')
-      .onDelete('RESTRICT');
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
     tbl.timestamps(true, true);
   });
 };

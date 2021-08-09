@@ -8,7 +8,7 @@ exports.up = function (knex) {
       .references('service_type_id')
       .inTable('service_types')
       .onUpdate('CASCADE')
-      .onDelete('RESTRICT');
+      .onDelete('CASCADE');
     tbl
       .string('provider_id')
       .unsigned()

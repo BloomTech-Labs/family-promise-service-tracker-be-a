@@ -15,8 +15,8 @@ exports.up = function (knex) {
       .notNullable()
       .references('service_type_id')
       .inTable('service_types')
-      .onUpdate('RESTRICT')
-      .onDelete('RESTRICT');
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
     tbl.timestamps(true, true);
   });
 };
