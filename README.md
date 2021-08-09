@@ -55,9 +55,9 @@ There are 3 options to get postgresql installed locally [Choose one]:
 1. Use docker. [Install](https://docs.docker.com/get-docker/) for your platform
    - run: `docker-compose up -d` to start up the postgresql database and pgadmin.
    - Open a browser to [pgadmin](http://localhost:5050/) and you should see the Dev and Test server already defined.
-   - If you need to start over you will need to delete the folder `$ rm -rf ./data/pg` as this is where all of the server data is stored.
-   - if the databases `api-dev` and `api-test` were not created then you'll need to start over. You may need to grant system execution access to the .sh file in docker/pg/pg-init-scripts:
-   - - Run following from within root: `chmod +x ./docker/pg/pg-init-scripts/create-multiple-postgresql-databases.sh`
+   - If you need to start over you will need to delete the folder `$ rm -rf ./data/pg` as this is where all of the server data is stored (_ONLY IF YOU NEED TO START OVER_)
+   - Upon logging into postgres admin on localhost (2nd dash above), you'll see the API-DEV server, but you will need to check if there is a "api-dev" database within that server, if not or if the databases `api-dev` and `api-test` were not created then you'll need to create them by right clicking databases, clicking create database, and adding a database for "api-dev" and then start over at step 1. You may need to grant system execution access to the .sh file in docker/pg/pg-init-scripts:
+   - Run following from within root: `chmod +x ./docker/pg/pg-init-scripts/create-multiple-postgresql-databases.sh`
 2. Download and install postgresql directly from the [main site](https://www.postgresql.org/download/)
    - make note of the port, username and password you use to setup the database.
    - Connect your client to the server manually using the values previously mentioned
