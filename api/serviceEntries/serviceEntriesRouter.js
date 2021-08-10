@@ -54,7 +54,7 @@ router.put('/:id', (req, res, next) => {
 
 router.delete('/:id', (req, res, next) => {
   const { id } = req.params;
-  DB.remove('service_entries', id)
+  ServiceEntries.deleteRecord(id)
     .then((count) => {
       if (count > 0) {
         res
