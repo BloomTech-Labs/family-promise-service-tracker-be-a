@@ -12,6 +12,7 @@ exports.up = (knex) => {
     tbl.boolean('has_disability').notNullable().defaultTo(false);
     tbl.boolean('has_valid_ssi').notNullable().defaultTo(false);
     tbl.boolean('has_valid_medicare_card').notNullable().defaultTo(false);
+    tbl
       .uuid('household_id')
       // .notNullable() These are commented out since the create new recipient transaction is not complete
       .unsigned()
