@@ -30,6 +30,10 @@ const findById = async (id) => {
     .first();
 };
 
+const findByType = async (type) => {
+  return await knex('service_types');
+};
+
 const create = async (serviceType) => {
   // separate out the service_providers array for junction table insert
   const { service_providers, ...newServiceType } = serviceType;
@@ -103,4 +107,5 @@ module.exports = {
   findById,
   create,
   update,
+  findByType,
 };
