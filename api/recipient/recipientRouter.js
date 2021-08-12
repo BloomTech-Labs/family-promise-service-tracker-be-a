@@ -87,7 +87,7 @@ router.put('/:id', requireAdmin, requireProgramManager, (req, res, next) => {
 router.delete('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;
 
-  DB.remove('recipients', id)
+  Recipients.deleteRecipient(id)
     .then((count) => {
       if (count > 0) {
         res.status(200).json({ message: `Recipient ${id} has been removed` });

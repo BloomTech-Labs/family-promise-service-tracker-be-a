@@ -8,7 +8,7 @@ exports.up = function (knex) {
       .references('recipient_id')
       .inTable('recipients')
       .onUpdate('CASCADE')
-      .onDelete('RESTRICT');
+      .onDelete('CASCADE');
     tbl.string('phone_number', 128);
     tbl.string('phone_number_description', 128);
     tbl.timestamps(true, true);

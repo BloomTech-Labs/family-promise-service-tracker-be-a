@@ -17,6 +17,7 @@ const testUser1 = {
   zip_code: "08259-2106",
   veteran_status: false,
   household_size: 8
+  // ""
 };
 
 jest.mock('../../api/utils/db-helper');
