@@ -19,7 +19,7 @@ const recipients = fakeRecipientIds.map((id) => {
     gender_id: getRand(3),
     race_id: getRand(5),
     ethnicity_id: getRand(2),
-    qualify_status: faker.datatype.boolean(),
+    active_status: faker.datatype.boolean(),
   };
 });
 
