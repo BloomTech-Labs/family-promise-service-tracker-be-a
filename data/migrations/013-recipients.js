@@ -9,9 +9,11 @@ exports.up = (knex) => {
     tbl.string('recipient_last_name').notNullable();
     tbl.date('recipient_date_of_birth').notNullable();
     tbl.boolean('recipient_veteran_status').notNullable();
+    tbl.boolean('qualify_status').notNullable();
     tbl.boolean('has_disability').notNullable().defaultTo(false);
     tbl.boolean('has_valid_ssi').notNullable().defaultTo(false);
     tbl.boolean('has_valid_medicare_card').notNullable().defaultTo(false);
+
     tbl
       .uuid('household_id')
       // .notNullable() These are commented out since the create new recipient transaction is not complete
