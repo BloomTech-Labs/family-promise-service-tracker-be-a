@@ -30,7 +30,7 @@ router.get('/veterans', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   const { id } = req.params;
 
-  DB.findById('recipients', id)
+  Recipients.findById(id)
     .then((recipient) => {
       if (recipient) {
         res.status(200).json(recipient);
