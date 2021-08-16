@@ -16,6 +16,8 @@ const create = async (serviceEntries) => {
 
       newServiceEntriesId = createdServiceEntries[0].service_entry_id;
 
+      // if this is all meant to let a single service entry have multiple providers and recipients, why isn't it mapping??
+
       await trx('service_entry_providers').insert([
         { service_entry_id: newServiceEntriesId },
         { provider_id: serviceEntries.provider_id },
@@ -92,7 +94,7 @@ const findById = async (id) => {
 
 // Can only update service_entries data in table on front end
 // Can't update "extra" data that's tacked onto the responses
-// Can't edit: first_name, last_name, service_type_name, status_name
+// Can't edit: first_name, last_name, service_type_name, status_name _
 const update = (id, object) => {
   return knex('service_entries')
     .where({ id: id })
