@@ -27,7 +27,7 @@ router.get('/:id', (req, res, next) => {
 router.post('/', (req, res, next) => {
   DB.create('service_entries', req.body)
     .then((response) => {
-      return ServiceEntries.findById(response[0].id);
+      return ServiceEntries.findById(response[0].service_entry_id);
     })
     .then((newEntry) => {
       res.status(201).json({
@@ -39,9 +39,9 @@ router.post('/', (req, res, next) => {
 });
 
 router.put('/:id', (req, res, next) => {
-  DB.update('service_entries', req.params.id, req.body)
+  ServiceEntries.update('service_entries', req.params.id, req.body)
     .then((response) => {
-      return ServiceEntries.findById(response[0].id);
+      return ServiceEntries.findById(response[0].service_entry_id);
     })
     .then((editedEntry) => {
       res.status(200).json({

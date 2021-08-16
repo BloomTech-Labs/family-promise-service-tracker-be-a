@@ -3,7 +3,7 @@ const knex = require('../../data/db-config');
 const isAssignedToProgram = async (provider, program) => {
   const programs = await knex('program_providers')
     .pluck('program_id')
-    .where({ provider_id: provider.id });
+    .where({ provider_id: provider.provider_id });
 
   return programs.includes(program);
 };
