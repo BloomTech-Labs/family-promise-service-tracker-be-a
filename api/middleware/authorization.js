@@ -59,6 +59,7 @@ const canCrudServiceType = async (req, res, next) => {
   }
 };
 
+// check to see if these still make sense, ie body.id, .email, .roles, .programs, etc
 const canEditProfile = async (req, res, next) => {
   try {
     if (

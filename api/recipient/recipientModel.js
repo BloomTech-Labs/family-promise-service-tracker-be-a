@@ -45,8 +45,13 @@ const findById = (id) => {
   return findAll({ 'r.recipient_id': id }).first();
 };
 
+const deleteRecipient = (id) => {
+  return knex("recipients").where("recipient_id", id).del();
+}
+
 module.exports = {
   findAll,
   create,
   findById,
+  deleteRecipient,
 };

@@ -5,6 +5,7 @@ exports.up = function (knex) {
       .primary()
       .defaultTo(knex.raw('gen_random_uuid ()'));
     tbl.string('household_name', 255).notNullable();
+    tbl.boolean('is_unstable').notNullable().defaultTo(false);
     tbl.integer('household_size').notNullable();
     tbl.integer('household_income').notNullable();
     tbl

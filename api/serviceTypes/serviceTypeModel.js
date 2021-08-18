@@ -47,14 +47,17 @@ const create = async (serviceType) => {
         .returning('*');
 
       // set the ID of the returning DB record
-      newServiceTypeId = createdServiceType[0].id;
+      newServiceTypeId = createdServiceType[0].service_type_id;
 
       // if there are service providers that need to be associated
       // with this type, insert them into junction table
       if (service_providers && service_providers.length > 0) {
         await trx('service_type_providers').insert(
           service_providers.map((p) => {
-            return { service_type_id: newServiceTypeId, provider_id: p };
+            return {
+              service_type_id: newServiceTypeId,
+              provider_id: p.provider_id,
+            };
           })
         );
       }
@@ -88,7 +91,7 @@ const update = async (id, updates) => {
       if (service_providers && service_providers.length > 0) {
         await trx('service_type_providers').insert(
           service_providers.map((p) => {
-            return { service_type_id: id, provider_id: p };
+            return { service_type_id: id, provider_id: p.provider_id };
           })
         );
       }
