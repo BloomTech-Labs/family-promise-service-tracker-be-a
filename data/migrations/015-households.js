@@ -13,7 +13,7 @@ exports.up = function (knex) {
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
     tbl.string('household_name', 255).notNullable();
-    tbl.integer('household_size').defaultTo(1);
+    tbl.integer('household_size');
     tbl.decimal('household_monthly_income');
     tbl.boolean('is_unstable').notNullable().defaultTo(false);
     tbl.timestamps(true, true);
