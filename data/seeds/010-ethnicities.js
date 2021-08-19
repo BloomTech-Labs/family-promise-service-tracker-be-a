@@ -1,9 +1,9 @@
 const ethnicities = [
   {
-    ethnicity: 'Hispanic',
+    ethnicity: 'Hispanic/Latino',
   },
   {
-    ethnicity: 'Non-Hispanic',
+    ethnicity: 'Non-Hispanic/Non-Latino',
   },
   {
     ethnicity: 'Decline to say',
