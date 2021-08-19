@@ -1,25 +1,45 @@
 const service_types = [
   {
+    service_type_id: 999,
+    service_type_name: 'New Service Type',
+    service_type_description: 'Give your service providers a description',
+    service_type_entry_model: {
+      custom: [
+        {
+          name_of_field: 'What do you want this field called?',
+          description: 'Add a description!',
+          data_type: 'text',
+          required: true,
+          display_field_as: 'entry',
+          options: null,
+        },
+      ],
+    },
+  },
+  {
     service_type_name: 'Showers',
-    service_type_description: null,
+    service_type_description:
+      'Self cleaning and care opportunities for currently homeless individuals',
     service_type_is_active: true,
     service_type_entry_model: {},
   },
   {
     service_type_name: 'Laundry',
-    service_type_description: null,
+    service_type_description:
+      'Personal clothing cleaning opportunities provided to currently homeless individuals',
     service_type_is_active: true,
     service_type_entry_model: {},
   },
   {
-    service_type_name: 'Case management',
-    service_type_description: null,
+    service_type_name: 'Case Management',
+    service_type_description: '',
     service_type_is_active: true,
     service_type_entry_model: {},
   },
   {
-    service_type_name: 'Food boxes',
-    service_type_description: null,
+    service_type_name: 'Food Boxes',
+    service_type_description:
+      'Food boxes provided to individuals and/or households to solidify stability among current program recipients',
     service_type_is_active: true,
     service_type_entry_model: {
       custom: [
@@ -60,15 +80,21 @@ const service_types = [
   },
   {
     service_type_name: 'Gas card',
-    service_type_description: null,
+    service_type_description:
+      'Prepaid gas cards provided to eligible program recipients',
     service_type_is_active: true,
-    service_type_entry_model: {},
+    service_type_entry_model: {
+      custom: [], // establish gas card type?
+    },
   },
   {
     service_type_name: 'Food card',
-    service_type_description: null,
+    service_type_description:
+      'Prepaid gas cards provided to eligible program recipients',
     service_type_is_active: true,
-    service_type_entry_model: {},
+    service_type_entry_model: {
+      custom: [], // establish food card type?
+    },
   },
   {
     service_type_name: 'Security Deposit',
@@ -110,23 +136,6 @@ const service_types = [
     },
   },
   {
-    service_type_id: 999,
-    service_type_name: 'New Service Type',
-    service_type_description: 'Give your service providers a description',
-    service_type_entry_model: {
-      custom: [
-        {
-          name_of_field: 'What do you want this field called?',
-          description: 'Add a description!',
-          data_type: 'text',
-          required: true,
-          display_field_as: 'entry',
-          options: null,
-        },
-      ],
-    },
-  },
-  {
     service_type_name: 'Bus Tokens',
     service_type_description:
       'Provide recipient with a set amount of bus tokens',
@@ -144,6 +153,44 @@ const service_types = [
             'FlixBus',
             'Greyhound',
           ],
+        },
+      ],
+    },
+  },
+  {
+    service_type_name: 'Bus Passes',
+    service_type_is_active: true,
+    service_type_description: 'Provide recipient with a bus pass',
+    service_type_entry_model: {
+      custom: [
+        {
+          name_of_field: 'Bus Service Provider',
+          description: 'Which bus service are the tokens for?',
+          data_type: 'text',
+          required: true,
+          display_field_as: 'dropdown',
+          options: [
+            'Spokane Transit Authority',
+            'InterCity Transit',
+            'FlixBus',
+            'Greyhound',
+          ],
+        },
+        {
+          name_of_field: 'Bus Pass Start Date',
+          description: 'When will the pass start working',
+          data_type: 'date',
+          required: true,
+          display_field_as: 'entry',
+          options: null,
+        },
+        {
+          name_of_field: 'Bus Pass End Date',
+          description: 'When will the pass stop working',
+          data_type: 'date',
+          required: true,
+          display_field_as: 'entry',
+          options: null,
         },
       ],
     },
@@ -211,44 +258,6 @@ const service_types = [
           description: 'Please write the allergy',
           data_type: 'text',
           required: false,
-          display_field_as: 'entry',
-          options: null,
-        },
-      ],
-    },
-  },
-  {
-    service_type_name: 'Bus Passes',
-    service_type_is_active: true,
-    service_type_description: 'Provide recipient with a bus pass',
-    service_type_entry_model: {
-      custom: [
-        {
-          name_of_field: 'Bus Service Provider',
-          description: 'Which bus service are the tokens for?',
-          data_type: 'text',
-          required: true,
-          display_field_as: 'dropdown',
-          options: [
-            'Spokane Transit Authority',
-            'InterCity Transit',
-            'FlixBus',
-            'Greyhound',
-          ],
-        },
-        {
-          name_of_field: 'Bus Pass Start Date',
-          description: 'When will the pass start working',
-          data_type: 'date',
-          required: true,
-          display_field_as: 'entry',
-          options: null,
-        },
-        {
-          name_of_field: 'Bus Pass End Date',
-          description: 'When will the pass stop working',
-          data_type: 'date',
-          required: true,
           display_field_as: 'entry',
           options: null,
         },
