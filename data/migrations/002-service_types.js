@@ -9,8 +9,9 @@ exports.up = function (knex) {
       .inTable('programs')
       .onUpdate('RESTRICT')
       .onDelete('RESTRICT');
-    tbl.string('service_type_name', 255);
+    tbl.string('service_type_name', 255).notNullable();
     tbl.text('service_type_description');
+    tbl.boolean('service_type_is_active').notNullable().defaultTo(true);
     tbl.jsonb('service_type_entry_model');
     tbl.timestamps(true, true);
   });
