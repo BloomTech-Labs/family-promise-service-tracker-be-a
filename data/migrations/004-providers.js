@@ -16,3 +16,5 @@ exports.up = (knex) => {
 exports.down = (knex) => {
   return knex.schema.dropTableIfExists('providers');
 };
+
+// All providers are considered to be direct associates with the main organization (ie, none will be 3rd party businesses or providers)
