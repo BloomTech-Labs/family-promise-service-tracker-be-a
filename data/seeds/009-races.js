@@ -9,6 +9,9 @@ const races = [
     race: 'Asian',
   },
   {
+    race: 'Native American/First Peoples',
+  },
+  {
     race: 'Hawaiian/Pacific Islander',
   },
   {
