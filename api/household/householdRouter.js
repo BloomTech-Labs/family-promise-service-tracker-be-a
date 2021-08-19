@@ -1,5 +1,5 @@
 const express = require('express');
-const DB = require('../utils/db-helper');
+// const DB = require('../utils/db-helper');
 const router = express.Router();
 const Households = require('./householdModel');
 const { requireAdmin } = require('../middleware/authorization');

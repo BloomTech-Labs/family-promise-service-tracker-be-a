@@ -1,5 +1,4 @@
 const express = require('express');
-const DB = require('../utils/db-helper');
 const Recipients = require('./recipientModel');
 const router = express.Router();
 const {
@@ -30,7 +29,7 @@ router.get('/veterans', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   const { id } = req.params;
 
-  DB.findById('recipients', id)
+  Recipients.findById(id)
     .then((recipient) => {
       if (recipient) {
         res.status(200).json(recipient);
@@ -62,7 +61,7 @@ router.post('/findRecipient', (req, res, next) => {
 // POST - Create new recipient
 // All users can add a new recipient
 router.post('/', (req, res, next) => {
-  Recipients.create('recipients', req.body)
+  Recipients.create(req.body)
     .then((newRecipient) => {
       res.status(201).json({ message: 'Recipient created', newRecipient });
     })
@@ -72,7 +71,7 @@ router.post('/', (req, res, next) => {
 // PUT - Update recipient by ID
 // Only Admin and Program Managers can update recipient by ID
 router.put('/:id', requireAdmin, requireProgramManager, (req, res, next) => {
-  DB.update('recipients', req.params.id, req.body)
+  Recipients.update(req.params.id, req.body)
     .then((editedRecipient) => {
       res.status(200).json({
         message: `Recipient ${req.params.id} updated`,

@@ -9,11 +9,9 @@ const findById = async (id) => {
 };
 
 const create = async (serviceType) => {
-
 };
 
 const update = async (id, updates) => {
-  
 };
 
 module.exports = {

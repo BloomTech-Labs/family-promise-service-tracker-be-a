@@ -1,10 +1,10 @@
 const express = require('express');
-const DB = require('../utils/db-helper');
+const Statuses = require('./statusesModel.js');
 const router = express.Router();
 const { requireAdmin } = require('../middleware/authorization');
 
 router.get('/', (req, res, next) => {
-  DB.findAll('statuses')
+  Statuses.findAll()
     .then((statuses) => {
       res.status(200).json(statuses);
     })
@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   const { id } = req.params;
 
-  DB.findById('statuses', id)
+  Statuses.findById(id)
     .then((status) => {
       if (status) {
         res.status(200).json(status);
@@ -26,7 +26,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', requireAdmin, (req, res, next) => {
-  DB.create('statuses', req.body)
+  Statuses.create(req.body)
     .then((newStatus) => {
       res.status(201).json({ message: 'Status created', status: newStatus });
     })
@@ -34,7 +34,7 @@ router.post('/', requireAdmin, (req, res, next) => {
 });
 
 router.put('/:id', requireAdmin, (req, res, next) => {
-  DB.update('statuses', req.params.id, req.body)
+  Statuses.update(req.params.id, req.body)
     .then((editedStatus) => {
       res.status(200).json({
         message: `Status ${req.params.id} updated`,
@@ -47,7 +47,7 @@ router.put('/:id', requireAdmin, (req, res, next) => {
 router.delete('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;
 
-  DB.remove('statuses', id)
+  Statuses.remove(id)
     .then((count) => {
       if (count > 0) {
         res.status(200).json({ message: `Status ${id} has been removed` });

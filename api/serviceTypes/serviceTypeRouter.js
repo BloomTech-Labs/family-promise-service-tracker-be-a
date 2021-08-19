@@ -1,6 +1,5 @@
 const express = require('express');
 const ServiceTypes = require('./serviceTypeModel');
-const DB = require('../utils/db-helper');
 const router = express.Router();
 const { canCrudServiceType } = require('../middleware/authorization');
 
@@ -42,7 +41,7 @@ router.put('/:id', canCrudServiceType, (req, res) => {
 
   if (Object.keys(update).length > 0) {
     const id = req.params.id;
-    DB.findById('service_types', id)
+    ServiceTypes.findById(id)
       .then(
         ServiceTypes.update(id, update)
           .then((updated) => {
@@ -71,7 +70,7 @@ router.put('/:id', canCrudServiceType, (req, res) => {
 router.delete('/:id', canCrudServiceType, (req, res, next) => {
   const { id } = req.params;
 
-  DB.remove('service_types', id)
+  ServiceTypes.remove('service_types', id)
     .then((count) => {
       if (count > 0) {
         res
