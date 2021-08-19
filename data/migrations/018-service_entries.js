@@ -21,11 +21,11 @@ exports.up = (knex) => {
       .onUpdate('RESTRICT')
       .onDelete('RESTRICT');
     tbl
-      .integer('service_type_id')
+      .integer('service_type_program_id')
       .unsigned()
       .notNullable()
-      .references('service_type_id')
-      .inTable('service_types')
+      .references('service_type_program_id')
+      .inTable('service_type_programs')
       .onUpdate('RESTRICT')
       .onDelete('RESTRICT');
     tbl.boolean('apply_service_to_household').notNullable().defaultTo(false);
