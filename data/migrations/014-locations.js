@@ -1,6 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.createTable('locations', function (tbl) {
-    tbl.increments('location_id').primary();
+    tbl.uuid('location_id').primary().defaultTo(knex.raw('gen_random_uuid ()'));
     tbl
       .integer('location_type_id', 128)
       .unsigned()
