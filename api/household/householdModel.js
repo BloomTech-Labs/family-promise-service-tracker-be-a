@@ -27,15 +27,9 @@ const findById = async (id) => {
     .leftJoin('locations', {
       'households.location_id': 'locations.location_id',
     })
-    .select(
-      knex.raw(
-      'households.*, to_json(locations.*) as location'
-      )
-    )
+    .select(knex.raw('households.*, to_json(locations.*) as location'))
     .first()
-    .groupBy(
-      'households.household_id','locations.location_id'
-    );
+    .groupBy('households.household_id', 'locations.location_id');
 };
 
 module.exports = {
