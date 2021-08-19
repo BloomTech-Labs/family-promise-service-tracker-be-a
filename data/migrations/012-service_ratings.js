@@ -10,4 +10,4 @@ exports.down = (knex) => {
   return knex.schema.dropTableIfExists('service_ratings');
 };
 
-// common ratings of the provided service, i.e., cans, tickets, tokens, dollars, classes, etc.
+// rating given by (provider, admin, recipient?) to help determine efficacy of received/provided service. Constrain 1-5, 5 being the best.
