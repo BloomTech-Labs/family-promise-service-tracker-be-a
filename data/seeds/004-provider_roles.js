@@ -12,6 +12,10 @@ const provider_roles = [
     provider_role_description: '',
   },
   {
+    provider_role: 'Case Manager',
+    provider_role_description: '',
+  },
+  {
     provider_role: 'Volunteer',
     provider_role_description: '',
   },
