@@ -6,7 +6,7 @@ const ethnicities = [
     ethnicity: 'Non-Hispanic/Non-Latino',
   },
   {
-    ethnicity: 'Decline to say',
+    ethnicity: 'Prefer not to say',
   },
 ];
 

@@ -54,7 +54,7 @@ const genders = [
     gender: 'Not sure',
   },
   {
-    gender: 'Rather not say',
+    gender: 'Prefer not to say',
   },
   {
     gender: 'Other',
