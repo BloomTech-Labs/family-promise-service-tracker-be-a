@@ -1,18 +1,21 @@
 const races = [
   {
-    race: "White",
+    race: 'White',
   },
   {
-    race: "Black/African-American",
+    race: 'Black/African-American',
   },
   {
-    race: "Asian",
+    race: 'Asian',
   },
   {
-    race: "Hawaiian/Pacific Islander",
+    race: 'Hawaiian/Pacific Islander',
   },
   {
-    race: "Some other race",
+    race: 'Other',
+  },
+  {
+    race: 'Prefer not to say',
   },
 ];
 

@@ -5,6 +5,9 @@ const ethnicities = [
   {
     ethnicity: 'Non-Hispanic',
   },
+  {
+    ethnicity: 'Decline to say',
+  },
 ];
 
 exports.seed = function (knex) {
