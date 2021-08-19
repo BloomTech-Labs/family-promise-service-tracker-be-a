@@ -9,3 +9,5 @@ exports.up = (knex) => {
 exports.down = (knex) => {
   return knex.schema.dropTableIfExists('provider_roles');
 };
+
+// administrator, program manager, service provider, intern, volunteer, etc..
