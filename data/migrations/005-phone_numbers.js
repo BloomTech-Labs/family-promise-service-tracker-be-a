@@ -10,7 +10,7 @@ exports.up = function (knex) {
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
     tbl.integer('phone_number');
-    tbl.string('phone_number_description', 128);
+    tbl.text('phone_number_description');
     tbl.timestamps(true, true);
   });
 };
@@ -18,3 +18,5 @@ exports.up = function (knex) {
 exports.down = function (knex) {
   return knex.schema.dropTableIfExists('phone_numbers');
 };
+
+// need to designate in description the type of phone number (home, office, emergency contact, etc)

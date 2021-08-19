@@ -10,7 +10,7 @@ exports.up = function (knex) {
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
     tbl.string('email_address', 255);
-    tbl.string('email_address_description');
+    tbl.text('email_address_description');
     tbl.timestamps(true, true);
   });
 };
@@ -18,3 +18,5 @@ exports.up = function (knex) {
 exports.down = function (knex) {
   return knex.schema.dropTableIfExists('email_addresses');
 };
+
+// need to designate in description the type of email address and it use (home, office, emergency contact, doctor, parole officer, etc)
