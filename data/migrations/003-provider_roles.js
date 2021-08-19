@@ -1,6 +1,6 @@
 exports.up = (knex) => {
   return knex.schema.createTable('provider_roles', (tbl) => {
-    tbl.increments('provider_role_id');
+    tbl.increments('provider_role_id').primary();
     tbl.string('provider_role', 255).notNullable();
     tbl.text('provider_role_description');
   });

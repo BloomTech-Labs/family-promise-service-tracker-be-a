@@ -1,7 +1,7 @@
 exports.up = (knex) => {
   return knex.schema.createTable('ethnicities', function (tbl) {
-    tbl.increments('ethnicity_id');
-    tbl.string('ethnicity').notNullable();
+    tbl.increments('ethnicity_id').primary();
+    tbl.string('ethnicity', 255).notNullable();
   });
 };
 

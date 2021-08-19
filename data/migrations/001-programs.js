@@ -1,6 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.createTable('programs', (tbl) => {
-    tbl.increments('program_id');
+    tbl.increments('program_id').primary();
     tbl.string('program_name', 255).notNullable();
     tbl.text('program_description');
     tbl.boolean('program_is_active').notNullable().defaultTo(true);

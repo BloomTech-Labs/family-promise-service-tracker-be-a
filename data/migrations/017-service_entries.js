@@ -23,8 +23,6 @@ exports.up = (knex) => {
   });
 };
 
-// WHY doesn't this tbl have recipient or provider id?
-
 exports.down = (knex) => {
   return knex.schema.dropTableIfExists('service_entries');
 };

@@ -1,6 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.createTable('service_types', (tbl) => {
-    tbl.increments('service_type_id');
+    tbl.increments('service_type_id').primary();
     tbl
       .integer('program_id', 128)
       .unsigned()
