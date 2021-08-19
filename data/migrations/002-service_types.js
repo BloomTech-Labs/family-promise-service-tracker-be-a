@@ -1,14 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.createTable('service_types', (tbl) => {
     tbl.increments('service_type_id').primary();
-    tbl
-      .integer('program_id', 128)
-      .unsigned()
-      .notNullable()
-      .references('program_id')
-      .inTable('programs')
-      .onUpdate('RESTRICT')
-      .onDelete('RESTRICT');
     tbl.string('service_type_name', 255).notNullable();
     tbl.text('service_type_description');
     tbl.boolean('service_type_is_active').notNullable().defaultTo(true);

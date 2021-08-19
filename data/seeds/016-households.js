@@ -6,7 +6,7 @@ const households = fakeHouseholdIds.map((id) => ({
   household_id: id,
   household_name: faker.fake(`{{name.lastName}}`),
   household_size: Number(getRand(10)),
-  household_income: Number(getRand(60000)),
+  household_monthly_income: Number(getRand(60000)),
   location_id: getRand(100),
 }));
 
