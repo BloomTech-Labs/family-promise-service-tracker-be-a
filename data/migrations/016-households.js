@@ -6,13 +6,12 @@ exports.up = function (knex) {
       .defaultTo(knex.raw('gen_random_uuid ()'));
     tbl
       .integer('location_id')
-      .notNullable()
       .unsigned()
       .references('location_id')
       .inTable('locations')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
-    tbl.string('household_name', 255).notNullable();
+    tbl.string('household_name', 255);
     tbl.integer('household_size');
     tbl.decimal('household_monthly_income');
     tbl.boolean('is_unstable').notNullable().defaultTo(false);

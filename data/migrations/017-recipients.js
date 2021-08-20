@@ -7,9 +7,9 @@ exports.up = (knex) => {
     tbl.string('recipient_first_name', 255).notNullable();
     tbl.string('recipient_middle_name', 255);
     tbl.string('recipient_last_name', 255).notNullable();
-    tbl.boolean('recipient_is_active').notNullable();
+    tbl.boolean('recipient_is_active').notNullable().defaultTo(true);
     tbl.date('recipient_date_of_birth').notNullable();
-    tbl.boolean('recipient_veteran_status').notNullable();
+    tbl.boolean('recipient_veteran_status').notNullable().defaultTo(false);
     tbl.boolean('has_disability').notNullable().defaultTo(false);
     tbl.boolean('has_valid_ssi').notNullable().defaultTo(false);
     tbl.boolean('has_valid_medicare_card').notNullable().defaultTo(false);
@@ -24,7 +24,6 @@ exports.up = (knex) => {
       .onDelete('RESTRICT');
     tbl
       .integer('gender_id')
-      .notNullable()
       .unsigned()
       .references('gender_id')
       .inTable('genders')
@@ -32,7 +31,6 @@ exports.up = (knex) => {
       .onDelete('RESTRICT');
     tbl
       .integer('race_id')
-      .notNullable()
       .unsigned()
       .references('race_id')
       .inTable('races')
@@ -40,7 +38,6 @@ exports.up = (knex) => {
       .onDelete('RESTRICT');
     tbl
       .integer('ethnicity_id')
-      .notNullable()
       .unsigned()
       .references('ethnicity_id')
       .inTable('ethnicities')

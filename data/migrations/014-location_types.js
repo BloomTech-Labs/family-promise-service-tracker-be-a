@@ -3,6 +3,7 @@ exports.up = (knex) => {
     tbl.increments('location_type_id').primary();
     tbl.string('location_type', 255).notNullable();
     tbl.text('location_type_description');
+    tbl.boolean('is_recipient_residence').notNullable();
   });
 };
 

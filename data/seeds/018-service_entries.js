@@ -6,21 +6,32 @@ const {
   getRand,
 } = require('../seedHelpers');
 
-const { service_type_programs } = require('./006-service_type_programs');
+// need these for the faker and mapper
+const { service_type_programs } = require('./003-service_type_programs');
+const { recipients } = require('./017-recipients');
+const { providers } = require('./017-providers');
+const { locations } = require('./015-locations');
 
 const service_entries = fakeServiceEntryIds.map((id) => {
-  const serviceTypeProgramNumToUse = getRand(service_type_programs.length); // Using '- 1' since we don't want to include service_type_id = 999, which isn't a real service_type
+  const providerNumToUse = getRandWithZero(providers.length);
+  const recipientNumToUse = getRandWithZero(recipients.length);
+  const serviceTypeProgramNumToUse = getRandWithZero(
+    service_type_programs.length
+  );
+  const locationNumToUse = getRandWithZero(locations.length);
+
   return {
     service_entry_id: id,
-    primary_provider_id: 1, // FIX ME
-    primary_recipient_id: 1, // must be uuid FIX ME
-    service_type_program_id: serviceTypeProgramNumToUse, // FIX ME...?
+    primary_provider_id: providers[providerNumToUse].provider_id,
+    primary_recipient_id: recipients[recipientNumToUse].recipient_id,
+    service_type_program_id: service_type_programs[serviceTypeProgramNumToUse],
     apply_service_to_household: faker.datatype.boolean(),
     service_date: faker.date.past(3),
     service_time: faker.time.recent('abbr'),
-    service_duration: null, // Fix me...??
-    service_value: 50.01, // Fix me...??
+    service_duration: null,
+    service_value: getRandWithZero(300),
     service_quantity: null,
+    service_entry_notes: '',
     // service_entry_data: {
     //   custom: fakeServiceEntryTypeCustomData(serviceTypeNumToUse - 1), // In this case using '-1' since the fake service creator is zero indexed
     // },
@@ -28,7 +39,7 @@ const service_entries = fakeServiceEntryIds.map((id) => {
     service_unit_id: null,
     status_id: getRand(4),
     service_rating_id: getRand(5),
-    location_id: getRand(100), // need to fix for uuid location_id FIX ME
+    location_id: locations[locationNumToUse].location_id,
   };
 });
 

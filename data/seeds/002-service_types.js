@@ -90,16 +90,16 @@ const service_types = [
   {
     service_type_name: 'Food card',
     service_type_description:
-      'Prepaid gas cards provided to eligible program recipients',
+      'Prepaid food cards provided to eligible program recipients',
     service_type_is_active: true,
     service_type_entry_model: {
-      custom: [], // establish food card type?
+      custom: [], // establish food card type? Safeway? Hannafords? Subway sandwiches?
     },
   },
   {
     service_type_name: 'Security Deposit',
     service_type_description:
-      'Provide recipient with funding to help secure rental apartment after homelessness',
+      'Provide recipient with funding to help secure rental apartment',
     service_type_entry_model: {
       custom: [
         {
@@ -224,7 +224,7 @@ const service_types = [
     },
   },
   {
-    service_type_name: 'Food Assistance', // for homeless
+    service_type_name: 'Food Assistance', // for homeless (Listed as Food/Meals in comments from stakeholders)
     service_type_description:
       'Provide recipient experiencing food insecurity with food delivery',
     service_type_entry_model: {
@@ -336,45 +336,6 @@ const service_types = [
           required: true,
           display_field_as: 'dropdown',
           options: [true, false],
-        },
-      ],
-    },
-  },
-  {
-    service_type_name: 'Security Deposit',
-    service_type_description:
-      'Provide recipient with funding to help secure rental apartment after homelessness',
-    service_type_entry_model: {
-      custom: [
-        {
-          name_of_field: 'What was the security deposit for?',
-          description: 'Choose which category fits best',
-          data_type: 'text',
-          required: true,
-          display_field_as: 'dropdown',
-          options: [
-            'Apartment',
-            'Vehicle',
-            'Electric Utility',
-            'Water Utility',
-            'Other Utility',
-          ],
-        },
-        {
-          name_of_field: 'Refundable security deposit?',
-          description: 'Is this a refundable security deposit?',
-          data_type: 'boolean',
-          required: true,
-          display_field_as: 'dropdown',
-          options: [true, false],
-        },
-        {
-          name_of_field: 'Security deposit due date',
-          description: 'When does this have to be paid by?',
-          data_type: 'date',
-          required: true,
-          display_field_as: 'entry',
-          options: null,
         },
       ],
     },

@@ -32,8 +32,9 @@ exports.up = (knex) => {
     tbl.date('service_date').notNullable();
     tbl.time('service_time');
     tbl.time('service_duration');
-    tbl.decimal('service_value').notNullable();
+    tbl.decimal('service_value');
     tbl.integer('service_quantity');
+    tbl.text('service_entry_notes');
     tbl.jsonb('service_entry_data').notNullable();
     tbl
       .integer('service_unit_id')
@@ -44,6 +45,7 @@ exports.up = (knex) => {
       .onDelete('RESTRICT');
     tbl
       .integer('status_id')
+      .defaultTo(2)
       .unsigned()
       .notNullable()
       .references('status_id')

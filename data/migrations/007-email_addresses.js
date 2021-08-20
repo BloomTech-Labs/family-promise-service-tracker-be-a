@@ -9,7 +9,7 @@ exports.up = function (knex) {
       .inTable('recipients')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
-    tbl.string('email_address', 255);
+    tbl.string('email_address', 255).notNullable();
     tbl.text('email_address_description');
     tbl.timestamps(true, true);
   });

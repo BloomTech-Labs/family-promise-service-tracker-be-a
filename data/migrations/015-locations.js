@@ -9,8 +9,8 @@ exports.up = function (knex) {
       .inTable('location_types')
       .onUpdate('RESTRICT')
       .onDelete('RESTRICT');
-    tbl.string('location_name', 255).notNullable();
-    tbl.text('location_description').notNullable();
+    tbl.string('location_name', 255);
+    tbl.text('location_description');
     tbl.string('address', 255).notNullable();
     tbl.string('address_line2', 255);
     tbl.string('city', 255).notNullable();

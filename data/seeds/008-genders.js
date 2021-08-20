@@ -1,3 +1,5 @@
+// feel free to parse or simplify as you see fit
+// list found the internet https://www.alchemer.com/resources/blog/how-to-write-survey-gender-questions/
 const genders = [
   {
     gender: 'Female',
