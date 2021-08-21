@@ -5,7 +5,7 @@ exports.up = function (knex) {
       .primary()
       .defaultTo(knex.raw('gen_random_uuid ()'));
     tbl
-      .integer('location_id')
+      .uuid('location_id')
       .unsigned()
       .references('location_id')
       .inTable('locations')

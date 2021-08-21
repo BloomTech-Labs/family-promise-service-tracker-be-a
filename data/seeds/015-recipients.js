@@ -8,6 +8,10 @@ const {
 } = require('../seedHelpers');
 
 const recipients = fakeRecipientIds.map((id) => {
+  const genID = getRand(19);
+  const raceID = getRand(5);
+  const ethID = getRand(2);
+
   return {
     recipient_id: id,
     recipient_first_name: faker.name.firstName(),
@@ -21,12 +25,17 @@ const recipients = fakeRecipientIds.map((id) => {
     has_valid_medicare_card: faker.datatype.boolean(),
     recipient_notes: null,
     household_id: fakeHouseholdIds[getRandWithZero(fakeHouseholdIds.length)],
-    gender_id: getRandWithZero(20),
-    race_id: getRandWithZero(7),
-    ethnicity_id: getRandWithZero(3),
+    gender_id: genID,
+    race_id: raceID,
+    ethnicity_id: ethID,
   };
 });
 
-exports.seed = function (knex) {
+const seed = function (knex) {
   return knex('recipients').insert(recipients);
+};
+
+module.exports = {
+  recipients,
+  seed,
 };

@@ -5,7 +5,7 @@ exports.up = (knex) => {
       .primary()
       .defaultTo(knex.raw('gen_random_uuid ()'));
     tbl
-      .uuid('primary_provider_id')
+      .string('primary_provider_id')
       .unsigned()
       .notNullable()
       .references('provider_id')
@@ -55,8 +55,8 @@ exports.up = (knex) => {
     tbl
       .integer('service_rating_id')
       .unsigned()
-      .references('location_id')
-      .inTable('locations')
+      .references('service_rating_id')
+      .inTable('service_ratings')
       .onUpdate('RESTRICT')
       .onDelete('RESTRICT');
     tbl

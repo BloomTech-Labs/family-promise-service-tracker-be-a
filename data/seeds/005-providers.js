@@ -66,6 +66,11 @@ const providers = [
   },
 ];
 
-exports.seed = function (knex) {
+const seed = function (knex) {
   return knex('providers').insert(providers);
+};
+
+module.exports = {
+  providers,
+  seed,
 };

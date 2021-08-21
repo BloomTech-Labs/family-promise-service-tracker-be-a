@@ -22,10 +22,11 @@ const location_types = [
   },
 ];
 
-exports.seed = function (knex) {
+const seed = function (knex) {
   return knex('location_types').insert(location_types);
 };
 
 module.exports = {
+  seed,
   location_types,
 };
