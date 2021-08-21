@@ -8,23 +8,20 @@ const {
 
 // need these for the faker and mapper
 const { service_type_programs } = require('./003-service_type_programs');
-const { recipients } = require('./017-recipients');
-const { providers } = require('./017-providers');
-const { locations } = require('./015-locations');
+const { recipients } = require('./015-recipients');
+const { providers } = require('./005-providers');
+const { locations } = require('./013-locations');
 
 const service_entries = fakeServiceEntryIds.map((id) => {
   const providerNumToUse = getRandWithZero(providers.length);
   const recipientNumToUse = getRandWithZero(recipients.length);
-  const serviceTypeProgramNumToUse = getRandWithZero(
-    service_type_programs.length
-  );
+  const stpNumToUse = getRand(service_type_programs.length);
   const locationNumToUse = getRandWithZero(locations.length);
-
   return {
     service_entry_id: id,
     primary_provider_id: providers[providerNumToUse].provider_id,
     primary_recipient_id: recipients[recipientNumToUse].recipient_id,
-    service_type_program_id: service_type_programs[serviceTypeProgramNumToUse],
+    service_type_program_id: stpNumToUse,
     apply_service_to_household: faker.datatype.boolean(),
     service_date: faker.date.past(3),
     service_time: faker.time.recent('abbr'),
@@ -40,6 +37,7 @@ const service_entries = fakeServiceEntryIds.map((id) => {
     status_id: getRand(4),
     service_rating_id: getRand(5),
     location_id: locations[locationNumToUse].location_id,
+    // location_id: locations[0]['location_id'],
   };
 });
 
