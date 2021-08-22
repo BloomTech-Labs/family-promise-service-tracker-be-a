@@ -5,7 +5,7 @@ const findAll = async () => {
 };
 
 const findById = async (id) => {
-  return await knex('programs').where({ id }).first();
+  return await knex('programs').where('program_id', id).first();
 };
 
 const findBy = async (filter) => {

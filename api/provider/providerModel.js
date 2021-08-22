@@ -16,7 +16,7 @@ const findAll = async () => {
 };
 
 const findById = async (id) => {
-  return await knex('providers').where({ id }).first();
+  return await knex('providers').where('provider_id', id).first();
   //   return await knex('providers')
   //     .leftJoin('program_providers', {
   //       'providers.provider_id': 'program_providers.provider_id',

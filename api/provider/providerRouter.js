@@ -231,7 +231,7 @@ router.get('/:id', (req, res, next) => {
  *                  $ref: '#/components/schemas/Profile'
  */
 router.post('/', async (req, res, next) => {
-  console.log('POST endpoint touched');
+  console.log('provider POST endpoint touched');
   Providers.addProvider(req.body)
     .then((providers) => {
       console.log(providers);
