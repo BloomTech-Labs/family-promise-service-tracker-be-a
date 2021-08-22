@@ -9,6 +9,7 @@ const findById = async (id) => {
 };
 
 const findBy = async (filter) => {
+  return await knex('programs').first(); // TEMP to prevent break
   //   return await knex('programs')
   //     .leftJoin('program_providers', {
   //       'programs.program_id': 'program_providers.program_id',
@@ -38,7 +39,7 @@ module.exports = {
   findAll,
   findById,
   findBy,
-  updateProgram,
-  createProgram,
-  deleteProgram,
+  //   updateProgram,
+  //   createProgram,
+  //   deleteProgram,
 };
