@@ -189,7 +189,6 @@ router.get('/:id', (req, res, next) => {
       }
     })
     .catch((err) => {
-      console.log(err);
       next();
     });
 });
@@ -231,10 +230,8 @@ router.get('/:id', (req, res, next) => {
  *                  $ref: '#/components/schemas/Profile'
  */
 router.post('/', async (req, res, next) => {
-  console.log('provider POST endpoint touched');
   Providers.addProvider(req.body)
     .then((providers) => {
-      console.log(providers);
       res.status(201).json(providers);
     })
     .catch(next);

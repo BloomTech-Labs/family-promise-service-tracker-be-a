@@ -27,7 +27,6 @@ describe('veteran router endpoints', () => {
   describe('[GET] /recipient/veterans', () => {
     it('status 200', async () => {
       const res = await request(server).get('/recipient/veterans');
-      console.log(res)
       expect(res.status).toBe(200);
     });
     it('should return all vets', async () => {

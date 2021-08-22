@@ -32,15 +32,12 @@ const authRequired = async (req, res, next) => {
     const authHeader = req.headers.authorization || '';
     const match = authHeader.match(/Bearer (.+)/);
     if (!match) throw new Error('Missing idToken');
-    console.log('match: ', match);
     const idToken = match[1];
     // verify it is valid with Okta
-    console.log('idToken: ', idToken);
     const verify = await oktaJwtVerifier.verifyAccessToken(
       idToken,
       oktaVerifierConfig.expectedAudience
     );
-    console.log('verify: ', verify);
     // if valid, check if user profile already exists
     const profile = await Providers.findById(verify.claims.sub);
     if (profile) {
