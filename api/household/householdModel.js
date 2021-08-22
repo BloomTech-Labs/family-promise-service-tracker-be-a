@@ -6,7 +6,7 @@ const findAll = async () => {
 
 const findById = async (id) => {
   // why not working??
-  return await knex('households').where('household_id', id).first();
+  return await knex('households').where('households.household_id', id).first();
   // .leftJoin('locations', {
   //   'households.location_id': 'locations.location_id',
   // })
