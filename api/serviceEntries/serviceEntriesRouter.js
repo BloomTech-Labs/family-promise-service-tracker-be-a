@@ -24,15 +24,11 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  ServiceEntries.create(req.body)
-    .then((response) => {
-      return ServiceEntries.findById(response[0].service_entry_id);
-    })
-    .then((newEntry) => {
-      res.status(201).json({
-        message: `Service Entry created`,
-        newEntry,
-      });
+  ServiceEntries.createServiceEntry(req.body)
+    .then((newServiceEntry) => {
+      res
+        .status(201)
+        .json({ message: 'Service Entry created', newServiceEntry });
     })
     .catch(next);
 });

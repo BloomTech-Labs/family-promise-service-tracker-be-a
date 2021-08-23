@@ -30,9 +30,7 @@ const findAll = async () => {
 };
 
 const findById = async (id) => {
-  return await knex('service_entries').where({
-    'service_entries.service_entry_id': id,
-  });
+  return await knex('service_entries').where('service_entry_id', id).first();
   // .leftJoin('service_entry_recipients', {
   //   'service_entries.service_entry_id':
   //     'service_entry_recipients.service_entry_id',
@@ -59,38 +57,40 @@ const findById = async (id) => {
   //   'locations.location_id'
   // );
 };
-const create = async (serviceEntries) => {
-  let newServiceEntriesId;
-  try {
-    await knex.transaction(async (trx) => {
-      const createdServiceEntries = await trx('service_entries')
-        .insert([
-          { service_type_id: serviceEntries.service_type_id },
-          { location_id: serviceEntries.location_id },
-          { service_time: serviceEntries.service_time },
-          { service_date: serviceEntries.service_date },
-          { service_entry_data: serviceEntries.service_entry },
-        ])
-        .returning('*');
+const createServiceEntry = async (newServiceEntry) => {
+  return await knex('service_entries').insert(newServiceEntry, ['*']);
 
-      newServiceEntriesId = createdServiceEntries[0].service_entry_id;
+  //   let newServiceEntriesId;
+  //   try {
+  //     await knex.transaction(async (trx) => {
+  //       const createdServiceEntries = await trx('service_entries')
+  //         .insert([
+  //           { service_type_id: serviceEntries.service_type_id },
+  //           { location_id: serviceEntries.location_id },
+  //           { service_time: serviceEntries.service_time },
+  //           { service_date: serviceEntries.service_date },
+  //           { service_entry_data: serviceEntries.service_entry },
+  //         ])
+  //         .returning('*');
 
-      // if this is all meant to let a single service entry have multiple providers and recipients, why isn't it mapping??
+  //       newServiceEntriesId = createdServiceEntries[0].service_entry_id;
 
-      await trx('service_entry_providers').insert([
-        { service_entry_id: newServiceEntriesId },
-        { provider_id: serviceEntries.provider_id },
-      ]);
-      await trx('service_entry_recipients').insert([
-        { service_entry_id: newServiceEntriesId },
-        { recipient_id: serviceEntries.recipient_id },
-      ]);
-    });
+  //       // if this is all meant to let a single service entry have multiple providers and recipients, why isn't it mapping??
 
-    return await findById(newServiceEntriesId);
-  } catch (err) {
-    throw new Error(err);
-  }
+  //       await trx('service_entry_providers').insert([
+  //         { service_entry_id: newServiceEntriesId },
+  //         { provider_id: serviceEntries.provider_id },
+  //       ]);
+  //       await trx('service_entry_recipients').insert([
+  //         { service_entry_id: newServiceEntriesId },
+  //         { recipient_id: serviceEntries.recipient_id },
+  //       ]);
+  //     });
+
+  //     return await findById(newServiceEntriesId);
+  //   } catch (err) {
+  //     throw new Error(err);
+  //   }
 };
 
 // Can only update service_entries data in table on front end
@@ -109,7 +109,7 @@ const deleteRecord = (id) => {
 };
 
 module.exports = {
-  create,
+  createServiceEntry,
   findAll,
   findById,
   update,

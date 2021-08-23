@@ -27,9 +27,10 @@ const findBy = async (filter) => {
 //   return await knex('programs');
 // };
 
-// const createProgram = async (newProgram) => {
-//   return await knex('programs');
-// };
+const createProgram = async (newProgram) => {
+  return await knex('programs').insert(newProgram).returning('*').first();
+  // TO-DO: need to make sure added programs and or service types ALSO get added to joiner table!
+};
 
 // const deleteProgram = async (id) => {
 //   return await knex('programs');
@@ -40,6 +41,6 @@ module.exports = {
   findById,
   findBy,
   //   updateProgram,
-  //   createProgram,
+  createProgram,
   //   deleteProgram,
 };

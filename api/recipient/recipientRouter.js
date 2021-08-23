@@ -17,14 +17,6 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
-router.get('/veterans', (req, res, next) => {
-  Recipients.findAll({ 'r.recipient_veteran_status': true })
-    .then((recipients) => {
-      res.status(200).json(recipients);
-    })
-    .catch(next);
-});
-
 // GET - View recipient by ID
 // All users can view recipients by ID
 router.get('/:id', (req, res, next) => {
@@ -37,6 +29,14 @@ router.get('/:id', (req, res, next) => {
       } else {
         res.status(404).json({ error: `Recipient ${id} not found` });
       }
+    })
+    .catch(next);
+});
+
+router.get('/veterans', (req, res, next) => {
+  Recipients.findAll({ 'r.recipient_veteran_status': true })
+    .then((recipients) => {
+      res.status(200).json(recipients);
     })
     .catch(next);
 });
@@ -61,7 +61,7 @@ router.get('/findRecipient', (req, res, next) => {
 // POST - Create new recipient
 // All users can add a new recipient
 router.post('/', (req, res, next) => {
-  Recipients.create(req.body)
+  Recipients.createRecipient(req.body)
     .then((newRecipient) => {
       res.status(201).json({ message: 'Recipient created', newRecipient });
     })
