@@ -12,6 +12,12 @@ const createRecipient = async (newRecipient) => {
   return await knex('recipients').insert(newRecipient, ['*']);
 };
 
+const updateRecipient = async (id, updatedInfo) => {
+  return await knex('recipients')
+    .where('recipient_id', id)
+    .insert(updatedInfo, ['*']);
+};
+
 // Note: DANGEROUS: instead of deleting ANYTHING, we are generally using is_active to mark a record as inactive
 const deleteRecipient = (id) => {
   return knex('recipients').where('recipient_id', id).del();
@@ -21,5 +27,6 @@ module.exports = {
   findAll,
   findById,
   createRecipient,
+  updateRecipient,
   deleteRecipient,
 };
