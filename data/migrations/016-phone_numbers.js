@@ -9,7 +9,7 @@ exports.up = function (knex) {
       .inTable('recipients')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');
-    tbl.string('phone_number', 128).notNullable();
+    tbl.string('phone_number', 31).notNullable();
     tbl.text('phone_number_description');
     tbl.timestamps(true, true);
   });

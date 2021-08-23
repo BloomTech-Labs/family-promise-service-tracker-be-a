@@ -14,7 +14,7 @@ exports.up = (knex) => {
     tbl.string('provider_first_name', 255).notNullable();
     tbl.string('provider_last_name', 255).notNullable();
     tbl.string('provider_email', 255);
-    tbl.string('provider_phone_number', 128);
+    tbl.string('provider_phone_number', 31);
     tbl.text('provider_avatar_url');
     tbl.boolean('provider_is_active').notNullable().defaultTo(true);
     tbl.timestamps(true, true);
