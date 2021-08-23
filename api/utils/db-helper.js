@@ -1,5 +1,7 @@
 const knex = require('../../data/db-config');
 
+// This file is Necessary...not sure why...be sure before u mess with it
+
 const findAll = async (table) => {
   return await knex(table);
 };

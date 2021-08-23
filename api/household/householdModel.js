@@ -1,6 +1,22 @@
 const knex = require('../../data/db-config');
 
+const findAll = async () => {
+  return await knex('households');
+};
+
+const findById = async (id) => {
+  // why not working??
+  return await knex('households').where('households.household_id', id).first();
+  // .leftJoin('locations', {
+  //   'households.location_id': 'locations.location_id',
+  // })
+  // .select(knex.raw('households.*, to_json(locations.*) as location'))
+
+  // .groupBy('households.household_id', 'locations.location_id');
+};
+
 const create = async (households) => {
+  // Not Ready
   let newHouseholdId;
   try {
     await knex.transaction(async (trx) => {
@@ -10,7 +26,7 @@ const create = async (households) => {
           { location_id: households.location_id },
           { household_name: households.household_name },
           { household_size: households.household_size },
-          { household_income: households.household_income },
+          { household_income: households.household_monthly_income },
         ])
         .returning('*');
       newHouseholdId = createdHousehold[0].household_id;
@@ -21,24 +37,18 @@ const create = async (households) => {
   }
 };
 
-const findById = async (id) => {
-  return await knex('households')
-    .where({ 'households.household_id': id })
-    .leftJoin('locations', {
-      'households.location_id': 'locations.location_id',
-    })
-    .select(
-      knex.raw(
-      'households.*, to_json(locations.*) as location'
-      )
-    )
-    .first()
-    .groupBy(
-      'households.household_id','locations.location_id'
-    );
+const update = async (id, household) => {
+  return id;
+};
+
+const remove = async (id) => {
+  return id;
 };
 
 module.exports = {
-  create,
+  findAll,
   findById,
+  create,
+  update,
+  remove,
 };

@@ -3,7 +3,7 @@ const { isAssignedToProgram, getProgramFromServiceType } = require('./models');
 
 // Requires role of admin to apply
 const requireAdmin = (req, res, next) => {
-  if (req.profile.role == 'Administrator') {
+  if (req.profile.provider_role_id == 1) {
     next();
   } else {
     next(createError(401, 'User not authorized to perform this action'));
@@ -12,7 +12,7 @@ const requireAdmin = (req, res, next) => {
 
 // Requires role of program_manager to apply
 const requireProgramManager = (req, res, next) => {
-  if (req.profile.role == 'Program Manager') {
+  if (req.profile.provider_role_id == 2) {
     next();
   } else {
     next(createError(401, 'User not authorized to perform this action'));
@@ -21,21 +21,21 @@ const requireProgramManager = (req, res, next) => {
 
 const canCrudServiceType = async (req, res, next) => {
   // admins can always create service types
-  if (req.profile.role == 'Administrator') {
+  if (req.profile.provider_role_id == 1) {
     next();
 
     // program managers can only create service types for
     // programs they are associated with
-  } else if (req.profile.role == 'Program Manager') {
+  } else if (req.profile.provider_role_id == 2) {
     try {
       // if this is create, the program is in req body
       // otherwise need to look up the service_type to
       // get the program id
       const program = req.body.program_id
         ? [req.body.program_id]
-        : getProgramFromServiceType(req.params.id);
+        : getProgramFromServiceType(req.params.id); // THIS NEEDS ATTENTION/FIXES
 
-      const canCrud = await isAssignedToProgram(req.profile, program[0]);
+      const canCrud = await isAssignedToProgram(req.profile, program[0]); // THIS MAY NEED FIXES OR BE OUTDATED
       canCrud
         ? next()
         : next(
@@ -65,17 +65,17 @@ const canEditProfile = async (req, res, next) => {
     if (
       // administrators cannot edit profile id or email
       // but can edit any other fields
-      (req.profile.role == 'Administrator') &
-      !req.body.id &
+      (req.profile.provider_role_id == 1) &
+      !req.body.id & // CHECK THIS .id
       !req.body.email
     ) {
       next();
     } else if (
       // users can only edit their own Name and Avatar
-      (req.profile.id == req.params.id) &
-      !req.body.id &
+      (req.profile.id == req.params.id) & // CHECK THESE TWO .id
+      !req.body.id & // CHECK THESE TWO .id
       !req.body.email &
-      !req.body.role &
+      !req.body.provider_role_id &
       !req.body.programs
     ) {
       next();

@@ -189,7 +189,6 @@ router.get('/:id', (req, res, next) => {
       }
     })
     .catch((err) => {
-      console.log(err);
       next();
     });
 });
@@ -231,10 +230,8 @@ router.get('/:id', (req, res, next) => {
  *                  $ref: '#/components/schemas/Profile'
  */
 router.post('/', async (req, res, next) => {
-  console.log('POST endpoint touched');
   Providers.addProvider(req.body)
     .then((providers) => {
-      console.log(providers);
       res.status(201).json(providers);
     })
     .catch(next);
@@ -274,11 +271,11 @@ router.post('/', async (req, res, next) => {
  *                provider:
  *                  $ref: '#/components/schemas/Profile'
  */
-router.put('/:id', canEditProfile, (req, res) => {
+router.put('/:id', canEditProfile, (req, res, next) => {
   const update = req.body;
   if (update) {
     const id = req.params.id;
-    Providers.findById('providers', id)
+    Providers.findById(id)
       .then(
         Providers.update(id, update)
           .then((updated) => {

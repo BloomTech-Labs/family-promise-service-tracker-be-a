@@ -1,33 +1,11 @@
 const knex = require('../../data/db-config');
 
 const findAll = async () => {
-  return await knex('service_types')
-    .leftJoin('service_type_providers', {
-      'service_types.service_type_id': 'service_type_providers.service_type_id',
-    })
-    .leftJoin('providers', {
-      'service_type_providers.provider_id': 'providers.provider_id',
-    })
-    .select(
-      knex.raw('service_types.*, json_agg(providers.*) as service_providers')
-    )
-    .groupBy('service_types.service_type_id');
+  return await knex('service_types');
 };
 
 const findById = async (id) => {
-  return await knex('service_types')
-    .leftJoin('service_type_providers', {
-      'service_types.service_type_id': 'service_type_providers.service_type_id',
-    })
-    .leftJoin('providers', {
-      'service_type_providers.provider_id': 'providers.provider_id',
-    })
-    .select(
-      knex.raw('service_types.*, json_agg(providers.*) as service_providers')
-    )
-    .where({ 'service_types.service_type_id': id })
-    .groupBy('service_types.service_type_id')
-    .first();
+  return await knex('service_types').where('service_type_id', id).first();
 };
 
 const create = async (serviceType) => {
@@ -101,7 +79,7 @@ const update = async (id, updates) => {
 };
 
 module.exports = {
-  knex,
+  knex, //why?
   findAll,
   findById,
   create,

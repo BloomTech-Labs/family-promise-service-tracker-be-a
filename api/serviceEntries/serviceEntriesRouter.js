@@ -1,10 +1,9 @@
 const express = require('express');
-const DB = require('../utils/db-helper');
 const ServiceEntries = require('./serviceEntriesModel');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-  ServiceEntries.findAll('service_entries')
+  ServiceEntries.findAll()
     .then((entries) => {
       res.status(200).json(entries);
     })
@@ -25,21 +24,17 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  DB.create('service_entries', req.body)
-    .then((response) => {
-      return ServiceEntries.findById(response[0].service_entry_id);
-    })
-    .then((newEntry) => {
-      res.status(201).json({
-        message: `Service Entry created`,
-        newEntry,
-      });
+  ServiceEntries.createServiceEntry(req.body)
+    .then((newServiceEntry) => {
+      res
+        .status(201)
+        .json({ message: 'Service Entry created', newServiceEntry });
     })
     .catch(next);
 });
 
 router.put('/:id', (req, res, next) => {
-  ServiceEntries.update('service_entries', req.params.id, req.body)
+  ServiceEntries.update(req.params.id, req.body)
     .then((response) => {
       return ServiceEntries.findById(response[0].service_entry_id);
     })

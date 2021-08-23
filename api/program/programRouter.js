@@ -1,5 +1,4 @@
 const express = require('express');
-const DB = require('../utils/db-helper');
 const Programs = require('./programModel');
 const router = express.Router();
 const { canCrudServiceType } = require('../middleware/authorization');
@@ -14,7 +13,6 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   const { id } = req.params;
-
   Programs.findById(id)
     .then((program) => {
       if (program) {
@@ -26,9 +24,8 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
-router.post('/name', (req, res, next) => {
+router.get('/name', (req, res, next) => {
   const { name } = req.body;
-
   Programs.findBy({ name: name })
     .then((program) => {
       res.status(200).json(program);
@@ -36,9 +33,8 @@ router.post('/name', (req, res, next) => {
     .catch(next);
 });
 
-router.post('/type', (req, res, next) => {
+router.get('/type', (req, res, next) => {
   const { type } = req.body;
-
   Programs.findBy({ type: type })
     .then((program) => {
       res.status(200).json(program);
@@ -47,7 +43,7 @@ router.post('/type', (req, res, next) => {
 });
 
 router.post('/', canCrudServiceType, (req, res, next) => {
-  DB.create('programs', req.body)
+  Programs.createProgram(req.body)
     .then((newProgram) => {
       res.status(201).json(newProgram);
     })
@@ -55,7 +51,7 @@ router.post('/', canCrudServiceType, (req, res, next) => {
 });
 
 router.put('/:id', canCrudServiceType, (req, res, next) => {
-  DB.update('programs', req.params.id, req.body)
+  Programs.update(req.params.id, req.body)
     .then((editedProgram) => {
       res.status(200).json(editedProgram);
     })
@@ -64,10 +60,8 @@ router.put('/:id', canCrudServiceType, (req, res, next) => {
 
 router.delete('/:id', canCrudServiceType, (req, res, next) => {
   const { id } = req.params;
-
-
   // removeProgram was added to db-helper to reflect the new schema change
-  DB.removeProgram('programs', id)
+  Programs.deleteProgram(id)
     .then((count) => {
       if (count > 0) {
         res.status(200).json({ message: `Program ${id} has been removed` });

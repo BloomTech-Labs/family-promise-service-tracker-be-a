@@ -1,18 +1,21 @@
 const programs = [
   {
-    program_name: 'Prevention',
+    program_name: 'Shelter Support',
     program_description:
-      'We work to help members of our community stay in their homes and not become homeless.',
+      'Serving the currently homeless: We work to help members of our community stay who have lost their homes.',
+    program_is_active: true,
   },
   {
-    program_name: 'Sheltering',
+    program_name: 'Prevention/Diversion',
     program_description:
-      'We work to help members of our community stay who have lost their homes.',
+      'Preventing Homelessness: We work to help members of our community stay in their homes and not become homeless.',
+    program_is_active: true,
   },
   {
     program_name: 'Aftercare',
     program_description:
-      'We work to help members of our community who have previously been homeless, but no longer are.',
+      'Supporting families after becoming renters/homeowners again to prevent ending up homeless again: We work to help members of our community who have previously been homeless, but no longer are.',
+    program_is_active: true,
   },
 ];
 
