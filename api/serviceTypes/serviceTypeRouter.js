@@ -1,6 +1,6 @@
 const express = require('express');
-const ServiceTypes = require('./serviceTypeModel');
 const router = express.Router();
+const ServiceTypes = require('./serviceTypeModel');
 const { canCrudServiceType } = require('../middleware/authorization');
 
 router.get('/', (req, res, next) => {
@@ -13,7 +13,6 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   const { id } = req.params;
-
   ServiceTypes.findById(id)
     .then((service) => {
       if (service) {
@@ -26,7 +25,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', canCrudServiceType, (req, res, next) => {
-  ServiceTypes.create(req.body)
+  ServiceTypes.createServiceType(req.body)
     .then((newServiceType) => {
       res.status(201).json({
         message: 'New service type created',
@@ -36,41 +35,21 @@ router.post('/', canCrudServiceType, (req, res, next) => {
     .catch(next);
 });
 
-router.put('/:id', canCrudServiceType, (req, res) => {
-  const update = req.body;
-
-  if (Object.keys(update).length > 0) {
-    const { id } = req.params;
-    ServiceTypes.findById(id)
-      .then(
-        ServiceTypes.update(id, update)
-          .then((updated) => {
-            res
-              .status(200)
-              .json({ message: 'Service type updated', service_type: updated });
-          })
-          .catch((err) => {
-            res.status(500).json({
-              message: `Could not update service type '${id}'`,
-              error: err.message,
-            });
-          })
-      )
-      .catch((err) => {
-        res.status(404).json({
-          message: `Could not find service type '${id}'`,
-          error: err.message,
-        });
+router.put('/:id', canCrudServiceType, (req, res, next) => {
+  const { id } = req.params;
+  ServiceTypes.updateServiceType(id, req.body)
+    .then((editedHousehold) => {
+      res.status(200).json({
+        message: 'Service type updated',
+        service_type: editedHousehold,
       });
-  } else {
-    res.status(400).json({ message: 'Update request not valid' });
-  }
+    })
+    .catch(next);
 });
 
 router.delete('/:id', canCrudServiceType, (req, res, next) => {
   const { id } = req.params;
-
-  ServiceTypes.remove(id)
+  ServiceTypes.removeServiceType(id)
     .then((count) => {
       if (count > 0) {
         res

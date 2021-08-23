@@ -12,7 +12,6 @@ const findById = async (id) => {
 };
 
 const createHousehold = async (newHousehold) => {
-  // Not Ready
   return await knex('households').insert(newHousehold, ['*']);
 };
 

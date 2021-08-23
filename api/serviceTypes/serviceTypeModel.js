@@ -8,80 +8,29 @@ const findById = async (id) => {
   return await knex('service_types').where('service_type_id', id).first();
 };
 
-const create = async (serviceType) => {
-  // separate out the service_providers array for junction table insert
-  const { service_providers, ...newServiceType } = serviceType;
-  // declare id variable for access across scopes
-  let newServiceTypeId;
-  try {
-    await knex.transaction(async (trx) => {
-      // first insert the serviceType object into service_types
-      const createdServiceType = await trx('service_types')
-        .insert(newServiceType)
-        .returning('*');
-
-      // set the ID of the returning DB record
-      newServiceTypeId = createdServiceType[0].service_type_id;
-
-      // if there are service providers that need to be associated
-      // with this type, insert them into junction table
-      if (service_providers && service_providers.length > 0) {
-        await trx('service_type_providers').insert(
-          service_providers.map((p) => {
-            return {
-              service_type_id: newServiceTypeId,
-              provider_id: p.provider_id,
-            };
-          })
-        );
-      }
-    });
-    // return promise with the new service type and associated providers
-    return await findById(newServiceTypeId);
-  } catch (err) {
-    // if transaction fails, forward the error to the router for handling
-    throw new Error(err);
-  }
+const createServiceType = async (newServiceType) => {
+  return await knex('service_types').insert(newServiceType, ['*']);
+  // TO-DO: need to insert associations in junction table
 };
 
-const update = async (id, updates) => {
-  // separate out the service_providers array for junction table insert
-  const { service_providers, ...serviceType } = updates;
+const updateServiceType = async (id, updates) => {
+  return await knex('service_types')
+    .where('service_type_id', id)
+    .update(updates);
+  //  TO-DO:  also need to remove associations in junction table
+};
 
-  try {
-    await knex.transaction(async (trx) => {
-      // only make updates to service_types table if request includes updates
-      if (Object.keys(serviceType).length > 0) {
-        await trx('service_types').where({ id }).first().update(serviceType);
-      }
-
-      // if request includes providers_array, wipe existing associations
-      if (service_providers) {
-        await trx('service_type_providers')
-          .where('service_type_id', id)
-          .delete();
-      }
-      // then insert new associations if there are any
-      if (service_providers && service_providers.length > 0) {
-        await trx('service_type_providers').insert(
-          service_providers.map((p) => {
-            return { service_type_id: id, provider_id: p.provider_id };
-          })
-        );
-      }
-    });
-    // return promise with the updated service type and associated providers
-    return await findById(id);
-  } catch (err) {
-    // if transaction fails, forward the error to the router for handling
-    throw new Error(err);
-  }
+// things are not usually deleted, but marked as inactive
+const removeServiceType = async (id) => {
+  return await knex('service_types').where('service_type_id', id).del();
+  //  TO-DO:  also need to remove associations in junction table
 };
 
 module.exports = {
   knex, //why?
   findAll,
   findById,
-  create,
-  update,
+  createServiceType,
+  updateServiceType,
+  removeServiceType,
 };
