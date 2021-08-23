@@ -1,5 +1,4 @@
 const express = require('express');
-// const DB = require('../utils/db-helper');
 const router = express.Router();
 const Households = require('./householdModel');
 const { requireAdmin } = require('../middleware/authorization');
@@ -16,7 +15,6 @@ router.get('/', (req, res, next) => {
 // GET - View household by ID
 router.get('/:id', (req, res, next) => {
   const { id } = req.params;
-
   Households.findById(id)
     .then((household) => {
       if (household) {
@@ -30,10 +28,7 @@ router.get('/:id', (req, res, next) => {
 
 // POST - Create new household
 router.post('/', (req, res, next) => {
-  Households.create(req.body)
-    .then((response) => {
-      return Households.findById(response[0].household_id);
-    })
+  Households.createHousehold(req.body)
     .then((newHousehold) => {
       res.status(201).json({ message: 'Household created', newHousehold });
     })
@@ -42,10 +37,11 @@ router.post('/', (req, res, next) => {
 
 // PUT - Update household by ID
 router.put('/:id', (req, res, next) => {
-  Households.update(req.params.id, req.body)
+  const { id } = req.params;
+  Households.updateHousehold(id, req.body)
     .then((editedHousehold) => {
       res.status(200).json({
-        message: `Household ${req.params.id} updated`,
+        message: `Household ${id} updated`,
         editedHousehold,
       });
     })
@@ -55,8 +51,7 @@ router.put('/:id', (req, res, next) => {
 // DELETE - Remove household by ID
 router.delete('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;
-
-  Households.remove(id)
+  Households.removeHousehold(id)
     .then((count) => {
       if (count > 0) {
         res.status(200).json({ message: `Household ${id} has been removed` });
