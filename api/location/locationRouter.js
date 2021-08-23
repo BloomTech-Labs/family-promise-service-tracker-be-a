@@ -1,11 +1,11 @@
 const express = require('express');
-const DB = require('../utils/db-helper');
+const Locations = require('./locationModel');
 const router = express.Router();
 const { requireAdmin } = require('../middleware/authorization');
 
 // GET - View all locations
 router.get('/', (req, res, next) => {
-  DB.findAll('locations')
+  Locations.findAll()
     .then((locations) => {
       res.status(200).json(locations);
     })
@@ -16,7 +16,7 @@ router.get('/', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   const { id } = req.params;
 
-  DB.findById('locations', id)
+  Locations.findById(id)
     .then((Location) => {
       if (Location) {
         res.status(200).json(Location);
@@ -29,7 +29,7 @@ router.get('/:id', (req, res, next) => {
 
 // POST - Create new Location
 router.post('/', (req, res, next) => {
-  DB.create('locations', req.body)
+  Locations.createLocation(req.body)
     .then((newLocation) => {
       res.status(201).json({ message: 'Location created', newLocation });
     })
@@ -38,10 +38,11 @@ router.post('/', (req, res, next) => {
 
 // PUT - Update Location by ID
 router.put('/:id', (req, res, next) => {
-  DB.update('locations', req.params.id, req.body)
+  const { id } = req.params;
+  Locations.updateLocation(id, req.body)
     .then((editedLocation) => {
       res.status(200).json({
-        message: `Location ${req.params.id} updated`,
+        message: `Location ${id} updated`,
         editedLocation,
       });
     })
@@ -52,7 +53,7 @@ router.put('/:id', (req, res, next) => {
 router.delete('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;
 
-  DB.remove('locations', id)
+  Locations.removeLocation(id)
     .then((count) => {
       if (count > 0) {
         res.status(200).json({ message: `Location ${id} has been removed` });
