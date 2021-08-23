@@ -36,7 +36,7 @@ router.post('/', (req, res, next) => {
 router.put('/:id', (req, res, next) => {
   ServiceEntries.update(req.params.id, req.body)
     .then((response) => {
-      return ServiceEntries.findById(response[0].service_entry_id);
+      return ServiceEntries.findById(response.service_entry_id);
     })
     .then((editedEntry) => {
       res.status(200).json({
@@ -47,6 +47,7 @@ router.put('/:id', (req, res, next) => {
     .catch(next);
 });
 
+// delete will not be used much, changed to an active/inactive status
 router.delete('/:id', (req, res, next) => {
   const { id } = req.params;
   ServiceEntries.deleteRecord(id)
