@@ -1,6 +1,6 @@
 const express = require('express');
-const Providers = require('./providerModel');
 const router = express.Router();
+const Providers = require('./providerModel');
 const { requireAdmin, canEditProfile } = require('../middleware/authorization');
 
 /**
@@ -170,6 +170,7 @@ router.get('/', (req, res, next) => {
  *        description: 'Profile not found'
  */
 
+// not working atm
 router.get('/getServiceProviders', (req, res, next) => {
   Providers.findServiceProviders()
     .then((serviceProviders) => {
@@ -178,6 +179,7 @@ router.get('/getServiceProviders', (req, res, next) => {
     .catch(next);
 });
 
+// because of okta, the primary key/id for providers is a string
 router.get('/:id', (req, res, next) => {
   const id = String(req.params.id);
   Providers.findById(id)
@@ -185,12 +187,10 @@ router.get('/:id', (req, res, next) => {
       if (provider) {
         res.status(200).json(provider);
       } else {
-        res.status(404).json({ error: 'ProfileNotFound' });
+        res.status(404).json({ error: 'Profile Not Found' });
       }
     })
-    .catch((err) => {
-      next();
-    });
+    .catch(next);
 });
 
 /**
@@ -273,8 +273,8 @@ router.post('/', async (req, res, next) => {
  */
 router.put('/:id', canEditProfile, (req, res, next) => {
   const update = req.body;
+  const { id } = req.params;
   if (update) {
-    const id = req.params.id;
     Providers.findById(id)
       .then(
         Providers.update(id, update)
@@ -290,14 +290,14 @@ router.put('/:id', canEditProfile, (req, res, next) => {
             });
           })
       )
-      .catch((err) => {
-        res.status(404).json({
-          message: `Could not find provider '${id}'`,
-          error: err.message,
-        });
-      });
+      .catch(next);
+  } else {
+    res.status(500).json({
+      message: `Could not update provider '${id}'`,
+    });
   }
 });
+
 /**
  * @swagger
  * /provider/{id}:
@@ -328,10 +328,17 @@ router.put('/:id', canEditProfile, (req, res, next) => {
  *                provider:
  *                  $ref: '#/components/schemas/Profile'
  */
-router.delete('/:id', requireAdmin, (req, res) => {
-  res.status(200).json({
-    message: 'Stubbed method for deleting users - no data was deleted',
-  });
+router.delete('/:id', requireAdmin, (req, res, next) => {
+  const { id } = req.params;
+  Providers.removeProvider(id)
+    .then((count) => {
+      if (count > 0) {
+        res.status(200).json({ message: `Provider ${id} has been removed` });
+      } else {
+        res.status(404).json({ message: `Provider ${id} could not be found` });
+      }
+    })
+    .catch(next);
 });
 
 module.exports = router;
