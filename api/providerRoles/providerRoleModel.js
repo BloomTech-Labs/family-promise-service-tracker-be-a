@@ -1,32 +1,34 @@
 const knex = require('../../data/db-config');
 
 const findAll = async () => {
-  return await knex('statuses');
+  return await knex('provider_roles');
 };
 
 const findById = async (id) => {
-  return await knex('statuses').where('status_id', id).first();
+  return await knex('provider_roles').where('provider_role_id', id).first();
   // keeping these for now as a reference
-  // .select(knex.raw('statuses.*, to_json(locations.*) as location'))
-  // .groupBy('statuses.status_id', 'locations.location_id');
+  // .select(knex.raw('provider_roles.*, to_json(locations.*) as location'))
+  // .groupBy('provider_roles.provider_role_id', 'locations.location_id');
 };
 
-const createStatus = async (newStatus) => {
-  return await knex('statuses').insert(newStatus, ['*']);
+const createProviderRole = async (newProviderRole) => {
+  return await knex('provider_roles').insert(newProviderRole, ['*']);
 };
 
-const updateStatus = async (id, Status) => {
-  return await knex('statuses').where('status_id', id).update(Status);
+const updateProviderRole = async (id, providerRole) => {
+  return await knex('provider_roles')
+    .where('provider_role_id', id)
+    .update(providerRole);
 };
 
-const removeStatus = async (id) => {
-  return await knex('statuses').where('status_id', id).del();
+const removeProviderRole = async (id) => {
+  return await knex('provider_roles').where('provider_role_id', id).del();
 };
 
 module.exports = {
   findAll,
   findById,
-  createStatus,
-  updateStatus,
-  removeStatus,
+  createProviderRole,
+  updateProviderRole,
+  removeProviderRole,
 };
