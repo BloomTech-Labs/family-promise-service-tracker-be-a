@@ -1,32 +1,32 @@
 const knex = require('../../data/db-config');
 
 const findAll = async () => {
-  return await knex('statuses');
+  return await knex('races');
 };
 
 const findById = async (id) => {
-  return await knex('statuses').where('status_id', id).first();
+  return await knex('races').where('race_id', id).first();
   // keeping these for now as a reference
-  // .select(knex.raw('statuses.*, to_json(locations.*) as location'))
-  // .groupBy('statuses.status_id', 'locations.location_id');
+  // .select(knex.raw('races.*, to_json(locations.*) as location'))
+  // .groupBy('races.race_id', 'locations.location_id');
 };
 
-const createStatus = async (newStatus) => {
-  return await knex('statuses').insert(newStatus, ['*']);
+const createRace = async (newRace) => {
+  return await knex('races').insert(newRace, ['*']);
 };
 
-const updateStatus = async (id, Status) => {
-  return await knex('statuses').where('status_id', id).update(Status);
+const updateRace = async (id, race) => {
+  return await knex('races').where('race_id', id).update(race);
 };
 
-const removeStatus = async (id) => {
-  return await knex('statuses').where('status_id', id).del();
+const removeRace = async (id) => {
+  return await knex('races').where('race_id', id).del();
 };
 
 module.exports = {
   findAll,
   findById,
-  createStatus,
-  updateStatus,
-  removeStatus,
+  createRace,
+  updateRace,
+  removeRace,
 };
