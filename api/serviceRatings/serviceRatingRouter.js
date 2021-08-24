@@ -1,44 +1,47 @@
 const express = require('express');
-const Statuses = require('./statusModel');
 const router = express.Router();
+const ServiceRatings = require('./statusModel');
 const { requireAdmin } = require('../middleware/authorization');
 
 router.get('/', (req, res, next) => {
-  Statuses.findAll()
-    .then((statuses) => {
-      res.status(200).json(statuses);
+  ServiceRatings.findAll()
+    .then((serviceRatings) => {
+      res.status(200).json(serviceRatings);
     })
     .catch(next);
 });
 
 router.get('/:id', (req, res, next) => {
   const { id } = req.params;
-  Statuses.findById(id)
+  ServiceRatings.findById(id)
     .then((status) => {
       if (status) {
         res.status(200).json(status);
       } else {
-        res.status(404).json({ error: `Status ${id} not found` });
+        res.status(404).json({ error: `Service Rating ${id} not found` });
       }
     })
     .catch(next);
 });
 
 router.post('/', requireAdmin, (req, res, next) => {
-  Statuses.createStatus(req.body)
-    .then((newStatus) => {
-      res.status(201).json({ message: 'Status created', status: newStatus });
+  ServiceRatings.createServiceRating(req.body)
+    .then((newServiceRating) => {
+      res.status(201).json({
+        message: 'Service Rating created',
+        status: newServiceRating,
+      });
     })
     .catch(next);
 });
 
 router.put('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;
-  Statuses.updateStatus(id, req.body)
-    .then((editedStatus) => {
+  ServiceRatings.updatesServiceRating(id, req.body)
+    .then((editedServiceRating) => {
       res.status(200).json({
-        message: `Status ${id} updated`,
-        status: editedStatus,
+        message: `Service Rating ${id} updated`,
+        status: editedServiceRating,
       });
     })
     .catch(next);
@@ -46,12 +49,16 @@ router.put('/:id', requireAdmin, (req, res, next) => {
 
 router.delete('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;
-  Statuses.removeStatus(id)
+  ServiceRatings.removeServiceRating(id)
     .then((count) => {
       if (count > 0) {
-        res.status(200).json({ message: `Status ${id} has been removed` });
+        res
+          .status(200)
+          .json({ message: `Service Rating ${id} has been removed` });
       } else {
-        res.status(404).json({ message: `Status ${id} could not be found` });
+        res
+          .status(404)
+          .json({ message: `Service Rating ${id} could not be found` });
       }
     })
     .catch(next);

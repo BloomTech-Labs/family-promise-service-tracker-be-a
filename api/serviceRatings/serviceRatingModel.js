@@ -1,32 +1,34 @@
 const knex = require('../../data/db-config');
 
 const findAll = async () => {
-  return await knex('statuses');
+  return await knex('service_ratings');
 };
 
 const findById = async (id) => {
-  return await knex('statuses').where('status_id', id).first();
+  return await knex('service_ratings').where('service_rating_id', id).first();
   // keeping these for now as a reference
-  // .select(knex.raw('statuses.*, to_json(locations.*) as location'))
-  // .groupBy('statuses.status_id', 'locations.location_id');
+  // .select(knex.raw('service_ratings.*, to_json(locations.*) as location'))
+  // .groupBy('service_ratings.service_rating_id', 'locations.location_id');
 };
 
-const createStatus = async (newStatus) => {
-  return await knex('statuses').insert(newStatus, ['*']);
+const createServiceRating = async (newServiceRating) => {
+  return await knex('service_ratings').insert(newServiceRating, ['*']);
 };
 
-const updateStatus = async (id, Status) => {
-  return await knex('statuses').where('status_id', id).update(Status);
+const updateServiceRating = async (id, serviceRatings) => {
+  return await knex('service_ratings')
+    .where('service_rating_id', id)
+    .update(serviceRatings);
 };
 
-const removeStatus = async (id) => {
-  return await knex('statuses').where('status_id', id).del();
+const removeServiceRating = async (id) => {
+  return await knex('service_ratings').where('service_rating_id', id).del();
 };
 
 module.exports = {
   findAll,
   findById,
-  createStatus,
-  updateStatus,
-  removeStatus,
+  createServiceRating,
+  updateServiceRating,
+  removeServiceRating,
 };
