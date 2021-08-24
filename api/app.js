@@ -18,17 +18,27 @@ const swaggerUIOptions = {
 };
 
 //###[  Routers ]###
-const indexRouter = require('./index/indexRouter');
-const providerRouter = require('./provider/providerRouter');
-const programRouter = require('./program/programRouter');
-const statusRouter = require('./statuses/statusesRouter');
-const serviceTypeRouter = require('./serviceTypes/serviceTypeRouter');
-const serviceEntryRouter = require('./serviceEntries/serviceEntriesRouter');
 const dsRouter = require('./dsService/dsRouter');
-const recipientRouter = require('./recipient/recipientRouter');
+const emailAddressRouter = require('./emailAddresses/emailAddressRouter');
+const ethnicityRouter = require('./ethnicities/ethnicityRouter');
+const genderRouter = require('./genders/genderRouter');
 const householdRouter = require('./household/householdRouter');
-const metricsRouter = require('./metrics/metricsRouter');
+const indexRouter = require('./index/indexRouter');
 const locationRouter = require('./location/locationRouter');
+const locationTypeRouter = require('./locationTypes/locationTypesRouter');
+const metricsRouter = require('./metrics/metricsRouter');
+const phoneNumberRouter = require('./phoneNumbers/phoneNumberRouter');
+const programRouter = require('./program/programRouter');
+const providerRouter = require('./provider/providerRouter');
+const providerRolesRouter = require('./providerRoles/providerRoleRouter');
+const raceRouter = require('./races/raceRouter');
+const recipientRouter = require('./recipient/recipientRouter');
+const serviceEntryRouter = require('./serviceEntries/serviceEntriesRouter');
+const serviceRatingsRouter = require('./serviceRatings/serviceRatingRouter');
+const serviceTypeProgramsRouter = require('./serviceTypeProgramss/serviceTypeProgramsRouter');
+const serviceTypeRouter = require('./serviceTypes/serviceTypeRouter');
+const serviceUnitsRouter = require('./serviceUnits/serviceUnitRouter');
+const statusRouter = require('./statuses/statusesRouter');
 
 const app = express();
 
@@ -56,17 +66,30 @@ app.use(cookieParser());
 app.use('/api/*', authRequired);
 
 // application routes
-app.use('/', indexRouter);
-app.use(['/api/provider', '/api/providers'], providerRouter);
-app.use(['/api/program', '/api/programs'], programRouter);
-app.use(['/api/status', '/api/statuses'], statusRouter);
-app.use(['/api/service_type', '/api/service_types'], serviceTypeRouter);
-app.use(['/api/service_entry', '/api/service_entries'], serviceEntryRouter);
 app.use('/data', dsRouter);
-app.use(['/api/recipient', '/api/recipients'], recipientRouter);
+app.use(['/api/emailAddress', '/api/emailAddresses'], emailAddressRouter);
+app.use(['/api/ethnicities', '/api/ethnicity'], ethnicityRouter);
+app.use(['/api/gender', '/api/genders'], genderRouter);
 app.use(['/api/household', '/api/households'], householdRouter);
-app.use(['/api/metric', '/api/metrics'], metricsRouter);
+app.use('/', indexRouter);
 app.use(['/api/location', '/api/locations'], locationRouter);
+app.use(['/api/locationTypes', '/api/locationType'], locationTypeRouter);
+app.use(['/api/metric', '/api/metrics'], metricsRouter);
+app.use(['/api/phoneNumbers', '/api/phoneNumber'], phoneNumberRouter);
+app.use(['/api/program', '/api/programs'], programRouter);
+app.use(['/api/provider', '/api/providers'], providerRouter);
+app.use(['/api/providerRoles', '/api/providerRole'], providerRolesRouter);
+app.use(['/api/races', '/api/race'], raceRouter);
+app.use(['/api/recipient', '/api/recipients'], recipientRouter);
+app.use(['/api/service_entry', '/api/service_entries'], serviceEntryRouter);
+app.use(['/api/serviceRatings', '/api/serviceRating'], serviceRatingsRouter);
+app.use(
+  ['/api/serviceTypePrograms', '/api/serviceTypeProgram'],
+  serviceTypeProgramsRouter
+);
+app.use(['/api/service_type', '/api/service_types'], serviceTypeRouter);
+app.use(['/api/serviceUnits', '/api/serviceUnit'], serviceUnitsRouter);
+app.use(['/api/status', '/api/statuses'], statusRouter);
 
 app.use((err, req, res, next) => {
   // eslint-disable-line
