@@ -1,6 +1,8 @@
 # API Endpoints
 
-WAtch this for a backend walkthrough: https://www.loom.com/share/4b2fbefcfe2a4d5d8e3dad2c20cb57d4 M Habermas, 24/08/2021
+Watch this for a backend walkthrough: https://www.loom.com/share/4b2fbefcfe2a4d5d8e3dad2c20cb57d4 
+latest DB schema: https://dbdesigner.page.link/TkqhaqDpvCjd4dDJ8
+M Habermas, 24/08/2021
 
 Server is deployed at: https://fp-service-tracker.herokuapp.com/
 
