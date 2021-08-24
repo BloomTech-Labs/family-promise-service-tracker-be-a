@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const ProviderRoles = require('./statusModel');
+const ProviderRoles = require('./providerRoleModel');
 const { requireAdmin } = require('../middleware/authorization');
 
 router.get('/', (req, res, next) => {
