@@ -1,5 +1,4 @@
 const express = require('express');
-// const DB = require('../utils/db-helper');
 const Recipients = require('./recipientModel');
 const router = express.Router();
 const {
@@ -8,7 +7,6 @@ const {
 } = require('../middleware/authorization');
 
 // GET - View all recipients
-// All users can view all recipients
 router.get('/', (req, res, next) => {
   Recipients.findAll()
     .then((recipients) => {
@@ -18,7 +16,6 @@ router.get('/', (req, res, next) => {
 });
 
 // GET - View recipient by ID
-// All users can view recipients by ID
 router.get('/:id', (req, res, next) => {
   const { id } = req.params;
 
@@ -59,7 +56,6 @@ router.get('/findRecipient', (req, res, next) => {
 });
 
 // POST - Create new recipient
-// All users can add a new recipient
 router.post('/', (req, res, next) => {
   Recipients.createRecipient(req.body)
     .then((newRecipient) => {
@@ -69,10 +65,10 @@ router.post('/', (req, res, next) => {
 });
 
 // PUT - Update recipient by ID
-// Only Admin and Program Managers can update recipient by ID
+// Only Admin and Program Managers should be able to update recipient by ID
 router.put('/:id', requireAdmin, requireProgramManager, (req, res, next) => {
   const { id } = req.params;
-  Recipients.update(id, req.body)
+  Recipients.updateRecipient(id, req.body)
     .then((editedRecipient) => {
       res.status(200).json({
         message: `Recipient ${id} updated`,
@@ -83,7 +79,7 @@ router.put('/:id', requireAdmin, requireProgramManager, (req, res, next) => {
 });
 
 // DELETE - Remove recipient by ID
-// Only Admin can remove recipient by ID
+// Only Admin should be able to remove recipient by ID
 router.delete('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;
 
