@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const EmailAddresses = require('./statusModel');
+const EmailAddresses = require('./emailAddressModel');
 const { requireAdmin } = require('../middleware/authorization');
 
 router.get('/', (req, res, next) => {

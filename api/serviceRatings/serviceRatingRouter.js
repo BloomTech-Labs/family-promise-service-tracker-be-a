@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const ServiceRatings = require('./statusModel');
+const ServiceRatings = require('./serviceRatingModel');
 const { requireAdmin } = require('../middleware/authorization');
 
 router.get('/', (req, res, next) => {

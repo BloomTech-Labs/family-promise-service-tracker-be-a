@@ -18,12 +18,12 @@ const swaggerUIOptions = {
 };
 
 //###[  Routers ]###
+const indexRouter = require('./index/indexRouter');
 const dsRouter = require('./dsService/dsRouter');
 const emailAddressRouter = require('./emailAddresses/emailAddressRouter');
 const ethnicityRouter = require('./ethnicities/ethnicityRouter');
 const genderRouter = require('./genders/genderRouter');
 const householdRouter = require('./household/householdRouter');
-const indexRouter = require('./index/indexRouter');
 const locationRouter = require('./location/locationRouter');
 const locationTypeRouter = require('./locationTypes/locationTypesRouter');
 const metricsRouter = require('./metrics/metricsRouter');
@@ -35,7 +35,7 @@ const raceRouter = require('./races/raceRouter');
 const recipientRouter = require('./recipient/recipientRouter');
 const serviceEntryRouter = require('./serviceEntries/serviceEntriesRouter');
 const serviceRatingsRouter = require('./serviceRatings/serviceRatingRouter');
-const serviceTypeProgramsRouter = require('./serviceTypeProgramss/serviceTypeProgramsRouter');
+const serviceTypeProgramsRouter = require('./serviceTypePrograms/serviceTypeProgramsRouter');
 const serviceTypeRouter = require('./serviceTypes/serviceTypeRouter');
 const serviceUnitsRouter = require('./serviceUnits/serviceUnitRouter');
 const statusRouter = require('./statuses/statusesRouter');
@@ -66,12 +66,12 @@ app.use(cookieParser());
 app.use('/api/*', authRequired);
 
 // application routes
+app.use('/', indexRouter);
 app.use('/data', dsRouter);
 app.use(['/api/emailAddress', '/api/emailAddresses'], emailAddressRouter);
 app.use(['/api/ethnicities', '/api/ethnicity'], ethnicityRouter);
 app.use(['/api/gender', '/api/genders'], genderRouter);
 app.use(['/api/household', '/api/households'], householdRouter);
-app.use('/', indexRouter);
 app.use(['/api/location', '/api/locations'], locationRouter);
 app.use(['/api/locationTypes', '/api/locationType'], locationTypeRouter);
 app.use(['/api/metric', '/api/metrics'], metricsRouter);

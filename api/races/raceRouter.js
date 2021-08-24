@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Races = require('./RacesModel');
+const Races = require('./raceModel');
 const { requireAdmin } = require('../middleware/authorization');
 
 router.get('/', (req, res, next) => {
