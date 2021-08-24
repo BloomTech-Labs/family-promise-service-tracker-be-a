@@ -1,5 +1,7 @@
 # API Endpoints
 
+WAtch this for a backend walkthrough: https://www.loom.com/share/4b2fbefcfe2a4d5d8e3dad2c20cb57d4 M Habermas, 24/08/2021
+
 Server is deployed at: https://fp-service-tracker.herokuapp.com/
 
 All endpoints except for index require a valid Okta token for authorization. The authorization specifications for each table
@@ -7,7 +9,7 @@ below refer to authorization beyond having a valid token.
 
 # Completed
 
-## Users
+## Users / Service Providers
 
 | Path                                    | Method  | Requirements                                                         | Authorization                                                                                                                                                                                 |
 | --------------------------------------- | ------- | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
