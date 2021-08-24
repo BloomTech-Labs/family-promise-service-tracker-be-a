@@ -22,15 +22,13 @@ const createRecipient = async (newRecipient) => {
   return await knex('recipients').insert(newRecipient, ['*']);
 };
 
-const updateRecipient = async (id, updatedInfo) => {
-  return await knex('recipients')
-    .where('recipient_id', id)
-    .insert(updatedInfo, ['*']);
+const updateRecipient = async (id, recipient) => {
+  return await knex('recipients').where('recipient_id', id).update(recipient);
 };
 
 // Note: DANGEROUS: instead of deleting ANYTHING, we are generally using is_active to mark a record as inactive
-const deleteRecipient = (id) => {
-  return knex('recipients').where('recipient_id', id).del();
+const deleteRecipient = async (id) => {
+  return await knex('recipients').where('recipient_id', id).del();
 };
 
 module.exports = {
