@@ -10,14 +10,13 @@ const findById = async (id) => {
 
 const createServiceType = async (newServiceType) => {
   return await knex('service_types').insert(newServiceType, ['*']);
-  // TO-DO: need to insert associations in junction table
+  // TO-DO: need to insert associations with programs in junction table
 };
 
 const updateServiceType = async (id, updates) => {
   return await knex('service_types')
     .where('service_type_id', id)
     .update(updates);
-  //  TO-DO:  also need to remove associations in junction table
 };
 
 // things are not usually deleted, but marked as inactive

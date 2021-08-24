@@ -51,7 +51,8 @@ router.post('/', canCrudServiceType, (req, res, next) => {
 });
 
 router.put('/:id', canCrudServiceType, (req, res, next) => {
-  Programs.update(req.params.id, req.body)
+  const { id } = req.params;
+  Programs.updateProgram(id, req.body)
     .then((editedProgram) => {
       res.status(200).json(editedProgram);
     })
@@ -60,8 +61,7 @@ router.put('/:id', canCrudServiceType, (req, res, next) => {
 
 router.delete('/:id', canCrudServiceType, (req, res, next) => {
   const { id } = req.params;
-  // removeProgram was added to db-helper to reflect the new schema change
-  Programs.deleteProgram(id)
+  Programs.removeProgram(id)
     .then((count) => {
       if (count > 0) {
         res.status(200).json({ message: `Program ${id} has been removed` });
