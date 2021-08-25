@@ -14,28 +14,18 @@ const findAll = async () => {
     .join('statuses as sta', 'sta.status_id', 'se.status_id')
     .join('locations as l', 'l.location_id', 'se.location_id')
     .select(
-      'service_entry_id',
-      'provider_first_name',
-      'provider_last_name',
-      'recipient_first_name',
-      'recipient_last_name',
-      'program_name',
-      'service_type_name',
-      'apply_service_to_household',
-      'service_date',
-      'service_time',
-      'service_duration',
-      'service_value',
-      'service_quantity',
-      'service_entry_notes',
-      'service_entry_data',
-      'service_unit_id',
-      'status',
-      'service_rating_id',
+      knex.raw(
+        'se.*,  to_json(r.*) as recipient, to_json(st.*) as service_type, to_json(l.*) as location, to_json(pv.*) as provider, to_json(pg.*) as program, to_json(sta.*) as status'
+      )
+    )
+    .groupBy(
+      'se.service_entry_id',
+      'r.recipient_id',
+      'st.service_type_id',
       'l.location_id',
-      'address',
-      'se.created_at',
-      'se.updated_at'
+      'pv.provider_id',
+      'pg.program_id',
+      'sta.status_id'
     );
 };
 
@@ -53,28 +43,18 @@ const findById = async (id) => {
     .join('statuses as sta', 'sta.status_id', 'se.status_id')
     .join('locations as l', 'l.location_id', 'se.location_id')
     .select(
-      'service_entry_id',
-      'provider_first_name',
-      'provider_last_name',
-      'recipient_first_name',
-      'recipient_last_name',
-      'program_name',
-      'service_type_name',
-      'apply_service_to_household',
-      'service_date',
-      'service_time',
-      'service_duration',
-      'service_value',
-      'service_quantity',
-      'service_entry_notes',
-      'service_entry_data',
-      'service_unit_id',
-      'status',
-      'service_rating_id',
+      knex.raw(
+        'se.*,  to_json(r.*) as recipient, to_json(st.*) as service_type, to_json(l.*) as location, to_json(pv.*) as provider, to_json(pg.*) as program, to_json(sta.*) as status'
+      )
+    )
+    .groupBy(
+      'se.service_entry_id',
+      'r.recipient_id',
+      'st.service_type_id',
       'l.location_id',
-      'address',
-      'se.created_at',
-      'se.updated_at'
+      'pv.provider_id',
+      'pg.program_id',
+      'sta.status_id'
     )
     .where('service_entry_id', id)
     .first();
