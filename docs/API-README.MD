@@ -23,6 +23,48 @@ below refer to authorization beyond having a valid token.
 
 We were asked to hold off on allowing access to Create/Delete functions, so those are stubbed responses for now.
 
+<details>
+<summary>What You Should Receive (GET)</summary>
+
+```JSON
+
+{
+    "provider_id": "00uk9lxaulDYOiB4H5d6",
+    "provider_role_id": 1,
+    "employee_id": "A002",
+    "provider_first_name": "BG_User",
+    "provider_last_name": "Basic",
+    "provider_email": "bg_user@gmail.com",
+    "provider_phone_number": "123-456-7894",
+    "provider_avatar_url": "https://avatars.dicebear.com/api/initials/bg_user%20basic.svg",
+    "provider_is_active": true,
+    "created_at": "2021-08-23T17:45:37.576Z",
+    "updated_at": "2021-08-23T17:45:37.576Z"
+   }
+```
+
+</details>
+
+<details>
+<summary>What You Should Send(POST)</summary>
+
+```JSON
+
+{
+    "provider_role_id": 1,
+    "employee_id": "A002",
+    "provider_first_name": "BG_User",
+    "provider_last_name": "Basic",
+    "provider_email": "bg_user@gmail.com",
+    "provider_phone_number": "123-456-7894",
+    "provider_avatar_url": "https://avatars.dicebear.com/api/initials/bg_user%20basic.svg",3
+}
+```
+
+</details>
+
+
+
 Provider object:
 
 ```
@@ -112,6 +154,35 @@ you must include both x and y in the programs field:
 
 program object returned on GET requests:
 
+<details>
+<summary>What You Should Receive (GET)</summary>
+
+```JSON
+
+{
+	message: 'TEST',
+	newUser: {
+		err: 'TEST2',
+	}
+}
+```
+
+</details>
+
+<details>
+<summary>What You Should Send(POST)</summary>
+
+```JSON
+
+{
+	message: 'TEST',
+	newUser: {
+		err: 'TEST2',
+	}
+}
+```
+
+</details>
 ```
 {
     program_id:int,
@@ -137,8 +208,6 @@ ID will be generated automatically for new programs, should be included in URL p
 According to UX docs, assigning Users to Programs will happen on the user object and not on Program object. -->
 
 ## Statuses
-
-~~All routes work with /api/status or /api/statuses~~
 
 Statuses are now part of the new service_entry_data JSON,
 status can be accessed using knex query for JSON as noted in [API-REAMDME-SERVICE-ENTRIES.md](API-README-SERVICE-ENTRIES.md)
@@ -182,6 +251,35 @@ To create or edit a status:
 
 **_Please refer to [API-README-SERVICE-ENTRIES.md](API-README-SERVICE-ENTRIES.md)_**
 
+<details>
+<summary>What You Should Receive (GET)</summary>
+
+```JSON
+
+{
+	message: 'TEST',
+	newUser: {
+		err: 'TEST2',
+	}
+}
+```
+
+</details>
+
+<details>
+<summary>What You Should Send(POST)</summary>
+
+```JSON
+
+{
+	message: 'TEST',
+	newUser: {
+		err: 'TEST2',
+	}
+}
+```
+
+</details>
 Service Type object returned on GET requests:
 
 ```
@@ -254,6 +352,35 @@ NOT WORKING
 
 **_Please refer to [API-README-SERVICE-ENTRIES.md](API-README-SERVICE-ENTRIES.md)_**
 
+<details>
+<summary>What You Should Receive (GET)</summary>
+
+```JSON
+
+{
+	message: 'TEST',
+	newUser: {
+		err: 'TEST2',
+	}
+}
+```
+
+</details>
+
+<details>
+<summary>What You Should Send(POST)</summary>
+
+```JSON
+
+{
+	message: 'TEST',
+	newUser: {
+		err: 'TEST2',
+	}
+}
+```
+
+</details>
 ```JS
 {
     service_entry_id: uuid,
@@ -284,6 +411,35 @@ All routes work with /api/recipient or /api/recipients
 
 Recipient object returned on GET requests:
 
+<details>
+<summary>What You Should Receive (GET)</summary>
+
+```JSON
+
+{
+	message: 'TEST',
+	newUser: {
+		err: 'TEST2',
+	}
+}
+```
+
+</details>
+
+<details>
+<summary>What You Should Send(POST)</summary>
+
+```JSON
+
+{
+	message: 'TEST',
+	newUser: {
+		err: 'TEST2',
+	}
+}
+```
+
+</details>
 ```JS
 {
     recipient_id:uuid,
@@ -334,6 +490,35 @@ All routes work with /api/household or /api/households
 
 Recipient object returned on GET requests:
 
+<details>
+<summary>What You Should Receive (GET)</summary>
+
+```JSON
+
+{
+	message: 'TEST',
+	newUser: {
+		err: 'TEST2',
+	}
+}
+```
+
+</details>
+
+<details>
+<summary>What You Should Send(POST)</summary>
+
+```JSON
+
+{
+	message: 'TEST',
+	newUser: {
+		err: 'TEST2',
+	}
+}
+```
+
+</details>
 ```JS
 {
     household_id:int,
