@@ -96,7 +96,7 @@ program object returned on GET requests:
 </details>
 
 <details>
-<summary>What You Should Send(POST)</summary>
+<summary>What You Should Send (POST)</summary>
 
 ```JSON
 
@@ -111,10 +111,7 @@ program object returned on GET requests:
 
 ## Statuses
 
-Statuses are now part of the new service_entry_data JSON,
-status can be accessed using knex query for JSON as noted in [API-REAMDME-SERVICE-ENTRIES.md](API-README-SERVICE-ENTRIES.md)
-
-<!-- | Path              | Method | Requirements              | Authorization |
+| Path              | Method | Requirements              | Authorization |
 | ----------------- | ------ | ------------------------- | ------------- |
 | /api/statuses     | GET    | none                      | none          |
 | /api/status/:id   | GET    | none                      | none          |
@@ -122,24 +119,32 @@ status can be accessed using knex query for JSON as noted in [API-REAMDME-SERVIC
 | /api/programs/:id | PUT    | desired edit as key:value | admin         |
 | /api/programs/:id | DELETE | none                      | admin         |
 
-Status object returned on GET requests:
+<details>
+<summary>What You Should Receive (GET)</summary>
 
-```
+```JSON
+
 {
-    id:int,
-    name:string,
-    created_at:datetime string,
-    updated_at:datetime string
+	"status_id": integer
+        "status_name": string,
+        "status_description": string,
 }
 ```
 
-To create or edit a status:
+</details>
 
-```
+<details>
+<summary>What You Should Send (POST)</summary>
+
+```JSON
+
 {
-    "name":"Desired change as a string"
+        "status_name": string,
+        "status_description": string,
 }
-``` -->
+```
+
+</details>
 
 ## Service Types
 
@@ -169,7 +174,7 @@ To create or edit a status:
 </details>
 
 <details>
-<summary>What You Should Send(POST)</summary>
+<summary>What You Should Send (POST)</summary>
 
 ```JSON
 
@@ -182,6 +187,7 @@ To create or edit a status:
 ```
 
 </details>
+
 Service Type object returned on GET requests:
 
 ```
@@ -270,7 +276,7 @@ NOT WORKING
 </details>
 
 <details>
-<summary>What You Should Send(POST)</summary>
+<summary>What You Should Send (POST)</summary>
 
 ```JSON
 
@@ -329,7 +335,7 @@ Recipient object returned on GET requests:
 </details>
 
 <details>
-<summary>What You Should Send(POST)</summary>
+<summary>What You Should Send (POST)</summary>
 
 ```JSON
 
@@ -408,7 +414,7 @@ Recipient object returned on GET requests:
 </details>
 
 <details>
-<summary>What You Should Send(POST)</summary>
+<summary>What You Should Send (POST)</summary>
 
 ```JSON
 
