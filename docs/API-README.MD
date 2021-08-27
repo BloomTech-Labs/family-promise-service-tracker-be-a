@@ -29,17 +29,17 @@ We were asked to hold off on allowing access to Create/Delete functions, so thos
 ```JSON
 
 {
-    "provider_id": "00uk9lxaulDYOiB4H5d6",
-    "provider_role_id": 1,
-    "employee_id": "A002",
-    "provider_first_name": "BG_User",
-    "provider_last_name": "Basic",
-    "provider_email": "bg_user@gmail.com",
-    "provider_phone_number": "123-456-7894",
-    "provider_avatar_url": "https://avatars.dicebear.com/api/initials/bg_user%20basic.svg",
-    "provider_is_active": true,
-    "created_at": "2021-08-23T17:45:37.576Z",
-    "updated_at": "2021-08-23T17:45:37.576Z"
+    "provider_id": string (okta id),
+    "provider_role_id": integer
+    "employee_id": string,
+    "provider_first_name": string,
+    "provider_last_name": string,
+    "provider_email": string,
+    "provider_phone_number": string,
+    "provider_avatar_url": string,
+    "provider_is_active": boolean,
+    "created_at": DateTime string,
+    "updated_at": DateTime string,
    }
 ```
 
@@ -51,13 +51,14 @@ We were asked to hold off on allowing access to Create/Delete functions, so thos
 ```JSON
 
 {
-    "provider_role_id": 1,
-    "employee_id": "A002",
-    "provider_first_name": "BG_User",
-    "provider_last_name": "Basic",
-    "provider_email": "bg_user@gmail.com",
-    "provider_phone_number": "123-456-7894",
-    "provider_avatar_url": "https://avatars.dicebear.com/api/initials/bg_user%20basic.svg",3
+    "provider_role_id": integer
+    "employee_id": string,
+    "provider_first_name": string,
+    "provider_last_name": string,
+    "provider_email": string,
+    "provider_phone_number": string,
+    "provider_avatar_url": string,
+    "provider_is_active": boolean,
 }
 ```
 
