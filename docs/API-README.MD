@@ -404,10 +404,14 @@ Recipient object returned on GET requests:
 ```JSON
 
 {
-	message: 'TEST',
-	newUser: {
-		err: 'TEST2',
-	}
+	"household_id": uuid,
+        "location_id": uuid,
+        "household_name": string,
+        "household_size": integer,
+        "household_monthly_income": decimal,
+        "is_unstable": boolean,
+        "created_at": DateTime string,
+        "updated_at": DateTime string
 }
 ```
 
@@ -419,25 +423,15 @@ Recipient object returned on GET requests:
 ```JSON
 
 {
-	message: 'TEST',
-	newUser: {
-		err: 'TEST2',
-	}
+	"location_id": uuid,
+        "household_name": string,
+        "household_size": integer,
+        "household_monthly_income": decimal,
+        "is_unstable": boolean,
 }
 ```
 
 </details>
-```JS
-{
-    household_id:int,
-    household_name: string
-    household_size:int,
-    household_income: int,
-    location_id: int,
-    created_at:datetime string,
-    updated_at:datetime string
-}
-```
 
 ## Metrics
 
