@@ -555,15 +555,15 @@ All routes work with /api/ethnicity or /api/ethnicities
 
 ## Races
 
-All routes work with /api/ethnicity or /api/ethnicities
+All routes work with /api/race or /api/races
 
 | Path                   | Method     | Requirements                  | Authorization                                |
 | ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
-| /api/ethnicity        | GET        | none                          | none                                         |
-| ~~/api/ethnicity/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
-| ~~/api/ethnicity~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
-| ~~/api/ethnicity/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
-| ~~/api/ethnicity/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
+| /api/race        | GET        | none                          | none                                         |
+| ~~/api/race/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/race~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/race/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/race/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
 
 <details>
 <summary>What You Should Receive (GET)</summary>
@@ -592,15 +592,15 @@ All routes work with /api/ethnicity or /api/ethnicities
 
 ## Phone Numbers
 
-All routes work with /api/ethnicity or /api/ethnicities
+All routes work with /api/phoneNumber or /api/phoneNumbers
 
 | Path                   | Method     | Requirements                  | Authorization                                |
 | ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
-| /api/ethnicity        | GET        | none                          | none                                         |
-| ~~/api/ethnicity/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
-| ~~/api/ethnicity~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
-| ~~/api/ethnicity/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
-| ~~/api/ethnicity/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
+| /api/phoneNumber        | GET        | none                          | none                                         |
+| ~~/api/phoneNumber/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/phoneNumber~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/phoneNumber/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/phoneNumber/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
 
 <details>
 <summary>What You Should Receive (GET)</summary>
@@ -629,15 +629,15 @@ All routes work with /api/ethnicity or /api/ethnicities
 
 ## Email Addresses
 
-All routes work with /api/ethnicity or /api/ethnicities
+All routes work with /api/emailAddress or /api/emailAddresses
 
 | Path                   | Method     | Requirements                  | Authorization                                |
 | ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
-| /api/ethnicity        | GET        | none                          | none                                         |
-| ~~/api/ethnicity/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
-| ~~/api/ethnicity~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
-| ~~/api/ethnicity/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
-| ~~/api/ethnicity/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
+| /api/emailAddress        | GET        | none                          | none                                         |
+| ~~/api/emailAddress/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/emailAddress~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/emailAddress/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/emailAddress/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
 
 <details>
 <summary>What You Should Receive (GET)</summary>
@@ -666,15 +666,15 @@ All routes work with /api/ethnicity or /api/ethnicities
 
 ## Location Types
 
-All routes work with /api/ethnicity or /api/ethnicities
+All routes work with /api/locationType or /api/locationTypes
 
 | Path                   | Method     | Requirements                  | Authorization                                |
 | ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
-| /api/ethnicity        | GET        | none                          | none                                         |
-| ~~/api/ethnicity/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
-| ~~/api/ethnicity~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
-| ~~/api/ethnicity/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
-| ~~/api/ethnicity/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
+| /api/locationType        | GET        | none                          | none                                         |
+| ~~/api/locationType/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/locationType~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/locationType/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/locationType/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
 
 <details>
 <summary>What You Should Receive (GET)</summary>
@@ -703,15 +703,15 @@ All routes work with /api/ethnicity or /api/ethnicities
 
 ## Service Units
 
-All routes work with /api/ethnicity or /api/ethnicities
+All routes work with /api/serviceUnit or /api/serviceUnits
 
 | Path                   | Method     | Requirements                  | Authorization                                |
 | ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
-| /api/ethnicity        | GET        | none                          | none                                         |
-| ~~/api/ethnicity/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
-| ~~/api/ethnicity~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
-| ~~/api/ethnicity/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
-| ~~/api/ethnicity/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
+| /api/serviceUnit        | GET        | none                          | none                                         |
+| ~~/api/serviceUnit/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/serviceUnit~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/serviceUnit/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/serviceUnit/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
 
 <details>
 <summary>What You Should Receive (GET)</summary>
@@ -740,15 +740,15 @@ All routes work with /api/ethnicity or /api/ethnicities
 
 ## Service Ratings
 
-All routes work with /api/ethnicity or /api/ethnicities
+All routes work with /api/serviceRating or /api/serviceRatings
 
 | Path                   | Method     | Requirements                  | Authorization                                |
 | ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
-| /api/ethnicity        | GET        | none                          | none                                         |
-| ~~/api/ethnicity/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
-| ~~/api/ethnicity~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
-| ~~/api/ethnicity/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
-| ~~/api/ethnicity/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
+| /api/serviceRating        | GET        | none                          | none                                         |
+| ~~/api/serviceRating/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/serviceRating~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/serviceRating/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/serviceRating/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
 
 <details>
 <summary>What You Should Receive (GET)</summary>
@@ -777,15 +777,15 @@ All routes work with /api/ethnicity or /api/ethnicities
 
 ## Provider Roles
 
-All routes work with /api/ethnicity or /api/ethnicities
+All routes work with /api/providerRole or /api/providerRoles
 
 | Path                   | Method     | Requirements                  | Authorization                                |
 | ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
-| /api/ethnicity        | GET        | none                          | none                                         |
-| ~~/api/ethnicity/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
-| ~~/api/ethnicity~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
-| ~~/api/ethnicity/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
-| ~~/api/ethnicity/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
+| /api/providerRole        | GET        | none                          | none                                         |
+| ~~/api/providerRole/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/providerRole~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/providerRole/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/providerRole/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
 
 <details>
 <summary>What You Should Receive (GET)</summary>
@@ -814,15 +814,15 @@ All routes work with /api/ethnicity or /api/ethnicities
 
 ## Service Type Programs
 
-All routes work with /api/ethnicity or /api/ethnicities
+All routes work with /api/serviceTypePrograms or /api/serviceTypeProgram
 
 | Path                   | Method     | Requirements                  | Authorization                                |
 | ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
-| /api/ethnicity        | GET        | none                          | none                                         |
-| ~~/api/ethnicity/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
-| ~~/api/ethnicity~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
-| ~~/api/ethnicity/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
-| ~~/api/ethnicity/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
+| /api/serviceTypeProgram        | GET        | none                          | none                                         |
+| ~~/api/serviceTypeProgram/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/serviceTypeProgram~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/serviceTypeProgram/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/serviceTypeProgram/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
 
 <details>
 <summary>What You Should Receive (GET)</summary>
