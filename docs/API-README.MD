@@ -140,7 +140,7 @@ program object returned on GET requests:
 
 {
         "status_name": string,
-        "status_description": string,
+        "status_description": string
 }
 ```
 
@@ -164,10 +164,12 @@ program object returned on GET requests:
 ```JSON
 
 {
-	message: 'TEST',
-	newUser: {
-		err: 'TEST2',
-	}
+	"service_type_id": 8,
+        "service_type_name": string,
+        "service_type_description": string,
+        "service_type_is_active": boolean,
+	"created_at": DateTime string,
+        "updated_at": DateTime string
 }
 ```
 
@@ -179,72 +181,14 @@ program object returned on GET requests:
 ```JSON
 
 {
-	message: 'TEST',
-	newUser: {
-		err: 'TEST2',
-	}
+        "service_type_name": string,
+        "service_type_description": string,
+        "service_type_is_active": boolean,
 }
 ```
 
 </details>
 
-Service Type object returned on GET requests:
-
-```
-{
-    service_type_id:int,
-    program_id:int,
-    service_type_name:string,
-    service_type_description:string,
-    service_type_entry_model: Object containing the default and custom field information
-    service_providers: array of profile objects
-    created_at:datetime string,
-    updated_at:datetime string,
-}
-```
-
-To create a service type:
-service_type_id: 999 is currently a "model" that can be used as a base for new service types, if needed.
-
-```JS
-NOT WORKING
-// {
-//     "service_type_name":"Bus Fare",
-//     "service_type_description":"Weekly bus fare allowance",
-//     service_type_entry_model: Object containing the default and custom field information,
-//     "program_id":3,
-// }
-```
-
-~~To edit a service type, provide only the fields you wish to change:~~
-
-```JS
-NOT WORKING
-
-// {
-//     "name":"Bus Fare"
-// }
-```
-
-~~To edit the associated service providers, provide the full list of service providers you would like associated. As with assigning programs to users on the /profiles routes, the service providers array you provide will overwrite any existing associations.~~
-
-~~E.g. To remove all associations, provide an empty array:~~
-
-```JS
-NOT WORKING
-// {
-//     "service_providers": []
-// }
-```
-
-~~If user X was already assigned to this service type, and you want to also add user Y, you must include both X and Y in the service providers field:~~
-
-```JS
-// NOT WORKING
-// {
-//     "service_providers": ["x","y"]
-// }
-```
 
 ## Service Entries
 
@@ -266,10 +210,97 @@ NOT WORKING
 ```JSON
 
 {
-	message: 'TEST',
-	newUser: {
-		err: 'TEST2',
-	}
+	"service_entry_id": uuid
+        "primary_provider_id": okta string,
+        "primary_recipient_id": uuid,
+        "service_type_program_id": integer,
+        "apply_service_to_household": boolean,
+        "service_date": Date string,
+        "service_time": Time string,
+        "service_duration": Time string,
+        "service_value": decimal,
+        "service_quantity": integer,
+        "service_entry_notes": string,
+        "service_entry_data": jsonb object, *
+        "service_unit_id": integer,
+        "status_id": integer,
+        "service_rating_id": integer,
+        "location_id": uuid,
+        "created_at": DateTime string,
+        "updated_at": DateTime string
+        "recipient": {
+		"recipient_id": uuid,
+		"recipient_first_name": string,
+		"recipient_middle_name": string,
+		"recipient_last_name": string,
+		"recipient_is_active": boolean,
+		"recipient_date_of_birth": Date string,
+		"recipient_veteran_status": boolean,
+		"has_disability": boolean,
+		"has_valid_ssi": boolean,
+		"has_valid_medicare_card": boolean,
+		"recipient_notes": string,
+		"household_id": uuid,
+		"gender_id": 19,
+		"race_id": 1,
+		"ethnicity_id": 1,
+		"created_at": DateTime string,
+		"updated_at": DateTime string,
+        },
+        "service_type": {
+		"service_type_id": integer,
+		"service_type_name": string,
+		"service_type_description": string,
+		"service_type_is_active": boolean,
+		"service_type_entry_model": {
+			"custom": []
+		},
+		"created_at": DateTime string,
+		"updated_at": DateTime string
+        },
+        "location": {
+		"location_id": uuid,
+		"location_type_id": 2,
+		"location_name":string,
+		"location_description": string,
+		"address": string,
+		"address_line2": string,
+		"city": "string,
+		"state": string,
+		"zip": string,
+		"county": string,
+		"country": string,
+		"location_longitude": decimal,
+		"location_latitude": decimal,
+		"created_at": DateTime string,
+		"updated_at": DateTime string
+        },
+        "provider": {
+		"provider_id": string (okta id),
+		"provider_role_id": integer
+		"employee_id": string,
+		"provider_first_name": string,
+		"provider_last_name": string,
+		"provider_email": string,
+		"provider_phone_number": string,
+		"provider_avatar_url": string,
+		"provider_is_active": boolean,
+		"created_at": DateTime string,
+		"updated_at": DateTime string,
+        },
+        "program": {
+            	"program_id": 2,
+          	"program_name": "Prevention/Diversion",
+         	"program_description": "Preventing Homelessness: We work to help members of our community stay in their homes and not become homeless.",
+         	"program_is_active": true,
+		"created_at": DateTime string,
+		"updated_at": DateTime string
+        },
+        "status": {
+            	"status_id": integer
+        	"status_name": string,
+        	"status_description": string,
+        }
 }
 ```
 
@@ -281,28 +312,25 @@ NOT WORKING
 ```JSON
 
 {
-	message: 'TEST',
-	newUser: {
-		err: 'TEST2',
-	}
+	"primary_provider_id": okta string,
+        "primary_recipient_id": uuid,
+        "service_type_program_id": integer,
+        "apply_service_to_household": boolean,
+        "service_date": Date string,
+        "service_time": Time string,
+        "service_duration": Time string,
+        "service_value": decimal,
+        "service_quantity": integer,
+        "service_entry_notes": string,
+        "service_entry_data": jsonb object, *
+        "service_unit_id": integer,
+        "status_id": integer,
+        "service_rating_id": integer,
+        "location_id": uuid
 }
 ```
 
 </details>
-```JS
-{
-    service_entry_id: uuid,
-    service_type_id: int,
-    location_id: int
-    service_date: datestring,
-    service_time: datestring,
-    service_entry_data: refer to readme,
-    created_at:datetime string,
-    updated_at:datetime string,
-    recipient: recipient object,
-    service_type: service_type object,
-}
-```
 
 ## Recipients
 
