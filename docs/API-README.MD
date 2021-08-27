@@ -29,36 +29,36 @@ We were asked to hold off on allowing access to Create/Delete functions, so thos
 ```JSON
 
 {
-    "provider_id": string (okta id),
-    "provider_role_id": integer
-    "employee_id": string,
-    "provider_first_name": string,
-    "provider_last_name": string,
-    "provider_email": string,
-    "provider_phone_number": string,
-    "provider_avatar_url": string,
-    "provider_is_active": boolean,
-    "created_at": DateTime string,
-    "updated_at": DateTime string,
-   }
+	"provider_id": string (okta id),
+	"provider_role_id": integer
+	"employee_id": string,
+	"provider_first_name": string,
+	"provider_last_name": string,
+	"provider_email": string,
+	"provider_phone_number": string,
+	"provider_avatar_url": string,
+	"provider_is_active": boolean,
+	"created_at": DateTime string,
+	"updated_at": DateTime string,
+}
 ```
 
 </details>
 
 <details>
-<summary>What You Should Send(POST)</summary>
+<summary>What You Should Send (POST)</summary>
 
 ```JSON
 
 {
-    "provider_role_id": integer
-    "employee_id": string,
-    "provider_first_name": string,
-    "provider_last_name": string,
-    "provider_email": string,
-    "provider_phone_number": string,
-    "provider_avatar_url": string,
-    "provider_is_active": boolean,
+	"provider_role_id": integer
+	"employee_id": string,
+	"provider_first_name": string,
+	"provider_last_name": string,
+	"provider_email": string,
+	"provider_phone_number": string,
+	"provider_avatar_url": string,
+	"provider_is_active": boolean,
 }
 ```
 
@@ -84,10 +84,12 @@ program object returned on GET requests:
 ```JSON
 
 {
-	message: 'TEST',
-	newUser: {
-		err: 'TEST2',
-	}
+	"program_id": integer
+        "program_name": string,
+        "program_description": string,
+        "program_is_active": boolean
+        "created_at": DateTime string,
+        "updated_at": DateTime string,
 }
 ```
 
@@ -99,37 +101,13 @@ program object returned on GET requests:
 ```JSON
 
 {
-	message: 'TEST',
-	newUser: {
-		err: 'TEST2',
-	}
+	"program_id": integer
+        "program_name": string,
+        "program_description": string,
 }
 ```
 
 </details>
-```
-{
-    program_id:int,
-    program_name:string,
-    program_description:string,
-    created_at: DateTime string,
-    updated_at, DateTime string,
-    users:[array of provider objects]
-}
-```
-
-<!-- To create or edit program:
-
-```
-{
-    rogram_name:string,
-    program_description:string,
-}
-```
-
-ID will be generated automatically for new programs, should be included in URL param for edits.
-
-According to UX docs, assigning Users to Programs will happen on the user object and not on Program object. -->
 
 ## Statuses
 
