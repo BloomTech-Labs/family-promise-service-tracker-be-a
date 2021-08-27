@@ -107,43 +107,6 @@ We were asked to hold off on allowing access to Create/Delete functions, so thos
 
 </details>
 
-## Statuses
-
-| Path              | Method | Requirements              | Authorization |
-| ----------------- | ------ | ------------------------- | ------------- |
-| /api/statuses     | GET    | none                      | none          |
-| /api/status/:id   | GET    | none                      | none          |
-| /api/status       | POST   | name                      | admin         |
-| /api/programs/:id | PUT    | desired edit as key:value | admin         |
-| /api/programs/:id | DELETE | none                      | admin         |
-
-<details>
-<summary>What You Should Receive (GET)</summary>
-
-```JSON
-
-{
-	"status_id": integer
-        "status_name": string,
-        "status_description": string,
-}
-```
-
-</details>
-
-<details>
-<summary>What You Should Send (POST)</summary>
-
-```JSON
-
-{
-        "status_name": string,
-        "status_description": string
-}
-```
-
-</details>
-
 ## Service Types
 
 | Path                       | Method     | Requirements         | Authorization                                                                           |
@@ -480,7 +443,44 @@ All routes work with /api/location or /api/locations
 ```
 
 </details>
+  
+## Statuses
 
+| Path              | Method | Requirements              | Authorization |
+| ----------------- | ------ | ------------------------- | ------------- |
+| /api/statuses     | GET    | none                      | none          |
+| /api/status/:id   | GET    | none                      | none          |
+| /api/status       | POST   | name                      | admin         |
+| /api/programs/:id | PUT    | desired edit as key:value | admin         |
+| /api/programs/:id | DELETE | none                      | admin         |
+
+<details>
+<summary>What You Should Receive (GET)</summary>
+
+```JSON
+
+{
+	"status_id": integer
+        "status_name": string,
+        "status_description": string,
+}
+```
+
+</details>
+
+<details>
+<summary>What You Should Send (POST)</summary>
+
+```JSON
+
+{
+        "status_name": string,
+        "status_description": string
+}
+```
+
+</details>  
+  
 ## Genders
 
 All routes work with /api/gender or /api/genders
@@ -552,6 +552,302 @@ All routes work with /api/ethnicity or /api/ethnicities
 ```
 
 </details>
+
+## Races
+
+All routes work with /api/ethnicity or /api/ethnicities
+
+| Path                   | Method     | Requirements                  | Authorization                                |
+| ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
+| /api/ethnicity        | GET        | none                          | none                                         |
+| ~~/api/ethnicity/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/ethnicity~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/ethnicity/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/ethnicity/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
+
+<details>
+<summary>What You Should Receive (GET)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+<details>
+<summary>What You Should Send (POST)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+
+## Phone Numbers
+
+All routes work with /api/ethnicity or /api/ethnicities
+
+| Path                   | Method     | Requirements                  | Authorization                                |
+| ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
+| /api/ethnicity        | GET        | none                          | none                                         |
+| ~~/api/ethnicity/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/ethnicity~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/ethnicity/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/ethnicity/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
+
+<details>
+<summary>What You Should Receive (GET)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+<details>
+<summary>What You Should Send (POST)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+
+## Email Addresses
+
+All routes work with /api/ethnicity or /api/ethnicities
+
+| Path                   | Method     | Requirements                  | Authorization                                |
+| ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
+| /api/ethnicity        | GET        | none                          | none                                         |
+| ~~/api/ethnicity/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/ethnicity~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/ethnicity/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/ethnicity/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
+
+<details>
+<summary>What You Should Receive (GET)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+<details>
+<summary>What You Should Send (POST)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+
+## Location Types
+
+All routes work with /api/ethnicity or /api/ethnicities
+
+| Path                   | Method     | Requirements                  | Authorization                                |
+| ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
+| /api/ethnicity        | GET        | none                          | none                                         |
+| ~~/api/ethnicity/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/ethnicity~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/ethnicity/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/ethnicity/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
+
+<details>
+<summary>What You Should Receive (GET)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+<details>
+<summary>What You Should Send (POST)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+
+## Service Units
+
+All routes work with /api/ethnicity or /api/ethnicities
+
+| Path                   | Method     | Requirements                  | Authorization                                |
+| ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
+| /api/ethnicity        | GET        | none                          | none                                         |
+| ~~/api/ethnicity/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/ethnicity~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/ethnicity/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/ethnicity/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
+
+<details>
+<summary>What You Should Receive (GET)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+<details>
+<summary>What You Should Send (POST)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+
+## Service Ratings
+
+All routes work with /api/ethnicity or /api/ethnicities
+
+| Path                   | Method     | Requirements                  | Authorization                                |
+| ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
+| /api/ethnicity        | GET        | none                          | none                                         |
+| ~~/api/ethnicity/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/ethnicity~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/ethnicity/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/ethnicity/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
+
+<details>
+<summary>What You Should Receive (GET)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+<details>
+<summary>What You Should Send (POST)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+
+## Provider Roles
+
+All routes work with /api/ethnicity or /api/ethnicities
+
+| Path                   | Method     | Requirements                  | Authorization                                |
+| ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
+| /api/ethnicity        | GET        | none                          | none                                         |
+| ~~/api/ethnicity/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/ethnicity~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/ethnicity/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/ethnicity/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
+
+<details>
+<summary>What You Should Receive (GET)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+<details>
+<summary>What You Should Send (POST)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+
+## Service Type Programs
+
+All routes work with /api/ethnicity or /api/ethnicities
+
+| Path                   | Method     | Requirements                  | Authorization                                |
+| ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
+| /api/ethnicity        | GET        | none                          | none                                         |
+| ~~/api/ethnicity/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/ethnicity~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/ethnicity/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/ethnicity/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
+
+<details>
+<summary>What You Should Receive (GET)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+<details>
+<summary>What You Should Send (POST)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
 
 ## Metrics
 
