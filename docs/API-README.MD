@@ -76,8 +76,6 @@ We were asked to hold off on allowing access to Create/Delete functions, so thos
 | ~~/api/programs/:id~~  | ~~PUT~~    | ~~any edits as key:value pairs~~ | ~~admin or program manager of this program~~ |
 | ~~/api/programs/:id~~  | ~~DELETE~~ | ~~none~~                         | ~~admin or program manager of this program~~ |
 
-program object returned on GET requests:
-
 <details>
 <summary>What You Should Receive (GET)</summary>
 
@@ -164,7 +162,7 @@ program object returned on GET requests:
 ```JSON
 
 {
-	"service_type_id": 8,
+	"service_type_id": integer,
         "service_type_name": string,
         "service_type_description": string,
         "service_type_is_active": boolean,
@@ -241,9 +239,9 @@ program object returned on GET requests:
 		"has_valid_medicare_card": boolean,
 		"recipient_notes": string,
 		"household_id": uuid,
-		"gender_id": 19,
-		"race_id": 1,
-		"ethnicity_id": 1,
+		"gender_id": integer,
+		"race_id": integer,
+		"ethnicity_id": integer,
 		"created_at": DateTime string,
 		"updated_at": DateTime string,
         },
@@ -260,12 +258,12 @@ program object returned on GET requests:
         },
         "location": {
 		"location_id": uuid,
-		"location_type_id": 2,
+		"location_type_id": uuid,
 		"location_name":string,
 		"location_description": string,
 		"address": string,
 		"address_line2": string,
-		"city": "string,
+		"city": string,
 		"state": string,
 		"zip": string,
 		"county": string,
@@ -289,9 +287,9 @@ program object returned on GET requests:
 		"updated_at": DateTime string,
         },
         "program": {
-            	"program_id": 2,
-          	"program_name": "Prevention/Diversion",
-         	"program_description": "Preventing Homelessness: We work to help members of our community stay in their homes and not become homeless.",
+            	"program_id": integer,
+          	"program_name": string,
+         	"program_description": string,
          	"program_is_active": true,
 		"created_at": DateTime string,
 		"updated_at": DateTime string
@@ -344,8 +342,6 @@ All routes work with /api/recipient or /api/recipients
 | ~~/api/recipient~~       | ~~POST~~   | ~~first_name, last_name, age, household_id, veteran_status~~ | ~~admin, Program Manager, Service Provider~~ |
 | ~~/api/recipient/:id~~   | ~~PUT~~    | ~~desired edit as key:value~~                                | ~~admin, Program Manager~~                   |
 | ~~/api/recipient/:id~~   | ~~DELETE~~ | ~~none~~                                                     | ~~admin~~                                    |
-
-Recipient object returned on GET requests:
 
 <details>
 <summary>What You Should Receive (GET)</summary>
@@ -414,8 +410,6 @@ All routes work with /api/household or /api/households
 | ~~/api/household/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
 | ~~/api/household/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
 
-Recipient object returned on GET requests:
-
 <details>
 <summary>What You Should Receive (GET)</summary>
 
@@ -446,6 +440,114 @@ Recipient object returned on GET requests:
         "household_size": integer,
         "household_monthly_income": decimal,
         "is_unstable": boolean,
+}
+```
+
+</details>
+
+## Locations
+
+All routes work with /api/location or /api/locations
+
+| Path                   | Method     | Requirements                  | Authorization                                |
+| ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
+| /api/location        | GET        | none                          | none                                         |
+| ~~/api/location/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/location~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/location/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/location/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
+
+<details>
+<summary>What You Should Receive (GET)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+<details>
+<summary>What You Should Send (POST)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+## Genders
+
+All routes work with /api/gender or /api/genders
+
+| Path                   | Method     | Requirements                  | Authorization                                |
+| ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
+| /api/gender        | GET        | none                          | none                                         |
+| ~~/api/gender/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/gender~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/gender/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/gender/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
+
+<details>
+<summary>What You Should Receive (GET)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+<details>
+<summary>What You Should Send (POST)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+## Ethnicities
+
+All routes work with /api/ethnicity or /api/ethnicities
+
+| Path                   | Method     | Requirements                  | Authorization                                |
+| ---------------------- | ---------- | ----------------------------- | -------------------------------------------- |
+| /api/ethnicity        | GET        | none                          | none                                         |
+| ~~/api/ethnicity/:id~~ | ~~GET~~    | ~~none~~                      | none                                         |
+| ~~/api/ethnicity~~     | ~~POST~~   |                               | ~~admin, Program Manager, Service Provider~~ |
+| ~~/api/ethnicity/:id~~ | ~~PUT~~    | ~~desired edit as key:value~~ | ~~admin, Program Manager~~                   |
+| ~~/api/ethnicity/:id~~ | ~~DELETE~~ | ~~none~~                      | ~~admin~~                                    |
+
+<details>
+<summary>What You Should Receive (GET)</summary>
+
+```JSON
+
+{
+	
+}
+```
+
+</details>
+
+<details>
+<summary>What You Should Send (POST)</summary>
+
+```JSON
+
+{
+	
 }
 ```
 
