@@ -8,7 +8,7 @@ Our goal is to build a generalizable monitoring and evaluation (M&E) platform th
 
 ## Schema
 
-[<img src='./docs/Labs37_DB_Schema.png'/> DB Designer Schema Link](https://dbdesigner.page.link/KdYw5jrqdVDgWU3a8)
+[<img src='./docs/Labs37 DB Schema.png'/> DB Designer Schema Link](https://dbdesigner.page.link/KdYw5jrqdVDgWU3a8)
 
 ## Status
 
