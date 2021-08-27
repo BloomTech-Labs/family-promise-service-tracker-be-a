@@ -89,7 +89,7 @@ program object returned on GET requests:
         "program_description": string,
         "program_is_active": boolean
         "created_at": DateTime string,
-        "updated_at": DateTime string,
+        "updated_at": DateTime string
 }
 ```
 
@@ -325,10 +325,26 @@ Recipient object returned on GET requests:
 ```JSON
 
 {
-	message: 'TEST',
-	newUser: {
-		err: 'TEST2',
-	}
+	"recipient_id": uuid,
+        "recipient_first_name": string,
+        "recipient_middle_name": string,
+        "recipient_last_name": string,
+        "recipient_is_active": boolean,
+        "recipient_date_of_birth": Date string,
+        "recipient_veteran_status": boolean,
+        "has_disability": boolean,
+        "has_valid_ssi": boolean,
+        "has_valid_medicare_card": boolean,
+        "recipient_notes": string,
+        "household_id": uuid,
+        "gender_id": 19,
+        "race_id": 1,
+        "ethnicity_id": 1,
+        "created_at": DateTime string,
+        "updated_at": DateTime string,
+        "gender": "Prefer not to say",
+        "race": "White",
+        "ethnicity": "Hispanic/Latino"
 }
 ```
 
@@ -340,49 +356,23 @@ Recipient object returned on GET requests:
 ```JSON
 
 {
-	message: 'TEST',
-	newUser: {
-		err: 'TEST2',
-	}
-}
+        "recipient_first_name": string,
+        "recipient_middle_name": string,
+        "recipient_last_name": string,
+        "recipient_is_active": boolean,
+        "recipient_date_of_birth": Date string,
+        "recipient_veteran_status": boolean,
+        "has_disability": boolean,
+        "has_valid_ssi": boolean,
+        "has_valid_medicare_card": boolean,
+        "recipient_notes": string,
+        "household_id": uuid,
+        "gender_id": 19,
+        "race_id": 1,
+        "ethnicity_id": 1,
 ```
 
 </details>
-```JS
-{
-    recipient_id:uuid,
-    recipient_first_name:string,
-    recipient_middle_name: string,
-    recipient_last_name:string,
-    recipient_date_of_birth:string,
-    recipient_veteran_status:boolean,
-    household_id:uuid,
-    gender_id: int,
-    race_id: int,
-    ethnicity_id: int,
-    created_at:datetime string,
-    updated_at:datetime string
-    race:string,
-    gender: string,
-    ethnicity:string,
-    household_name: string,
-    zip: string
-}
-```
-
-<!-- To create or edit a recipient:
-
-```
-{
-    "first_name":"Desired change as a string",
-    "last_name":"Desired change as a string",
-    "age":"Desired change as an integer",
-    "race":"Desired change as an enum",
-    "ethnicity":"Desired change as an enum",
-    "gender":"Desired change as an enum",
-    "veteran_status":"Desired change as a boolean"
-}
-``` -->
 
 ## Households
 
