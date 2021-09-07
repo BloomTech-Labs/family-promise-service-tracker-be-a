@@ -31,6 +31,8 @@ Labs teams must follow all [Labs Engineering Standards](https://docs.labs.lambda
 
 ## Getting Started
 
+Here is a link to help set up your [local backend development environment](https://docs.google.com/document/d/109xl44p7A_f2oyT4PffSgINEuEd5ph6orSfaN4g-XBQ/edit?usp=sharing)
+
 ### Enviornment Variables
 
 - `PORT` - API port (optional, but helpful with FE running as well)
