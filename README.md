@@ -20,7 +20,7 @@ Deployed here: [https://fp-service-tracker.herokuapp.com/](https://fp-service-tr
 
 Details on the Labs Node Scaffolding here: <https://docs.labs.lambdaschool.com/labs-api-strarter/>
 
-Labs teams must follow all [Labs Engineering Standards](https://labs.lambdaschool.com/topics/node-js/).
+Labs teams must follow all [Labs Engineering Standards](https://docs.labs.lambdaschool.com/standards/).
 
 ## Documentation
 
