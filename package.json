@@ -14,6 +14,7 @@
     "tests": "npx jest",
     "tests:watch": "npx jest --watch",
     "coverage": "CI=true npx jest --coverage --detectOpenHandles --forceExit",
+    "coverage-dev": "npx jest --coverage --detectOpenHandles --forceExit",
     "rollback": "npm run knex migrate:rollback",
     "migrate": "npm run knex migrate:latest",
     "seed": "npm run knex seed:run",
