@@ -14,7 +14,7 @@ Our goal is to build a generalizable monitoring and evaluation (M&E) platform th
 
 Deployed here: [https://fp-service-tracker.herokuapp.com/](https://fp-service-tracker.herokuapp.com/)
 
-**_Needs Updating_** Current Roadmap in [Notion](https://www.notion.so/Roadmap-Family-Promise-Service-Tracker-Labs-33-301d3f1b37564f11b6e0a399a5ca8365), all activity tracked in [Trello](https://trello.com/b/8Y9zYr3n/family-promise-service-tracker-labs-33).
+**_Needs Updating_** Current Roadmap in [Notion](https://www.notion.so/Roadmap-Family-Promise-Service-Tracker-2ca00c11c8e14dec93c861ac7aae49c0), all activity tracked in [Trello](https://trello.com/b/U8UUCBeb/family-promise-service-tracker).
 
 ## Requirements
 
