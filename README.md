@@ -31,7 +31,7 @@ Labs teams must follow all [Labs Engineering Standards](https://docs.labs.lambda
 
 ## Getting Started
 
-Please reference these [step by step instructions to setup development environment](dev-setup.md)
+Please reference these [step by step instructions to setup development environment](docs\dev-setup.md)
 
 ### Enviornment Variables
 
