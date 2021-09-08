@@ -31,7 +31,7 @@ Labs teams must follow all [Labs Engineering Standards](https://docs.labs.lambda
 
 ## Getting Started
 
-Please reference these [step by step instructions to setup development environment](https://github.com/Lambda-School-Labs/family-promise-service-tracker-be-a/blob/thomas-capello/doc-updates/docs/dev-setup.md)
+Please reference the step by step instructions to setup development environment in **/docs/dev-setup.md**
 
 ### Enviornment Variables
 
