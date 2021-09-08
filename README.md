@@ -31,7 +31,7 @@ Labs teams must follow all [Labs Engineering Standards](https://docs.labs.lambda
 
 ## Getting Started
 
-Here is a link to help set up your [local backend development environment](https://docs.google.com/document/d/109xl44p7A_f2oyT4PffSgINEuEd5ph6orSfaN4g-XBQ/edit?usp=sharing)
+Please reference these [step by step instructions to setup development environment](dev-setup.md)
 
 ### Enviornment Variables
 
