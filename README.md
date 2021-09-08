@@ -8,19 +8,19 @@ Our goal is to build a generalizable monitoring and evaluation (M&E) platform th
 
 ## Schema
 
-[<img src='./docs/Labs37 DB Schema.png'/> DB Designer Schema Link](https://dbdesigner.page.link/KdYw5jrqdVDgWU3a8)
+[<img src='./docs/Labs37 DB Schema.png'/> DB Designer Schema Link](https://dbdesigner.page.link/VWjy5xWKghDumgmV8)
 
 ## Status
 
 Deployed here: [https://fp-service-tracker.herokuapp.com/](https://fp-service-tracker.herokuapp.com/)
 
-**_Needs Updating_** Current Roadmap in [Notion](https://www.notion.so/Roadmap-Family-Promise-Service-Tracker-Labs-33-301d3f1b37564f11b6e0a399a5ca8365), all activity tracked in [Trello](https://trello.com/b/8Y9zYr3n/family-promise-service-tracker-labs-33).
+**_Needs Updating_** Current Roadmap in [Notion](https://www.notion.so/Roadmap-Family-Promise-Service-Tracker-2ca00c11c8e14dec93c861ac7aae49c0), all activity tracked in [Trello](https://trello.com/b/U8UUCBeb/family-promise-service-tracker).
 
 ## Requirements
 
 Details on the Labs Node Scaffolding here: <https://docs.labs.lambdaschool.com/labs-api-strarter/>
 
-Labs teams must follow all [Labs Engineering Standards](https://labs.lambdaschool.com/topics/node-js/).
+Labs teams must follow all [Labs Engineering Standards](https://docs.labs.lambdaschool.com/standards/).
 
 ## Documentation
 
@@ -30,6 +30,8 @@ Labs teams must follow all [Labs Engineering Standards](https://labs.lambdaschoo
 - Pull Request Template found in **/docs/pull_request_template.md**
 
 ## Getting Started
+
+Please reference the step by step instructions to setup development environment in **/docs/dev-setup.md**
 
 ### Enviornment Variables
 
