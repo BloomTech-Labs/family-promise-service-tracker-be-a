@@ -9,9 +9,12 @@ const findAll = async () => {
       'stp.service_type_id'
     )
     .select(
-      knex.raw(
-        'service_type_programs.*, to_json(programs.*) as program, to_json(service_types.*) as service_type'
-      )
+      'service_type_program_id',
+      'stp.program_id',
+      'stp.service_type_id',
+      'program_name',
+      'service_type_name',
+      'service_type_entry_model'
     )
     .groupBy(
       'stp.service_type_program_id',
