@@ -20,7 +20,8 @@ const findAll = async () => {
       'stp.service_type_program_id',
       'p.program_id',
       'st.service_type_id'
-    );
+    )
+    .orderBy([{ column: 'program_id' }, { column: 'service_type_name' }]);
 };
 
 const findById = async (id) => {
