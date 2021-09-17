@@ -16,7 +16,7 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *      example: '00uk9lxaulDYOiB4H5d8'
  *     provider_role_id:
  *      type: string
- *      description: Foreign key from provider roles table
+ *      description: Foreign key from provider_roles table
  *      example: 1
  *     employee_id:
  *      type: string
@@ -58,14 +58,14 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *
  * /api/providers:
  *  get:
- *    summary: Returns a list of all providers
+ *    summary: Returns all providers
  *    security:
  *      - okta: []
  *    tags:
  *      - provider
  *    responses:
  *      200:
- *        description: Array of providers
+ *        description: Array of all providers in system
  *        content:
  *          application/json:
  *            schema:
@@ -76,7 +76,7 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *                - provider_id: '00uhjfrwdWAQvD8JV4x9'
  *                  provider_role_id: 1
  *                  employee_id: 'A006'
- *                  provider_first_name: 'Frank
+ *                  provider_first_name: 'Frank'
  *                  provider_last_name: 'Martinez'
  *                  provider_email: 'fm@gmail.com'
  *                  provider_phone_number: '123-456-7891'
@@ -108,21 +108,19 @@ router.get('/', (req, res, next) => {
 
 /**
  * @swagger
- * components:
+ *  components:
  *  parameters:
  *    provider_id:
- *      name: id
+ *      name: provider_id
  *      in: path
- *      description: ID of the provider to return
+ *      description: primary key for providers table
  *      required: true
- *      example: 00uhjfrwdWAQvD8JV4x6
+ *      example: 00uhjfrwdWAQvD8JV4x3
  *      schema:
  *        type: string
- *
- * /provider/{id}:
+ * /api/provider/{provider_id}:
  *  get:
- *    description: Find providers by ID
- *    summary: Returns a single provider
+ *    summary: Returns a provider using provider_id
  *    security:
  *      - okta: []
  *    tags:
@@ -131,27 +129,29 @@ router.get('/', (req, res, next) => {
  *      - $ref: '#/components/parameters/provider_id'
  *    responses:
  *      200:
- *        description: A provider object
+ *        description: A valid provider in our system
  *        content:
  *          application/json:
  *            schema:
  *              $ref: '#/components/schemas/Provider'
+ *              example:
+ *                - provider_id: '00uhjfrwdWAQvD8JV4x9'
+ *                  provider_role_id: 1
+ *                  employee_id: 'A006'
+ *                  provider_first_name: 'Frank'
+ *                  provider_last_name: 'Martinez'
+ *                  provider_email: 'fm@gmail.com'
+ *                  provider_phone_number: '123-456-7891'
+ *                  provider_avatar_url: 'https://avatars.dicebear.com/api/initials/bg_user%20basic.svg'
+ *                  provider_is_active: true
+ *                  created_at: '2021-08-23T20:51:26.363Z'
+ *                  updated_at: '2021-08-23T20:51:26.363Z'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  *      404:
  *        description: 'Provider not found'
  */
 
-// not working atm
-router.get('/getServiceProviders', (req, res, next) => {
-  Providers.findServiceProviders()
-    .then((serviceProviders) => {
-      res.status(200).json(serviceProviders);
-    })
-    .catch(next);
-});
-
-// because of okta, the primary key/id for providers is a string
 router.get('/:id', (req, res, next) => {
   const id = String(req.params.id);
   Providers.findById(id)
@@ -159,7 +159,7 @@ router.get('/:id', (req, res, next) => {
       if (provider) {
         res.status(200).json(provider);
       } else {
-        res.status(404).json({ error: 'Profile Not Found' });
+        res.status(404).json({ error: 'Provider Not Found' });
       }
     })
     .catch(next);

@@ -15,15 +15,6 @@ const findById = async (id) => {
   //     .groupBy('providers.provider_id')
 };
 
-// not functional / old model???
-const findServiceProviders = () => {
-  return knex('providers').select(
-    'provider_id',
-    'provider_first_name',
-    'provider_last_name'
-  );
-};
-
 const addProvider = async (newProvider) => {
   return await knex('providers').insert(newProvider, ['*']);
 };
