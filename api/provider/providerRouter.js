@@ -7,70 +7,54 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  * @swagger
  * components:
  *  schemas:
- *    Profile:
- *      type: object
- *      required:
- *        - id
- *        - email
- *        - firstName
- *        - lastName
- *        - role
- *
- *      properties:
- *        id:
- *          type: string
- *          description: This is a foreign key (the okta user ID)
- *        email:
- *          type: string
- *        firstName:
- *          type: string
- *        lastName:
- *          type: string
- *        avatarUrl:
- *          type: string
- *          description: public url of provider avatar
- *        role:
- *          type: string
- *          enum: [administrator|program_manager|service_provider|unnassigned]
- *        created_at:
- *          type: string
- *          format: date-time
- *        updated_at:
- *          type: string
- *          format: date-time
- *        programs:
- *          type: array
- *          items:
- *            type: object
- *            properties:
- *              id:
- *                type: string
- *              name:
- *                type: string
- *              type:
- *                type: string
- *              description:
- *                type: string
- *      example:
- *        id: '00uhjfrwdWAQvD8JV4x6'
- *        email: 'frank@example.com'
- *        firstName: 'Frank'
- *        lastName: 'Martinez'
- *        avatarUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/hermanobrother/128.jpg'
- *        role: administrator
- *        created_at: 2021-04-13T18:47:08.529Z
- *        updated_at: 2021-04-13T18:47:08.529Z
- *        programs:
- *          - id: '49365015-1fea-4b56-a635-638388df5c64'
- *            name: 'Prevention'
- *            type: 'Prevention'
- *            description: 'This is the prevention program'
- *          - id: 'ee313f99-22cf-4a1b-b073-3d6b5c625004'
- *            name: 'Sheltering'
- *            type: 'Sheltering'
- *            description: 'This is the sheltering program'
- *
- *
+ *   Provider:
+ *    type: object
+ *    properties:
+ *     provider_id:
+ *      type: string
+ *      description: This is provided by Okta
+ *      example: '00uk9lxaulDYOiB4H5d8'
+ *     provider_role_id:
+ *      type: string
+ *      description: Foreign key from provider roles table
+ *      example: 1
+ *     employee_id:
+ *      type: string
+ *      example: 'A000'
+ *     provider_first_name:
+ *      type: string
+ *      example: 'Frank'
+ *     provider_last_name:
+ *      type: string
+ *      example: 'Martinez'
+ *     provider_email:
+ *      type: string
+ *      example: 'fm@gmail.com'
+ *     provider_phone_number:
+ *      type: string
+ *      example: '123-456-7890'
+ *     provider_avatar_url:
+ *      type: string
+ *      description: public url of provider avatar
+ *      example: 'https://avatars.dicebear.com/api/initials/fm%20Frank.svg'
+ *     provider_is_active:
+ *      type: boolean
+ *      description: defaults to true
+ *      example: true
+ *     created_at:
+ *      type: string
+ *      format: date-time
+ *      example: '2021-08-23T20:51:26.363Z'
+ *     updated_at:
+ *      type: string
+ *      format: date-time
+ *      example: '2021-04-13T18:47:08.529Z'
+ *    required:
+ *    - provider_id
+ *    - provider_role_id
+ *    - provider_first_name
+ *    - provider_last_name
+ *    - provider_is_active
  *
  * /providers:
  *  get:
@@ -88,7 +72,7 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *            schema:
  *              type: array
  *              items:
- *                $ref: '#/components/schemas/Profile'
+ *                $ref: '#/components/schemas/Provider'
  *              example:
  *                - id: '00uhjfrwdWAQvD8JV4x6'
  *                  email: 'frank@example.com'
@@ -138,7 +122,7 @@ router.get('/', (req, res, next) => {
  * @swagger
  * components:
  *  parameters:
- *    profileId:
+ *    provider_id:
  *      name: id
  *      in: path
  *      description: ID of the provider to return
@@ -156,18 +140,18 @@ router.get('/', (req, res, next) => {
  *    tags:
  *      - provider
  *    parameters:
- *      - $ref: '#/components/parameters/profileId'
+ *      - $ref: '#/components/parameters/provider_id'
  *    responses:
  *      200:
  *        description: A provider object
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Profile'
+ *              $ref: '#/components/schemas/Provider'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  *      404:
- *        description: 'Profile not found'
+ *        description: 'Provider not found'
  */
 
 // not working atm
@@ -203,18 +187,18 @@ router.get('/:id', (req, res, next) => {
  *    tags:
  *      - provider
  *    requestBody:
- *      description: Profile object to to be added
+ *      description: Provider object to to be added
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Profile'
+ *            $ref: '#/components/schemas/Provider'
  *    responses:
  *      400:
  *        $ref: '#/components/responses/BadRequest'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  *      404:
- *        description: 'Profile not found'
+ *        description: 'Provider not found'
  *      200:
  *        description: A provider object
  *        content:
@@ -227,7 +211,7 @@ router.get('/:id', (req, res, next) => {
  *                  description: A message about the result
  *                  example: provider created
  *                provider:
- *                  $ref: '#/components/schemas/Profile'
+ *                  $ref: '#/components/schemas/Provider'
  */
 router.post('/', async (req, res, next) => {
   Providers.addProvider(req.body)
@@ -247,11 +231,11 @@ router.post('/', async (req, res, next) => {
  *    tags:
  *      - provider
  *    requestBody:
- *      description: Profile object to to be updated
+ *      description: Provider object to to be updated
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Profile'
+ *            $ref: '#/components/schemas/Provider'
  *    responses:
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
@@ -269,7 +253,7 @@ router.post('/', async (req, res, next) => {
  *                  description: A message about the result
  *                  example: provider created
  *                provider:
- *                  $ref: '#/components/schemas/Profile'
+ *                  $ref: '#/components/schemas/Provider'
  */
 router.put('/:id', canEditProfile, (req, res, next) => {
   const update = req.body;
@@ -308,7 +292,7 @@ router.put('/:id', canEditProfile, (req, res, next) => {
  *    tags:
  *      - provider
  *    parameters:
- *      - $ref: '#/components/parameters/profileId'
+ *      - $ref: '#/components/parameters/provider_id'
  *    responses:
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
@@ -324,9 +308,9 @@ router.put('/:id', canEditProfile, (req, res, next) => {
  *                message:
  *                  type: string
  *                  description: A message about the result
- *                  example: Profile '00uhjfrwdWAQvD8JV4x6' was deleted.
+ *                  example: Provider '00uhjfrwdWAQvD8JV4x6' was deleted.
  *                provider:
- *                  $ref: '#/components/schemas/Profile'
+ *                  $ref: '#/components/schemas/Provider'
  */
 router.delete('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;

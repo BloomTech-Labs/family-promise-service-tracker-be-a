@@ -17,8 +17,8 @@ module.exports = {
         description: 'the status of the api',
       },
       {
-        name: 'profile',
-        description: 'Operations for profile',
+        name: 'provider',
+        description: 'Operations for providers',
       },
       {
         name: 'data',
