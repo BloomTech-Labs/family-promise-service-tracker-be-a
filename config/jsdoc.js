@@ -13,8 +13,8 @@ module.exports = {
     },
     tags: [
       {
-        name: 'status',
-        description: 'Everything about your status',
+        name: 'index',
+        description: 'the status of the api',
       },
       {
         name: 'profile',
