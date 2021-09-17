@@ -19,8 +19,8 @@ var router = express.Router();
  *                - api
  *              properties:
  *                api:
- *                  type: boolean
- *                  example: true
+ *                  type: string
+ *                  example: 'up'
  *                timestamp:
  *                  type: integer
  *                  example: 1631894113404

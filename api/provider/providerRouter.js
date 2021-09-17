@@ -56,17 +56,16 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *    - provider_last_name
  *    - provider_is_active
  *
- * /providers:
+ * /api/providers:
  *  get:
- *    description: Returns a list of providers
- *    summary: Get a list of all providers
+ *    summary: Returns a list of all providers
  *    security:
  *      - okta: []
  *    tags:
  *      - provider
  *    responses:
  *      200:
- *        description: array of providers
+ *        description: Array of providers
  *        content:
  *          application/json:
  *            schema:
@@ -74,40 +73,29 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *              items:
  *                $ref: '#/components/schemas/Provider'
  *              example:
- *                - id: '00uhjfrwdWAQvD8JV4x6'
- *                  email: 'frank@example.com'
- *                  firstName: 'Frank'
- *                  lastName: 'Martinez'
- *                  avatarUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/herm.jpg'
- *                  role: administrator
- *                  created_at: 2021-04-13T18:47:08.529Z
- *                  updated_at: 2021-04-13T18:47:08.529Z
- *                  programs:
- *                   - id: '49365015-1fea-4b56-a635-638388df5c64'
- *                     name: 'Prevention'
- *                     type: 'Prevention'
- *                     description: 'This is the prevention program'
- *                   - id: 'ee313f99-22cf-4a1b-b073-3d6b5c625004'
- *                     name: 'Sheltering'
- *                     type: 'Sheltering'
- *                     description: 'This is the sheltering program'
- *                - id: '013e4ab94d96542e791f'
- *                  email: 'cathy@example.com'
- *                  firstName: 'Cathy'
- *                  lastName: 'Warmund'
- *                  avatarUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/geneseleznev/128.jpg'
- *                  role: program_manager
- *                  created_at: 2021-04-13T18:47:08.529Z
- *                  updated_at: 2021-04-13T18:47:08.529Z
- *                  programs:
- *                   - id: '49365015-1fea-4b56-a635-638388df5c64'
- *                     name: 'Prevention'
- *                     type: 'Prevention'
- *                     description: 'This is the prevention program'
- *
+ *                - provider_id: '00uhjfrwdWAQvD8JV4x9'
+ *                  provider_role_id: 1
+ *                  employee_id: 'A006'
+ *                  provider_first_name: 'Frank
+ *                  provider_last_name: 'Martinez'
+ *                  provider_email: 'fm@gmail.com'
+ *                  provider_phone_number: '123-456-7891'
+ *                  provider_avatar_url: 'https://avatars.dicebear.com/api/initials/bg_user%20basic.svg'
+ *                  provider_is_active: true
+ *                  created_at: '2021-08-23T20:51:26.363Z'
+ *                  updated_at: '2021-08-23T20:51:26.363Z'
+ *                - provider_id: '00uhjfrwdWAQvD8JV4x2'
+ *                  provider_role_id: 2
+ *                  employee_id: 'PM002'
+ *                  provider_first_name: 'Patty'
+ *                  provider_last_name: 'Program'
+ *                  provider_email: 'pp@gmail.com'
+ *                  provider_phone_number: '123-456-7891'
+ *                  provider_avatar_url: 'https://avatars.dicebear.com/api/initials/Patty%20Program.svg'
+ *                  provider_is_active: true
+ *                  created_at: '2021-08-23T20:51:26.363Z'
+ *                  updated_at: '2021-08-23T20:51:26.363Z'
  *      401:
- *        $ref: '#/components/responses/UnauthorizedError'
- *      403:
  *        $ref: '#/components/responses/UnauthorizedError'
  */
 router.get('/', (req, res, next) => {
