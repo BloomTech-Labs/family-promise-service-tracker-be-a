@@ -115,9 +115,9 @@ router.get('/', (req, res, next) => {
  *      in: path
  *      description: primary key for providers table
  *      required: true
- *      example: 00uhjfrwdWAQvD8JV4x3
  *      schema:
  *        type: string
+ *      example: '00uhjfrwdWAQvD8JV4x3'
  * /api/provider/{provider_id}:
  *  get:
  *    summary: Returns a provider using provider_id
@@ -167,9 +167,9 @@ router.get('/:id', (req, res, next) => {
 
 /**
  * @swagger
- * /provider:
+ * /api/provider:
  *  post:
- *    summary: Add a provider
+ *    summary: Add a provider to the system
  *    security:
  *      - okta: []
  *    tags:
@@ -187,8 +187,8 @@ router.get('/:id', (req, res, next) => {
  *        $ref: '#/components/responses/UnauthorizedError'
  *      404:
  *        description: 'Provider not found'
- *      200:
- *        description: A provider object
+ *      201:
+ *        description: A newly created provider in the system.
  *        content:
  *          application/json:
  *            schema:
@@ -196,15 +196,15 @@ router.get('/:id', (req, res, next) => {
  *              properties:
  *                message:
  *                  type: string
- *                  description: A message about the result
- *                  example: provider created
+ *                  description: Used to alert the user of a successfully created provider.
+ *                  example: 'Provider created'
  *                provider:
  *                  $ref: '#/components/schemas/Provider'
  */
 router.post('/', async (req, res, next) => {
   Providers.addProvider(req.body)
     .then((providers) => {
-      res.status(201).json(providers);
+      res.status(201).json({ message: 'Provider created', providers });
     })
     .catch(next);
 });
