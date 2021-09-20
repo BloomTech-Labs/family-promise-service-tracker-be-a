@@ -1,7 +1,11 @@
 const knex = require('../../data/db-config');
 
 const findAll = async () => {
-  return knex("households as h").leftJoin("locations as l", "l.location_id", "h.location_id")
+  return knex('households as h').leftJoin(
+    'locations as l',
+    'l.location_id',
+    'h.location_id'
+  );
 };
 
 const findById = async (id) => {
