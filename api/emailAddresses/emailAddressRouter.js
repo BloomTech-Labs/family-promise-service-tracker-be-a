@@ -147,8 +147,6 @@ router.get('/:id', (req, res, next) => {
  *        $ref: '#/components/responses/BadRequest'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
- *      404:
- *        description: 'Email address not found'
  *      201:
  *        description: A newly created email in the system.
  *        content:

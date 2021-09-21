@@ -124,8 +124,6 @@ router.get('/:id', (req, res, next) => {
  *        $ref: '#/components/responses/BadRequest'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
- *      404:
- *        description: 'Ethnicity not found'
  *      201:
  *        description: A newly created ethnicity in the system.
  *        content:
@@ -206,7 +204,7 @@ router.put('/:id', requireAdmin, (req, res, next) => {
  *   security:
  *    - okta: []
  *   tags:
- *    - email address
+ *    - ethnicity
  *   parameters:
  *    - $ref: '#/components/parameters/ethnicity_id'
  *   responses:
