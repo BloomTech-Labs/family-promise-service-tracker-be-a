@@ -17,6 +17,10 @@ module.exports = {
         description: 'the status of the api',
       },
       {
+        name: 'email address',
+        description: 'Operations for email addresses',
+      },
+      {
         name: 'provider',
         description: 'Operations for providers',
       },

@@ -56,7 +56,7 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *    - provider_last_name
  *    - provider_is_active
  *
- * /api/providers:
+ * /api/provider:
  *  get:
  *    summary: Returns all providers
  *    security:
@@ -169,7 +169,7 @@ router.get('/:id', (req, res, next) => {
  * @swagger
  * /api/provider:
  *  post:
- *    summary: Add a provider to the system
+ *    summary: Add a provider
  *    security:
  *      - okta: []
  *    tags:
@@ -211,13 +211,15 @@ router.post('/', async (req, res, next) => {
 
 /**
  * @swagger
- * /provider:
+ * /api/provider/{provider_id}:
  *  put:
  *    summary: Update a provider
  *    security:
  *      - okta: []
  *    tags:
  *      - provider
+ *    parameters:
+ *      - $ref: '#/components/parameters/provider_id'
  *    requestBody:
  *      description: Provider object to to be updated
  *      content:
@@ -238,8 +240,8 @@ router.post('/', async (req, res, next) => {
  *              properties:
  *                message:
  *                  type: string
- *                  description: A message about the result
- *                  example: provider created
+ *                  description: Used to alert the user of a successfully updated provider.
+ *                  example: 'Provider updated'
  *                provider:
  *                  $ref: '#/components/schemas/Provider'
  */
@@ -253,7 +255,7 @@ router.put('/:id', canEditProfile, (req, res, next) => {
           .then((updated) => {
             res
               .status(200)
-              .json({ message: 'provider updated', provider: updated });
+              .json({ message: 'Provider updated', provider: updated });
           })
           .catch((err) => {
             res.status(500).json({
@@ -272,33 +274,33 @@ router.put('/:id', canEditProfile, (req, res, next) => {
 
 /**
  * @swagger
- * /provider/{id}:
+ * /api/provider/{provider_id}:
  *  delete:
- *    summary: Remove a provider
- *    security:
- *      - okta: []
- *    tags:
- *      - provider
- *    parameters:
- *      - $ref: '#/components/parameters/provider_id'
- *    responses:
- *      401:
- *        $ref: '#/components/responses/UnauthorizedError'
- *      404:
- *        $ref: '#/components/responses/NotFound'
- *      200:
- *        description: A provider object
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                message:
- *                  type: string
- *                  description: A message about the result
- *                  example: Provider '00uhjfrwdWAQvD8JV4x6' was deleted.
- *                provider:
- *                  $ref: '#/components/schemas/Provider'
+ *   summary: Delete a provider
+ *   security:
+ *    - okta: []
+ *   tags:
+ *    - provider
+ *   parameters:
+ *    - $ref: '#/components/parameters/provider_id'
+ *   responses:
+ *    401:
+ *     $ref: '#/components/responses/UnauthorizedError'
+ *    404:
+ *     $ref: '#/components/responses/NotFound'
+ *    200:
+ *     description: The deleted provider object
+ *     content:
+ *       application/json:
+ *         schema:
+ *           type: object
+ *           properties:
+ *             message:
+ *               type: string
+ *               description: Used to alert the user of a successfully deleted provider.
+ *               example: 'Provider 00uhjfrwdWAQvD8JV4x6 was deleted.'
+ *             provider:
+ *               $ref: '#/components/schemas/Provider'
  */
 router.delete('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;
