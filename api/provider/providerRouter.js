@@ -134,8 +134,6 @@ router.get('/:id', (req, res, next) => {
  *        $ref: '#/components/responses/BadRequest'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
- *      404:
- *        $ref: '#/components/responses/NotFound'
  *      201:
  *        description: A newly created provider in the system.
  */
