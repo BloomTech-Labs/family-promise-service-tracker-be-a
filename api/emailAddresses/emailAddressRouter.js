@@ -46,25 +46,6 @@ const { requireAdmin } = require('../middleware/authorization');
  *    responses:
  *      200:
  *        description: Array of all email addresses in system
- *        content:
- *          application/json:
- *            schema:
- *              type: array
- *              items:
- *                $ref: '#/components/schemas/EmailAddress'
- *              example:
- *               - email_address_id: 32
- *                 recipient_id: '4456de2e-dc93-4ae6-b1cf-cc59c4394e68'
- *                 email_address: 'fakeemail@gmail.com'
- *                 email_address_description: 'Father personal email'
- *                 created_at: '2021-08-23T20:51:26.363Z'
- *                 updated_at: '2021-08-23T20:51:26.363Z'
- *               - email_address_id: 33
- *                 recipient_id: '4456de2e-dc93-4ae6-b1cf-cc59c4394e59'
- *                 email_address: 'fakeemail2@gmail.com'
- *                 email_address_description: 'Mother work email'
- *                 created_at: '2021-08-23T20:51:26.363Z'
- *                 updated_at: '2021-08-23T20:51:26.363Z'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  */
@@ -100,17 +81,6 @@ router.get('/', (req, res, next) => {
  *    responses:
  *      200:
  *        description: A valid email address in our system
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#/components/schemas/EmailAddress'
- *              example:
- *                - email_address_id: 32
- *                  recipient_id: '4456de2e-dc93-4ae6-b1cf-cc59c4394e68'
- *                  email_address: 'fakeemail@gmail.com'
- *                  email_address_description: 'Father personal email'
- *                  created_at: '2021-08-23T20:51:26.363Z'
- *                  updated_at: '2021-08-23T20:51:26.363Z'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  */
@@ -141,7 +111,11 @@ router.get('/:id', (req, res, next) => {
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/EmailAddress'
+ *            type: object
+ *            example:
+ *             recipient_id: ''
+ *             email_address: ''
+ *             email_address_description: ''
  *    responses:
  *      400:
  *        $ref: '#/components/responses/BadRequest'
@@ -149,17 +123,6 @@ router.get('/:id', (req, res, next) => {
  *        $ref: '#/components/responses/UnauthorizedError'
  *      201:
  *        description: A newly created email in the system.
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                message:
- *                  type: string
- *                  description: Used to alert the user of a successfully created email address.
- *                  example: 'Email Address created'
- *                email address:
- *                  $ref: '#/components/schemas/EmailAddress'
  */
 router.post('/', (req, res, next) => {
   EmailAddresses.createEmailAddress(req.body)
@@ -195,17 +158,6 @@ router.post('/', (req, res, next) => {
  *        $ref: '#/components/responses/NotFound'
  *      200:
  *        description: The newly updated email address object
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                message:
- *                  type: string
- *                  description: Used to alert the user of a successfully updated email address.
- *                  example: 'Email address (email_address_id) updated'
- *                email address:
- *                  $ref: '#/components/schemas/EmailAddress'
  */
 router.put('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;
@@ -237,17 +189,6 @@ router.put('/:id', requireAdmin, (req, res, next) => {
  *     $ref: '#/components/responses/NotFound'
  *    200:
  *     description: The deleted email address object
- *     content:
- *       application/json:
- *         schema:
- *           type: object
- *           properties:
- *             message:
- *               type: string
- *               description: Used to alert the user of a successfully deleted email address.
- *               example: 'Email address (email_address_id) was deleted.'
- *             provider:
- *               $ref: '#/components/schemas/EmailAddress'
  */
 router.delete('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;

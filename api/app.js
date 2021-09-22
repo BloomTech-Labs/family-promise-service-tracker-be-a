@@ -15,6 +15,7 @@ const authRequired = require('./middleware/authRequired');
 const swaggerSpec = swaggerJSDoc(jsdocConfig);
 const swaggerUIOptions = {
   explorer: true,
+  docExpansion: 'none',
 };
 
 //###[  Routers ]###
@@ -91,8 +92,7 @@ app.use(['/api/service_type', '/api/service_types'], serviceTypeRouter);
 app.use(['/api/serviceUnits', '/api/serviceUnit'], serviceUnitsRouter);
 app.use(['/api/status', '/api/statuses'], statusRouter);
 
-app.use((err, req, res, next) => {
-  // eslint-disable-line
+app.use((err, req, res, next) => { // eslint-disable-line
   res.status(err.status || 500).json({
     message: err.message,
     // when actually deployed for use do not

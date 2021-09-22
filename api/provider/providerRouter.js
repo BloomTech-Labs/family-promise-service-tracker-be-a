@@ -66,35 +66,6 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *    responses:
  *      200:
  *        description: Array of all providers in system
- *        content:
- *          application/json:
- *            schema:
- *              type: array
- *              items:
- *                $ref: '#/components/schemas/Provider'
- *              example:
- *                - provider_id: '00uhjfrwdWAQvD8JV4x9'
- *                  provider_role_id: 1
- *                  employee_id: 'A006'
- *                  provider_first_name: 'Frank'
- *                  provider_last_name: 'Martinez'
- *                  provider_email: 'fm@gmail.com'
- *                  provider_phone_number: '123-456-7891'
- *                  provider_avatar_url: 'https://avatars.dicebear.com/api/initials/bg_user%20basic.svg'
- *                  provider_is_active: true
- *                  created_at: '2021-08-23T20:51:26.363Z'
- *                  updated_at: '2021-08-23T20:51:26.363Z'
- *                - provider_id: '00uhjfrwdWAQvD8JV4x2'
- *                  provider_role_id: 2
- *                  employee_id: 'PM002'
- *                  provider_first_name: 'Patty'
- *                  provider_last_name: 'Program'
- *                  provider_email: 'pp@gmail.com'
- *                  provider_phone_number: '123-456-7891'
- *                  provider_avatar_url: 'https://avatars.dicebear.com/api/initials/Patty%20Program.svg'
- *                  provider_is_active: true
- *                  created_at: '2021-08-23T20:51:26.363Z'
- *                  updated_at: '2021-08-23T20:51:26.363Z'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  */
@@ -130,26 +101,12 @@ router.get('/', (req, res, next) => {
  *    responses:
  *      200:
  *        description: A valid provider in our system
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#/components/schemas/Provider'
- *              example:
- *                - provider_id: '00uhjfrwdWAQvD8JV4x9'
- *                  provider_role_id: 1
- *                  employee_id: 'A006'
- *                  provider_first_name: 'Frank'
- *                  provider_last_name: 'Martinez'
- *                  provider_email: 'fm@gmail.com'
- *                  provider_phone_number: '123-456-7891'
- *                  provider_avatar_url: 'https://avatars.dicebear.com/api/initials/bg_user%20basic.svg'
- *                  provider_is_active: true
- *                  created_at: '2021-08-23T20:51:26.363Z'
- *                  updated_at: '2021-08-23T20:51:26.363Z'
+ *        example:
+ *         $ref: '#/components/schemas/Provider'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  *      404:
- *        description: 'Provider not found'
+ *        example: 'Provider not found'
  */
 
 router.get('/:id', (req, res, next) => {
@@ -251,7 +208,7 @@ router.put('/:id', canEditProfile, (req, res, next) => {
   if (update) {
     Providers.findById(id)
       .then(
-        Providers.update(id, update)
+        Providers.updateProvider(id, update)
           .then((updated) => {
             res
               .status(200)
@@ -298,7 +255,6 @@ router.put('/:id', canEditProfile, (req, res, next) => {
  *             message:
  *               type: string
  *               description: Used to alert the user of a successfully deleted provider.
- *               example: 'Provider 00uhjfrwdWAQvD8JV4x6 was deleted.'
  *             provider:
  *               $ref: '#/components/schemas/Provider'
  */
