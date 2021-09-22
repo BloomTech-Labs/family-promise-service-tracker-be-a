@@ -43,7 +43,7 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *    - provider_last_name
  *    - provider_is_active
  *
- * /api/provider:
+ * /api/providers:
  *  get:
  *    summary: Returns all providers
  *    security:
@@ -75,7 +75,7 @@ router.get('/', (req, res, next) => {
  *      required: true
  *      schema:
  *        type: string
- * /api/provider/{provider_id}:
+ * /api/providers/{provider_id}:
  *  get:
  *    summary: Returns a provider using provider_id
  *    security:
@@ -92,7 +92,6 @@ router.get('/', (req, res, next) => {
  *      200:
  *        description: A valid provider in our system
  */
-
 router.get('/:id', (req, res, next) => {
   const id = String(req.params.id);
   Providers.findById(id)
@@ -108,7 +107,7 @@ router.get('/:id', (req, res, next) => {
 
 /**
  * @swagger
- * /api/provider:
+ * /api/providers:
  *  post:
  *    summary: Add a provider
  *    security:
