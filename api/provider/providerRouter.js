@@ -7,7 +7,7 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  * @swagger
  * components:
  *  schemas:
- *   Provider:
+ *   Providers:
  *    type: object
  *    properties:
  *     provider_id:

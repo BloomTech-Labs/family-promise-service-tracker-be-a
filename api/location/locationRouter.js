@@ -59,7 +59,7 @@ const { requireAdmin } = require('../middleware/authorization');
  *
  * /api/locations:
  *  get:
- *    summary: Returns all providers
+ *    summary: Returns all locations
  *    security:
  *      - okta: []
  *    tags:
@@ -91,7 +91,7 @@ router.get('/', (req, res, next) => {
  *        type: uuid
  * /api/locations/{location_id}:
  *  get:
- *    summary: Returns a provider using location_id
+ *    summary: Returns a location using location_id
  *    security:
  *      - okta: []
  *    tags:
@@ -152,8 +152,6 @@ router.get('/:id', (req, res, next) => {
  *        $ref: '#/components/responses/BadRequest'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
- *      404:
- *        $ref: '#/components/responses/NotFound'
  *      201:
  *        description: A newly created location in the system.
  */
@@ -167,7 +165,7 @@ router.post('/', (req, res, next) => {
 
 /**
  * @swagger
- * /api/locations/{locations_id}:
+ * /api/locations/{location_id}:
  *  put:
  *    summary: Update a location
  *    security:
