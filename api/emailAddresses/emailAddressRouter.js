@@ -12,25 +12,19 @@ const { requireAdmin } = require('../middleware/authorization');
  *    properties:
  *     email_address_id:
  *      type: integer
- *      example: 55
  *     recipient_id:
  *      type: uuid
  *      description: Foreign key from recipient table
- *      example: '4456de2e-dc93-4ae6-b1cf-cc59c4394e68'
  *     email_address:
  *      type: string
- *      example: 'fakeEmail@gmail.com'
  *     email_address_description:
  *      type: text
- *      example: 'Fathers personal email'
  *     created_at:
  *      type: string
  *      format: date-time
- *      example: '2021-08-23T20:51:26.363Z'
  *     updated_at:
  *      type: string
  *      format: date-time
- *      example: '2021-04-13T18:47:08.529Z'
  *    required:
  *    - email_address_id
  *    - recipient_id
@@ -68,7 +62,6 @@ router.get('/', (req, res, next) => {
  *      required: true
  *      schema:
  *        type: integer
- *      example: 23
  * /api/emailAddress/{email_address_id}:
  *  get:
  *    summary: Returns a provider using email_address_id

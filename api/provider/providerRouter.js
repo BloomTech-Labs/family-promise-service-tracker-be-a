@@ -13,42 +13,29 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *     provider_id:
  *      type: string
  *      description: This is provided by Okta
- *      example: '00uk9lxaulDYOiB4H5d8'
  *     provider_role_id:
  *      type: string
  *      description: Foreign key from provider_roles table
- *      example: 1
  *     employee_id:
  *      type: string
- *      example: 'A000'
  *     provider_first_name:
  *      type: string
- *      example: 'Frank'
  *     provider_last_name:
  *      type: string
- *      example: 'Martinez'
  *     provider_email:
  *      type: string
- *      example: 'fm@gmail.com'
  *     provider_phone_number:
  *      type: string
- *      example: '123-456-7890'
  *     provider_avatar_url:
  *      type: string
- *      description: public url of provider avatar
- *      example: 'https://avatars.dicebear.com/api/initials/fm%20Frank.svg'
  *     provider_is_active:
  *      type: boolean
- *      description: defaults to true
- *      example: true
  *     created_at:
  *      type: string
  *      format: date-time
- *      example: '2021-08-23T20:51:26.363Z'
  *     updated_at:
  *      type: string
  *      format: date-time
- *      example: '2021-04-13T18:47:08.529Z'
  *    required:
  *    - provider_id
  *    - provider_role_id
@@ -88,7 +75,6 @@ router.get('/', (req, res, next) => {
  *      required: true
  *      schema:
  *        type: string
- *      example: '00uhjfrwdWAQvD8JV4x3'
  * /api/provider/{provider_id}:
  *  get:
  *    summary: Returns a provider using provider_id
@@ -99,14 +85,12 @@ router.get('/', (req, res, next) => {
  *    parameters:
  *      - $ref: '#/components/parameters/provider_id'
  *    responses:
- *      200:
- *        description: A valid provider in our system
- *        example:
- *         $ref: '#/components/schemas/Provider'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  *      404:
- *        example: 'Provider not found'
+ *        $ref: '#/components/responses/NotFound'
+ *      200:
+ *        description: A valid provider in our system
  */
 
 router.get('/:id', (req, res, next) => {
@@ -136,27 +120,25 @@ router.get('/:id', (req, res, next) => {
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Provider'
+ *           type: object
+ *           example:
+ *            provider_id: ''
+ *            provider_role_id: ''
+ *            employee_id: ''
+ *            provider_first_name: ''
+ *            provider_last_name: ''
+ *            provider_email: ''
+ *            provider_phone_number: ''
+ *            provider_avatar_url: ''
  *    responses:
  *      400:
  *        $ref: '#/components/responses/BadRequest'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  *      404:
- *        description: 'Provider not found'
+ *        $ref: '#/components/responses/NotFound'
  *      201:
  *        description: A newly created provider in the system.
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                message:
- *                  type: string
- *                  description: Used to alert the user of a successfully created provider.
- *                  example: 'Provider created'
- *                provider:
- *                  $ref: '#/components/schemas/Provider'
  */
 router.post('/', async (req, res, next) => {
   Providers.addProvider(req.body)
@@ -182,25 +164,23 @@ router.post('/', async (req, res, next) => {
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Provider'
+ *           type: object
+ *           example:
+ *            provider_id: ''
+ *            provider_role_id: ''
+ *            employee_id: ''
+ *            provider_first_name: ''
+ *            provider_last_name: ''
+ *            provider_email: ''
+ *            provider_phone_number: ''
+ *            provider_avatar_url: ''
  *    responses:
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  *      404:
  *        $ref: '#/components/responses/NotFound'
  *      200:
- *        description: A provider object
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                message:
- *                  type: string
- *                  description: Used to alert the user of a successfully updated provider.
- *                  example: 'Provider updated'
- *                provider:
- *                  $ref: '#/components/schemas/Provider'
+ *        description: The updated provider object
  */
 router.put('/:id', canEditProfile, (req, res, next) => {
   const update = req.body;
@@ -247,16 +227,6 @@ router.put('/:id', canEditProfile, (req, res, next) => {
  *     $ref: '#/components/responses/NotFound'
  *    200:
  *     description: The deleted provider object
- *     content:
- *       application/json:
- *         schema:
- *           type: object
- *           properties:
- *             message:
- *               type: string
- *               description: Used to alert the user of a successfully deleted provider.
- *             provider:
- *               $ref: '#/components/schemas/Provider'
  */
 router.delete('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;

@@ -12,10 +12,8 @@ const { requireAdmin } = require('../middleware/authorization');
  *    properties:
  *     gender_id:
  *      type: integer
- *      example: 2
  *     gender:
  *      type: string
- *      example: 'Male'
  *    required:
  *    - gender_id
  *    - gender
@@ -30,19 +28,6 @@ const { requireAdmin } = require('../middleware/authorization');
  *    responses:
  *      200:
  *        description: Array of all Genders
- *        content:
- *          application/json:
- *            schema:
- *              type: array
- *              items:
- *                $ref: '#/components/schemas/EmailAddress'
- *              example:
- *               - gender_id: 2
- *                 gender: 'Male'
- *               - gender_id: 3
- *                 gender: 'Female'
- *               - gender_id: 4
- *                 gender: 'Other'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  */
@@ -65,7 +50,6 @@ router.get('/', (req, res, next) => {
  *      required: true
  *      schema:
  *        type: integer
- *      example: 2
  * /api/genders/{gender_id}:
  *  get:
  *    summary: Returns a gender using gender_id
@@ -78,13 +62,6 @@ router.get('/', (req, res, next) => {
  *    responses:
  *      200:
  *        description: A valid gender in our system
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#/components/schemas/Genders'
- *              example:
- *                - ethnicity_id: 1
- *                  ethnicity: 'Male'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  */
@@ -115,10 +92,9 @@ router.get('/:id', (req, res, next) => {
  *      content:
  *        application/json:
  *         schema:
- *          properties:
- *           gender:
- *            type: string
- *            example: 'Prefer not to say'
+ *          type: string
+ *          example:
+ *            gender: ''
  *    responses:
  *      400:
  *        $ref: '#/components/responses/BadRequest'
@@ -126,17 +102,6 @@ router.get('/:id', (req, res, next) => {
  *        $ref: '#/components/responses/UnauthorizedError'
  *      201:
  *        description: A newly created ethnicity in the system.
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                message:
- *                  type: string
- *                  description: Used to alert the user of a successfully created gender.
- *                  example: 'Gender created'
- *                gender:
- *                  $ref: '#/components/schemas/Genders'
  */
 router.post('/', requireAdmin, (req, res, next) => {
   Genders.createGender(req.body)
@@ -170,17 +135,6 @@ router.post('/', requireAdmin, (req, res, next) => {
  *        $ref: '#/components/responses/NotFound'
  *      200:
  *        description: The newly updated gender object
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                message:
- *                  type: string
- *                  description: Used to alert the user of a successfully updated gender.
- *                  example: 'Gender (gender_id) updated'
- *                gender:
- *                  $ref: '#/components/schemas/Genders'
  */
 router.put('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;
@@ -212,17 +166,6 @@ router.put('/:id', requireAdmin, (req, res, next) => {
  *     $ref: '#/components/responses/NotFound'
  *    200:
  *     description: The deleted gender object
- *     content:
- *       application/json:
- *         schema:
- *           type: object
- *           properties:
- *             message:
- *               type: string
- *               description: Used to alert the user of a successfully deleted gender.
- *               example: 'Gender (gender_id) has been removed.'
- *             gender:
- *               $ref: '#/components/schemas/Genders'
  */
 router.delete('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;

@@ -12,10 +12,8 @@ const { requireAdmin } = require('../middleware/authorization');
  *    properties:
  *     ethnicity_id:
  *      type: integer
- *      example: 2
  *     ethnicity:
  *      type: string
- *      example: 'Hispanic/Latino'
  *    required:
  *    - ethnicity_id
  *    - ethnicity
@@ -30,19 +28,6 @@ const { requireAdmin } = require('../middleware/authorization');
  *    responses:
  *      200:
  *        description: Array of all Ethnicities
- *        content:
- *          application/json:
- *            schema:
- *              type: array
- *              items:
- *                $ref: '#/components/schemas/EmailAddress'
- *              example:
- *               - ethnicity_id: 3
- *                 ethnicity: 'Hispanic/Latino'
- *               - ethnicity_id: 4
- *                 ethnicity: 'Non-Hispanic/Non-Latino'
- *               - ethnicity_id: 5
- *                 ethnicity: 'Prefer not to say'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  */
@@ -65,7 +50,6 @@ router.get('/', (req, res, next) => {
  *      required: true
  *      schema:
  *        type: integer
- *      example: 2
  * /api/ethnicities/{ethnicity_id}:
  *  get:
  *    summary: Returns an ethnicity using ethnicity_id
@@ -78,13 +62,6 @@ router.get('/', (req, res, next) => {
  *    responses:
  *      200:
  *        description: A valid ethnicity in our system
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#/components/schemas/Ethnicities'
- *              example:
- *                - ethnicity_id: 1
- *                  ethnicity: "Hispanic/Latino"
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  */
@@ -115,10 +92,9 @@ router.get('/:id', (req, res, next) => {
  *      content:
  *        application/json:
  *         schema:
- *          properties:
- *           ethnicity:
  *            type: string
- *            example: 'White or Caucasian'
+ *            example:
+ *             ethnicity: ''
  *    responses:
  *      400:
  *        $ref: '#/components/responses/BadRequest'
@@ -126,17 +102,6 @@ router.get('/:id', (req, res, next) => {
  *        $ref: '#/components/responses/UnauthorizedError'
  *      201:
  *        description: A newly created ethnicity in the system.
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                message:
- *                  type: string
- *                  description: Used to alert the user of a successfully created ethnicity.
- *                  example: 'Ethnicity created'
- *                ethnicity:
- *                  $ref: '#/components/schemas/Ethnicities'
  */
 router.post('/', requireAdmin, (req, res, next) => {
   Ethnicities.createEthnicity(req.body)
@@ -172,17 +137,6 @@ router.post('/', requireAdmin, (req, res, next) => {
  *        $ref: '#/components/responses/NotFound'
  *      200:
  *        description: The newly updated ethnicity object
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                message:
- *                  type: string
- *                  description: Used to alert the user of a successfully updated ethnicity.
- *                  example: 'Ethnicity (ethnicity_id) updated'
- *                ethnicity:
- *                  $ref: '#/components/schemas/Ethnicities'
  */
 router.put('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;
@@ -214,17 +168,6 @@ router.put('/:id', requireAdmin, (req, res, next) => {
  *     $ref: '#/components/responses/NotFound'
  *    200:
  *     description: The deleted ethnicity object
- *     content:
- *       application/json:
- *         schema:
- *           type: object
- *           properties:
- *             message:
- *               type: string
- *               description: Used to alert the user of a successfully deleted ethnicity.
- *               example: 'Ethnicity (ethnicity_id) has been removed.'
- *             ethnicity:
- *               $ref: '#/components/schemas/EmailAddress'
  */
 router.delete('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;

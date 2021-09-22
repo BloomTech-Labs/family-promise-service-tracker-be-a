@@ -12,29 +12,22 @@ const { requireAdmin } = require('../middleware/authorization');
  *    properties:
  *     household_id:
  *      type: uuid
- *      example: '1b9efd46-0a29-4ed0-9646-4eb01fcb1a77'
  *     location_id:
  *      type: uuid
- *      example: 'ffb7ad0a-e698-4731-b4db-7a632ca9016a'
  *     household_name:
  *      type: string
- *      example: 'The Charles Family'
  *     household_size:
  *      type: integer
- *      example: 8
  *     household_monthly_income:
  *      type: number
- *      example: '840.50'
  *     is_unstable:
  *      type: boolean
  *     created_at:
  *      type: string
  *      format: date-time
- *      example: '2021-08-23T20:51:26.363Z'
  *     updated_at:
  *      type: string
  *      format: date-time
- *      example: '2021-04-13T18:47:08.529Z'
  *    required:
  *    - household_id
  *    - is_unstable
@@ -71,7 +64,6 @@ router.get('/', (req, res, next) => {
  *      required: true
  *      schema:
  *        type: uuid
- *      example: '1b9efd46-0a29-4ed0-9646-4eb01fcb1a77'
  * /api/households/{household_id}:
  *  get:
  *    summary: Returns a household using household_id
@@ -137,17 +129,6 @@ router.get('/:id', (req, res, next) => {
  *        $ref: '#/components/responses/UnauthorizedError'
  *      201:
  *        description: A newly created household in the system.
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                message:
- *                  type: string
- *                  description: Used to alert the user of a successfully created household.
- *                  example: 'Household created'
- *                household:
- *                  $ref: '#/components/schemas/Households'
  */
 router.post('/', (req, res, next) => {
   Households.createHousehold(req.body)
@@ -180,18 +161,7 @@ router.post('/', (req, res, next) => {
  *      404:
  *        $ref: '#/components/responses/NotFound'
  *      200:
- *        description: A households object
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                message:
- *                  type: string
- *                  description: Used to alert the user of a successfully updated household.
- *                  example: 'households updated'
- *                households:
- *                  $ref: '#/components/schemas/Households'
+ *        description: The newly updated household object
  */
 router.put('/:id', (req, res, next) => {
   const { id } = req.params;
@@ -223,16 +193,6 @@ router.put('/:id', (req, res, next) => {
  *     $ref: '#/components/responses/NotFound'
  *    200:
  *     description: The deleted households object
- *     content:
- *       application/json:
- *         schema:
- *           type: object
- *           properties:
- *             message:
- *               type: string
- *               description: Used to alert the user of a successfully deleted household.
- *             households:
- *               $ref: '#/components/schemas/Households'
  */
 router.delete('/:id', requireAdmin, (req, res, next) => {
   const { id } = req.params;
