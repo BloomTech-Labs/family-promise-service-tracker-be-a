@@ -3,25 +3,10 @@ const { okta } = require('../../config/okta');
 
 const findAll = async () => {
   return await knex('providers');
-  // kept for example
-  //     .select(knex.raw('providers.*, json_agg(programs.*) as programs'))
-  //     .groupBy('providers.provider_id');
 };
 
 const findById = async (id) => {
   return await knex('providers').where('provider_id', id).first();
-  //     .select(knex.raw('providers.*, json_agg(programs.*) as programs'))
-  //     .where({ 'providers.provider_id': id })
-  //     .groupBy('providers.provider_id')
-};
-
-// not functional / old model???
-const findServiceProviders = () => {
-  return knex('providers').select(
-    'provider_id',
-    'provider_first_name',
-    'provider_last_name'
-  );
 };
 
 const addProvider = async (newProvider) => {
@@ -41,6 +26,5 @@ module.exports = {
   findById,
   addProvider,
   updateProvider,
-  findServiceProviders,
   removeProvider,
 };

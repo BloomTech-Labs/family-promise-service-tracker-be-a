@@ -5,14 +5,12 @@ var router = express.Router();
  * @swagger
  * /:
  *  get:
- *    description: root path returning status
+ *    description: returns the status of the root endpoint
  *    tags:
- *      - status
- *    produces:
- *      - applicaiton/json
+ *      - index
  *    responses:
  *      200:
- *        description: status is up
+ *        description: root is up
  *        content:
  *          application/json:
  *            schema:
@@ -21,8 +19,11 @@ var router = express.Router();
  *                - api
  *              properties:
  *                api:
- *                  type: boolean
- *                  example: true
+ *                  type: string
+ *                  example: 'up'
+ *                timestamp:
+ *                  type: integer
+ *                  example: 1631894113404
  */
 router.get('/', function (req, res) {
   res.status(200).json({ api: 'up', timestamp: Date.now() });

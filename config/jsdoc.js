@@ -13,21 +13,12 @@ module.exports = {
     },
     tags: [
       {
-        name: 'status',
-        description: 'Everything about your status',
-      },
-      {
-        name: 'profile',
-        description: 'Operations for profile',
-      },
-      {
-        name: 'data',
-        description: 'Operations for data science service',
+        name: 'index',
       },
     ],
     externalDocs: {
-      description: 'Data Science scaffold service docs',
-      url: 'https://ds.labsscaffolding.dev/',
+      description: 'OpenAPI Specification',
+      url: 'https://swagger.io/specification/',
     },
     components: {
       securitySchemes: {

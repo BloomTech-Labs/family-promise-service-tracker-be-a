@@ -1,18 +1,11 @@
 const knex = require('../../data/db-config');
 
 const findAll = async () => {
-  return knex('households as h').leftJoin(
-    'locations as l',
-    'l.location_id',
-    'h.location_id'
-  );
+  return await knex('households as h');
 };
 
 const findById = async (id) => {
   return await knex('households').where('household_id', id).first();
-  // keeping these for now as a reference
-  // .select(knex.raw('households.*, to_json(locations.*) as location'))
-  // .groupBy('households.household_id', 'locations.location_id');
 };
 
 const createHousehold = async (newHousehold) => {
