@@ -82,7 +82,7 @@ router.get('/:id', (req, res, next) => {
 
 /**
  * @swagger
- * /api/service_types:
+ * /api/serviceUnits:
  *  post:
  *    summary: Add a service unit
  *    security:
