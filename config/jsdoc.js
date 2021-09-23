@@ -14,24 +14,11 @@ module.exports = {
     tags: [
       {
         name: 'index',
-        description: 'the status of the api',
-      },
-      {
-        name: 'email address',
-        description: 'Operations for email addresses',
-      },
-      {
-        name: 'provider',
-        description: 'Operations for providers',
-      },
-      {
-        name: 'data',
-        description: 'Operations for data science service',
       },
     ],
     externalDocs: {
-      description: 'Data Science scaffold service docs',
-      url: 'https://ds.labsscaffolding.dev/',
+      description: 'OpenAPI Specification',
+      url: 'https://swagger.io/specification/',
     },
     components: {
       securitySchemes: {
