@@ -56,7 +56,7 @@ router.get('/', (req, res, next) => {
  *    security:
  *      - okta: []
  *    tags:
- *      - gender
+ *      - race
  *    parameters:
  *      - $ref: '#/components/parameters/race_id'
  *    responses:
