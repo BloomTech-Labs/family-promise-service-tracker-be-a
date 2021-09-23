@@ -94,7 +94,7 @@ router.get('/:id', (req, res, next) => {
  *      content:
  *        application/json:
  *         schema:
- *          type: string
+ *          type: object
  *          example:
  *            service_rating: ''
  *            service_rating_description: ''
@@ -121,7 +121,7 @@ router.post('/', requireAdmin, (req, res, next) => {
  * @swagger
  * /api/serviceRatings/{service_rating_id}:
  *  put:
- *    summary: Update a servce rating
+ *    summary: Update a service rating
  *    security:
  *      - okta: []
  *    tags:
