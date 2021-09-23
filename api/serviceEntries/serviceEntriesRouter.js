@@ -38,7 +38,7 @@ const router = express.Router();
  *      type: text
  *     service_entry_data:
  *      type: object
- *      description: jsob object
+ *      description: jsonb object
  *     service_unit_id:
  *      type: integer
  *      description: Foreign key from service units table
