@@ -8,14 +8,6 @@ const findById = async (id) => {
   return await knex('service_types').where('service_type_id', id).first();
 };
 
-// const createServiceType = async (newServiceType) => {
-//   return await knex('service_types').insert(newServiceType, ['*']);
-//   // TO-DO: need to insert associations with programs in junction table
-// };
-
-// the argument is req.body
-// req.body includes new service_type_name
-// req.body also inclues program_ids: [1, 2]
 const createServiceType = async (newServiceTypeData) => {
   const newServiceTypeModel = {
     service_type_name: newServiceTypeData.service_type_name,
@@ -46,7 +38,6 @@ const createServiceType = async (newServiceTypeData) => {
     service_type: service_response[0],
     service_type_programs: serviceTypeProgramData,
   };
-  // TO-DO: need to insert associations with programs in junction table
 };
 
 const updateServiceType = async (id, updates) => {
