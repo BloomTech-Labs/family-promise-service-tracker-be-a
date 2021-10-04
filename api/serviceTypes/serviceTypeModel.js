@@ -31,13 +31,14 @@ const createServiceType = async (newServiceTypeData) => {
 
   const serviceTypeProgramData = await Promise.all(
     newServiceTypeData.program_id.map(async (id) => {
-      return await knex('service_type_programs').insert(
+      const programs = await knex('service_type_programs').insert(
         {
           program_id: id,
           service_type_id: service_type_id,
         },
         '*'
       );
+      return programs[0];
     })
   );
 
