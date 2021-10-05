@@ -1,10 +1,10 @@
 const axios = require('axios');
 
 function validateBody(req, res, next) {
-  const { address, city, state, zip } = req.body;
-  if (!address || !city || !state || !zip) {
+  const { city, state, zip } = req.body;
+  if (!city || !state || !zip) {
     next({
-      message: 'Address, city, state and zip code are all required',
+      message: 'City, state and zip code are all required',
       status: 400,
     });
   } else {
