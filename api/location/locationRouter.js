@@ -1,7 +1,9 @@
+/* eslint-disable prettier/prettier */
 const express = require('express');
 const Locations = require('./locationModel');
 const router = express.Router();
 const { requireAdmin } = require('../middleware/authorization');
+const { validateBody, getCoords } = require("./location-middleware");
 
 /**
  * @swagger
@@ -155,7 +157,7 @@ router.get('/:id', (req, res, next) => {
  *      201:
  *        description: A newly created location in the system.
  */
-router.post('/', (req, res, next) => {
+router.post('/', validateBody, getCoords, (req, res, next) => {
   Locations.createLocation(req.body)
     .then((newLocation) => {
       res.status(201).json({ message: 'Location created', newLocation });
@@ -202,7 +204,7 @@ router.post('/', (req, res, next) => {
  *      200:
  *        description: The updated location object
  */
-router.put('/:id', (req, res, next) => {
+router.put('/:id', validateBody, getCoords, (req, res, next) => {
   const { id } = req.params;
   Locations.updateLocation(id, req.body)
     .then((editedLocation) => {

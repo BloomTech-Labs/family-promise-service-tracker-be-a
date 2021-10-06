@@ -40,6 +40,7 @@ const serviceTypeProgramsRouter = require('./serviceTypePrograms/serviceTypeProg
 const serviceTypeRouter = require('./serviceTypes/serviceTypeRouter');
 const serviceUnitsRouter = require('./serviceUnits/serviceUnitRouter');
 const statusRouter = require('./statuses/statusesRouter');
+const mapsRouter = require('./maps/mapsRouter');
 
 const app = express();
 
@@ -91,6 +92,7 @@ app.use(
 app.use(['/api/service_type', '/api/service_types'], serviceTypeRouter);
 app.use(['/api/serviceUnits', '/api/serviceUnit'], serviceUnitsRouter);
 app.use(['/api/status', '/api/statuses'], statusRouter);
+app.use(['/api/map', '/api/maps'], mapsRouter);
 
 app.use((err, req, res, next) => { // eslint-disable-line
   res.status(err.status || 500).json({
