@@ -30,8 +30,10 @@ function getCoords(req, res, next) {
       next();
     })
     .catch((err) => {
-      console.log(err);
-    });
+      next({
+        message: err,
+        status: 500,
+      });
 }
 
 module.exports = { getCoords, validateBody };
