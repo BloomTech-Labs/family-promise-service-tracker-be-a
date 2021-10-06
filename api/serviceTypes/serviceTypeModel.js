@@ -8,21 +8,21 @@ const findById = async (id) => {
   return await knex('service_types').where('service_type_id', id).first();
 };
 
-const createServiceType = async (newServiceTypeData) => {
-  const newServiceTypeModel = {
-    service_type_name: newServiceTypeData.service_type_name,
-    service_type_description: newServiceTypeData.service_type_description,
-    service_type_entry_model: newServiceTypeData.service_type_entry_model,
+const createServiceType = async (newServiceType) => {
+  const newServiceTypeInsert = {
+    service_type_name: newServiceType.service_type_name,
+    service_type_description: newServiceType.service_type_description,
+    service_type_entry_model: newServiceType.service_type_entry_model,
   };
 
   const service_response = await knex('service_types').insert(
-    newServiceTypeModel,
+    newServiceTypeInsert,
     ['*']
   );
   const service_type_id = service_response[0].service_type_id;
 
   const serviceTypeProgramData = await Promise.all(
-    newServiceTypeData.program_id.map(async (id) => {
+    newServiceType.program_id.map(async (id) => {
       const programs = await knex('service_type_programs').insert(
         {
           program_id: id,
