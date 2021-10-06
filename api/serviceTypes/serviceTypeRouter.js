@@ -122,10 +122,11 @@ router.get('/:id', (req, res, next) => {
  */
 router.post('/', canCrudServiceType, (req, res, next) => {
   ServiceTypes.createServiceType(req.body)
-    .then((newServiceType) => {
+    .then((newServiceTypeData) => {
       res.status(201).json({
         message: 'New service type created',
-        service_type: newServiceType,
+        service_type: newServiceTypeData.service_type,
+        service_type_programs: newServiceTypeData.service_type_programs,
       });
     })
     .catch(next);
