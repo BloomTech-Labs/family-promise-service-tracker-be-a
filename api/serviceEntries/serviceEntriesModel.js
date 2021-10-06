@@ -1,17 +1,5 @@
 const knex = require('../../data/db-config');
 
-// select se.service_entry_id,
-// p.program_name,
-// 	l.location_longitude,
-// 	l.location_latitude
-// from service_entries se
-// 	join _type_prograservicems stp 
-// 		on se.service_type_program_id = stp.service_type_program_id
-// 	join programs p 
-// 		on stp.program_id = p.program_id
-// 	join locations l
-// 		on se.location_id = l.location_id
-
 const findAll = async () => {
   return await knex('service_entries as se')
     .join('providers as pv', 'se.primary_provider_id', 'pv.provider_id')
