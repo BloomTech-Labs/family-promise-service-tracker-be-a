@@ -204,7 +204,7 @@ router.post('/', validateBody, getCoords, (req, res, next) => {
  *      200:
  *        description: The updated location object
  */
-router.put('/:id', (req, res, next) => {
+router.put('/:id', validateBody, getCoords, (req, res, next) => {
   const { id } = req.params;
   Locations.updateLocation(id, req.body)
     .then((editedLocation) => {
