@@ -34,6 +34,7 @@ function getCoords(req, res, next) {
         message: err,
         status: 500,
       });
+    });
 }
 
 module.exports = { getCoords, validateBody };
