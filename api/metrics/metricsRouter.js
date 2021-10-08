@@ -3,6 +3,26 @@ const Metric = require('./metricsModel');
 const DS = require('../dsService/dsModel');
 const router = express.Router();
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    Metrics:
+ *      type:number
+ *
+ * /api/metrics/total:
+ *  get:
+ *    summary: Returns the total number of recipients served
+ *    security:
+ *      - okta: []
+ *    tags:
+ *      - metrics
+ *    responses:
+ *      200:
+ *        description: Total number of recipients served
+ *      401:
+ *        $ref: '#/components/responses/UnauthorizedError'
+ */
 router.get('/total', (req, res, next) => {
   DS.getTotal()
     .then((response) => {
@@ -11,6 +31,26 @@ router.get('/total', (req, res, next) => {
     .catch(next);
 });
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    Metrics:
+ *      type:number
+ *
+ * /api/metrics/families:
+ *  get:
+ *    summary: Returns the total number of families served
+ *    security:
+ *      - okta: []
+ *    tags:
+ *      - metrics
+ *    responses:
+ *      200:
+ *        description: Total number of families served
+ *      401:
+ *        $ref: '#/components/responses/UnauthorizedError'
+ */
 router.get('/families', (req, res, next) => {
   DS.getFamilies()
     .then((response) => {
@@ -19,6 +59,26 @@ router.get('/families', (req, res, next) => {
     .catch(next);
 });
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    Metrics:
+ *      type:number
+ *
+ * /api/metrics/children:
+ *  get:
+ *    summary: Returns the total number of recipients who are under 18, not inclusive, served
+ *    security:
+ *      - okta: []
+ *    tags:
+ *      - metrics
+ *    responses:
+ *      200:
+ *        description: Total number of recipients under 18 served
+ *      401:
+ *        $ref: '#/components/responses/UnauthorizedError'
+ */
 router.get('/children', (req, res, next) => {
   DS.getChildren()
     .then((response) => {
