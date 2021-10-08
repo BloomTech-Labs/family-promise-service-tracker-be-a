@@ -10,4 +10,12 @@ const getViz = (state) => {
   return dsClient.get(`/viz/${state}`);
 };
 
-module.exports = { getPrediction, getViz };
+const getTotal = () => {
+  return dsClient.get('/total_served')
+}
+
+module.exports = {
+  getPrediction,
+  getViz,
+  getTotal,
+};
