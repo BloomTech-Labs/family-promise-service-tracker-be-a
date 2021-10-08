@@ -1,6 +1,15 @@
 const express = require('express');
 const Metric = require('./metricsModel');
+const DS = require('../dsService/dsModel');
 const router = express.Router();
+
+router.get('/total', (req, res, next) => {
+  DS.getTotal()
+    .then((recipients) => {
+      res.status(200).json(recipients);
+    })
+    .catch(next);
+});
 
 router.get('/recipientscount', (req, res, next) => {
   Metric.findAllUniqueRecipients()
