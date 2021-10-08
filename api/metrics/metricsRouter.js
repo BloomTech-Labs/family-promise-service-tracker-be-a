@@ -6,7 +6,15 @@ const router = express.Router();
 router.get('/total', (req, res, next) => {
   DS.getTotal()
     .then((response) => {
-      res.status(200).json(response.data)
+      res.status(200).json(response.data);
+    })
+    .catch(next);
+});
+
+router.get('/families', (req, res, next) => {
+  DS.getFamilies()
+    .then((response) => {
+      res.status(200).json(response.data);
     })
     .catch(next);
 });

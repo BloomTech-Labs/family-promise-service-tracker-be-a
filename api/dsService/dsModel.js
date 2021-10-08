@@ -14,8 +14,13 @@ const getTotal = () => {
   return dsClient.get('/total_served')
 }
 
+const getFamilies = () => {
+  return dsClient.get('/families_served')
+}
+
 module.exports = {
   getPrediction,
   getViz,
   getTotal,
+  getFamilies,
 };
