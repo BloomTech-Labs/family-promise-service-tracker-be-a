@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.get('/total', (req, res, next) => {
   DS.getTotal()
-    .then((recipients) => {
-      res.status(200).json(recipients);
+    .then((response) => {
+      res.status(200).json(response.data)
     })
     .catch(next);
 });
