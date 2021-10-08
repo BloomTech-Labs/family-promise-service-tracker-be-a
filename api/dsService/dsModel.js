@@ -11,11 +11,15 @@ const getViz = (state) => {
 };
 
 const getTotal = () => {
-  return dsClient.get('/total_served')
+  return dsClient.get('/total_served');
 }
 
 const getFamilies = () => {
-  return dsClient.get('/families_served')
+  return dsClient.get('/families_served');
+}
+
+const getChildren = () => {
+  return dsClient.get('/children_served');
 }
 
 module.exports = {
@@ -23,4 +27,5 @@ module.exports = {
   getViz,
   getTotal,
   getFamilies,
+  getChildren,
 };

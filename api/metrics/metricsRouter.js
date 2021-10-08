@@ -19,6 +19,14 @@ router.get('/families', (req, res, next) => {
     .catch(next);
 });
 
+router.get('/children', (req, res, next) => {
+  DS.getChildren()
+    .then((response) => {
+      res.status(200).json(response.data);
+    })
+    .catch(next);
+});
+
 router.get('/recipientscount', (req, res, next) => {
   Metric.findAllUniqueRecipients()
     .then((recipients) => {
