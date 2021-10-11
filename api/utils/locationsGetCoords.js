@@ -1,32 +1,22 @@
 // const { findAll, updateLocation } = require('../location/locationModel');
+const locations = require('./locations_sample');
 //   updateLocation(updatedLocationObj.id, updatedLocationObj);
 //   const locations = await findAll();
 
+// const locations = [
+//   {
+//     address: '123 Gilman Dr W',
+//     address_line2: '',
+//     city: 'Seattle',
+//     state: 'WA',
+//     zip: '98119',
+//     country: 'United States',
+//   },
+// ];
 const axios = require('axios');
 
-const locationData = [
-  {
-    address: '507 N Howard St',
-    city: 'Spokane',
-    state: 'WA',
-    zip: '99201',
-  },
-  {
-    address: '308 S Washington St',
-    city: 'Denver',
-    state: 'CO',
-    zip: '80209',
-  },
-  {
-    address: '404 W Main Ave',
-    city: 'Spokane',
-    state: 'WA',
-    zip: '99201',
-  },
-];
-
-
 const getCoords = async (l) => {
+  const result = [];
   await axios
     .post('http://family-promise-dev.us-east-1.elasticbeanstalk.com/geocode/', {
       address: l.address,
@@ -42,28 +32,40 @@ const getCoords = async (l) => {
         location_longitude: res.data.longitude,
         location_latitude: res.data.latitude,
       };
-      return updatedLocation;
+      result.push(updatedLocation);
     })
     .catch((err) => {
       console.log('error with axios call', err);
     });
+  return result[0];
 };
 
-const delayFunction = (index) => {
-  let location = locationData[index];
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      resolve(getCoords(location));
-    }, 3000)
+// const delayFunction = (index) => {
+//   return Promise.all();
+//   return new Promise((resolve) => resolve(getCoords(locations[index])));
+//   // setTimeout(() => {
+//   // }, 1)
+// };
+
+// const asyncCall = async () => {
+//   let allLocations = [];
+//   for (let i = 0; i < locations.length; i++) {
+//     console.log('calling');
+//     let location = await delayFunction(i);
+//     console.log(location);
+//     allLocations.push(location);
+//   }
+//   console.log(allLocations);
+// };
+
+// asyncCall();
+
+const asyncWrapper = async () => {
+  const updatedLocations = await Promise.all(
+    locations.map(async (location) => {
+      return await getCoords(location);
+    })
   );
+  console.log(updatedLocations);
 };
-
-const asyncCall = async () => {
-  for (let i = 0; i < locationData.length; i++) {
-    console.log('calling');
-    const result = await delayFunction(i);
-    console.log(result);
-  }
-};
-
-asyncCall();
+asyncWrapper();
