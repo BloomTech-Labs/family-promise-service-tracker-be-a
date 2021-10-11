@@ -187,12 +187,40 @@ router.get('/ethnicities', (req, res, next) => {
  *      - metrics
  *    responses:
  *      200:
- *        description: Returns the count of services done for each program
+ *        description: Returns the count of services done for each program as an array of objects
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  */
 router.get('/programs', (req, res, next) => {
   DS.getPrograms()
+    .then((response) => {
+      res.status(200).json(response.data);
+    })
+    .catch(next);
+});
+
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    Metrics:
+ *      type:object
+ *
+ * /api/metrics/services:
+ *  get:
+ *    summary: Returns the count of services provided
+ *    security:
+ *      - okta: []
+ *    tags:
+ *      - metrics
+ *    responses:
+ *      200:
+ *        description: Returns the count of services provided as an array of objects
+ *      401:
+ *        $ref: '#/components/responses/UnauthorizedError'
+ */
+router.get('/services', (req, res, next) => {
+  DS.getServices()
     .then((response) => {
       res.status(200).json(response.data);
     })

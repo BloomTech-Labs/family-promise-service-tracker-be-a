@@ -27,15 +27,19 @@ const getGender = () => {
 };
 
 const getRace = () => {
-  return dsClient.get('races_served');
+  return dsClient.get('/races_served');
 };
 
 const getEthnicities = () => {
-  return dsClient.get('ethnicities_served');
+  return dsClient.get('/ethnicities_served');
 };
 
 const getPrograms = () => {
-  return dsClient.get('program_enrollment');
+  return dsClient.get('/program_enrollment');
+};
+
+const getServices = () => {
+  return dsClient.get('/services_given');
 };
 
 module.exports = {
@@ -48,4 +52,5 @@ module.exports = {
   getRace,
   getEthnicities,
   getPrograms,
+  getServices,
 };
