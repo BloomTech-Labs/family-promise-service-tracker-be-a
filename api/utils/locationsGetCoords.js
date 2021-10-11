@@ -1,9 +1,9 @@
 // const { findAll, updateLocation } = require('../location/locationModel');
-const locations = require('./locations_sample');
+const locationsData = require('./locations_sample');
 //   updateLocation(updatedLocationObj.id, updatedLocationObj);
 //   const locations = await findAll();
 
-// const locations = [
+// const locationsData = [
 //   {
 //     address: '123 Gilman Dr W',
 //     address_line2: '',
@@ -40,32 +40,23 @@ const getCoords = async (l) => {
   return result[0];
 };
 
-// const delayFunction = (index) => {
-//   return Promise.all();
-//   return new Promise((resolve) => resolve(getCoords(locations[index])));
-//   // setTimeout(() => {
-//   // }, 1)
-// };
-
-// const asyncCall = async () => {
-//   let allLocations = [];
-//   for (let i = 0; i < locations.length; i++) {
-//     console.log('calling');
-//     let location = await delayFunction(i);
-//     console.log(location);
-//     allLocations.push(location);
-//   }
-//   console.log(allLocations);
-// };
-
-// asyncCall();
-
-const asyncWrapper = async () => {
-  const updatedLocations = await Promise.all(
-    locations.map(async (location) => {
-      return await getCoords(location);
-    })
+const delayFunction = (index) => {
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      resolve(getCoords(locationsData[index]));
+    }, 1)
   );
-  console.log(updatedLocations);
 };
-asyncWrapper();
+
+const asyncCall = async () => {
+  let allLocations = [];
+  for (let i = 0; i < locationsData.length; i++) {
+    console.log('calling');
+    let location = await delayFunction(i);
+    console.log(location);
+    allLocations.push(location);
+  }
+  console.log(allLocations);
+};
+
+asyncCall();
