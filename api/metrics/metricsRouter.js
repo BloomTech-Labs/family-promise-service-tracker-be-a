@@ -68,19 +68,47 @@ router.get('/families', (req, res, next) => {
  *
  * /api/metrics/children:
  *  get:
- *    summary: Returns the total number of recipients who are under 18, not inclusive, served
+ *    summary: Returns the total number of recipients who are under 18 served
  *    security:
  *      - okta: []
  *    tags:
  *      - metrics
  *    responses:
  *      200:
- *        description: Total number of recipients under 18 served
+ *        description: Total number of recipients under 18, not inclusive, served
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  */
 router.get('/children', (req, res, next) => {
   DS.getChildren()
+    .then((response) => {
+      res.status(200).json(response.data);
+    })
+    .catch(next);
+});
+
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    Metrics:
+ *      type:number
+ *
+ * /api/metrics/genders:
+ *  get:
+ *    summary: Returns the count of each gender served
+ *    security:
+ *      - okta: []
+ *    tags:
+ *      - metrics
+ *    responses:
+ *      200:
+ *        description: Returns the count of each gender served in an array.
+ *      401:
+ *        $ref: '#/components/responses/UnauthorizedError'
+ */
+router.get('/genders', (req, res, next) => {
+  DS.getGender()
     .then((response) => {
       res.status(200).json(response.data);
     })

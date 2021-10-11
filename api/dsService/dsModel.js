@@ -12,15 +12,19 @@ const getViz = (state) => {
 
 const getTotal = () => {
   return dsClient.get('/total_served');
-}
+};
 
 const getFamilies = () => {
   return dsClient.get('/families_served');
-}
+};
 
 const getChildren = () => {
   return dsClient.get('/children_served');
-}
+};
+
+const getGender = () => {
+  return dsClient.get('/genders_served');
+};
 
 module.exports = {
   getPrediction,
@@ -28,4 +32,5 @@ module.exports = {
   getTotal,
   getFamilies,
   getChildren,
+  getGender,
 };
