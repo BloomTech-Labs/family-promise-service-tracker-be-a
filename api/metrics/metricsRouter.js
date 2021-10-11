@@ -103,7 +103,7 @@ router.get('/children', (req, res, next) => {
  *      - metrics
  *    responses:
  *      200:
- *        description: Returns the count of each gender served as an array of objects.
+ *        description: Returns the count of each gender served as an array of objects
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  */
@@ -131,7 +131,7 @@ router.get('/genders', (req, res, next) => {
  *      - metrics
  *    responses:
  *      200:
- *        description: Returns the count of each race served as an array of objects.
+ *        description: Returns the count of each race served as an array of objects
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  */
@@ -159,12 +159,40 @@ router.get('/races', (req, res, next) => {
  *      - metrics
  *    responses:
  *      200:
- *        description: Returns the count of each ethnicity served as an array of objects.
+ *        description: Returns the count of each ethnicity served as an array of objects
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  */
 router.get('/ethnicities', (req, res, next) => {
   DS.getEthnicities()
+    .then((response) => {
+      res.status(200).json(response.data);
+    })
+    .catch(next);
+});
+
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    Metrics:
+ *      type:object
+ *
+ * /api/metrics/programs:
+ *  get:
+ *    summary: Returns the count of services for each program
+ *    security:
+ *      - okta: []
+ *    tags:
+ *      - metrics
+ *    responses:
+ *      200:
+ *        description: Returns the count of services done for each program
+ *      401:
+ *        $ref: '#/components/responses/UnauthorizedError'
+ */
+router.get('/programs', (req, res, next) => {
+  DS.getPrograms()
     .then((response) => {
       res.status(200).json(response.data);
     })
