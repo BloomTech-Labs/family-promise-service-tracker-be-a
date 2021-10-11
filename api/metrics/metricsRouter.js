@@ -122,7 +122,7 @@ router.get('/genders', (req, res, next) => {
  *    Metrics:
  *      type:object
  *
- * /api/metrics/genders:
+ * /api/metrics/races:
  *  get:
  *    summary: Returns the count of each race served
  *    security:
@@ -137,6 +137,34 @@ router.get('/genders', (req, res, next) => {
  */
 router.get('/races', (req, res, next) => {
   DS.getRace()
+    .then((response) => {
+      res.status(200).json(response.data);
+    })
+    .catch(next);
+});
+
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    Metrics:
+ *      type:object
+ *
+ * /api/metrics/ethnicities:
+ *  get:
+ *    summary: Returns the count of each ethnicity served
+ *    security:
+ *      - okta: []
+ *    tags:
+ *      - metrics
+ *    responses:
+ *      200:
+ *        description: Returns the count of each ethnicity served as an array of objects.
+ *      401:
+ *        $ref: '#/components/responses/UnauthorizedError'
+ */
+router.get('/ethnicities', (req, res, next) => {
+  DS.getEthnicities()
     .then((response) => {
       res.status(200).json(response.data);
     })
