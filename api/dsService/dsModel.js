@@ -26,6 +26,10 @@ const getGender = () => {
   return dsClient.get('/genders_served');
 };
 
+const getRace = () => {
+  return dsClient.get('races_served');
+};
+
 module.exports = {
   getPrediction,
   getViz,
@@ -33,4 +37,5 @@ module.exports = {
   getFamilies,
   getChildren,
   getGender,
+  getRace,
 };
