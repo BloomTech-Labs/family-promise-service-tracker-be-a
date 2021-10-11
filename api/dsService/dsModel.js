@@ -42,6 +42,10 @@ const getServices = () => {
   return dsClient.get('/services_given');
 };
 
+const getLocations = () => {
+  return dsClient.get('/locations_of_service');
+};
+
 module.exports = {
   getPrediction,
   getViz,
@@ -53,4 +57,5 @@ module.exports = {
   getEthnicities,
   getPrograms,
   getServices,
+  getLocations,
 };

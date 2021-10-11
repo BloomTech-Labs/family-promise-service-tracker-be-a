@@ -227,6 +227,34 @@ router.get('/services', (req, res, next) => {
     .catch(next);
 });
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    Metrics:
+ *      type:object
+ *
+ * /api/metrics/locations:
+ *  get:
+ *    summary: Returns the count of services at each location type
+ *    security:
+ *      - okta: []
+ *    tags:
+ *      - metrics
+ *    responses:
+ *      200:
+ *        description: Returns the count of services at each location type as an array of objects
+ *      401:
+ *        $ref: '#/components/responses/UnauthorizedError'
+ */
+router.get('/locations', (req, res, next) => {
+  DS.getLocations()
+    .then((response) => {
+      res.status(200).json(response.data);
+    })
+    .catch(next);
+});
+
 router.get('/recipientscount', (req, res, next) => {
   Metric.findAllUniqueRecipients()
     .then((recipients) => {
