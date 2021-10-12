@@ -1,23 +1,8 @@
-// const { findAll, updateLocation } = require('../location/locationModel');
-const locationsData = require('./locations_sample');
-//   updateLocation(updatedLocationObj.id, updatedLocationObj);
-//   const locations = await findAll();
-
-// const locationsData = [
-//   {
-//     address: '123 Gilman Dr W',
-//     address_line2: '',
-//     city: 'Seattle',
-//     state: 'WA',
-//     zip: '98119',
-//     country: 'United States',
-//   },
-// ];
+const locations = require('./addresses_data');
 const axios = require('axios');
 
-const getCoords = async (l) => {
-  const result = [];
-  await axios
+const getCoords = (l) => {
+  return axios
     .post('http://family-promise-dev.us-east-1.elasticbeanstalk.com/geocode/', {
       address: l.address,
       address_line2: l.address_line2,
@@ -32,31 +17,20 @@ const getCoords = async (l) => {
         location_longitude: res.data.longitude,
         location_latitude: res.data.latitude,
       };
-      result.push(updatedLocation);
+      return updatedLocation;
     })
     .catch((err) => {
       console.log('error with axios call', err);
     });
-  return result[0];
 };
 
-const delayFunction = (index) => {
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      resolve(getCoords(locationsData[index]));
-    }, 1)
-  );
-};
-
-const asyncCall = async () => {
-  let allLocations = [];
-  for (let i = 0; i < locationsData.length; i++) {
-    console.log('calling');
-    let location = await delayFunction(i);
-    console.log(location);
-    allLocations.push(location);
+const loopGetCoords = async () => {
+  const updatedLocations = [];
+  for (const l of locations) {
+    const res = await getCoords(l);
+    updatedLocations.push(res);
   }
-  console.log(allLocations);
+  return updatedLocations;
 };
 
-asyncCall();
+module.exports = loopGetCoords;
