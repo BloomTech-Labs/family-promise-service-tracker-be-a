@@ -30,7 +30,6 @@ const loopGetCoords = async () => {
     const res = await getCoords(a);
     updatedAddresses.push(res);
   }
-  console.log(updatedAddresses);
   return updatedAddresses;
 };
 

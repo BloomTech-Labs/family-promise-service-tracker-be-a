@@ -33,7 +33,7 @@ Labs teams must follow all [Labs Engineering Standards](https://docs.labs.lambda
 
 Please reference the step by step instructions to setup development environment in **/docs/dev-setup.md**
 
-### Enviornment Variables
+### Environment Variables
 
 - `PORT` - API port (optional, but helpful with FE running as well)
   - The following ports are whitelisted for use with okta
@@ -80,3 +80,10 @@ There are 3 options to get postgresql installed locally [Choose one]:
 - run: `npm run knex seed:run` to populate your db with some data.
 - run: `npm run tests` to confirm all is setup and tests pass.
 - run: `npm run watch:dev` to start nodemon in local dev enviornment.
+
+### Getting coordinates for location data
+- The location seed data comes from `data/addresses_data.js` and is combined faker data in the locations seed file.
+- The coordinates for addresses were generated with the helper file in `utils/getAddressesWithCoords.js`
+- This helper file can be used as a service in the event that future location data needs coordinates
+- The `addresses` should be changed to an array of properly formatted address objects (see `addresses_data.js` or the `/geocode/` endpoint in the DS Swagger docs)
+- The program will loop through the array, hit the DS `/geocode/` endpoint, and return an array of the updated address objects, now with coordinates
