@@ -17,7 +17,7 @@ const findBy = async (filter) => {
 };
 
 const createProgram = async (newProgram) => {
-  return await knex('programs').insert(newProgram).returning('*').first();
+  return await knex('programs').insert(newProgram, ['*']);
 };
 
 const updateProgram = async (program_id, program_updates) => {
