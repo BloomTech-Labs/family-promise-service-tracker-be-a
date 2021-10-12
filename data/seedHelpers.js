@@ -778,7 +778,6 @@ module.exports = {
   getRand,
   getRandWithZero,
   providerIds,
-  zipCityCombos,
   fakeDescriptions,
   fakeHouseholdIds,
   fakeRecipientIds,

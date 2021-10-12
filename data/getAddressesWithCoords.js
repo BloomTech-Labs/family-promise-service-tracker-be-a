@@ -25,12 +25,10 @@ const getCoords = (a) => {
 };
 
 const loopGetCoords = async () => {
-  console.log(
-    'FETCHING LOCATION COORDINATES FROM DS API -- SEEDING WILL CONTINUE UPON COMPLETION'
-  );
   const updatedAddresses = [];
   for (const a of addresses) {
     const res = await getCoords(a);
+    console.log(res);
     updatedAddresses.push(res);
   }
   return updatedAddresses;
