@@ -29,6 +29,11 @@ const findAllServiceEntryLocations = async () => {
       'r.recipient_last_name',
       'pd.provider_first_name',
       'pd.provider_last_name',
+      'l.address',
+      'l.address_line2',
+      'l.city',
+      'l.state',
+      'l.zip',
       'l.location_longitude',
       'l.location_latitude'
     );
