@@ -87,3 +87,4 @@ There are 3 options to get postgresql installed locally [Choose one]:
 - This helper file can be used as a service in the event that future location data needs coordinates
 - The `addresses` should be changed to an array of properly formatted address objects (see `addresses_data.js` or the `/geocode/` endpoint in the DS Swagger docs)
 - The program will loop through the array, hit the DS `/geocode/` endpoint, and return an array of the updated address objects, now with coordinates
+- This program is for one off data cleaning operations. When a user creates a new location in the application, the getCoords middleware will get the coordinates from the DS '/geocode/' endpoint
