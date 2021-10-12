@@ -17,46 +17,6 @@ const providerIds = [
   '00unr3s3m2zHx70ck5d6',
 ];
 
-// These zip codes match up Spokane and near by cities
-const zipCityCombos = [
-  { zip: '99001', city: 'Airway Heights' },
-  { zip: '99003', city: 'Chattaroy' },
-  { zip: '99004', city: 'Cheney' },
-  { zip: '99005', city: 'Colbert' },
-  { zip: '99006', city: 'Deer Park' },
-  { zip: '99009', city: 'Elk' },
-  { zip: '99011', city: 'Fairchild Air Force Base' },
-  { zip: '99012', city: 'Fairfield' },
-  { zip: '99016', city: 'Greenacres' },
-  { zip: '99018', city: 'Latah' },
-  { zip: '99019', city: 'Liberty Lake' },
-  { zip: '99020', city: 'Marshall' },
-  { zip: '99021', city: 'Mead' },
-  { zip: '99022', city: 'Medical Lake' },
-  { zip: '99023', city: 'Mica' },
-  { zip: '99025', city: 'Newman Lake' },
-  { zip: '99027', city: 'Otis Orchards' },
-  { zip: '99030', city: 'Rockford' },
-  { zip: '99031', city: 'Spangle' },
-  { zip: '99036', city: 'Valleyford' },
-  { zip: '99037', city: 'Spokane Valley' },
-  { zip: '99039', city: 'Waverly' },
-  { zip: '99201', city: 'Spokane' },
-  { zip: '99202', city: 'Spokane' },
-  { zip: '99203', city: 'Spokane' },
-  { zip: '99204', city: 'Spokane' },
-  { zip: '99205', city: 'Spokane' },
-  { zip: '99206', city: 'Spokane Valley' },
-  { zip: '99207', city: 'Spokane' },
-  { zip: '99208', city: 'Spokane' },
-  { zip: '99212', city: 'Spokane Valley' },
-  { zip: '99216', city: 'Spokane Valley' },
-  { zip: '99217', city: 'Spokane' },
-  { zip: '99218', city: 'Spokane' },
-  { zip: '99223', city: 'Spokane' },
-  { zip: '99224', city: 'Spokane' },
-];
-
 // Fake phone and email descriptions
 const fakeDescriptions = [
   'Personal',
@@ -73,7 +33,7 @@ const fakeDescriptions = [
   'Cousin',
 ];
 
-// 100 Location UUIDs to use
+// 75 Location UUIDs to use
 const fakeLocationIds = [
   '10d8c8f7-a0dc-4366-adc3-8a349248003e',
   'c39c68d1-b931-4cd5-b55c-dc1df9e2c83c',
@@ -150,31 +110,6 @@ const fakeLocationIds = [
   'ab95390e-83b0-4964-b476-3c60bea43bf9',
   '9e52ec3e-1688-420e-b7ca-4b13c9e911c1',
   'ab28df97-5769-4a74-9b5a-5e748309d8d1',
-  '17056368-1bf1-4dca-aa3c-8fb4a1c14b2c',
-  '102524bf-c933-41e3-9a13-a0d45327d015',
-  'de208563-5c77-465f-a41e-8e16f0c21138',
-  '1901fbcd-6cd3-4b3a-a088-7560edeb7217',
-  '6d687231-e64c-4e41-9030-5f5efaaecc76',
-  '047cadd2-c840-4de3-897d-02f685973ab2',
-  '37a614c5-aa44-4f9d-a4dd-d55a608b4ffb',
-  'c13753b1-6d88-44f1-9243-684a2ca6f163',
-  'a6f412d7-ddd2-4f18-ad59-fcd1b6367d3d',
-  '5383b24d-9532-404c-908a-08dee126d4b4',
-  '0553cc88-4264-4ba4-8d65-2477adfbea1d',
-  '1cf2c72c-c273-46f7-99a0-aa2bbd26afa4',
-  'b00f399c-7deb-4aa8-b162-47804e409231',
-  '6552190d-d0fb-437f-a621-97dffb201dbf',
-  '0b57336d-58eb-42ee-a358-6a3c8e23e66b',
-  'e318ea5f-7dfb-42c0-832d-f1e6dfb21365',
-  'fca3cdbc-b339-444f-ac25-db4e54f1ab95',
-  '80bc70fe-ff1d-4441-ab5c-5c562ac05283',
-  '823bdb1e-fbff-4ecd-a242-42d4c1443bba',
-  'df86acc9-61a3-438e-989f-47cb3e91cbcb',
-  '562ac9c4-cd8c-4b36-b6f3-f7f9e476926b',
-  'd1357d64-c17c-4023-afee-77ebf84f0a1f',
-  '871d4fca-2249-4634-bf08-4395ee01f6e0',
-  '48b26f91-7ceb-4fc0-b6be-eb1a8e7c02ce',
-  '291d757f-365f-4ac7-9d8b-c2994b75884d',
 ];
 
 // 50 Household UUIDs to use

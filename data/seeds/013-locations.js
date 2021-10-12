@@ -1,34 +1,32 @@
 const faker = require('faker/locale/en_US');
-
-const {
-  zipCityCombos,
-  getRand,
-  getRandWithZero,
-  fakeLocationIds,
-} = require('../seedHelpers');
-
+const { getRand, fakeLocationIds } = require('../seedHelpers');
 const { location_types } = require('./012-location_types');
+const getAddressesWithCoords = require('../getAddressesWithCoords');
 
-const locations = fakeLocationIds.map((id) => {
-  const numToUse = getRandWithZero(zipCityCombos.length);
+const addresses = getAddressesWithCoords()
+  .then((res) => console.log('SUCCESS GETTING COORDINATES: ', res))
+  .catch((err) => console.log('ERROR GETTING COORDINATES: ', err));
+
+const locations = [];
+for (let i = 0; i < addresses.length; i++) {
   const loc_type_ID = getRand(location_types.length);
-
-  return {
-    location_id: id,
+  const location = {
+    location_id: fakeLocationIds[i],
     location_type_id: loc_type_ID,
-    location_name: '',
+    location_name: faker.lorem.words(),
     location_description: faker.lorem.sentence(),
-    address: faker.address.streetAddress(),
-    address_line2: faker.address.secondaryAddress(),
-    city: zipCityCombos[numToUse].city,
-    state: 'WA',
-    zip: zipCityCombos[numToUse].zip,
-    county: faker.address.county(),
-    country: 'US',
-    location_longitude: 1.1, // need to fix this, edit and give correct long, automate
-    location_latitude: 1.1, // need to fix this, edit and give correct lang, automate
+    address: addresses[i].address,
+    address_line2: addresses[i].address_line2,
+    city: addresses[i].city,
+    state: addresses[i].state,
+    zip: addresses[i].zip,
+    county: addresses[i].county,
+    country: addresses[i].country,
+    location_longitude: addresses[i].location_longitude,
+    location_latitude: addresses[i].location_latitude,
   };
-});
+  locations.push(location);
+}
 
 const seed = function (knex) {
   return knex('locations').insert(locations);
