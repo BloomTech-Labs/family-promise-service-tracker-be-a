@@ -2,47 +2,34 @@ const knex = require('../../data/db-config');
 
 const findAll = async () => {
   const providerArray = await knex('providers as p')
-    .join('provider_roles as pr', 'p.provider_role_id', 'pr.provider_role_id')
-    .join('provider_programs as pp', 'p.provider_id', 'pp.provider_id')
-    .join('programs as pg', 'pp.program_id', 'pg.program_id')
+    .leftJoin(
+      'provider_roles as pr',
+      'p.provider_role_id',
+      'pr.provider_role_id'
+    )
+    .leftJoin('provider_programs as pp', 'p.provider_id', 'pp.provider_id')
+    .leftJoin('programs as pg', 'pp.program_id', 'pg.program_id')
     .select('p.*', 'pr.provider_role', 'pg.program_name');
-//   const dict = {};
-//   providerArray.forEach((obj) => {
-//     let shapedObj = {
-//       provider_id: obj.provider_id,
-//       provider_role_id: obj.provider_role_id,
-//       employee_id: obj.employee_id,
-//       provider_first_name: obj.provider_first_name,
-//       provider_last_name: obj.provider_last_name,
-//       provider_email: obj.provider_email,
-//       provider_phone_number: obj.provider_phone_number,
-//       provider_avatar_url: obj.provider_avatar_url,
-//       provider_is_active: obj.provider_is_active,
-//       created_at: obj.created_at,
-//       updated_at: obj.updated_at,
-//       provider_role: obj.provider_role,
-//       programs: [obj.program_name],
-//     };
-//     if (!(obj.provider_id in dict)) {
-//       dict[obj.provider_id] = shapedObj;
-//     } else {
-//       dict[obj.provider_id]['programs'].push(obj.program_name);
-//     }
-//   });
-//   const result = [];
-//   for (const key in dict) {
-//     result.push(dict[key]);
-//   }
-//   return result;
-// };
-results = []
-providerArray.forEach((obj) => {
-  if (!results.includes(obj.provider_id)) {
-    results.push(obj.provider_id);
-  }else{
 
-  }
-});
+  const idArray = [];
+  const finalArray = [];
+  providerArray.forEach((obj) => {
+    if (!idArray.includes(obj.provider_id)) {
+      idArray.push(obj.provider_id);
+      const { program_name, ...newObj } = obj;
+      obj.program_name
+        ? (newObj.programs = [program_name])
+        : (newObj.programs = []);
+      finalArray.push(newObj);
+    } else {
+      const targetObj = finalArray.find(
+        (provider) => obj.provider_id === provider.provider_id
+      );
+      targetObj.programs.push(obj.program_name);
+    }
+  });
+  return finalArray;
+};
 
 // const findById = async (id) => {
 //   return await knex('service_type_programs as stp')
