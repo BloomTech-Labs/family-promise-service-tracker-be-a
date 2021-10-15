@@ -69,18 +69,18 @@ router.get('/', (req, res, next) => {
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  */
-// router.get('/:id', (req, res, next) => {
-//   const { id } = req.params;
-//   ServiceTypePrograms.findById(id)
-//     .then((entry) => {
-//       if (entry) {
-//         res.status(200).json(entry);
-//       } else {
-//         res.status(404).json({ error: `Entry ${id} not found` });
-//       }
-//     })
-//     .catch(next);
-// });
+router.get('/:id', (req, res, next) => {
+  const id = String(req.params.id);
+  ProviderPrograms.findById(id)
+    .then((provider) => {
+      if (provider) {
+        res.status(200).json(provider);
+      } else {
+        res.status(404).json({ error: `Entry ${id} not found` });
+      }
+    })
+    .catch(next);
+});
 
 /**
  * @swagger
