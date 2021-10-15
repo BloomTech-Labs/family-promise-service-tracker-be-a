@@ -60,27 +60,58 @@ const findById = async (id) => {
       targetObj.programs.push(obj.program_name);
     }
   });
-  return finalArray;
+  return finalArray[0];
 };
 
-// // this will may be involved in a more complex machine, for when new service_types are created, and they need to be linked to a program(s)
-// const createServiceTypeProgram = async (newServiceEntry) => {
-//   return await knex('service_type_programs').insert(newServiceEntry, ['*']);
-// };
-
-// const updateServiceTypeProgram = (id, object) => {
-//   return knex('service_type_programs')
-//     .where({ service_type_program_id: id })
-//     .update(object);
-// };
-
-// const removeServiceTypeProgram = (id) => {
-//   return knex('service_type_programs')
-//     .where('service_type_program_id', id)
-//     .del();
-// };
-
+const update = async (id, change) => {
+  const old = await findById(id);
+  if (old.programs !== change.programs) {
+    // Program has been deleted
+    for (const i in old.programs) {
+      if (!change.programs.includes(old.programs[i])) {
+        const programObj = await knex('programs as p')
+          .where({ 'p.program_name': old.programs[i] })
+          .select('program_id')
+          .first();
+        const program_id = programObj.program_id;
+        await knex('provider_programs as pp')
+          .where({ 'pp.program_id': program_id })
+          .andWhere({ 'pp.provider_id': id })
+          .del();
+      }
+    }
+    // Program has been added
+    for (const i in change.programs) {
+      if (!old.programs.includes(change.programs[i])) {
+        const programObj = await knex('programs as p')
+          .where({ 'p.program_name': change.programs[i] })
+          .select('program_id')
+          .first();
+        const program_id = programObj.program_id;
+        await knex('provider_programs').insert({
+          program_id: program_id,
+          provider_id: id,
+        });
+      }
+    }
+  }
+  const providerRoleObj = await knex('provider_roles')
+    .where({ provider_role: change.provider_role })
+    .select('provider_role_id')
+    .first();
+  const providerRoleId = providerRoleObj.provider_role_id;
+  let { programs, provider_role, ...rest } = change;
+  const insertObj = {
+    ...rest,
+    provider_role_id: providerRoleId,
+    updated_at: knex.fn.now(),
+  };
+  await knex('providers').where({ provider_id: id }).update(insertObj);
+  return await findById(id);
+  // Program had been added
+};
 module.exports = {
   findAll,
   findById,
+  update,
 };

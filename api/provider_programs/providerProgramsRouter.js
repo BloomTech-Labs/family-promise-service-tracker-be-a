@@ -108,15 +108,18 @@ router.get('/:id', (req, res, next) => {
  *      201:
  *        description: A newly created service type program in the system.
  */
-// router.post('/', (req, res, next) => {
-//   ServiceTypePrograms.createServiceTypeProgram(req.body)
-//     .then((newServiceEntry) => {
-//       res
-//         .status(201)
-//         .json({ message: 'Service Type Program created', newServiceEntry });
-//     })
-//     .catch(next);
-// });
+router.put('/:id', (req, res, next) => {
+  const id = String(req.params.id);
+  ProviderPrograms.update(id, req.body)
+    .then((updatedProvider) => {
+      if (updatedProvider) {
+        res.status(200).json(updatedProvider);
+      } else {
+        res.status(404).json({ error: `Entry ${id} not found` });
+      }
+    })
+    .catch(next);
+});
 
 /**
  * @swagger
