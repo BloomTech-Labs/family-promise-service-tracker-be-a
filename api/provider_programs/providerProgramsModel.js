@@ -108,7 +108,6 @@ const update = async (id, change) => {
   };
   await knex('providers').where({ provider_id: id }).update(insertObj);
   return await findById(id);
-  // Program had been added
 };
 module.exports = {
   findAll,
