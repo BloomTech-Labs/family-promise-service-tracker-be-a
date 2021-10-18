@@ -1,6 +1,7 @@
 const express = require('express');
 const ProviderPrograms = require('./providerProgramsModel');
 const router = express.Router();
+const { requireAdmin, canEditProfile } = require('../middleware/authorization');
 
 /**
  * @swagger
@@ -150,20 +151,16 @@ router.put('/:id', (req, res, next) => {
  *      200:
  *        description: The newly updated service type program object
  */
-// router.put('/:id', (req, res, next) => {
-//   const { id } = req.params;
-//   ServiceTypePrograms.updateServiceTypeProgram(id, req.body)
-//     .then((response) => {
-//       return ServiceTypePrograms.findById(response[0].service_entry_id);
-//     })
-//     .then((editedEntry) => {
-//       res.status(200).json({
-//         message: `Service Type Program ${id} updated`,
-//         editedEntry,
-//       });
-//     })
-//     .catch(next);
-// });
+router.delete('/:id', (req, res, next) => {
+  const id = String(req.params.id);
+  ProviderPrograms.removeProvider(id)
+    .then((result) => {
+      res
+        .status(200)
+        .json({ message: `Provider ${result.provider_id} has been removed` });
+    })
+    .catch(next);
+});
 
 /**
  * @swagger

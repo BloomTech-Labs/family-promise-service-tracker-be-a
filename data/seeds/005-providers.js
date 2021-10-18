@@ -64,6 +64,19 @@ const providers = [
     )}.svg`,
     provider_is_active: true,
   },
+  {
+    provider_id: 'heyo12345',
+    provider_role_id: 3,
+    employee_id: 'U001',
+    provider_first_name: 'DELETEABLE',
+    provider_last_name: 'PERSON',
+    provider_email: 'fp.servicetracker+unassigned@gmail.com',
+    provider_phone_number: '123-456-9099',
+    provider_avatar_url: `https://avatars.dicebear.com/api/initials/${encodeURIComponent(
+      'DELETEABLE PERSON'
+    )}.svg`,
+    provider_is_active: true,
+  },
 ];
 
 const seed = function (knex) {

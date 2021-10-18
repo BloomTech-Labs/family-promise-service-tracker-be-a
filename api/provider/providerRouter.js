@@ -226,7 +226,7 @@ router.put('/:id', canEditProfile, (req, res, next) => {
  *     description: The deleted provider object
  */
 router.delete('/:id', requireAdmin, (req, res, next) => {
-  const { id } = req.params;
+  const id = String(req.params.id);
   Providers.removeProvider(id)
     .then((count) => {
       if (count > 0) {

@@ -43,6 +43,10 @@ const findById = async (id) => {
     .select('p.*', 'pr.provider_role', 'pg.program_name')
     .where({ 'p.provider_id': id });
 
+  if (providerArray.length === 0) {
+    throw new Error(`Provider with id ${id} not found`);
+  }
+
   const idArray = [];
   const finalArray = [];
   providerArray.forEach((obj) => {
@@ -109,8 +113,23 @@ const update = async (id, change) => {
   await knex('providers').where({ provider_id: id }).update(insertObj);
   return await findById(id);
 };
+
+const removeProvider = async (id) => {
+  const userObj = await findById(id);
+  if (userObj.provider_is_active === false) {
+    throw new Error(`Provider with id ${id} is already deleted`);
+  }
+  const updated = await knex('providers as p')
+    .where('provider_id', id)
+    .update({ provider_is_active: false });
+  if (updated > 0) {
+    return userObj;
+  }
+};
+
 module.exports = {
   findAll,
   findById,
   update,
+  removeProvider,
 };
