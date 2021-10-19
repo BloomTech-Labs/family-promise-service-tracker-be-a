@@ -1,7 +1,7 @@
 const express = require('express');
 const Programs = require('./programModel');
 const router = express.Router();
-const { canCrudServiceType } = require('../middleware/authorization');
+const { canCrudProgram } = require('../middleware/authorization');
 
 /**
  * @swagger
@@ -120,8 +120,8 @@ router.get('/:id', (req, res, next) => {
  *      201:
  *        description: A newly created program in the system.
  */
-router.post('/', canCrudServiceType, (req, res, next) => {
-  Programs.createProgram(req.body)
+router.post('/', canCrudProgram, (req, res, next) => {
+  Programs.createProgram(req.body, req.profile.provider_id)
     .then((newProgram) => {
       res.status(201).json(newProgram);
     })
@@ -158,7 +158,7 @@ router.post('/', canCrudServiceType, (req, res, next) => {
  *      200:
  *        description: The updated program object
  */
-router.put('/:id', canCrudServiceType, (req, res, next) => {
+router.put('/:id', canCrudProgram, (req, res, next) => {
   const { id } = req.params;
   Programs.updateProgram(id, req.body)
     .then((editedProgram) => {
@@ -186,15 +186,14 @@ router.put('/:id', canCrudServiceType, (req, res, next) => {
  *    200:
  *     description: The deleted program object
  */
-router.delete('/:id', canCrudServiceType, (req, res, next) => {
+router.delete('/:id', canCrudProgram, (req, res, next) => {
   const { id } = req.params;
   Programs.removeProgram(id)
-    .then((count) => {
-      if (count > 0) {
-        res.status(200).json({ message: `Program ${id} has been removed` });
-      } else {
-        res.status(404).json({ message: `Program ${id} could not be found` });
-      }
+    .then((result) => {
+      res.status(200).json({
+        message: `Program ${result.program_id} is no longer active`,
+        result,
+      });
     })
     .catch(next);
 });

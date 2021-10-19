@@ -1,12 +1,10 @@
 const knex = require('../../data/db-config');
 
 const isAssignedToProgram = async (provider, program) => {
-  // DEPRICATED????
-  const programs = await knex('providers')
-    .pluck('program_id')
-    .where({ provider_id: provider.provider_id });
-
-  return programs.includes(program);
+  const providerToProgram = await knex('provider_programs')
+    .where('program_id', program)
+    .andWhere('provider_id', provider);
+  return providerToProgram.length > 0;
 };
 
 const getProgramFromServiceType = async (serviceTypeId) => {

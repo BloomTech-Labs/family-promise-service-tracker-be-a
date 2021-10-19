@@ -79,7 +79,7 @@ const addProvider = async (provider) => {
       program_id: programId.program_id,
     });
   }
-  return newProvider;
+  return findById(newProvider.provider_id);
 };
 
 const updateProvider = async (id, change) => {
@@ -114,15 +114,10 @@ const updateProvider = async (id, change) => {
       }
     }
   }
-  const providerRoleObj = await knex('provider_roles')
-    .where({ provider_role: change.provider_role })
-    .select('provider_role_id')
-    .first();
-  const providerRoleId = providerRoleObj.provider_role_id;
-  let { programs, provider_role, ...rest } = change;
+
+  let { programs, ...rest } = change;
   const insertObj = {
     ...rest,
-    provider_role_id: providerRoleId,
     updated_at: knex.fn.now(),
   };
   await knex('providers').where({ provider_id: id }).update(insertObj);

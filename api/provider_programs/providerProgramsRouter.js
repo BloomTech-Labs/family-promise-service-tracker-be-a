@@ -1,38 +1,62 @@
 const express = require('express');
 const ProviderPrograms = require('./providerProgramsModel');
 const router = express.Router();
-const { requireAdmin, canEditProfile } = require('../middleware/authorization');
+// const { canCrudProgram } = require('../middleware/authorization');
+// const { requireAdmin, canEditProfile } = require('../middleware/authorization');
 
 /**
  * @swagger
  * components:
  *  schemas:
- *   ServiceTypePrograms:
+ *   Providers:
  *    type: object
  *    properties:
- *     service_type_program_id:
+ *     provider_id:
+ *      type: string
+ *      description: This is provided by Okta, user should copy and paste
+ *     provider_role_id:
  *      type: integer
- *     program_id:
- *      type: integer
- *      description: Foreign key from programs table
- *     service_type_id:
- *      type: integer
- *      description: Foreign key from service types table
+ *      description: Foreign key from provider_roles table
+ *     employee_id:
+ *      type: string
+ *     provider_first_name:
+ *      type: string
+ *     provider_last_name:
+ *      type: string
+ *     provider_email:
+ *      type: string
+ *     provider_phone_number:
+ *      type: string
+ *     provider_avatar_url:
+ *      type: string
+ *     provider_is_active:
+ *      type: boolean
+ *     created_at:
+ *      type: string
+ *      format: date-time
+ *     updated_at:
+ *      type: string
+ *      format: date-time
+ *     programs:
+ *      type: array
+ *      description: an array of programs from the provider_programs table
  *    required:
- *    - service_type_program_id
- *    - program_id
- *    - service_type_id
+ *    - provider_id
+ *    - provider_role_id
+ *    - provider_first_name
+ *    - provider_last_name
+ *    - provider_is_active
  *
- * /api/serviceTypePrograms:
+ * /api/providerPrograms:
  *  get:
- *    summary: Returns all service type programs
+ *    summary: Returns all providers
  *    security:
  *      - okta: []
  *    tags:
- *      - service type program
+ *      - provider
  *    responses:
  *      200:
- *        description: Array of all service type programs
+ *        description: Array of all providers in system
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  */
@@ -48,27 +72,29 @@ router.get('/', (req, res, next) => {
  * @swagger
  *  components:
  *  parameters:
- *    service_type_program_id:
- *      name: service_type_program_id
+ *    provider_id:
+ *      name: provider_id
  *      in: path
- *      description: primary key for service type programs table
+ *      description: primary key for providers table
  *      required: true
  *      schema:
- *        type: integer
- * /api/serviceTypePrograms/{service_type_program_id}:
+ *        type: string
+ * /api/providerPrograms/{provider_id}:
  *  get:
- *    summary: Returns a service type program using service_type_program_id
+ *    summary: Returns a provider using provider_id
  *    security:
  *      - okta: []
  *    tags:
- *      - service type program
+ *      - provider
  *    parameters:
- *      - $ref: '#/components/parameters/service_type_program_id'
+ *      - $ref: '#/components/parameters/provider_id'
  *    responses:
- *      200:
- *        description: A valid service type program in our system
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
+ *      404:
+ *        $ref: '#/components/responses/NotFound'
+ *      200:
+ *        description: A valid provider in our system
  */
 router.get('/:id', (req, res, next) => {
   const id = String(req.params.id);
@@ -79,6 +105,39 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
+/**
+ * @swagger
+ * /api/providerPrograms:
+ *  post:
+ *    summary: Add a provider
+ *    security:
+ *      - okta: []
+ *    tags:
+ *      - provider
+ *    requestBody:
+ *      description: Provider object to to be added
+ *      content:
+ *        application/json:
+ *          schema:
+ *           type: object
+ *           example:
+ *            provider_id: ''
+ *            provider_role_id: ''
+ *            employee_id: ''
+ *            provider_first_name: ''
+ *            provider_last_name: ''
+ *            provider_email: ''
+ *            provider_phone_number: ''
+ *            provider_avatar_url: ''
+ *            programs: []
+ *    responses:
+ *      400:
+ *        $ref: '#/components/responses/BadRequest'
+ *      401:
+ *        $ref: '#/components/responses/UnauthorizedError'
+ *      201:
+ *        description: A newly created provider in the system.
+ */
 router.post('/', async (req, res, next) => {
   ProviderPrograms.addProvider(req.body)
     .then((provider) => {
@@ -92,29 +151,38 @@ router.post('/', async (req, res, next) => {
 
 /**
  * @swagger
- * /api/serviceTypePrograms:
- *  post:
- *    summary: Add a service type program
+ * /api/providerPrograms/{provider_id}:
+ *  put:
+ *    summary: Update a provider
  *    security:
  *      - okta: []
  *    tags:
- *      - service type program
+ *      - provider
+ *    parameters:
+ *      - $ref: '#/components/parameters/provider_id'
  *    requestBody:
- *      description: service type program object to to be added
+ *      description: Provider object to to be updated
  *      content:
  *        application/json:
- *         schema:
- *          type: object
- *          example:
- *            program_id: ''
- *            service_type_id: ''
+ *          schema:
+ *           type: object
+ *           example:
+ *            provider_id: ''
+ *            provider_role_id: ''
+ *            employee_id: ''
+ *            provider_first_name: ''
+ *            provider_last_name: ''
+ *            provider_email: ''
+ *            provider_phone_number: ''
+ *            provider_avatar_url: ''
+ *            programs: []
  *    responses:
- *      400:
- *        $ref: '#/components/responses/BadRequest'
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
- *      201:
- *        description: A newly created service type program in the system.
+ *      404:
+ *        $ref: '#/components/responses/NotFound'
+ *      200:
+ *        description: The updated provider object
  */
 router.put('/:id', (req, res, next) => {
   const id = String(req.params.id);
@@ -131,78 +199,33 @@ router.put('/:id', (req, res, next) => {
 
 /**
  * @swagger
- * /api/serviceTypePrograms/{service_type_program_id}:
- *  put:
- *    summary: Update a service type program
- *    security:
- *      - okta: []
- *    tags:
- *      - service type program
- *    parameters:
- *      - $ref: '#/components/parameters/service_type_program_id'
- *    requestBody:
- *      description: Service type program object to to be updated
- *      content:
- *        application/json:
- *          schema:
- *           type: object
- *           example:
- *            service_type_program_id: ''
- *            program_id: ''
- *            service_type_id: ''
- *    responses:
- *      401:
- *        $ref: '#/components/responses/UnauthorizedError'
- *      404:
- *        $ref: '#/components/responses/NotFound'
- *      200:
- *        description: The newly updated service type program object
- */
-router.delete('/:id', (req, res, next) => {
-  const id = String(req.params.id);
-  ProviderPrograms.removeProvider(id)
-    .then((result) => {
-      res
-        .status(200)
-        .json({ message: `Provider ${result.provider_id} has been removed` });
-    })
-    .catch(next);
-});
-
-/**
- * @swagger
- * /api/serviceTypePrograms/{service_type_program_id}:
+ * /api/providerPrograms/{provider_id}:
  *  delete:
- *   summary: Delete a service type program from our system
+ *   summary: Delete a provider (changes provider_is_active to false)
  *   security:
  *    - okta: []
  *   tags:
- *    - service type program
+ *    - provider
  *   parameters:
- *    - $ref: '#/components/parameters/service_type_program_id'
+ *    - $ref: '#/components/parameters/provider_id'
  *   responses:
  *    401:
  *     $ref: '#/components/responses/UnauthorizedError'
  *    404:
  *     $ref: '#/components/responses/NotFound'
  *    200:
- *     description: The deleted service type program object
+ *     description: The provider is no longer active + the deleted provider object
  */
-// router.delete('/:id', (req, res, next) => {
-//   const { id } = req.params;
-//   ServiceTypePrograms.removeServiceTypeProgram(id)
-//     .then((count) => {
-//       if (count > 0) {
-//         res
-//           .status(200)
-//           .json({ message: `Service Type Program ${id} has been removed` });
-//       } else {
-//         res
-//           .status(404)
-//           .json({ message: `Service Type Program ${id} could not be found` });
-//       }
-//     })
-//     .catch(next);
-// });
+router.delete('/:id', (req, res, next) => {
+  const id = String(req.params.id);
+  ProviderPrograms.removeProvider(id)
+    .then((result) => {
+      res.status(200).json({
+        message: `Provider ${result.provider_id} is no longer active`,
+        result,
+      });
+    })
+    .catch(next);
+});
 
 module.exports = router;

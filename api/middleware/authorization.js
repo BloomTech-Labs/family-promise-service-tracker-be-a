@@ -1,4 +1,5 @@
 const createError = require('http-errors');
+const knex = require('../../data/db-config');
 const { isAssignedToProgram, getProgramFromServiceType } = require('./models');
 
 // Requires role of admin to apply
@@ -16,6 +17,37 @@ const requireProgramManager = (req, res, next) => {
     next();
   } else {
     next(createError(401, 'User not authorized to perform this action'));
+  }
+};
+
+const canCrudProgram = async (req, res, next) => {
+  // admins can always create service types
+  if (req.profile.provider_role_id == 1) {
+    next();
+  } else if (req.profile.provider_role_id == 2) {
+    if (req.method == 'POST') {
+      next();
+    } else {
+      const providerId = req.profile.provider_id;
+      const programId = req.params.id;
+      const providerToProgram = await isAssignedToProgram(
+        providerId,
+        programId
+      );
+      providerToProgram
+        ? next()
+        : next(
+            createError(
+              401,
+              'This user is not authorized to perform this action'
+            )
+          );
+    }
+  } else {
+    // no other user role can create or edit service types
+    next(
+      createError(401, 'This user is not authorized to perform this action')
+    );
   }
 };
 
@@ -93,4 +125,5 @@ module.exports = {
   canEditProfile,
   canCrudServiceType,
   isAssignedToProgram,
+  canCrudProgram,
 };
