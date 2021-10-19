@@ -69,19 +69,17 @@ const findById = async (id) => {
 
 const addProvider = async (provider) => {
   const { programs, ...rest } = provider;
-  const newProviderId = await knex('providers').insert(rest, ['provider_id']);
-  console.log(newProviderId);
+  const [newProvider] = await knex('providers').insert(rest, ['*']);
   for (const i in programs) {
-    const programId = await knex('programs as p')
+    const [programId] = await knex('programs as p')
       .where('p.program_name', programs[i])
       .select('p.program_id');
-    console.log(programId);
     await knex('provider_programs').insert({
-      provider_id: newProviderId,
-      program_id: programId[0].program_id,
+      provider_id: newProvider.provider_id,
+      program_id: programId.program_id,
     });
   }
-  return newProviderId;
+  return newProvider;
 };
 
 const updateProvider = async (id, change) => {
