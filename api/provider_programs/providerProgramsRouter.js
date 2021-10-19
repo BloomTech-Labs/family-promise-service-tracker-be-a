@@ -74,11 +74,15 @@ router.get('/:id', (req, res, next) => {
   const id = String(req.params.id);
   ProviderPrograms.findById(id)
     .then((provider) => {
-      if (provider) {
-        res.status(200).json(provider);
-      } else {
-        res.status(404).json({ error: `Entry ${id} not found` });
-      }
+      res.status(200).json(provider);
+    })
+    .catch(next);
+});
+
+router.post('/', (req, res, next) => {
+  ProviderPrograms.create()
+    .then((res) => {
+      res.status(201).json(`New provider created with id: ${res.provider_id}`);
     })
     .catch(next);
 });
