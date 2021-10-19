@@ -31,7 +31,6 @@ const metricsRouter = require('./metrics/metricsRouter');
 const phoneNumberRouter = require('./phoneNumbers/phoneNumberRouter');
 const programRouter = require('./program/programRouter');
 const providerRouter = require('./provider/providerRouter');
-const providerProgramRouter = require('./provider_programs/providerProgramsRouter');
 const providerRolesRouter = require('./providerRoles/providerRoleRouter');
 const raceRouter = require('./races/raceRouter');
 const recipientRouter = require('./recipient/recipientRouter');
@@ -81,10 +80,6 @@ app.use(['/api/metric', '/api/metrics'], metricsRouter);
 app.use(['/api/phoneNumbers', '/api/phoneNumber'], phoneNumberRouter);
 app.use(['/api/program', '/api/programs'], programRouter);
 app.use(['/api/provider', '/api/providers'], providerRouter);
-app.use(
-  ['/api/providerPrograms', '/api/providerProgram'],
-  providerProgramRouter
-);
 app.use(['/api/providerRoles', '/api/providerRole'], providerRolesRouter);
 app.use(['/api/races', '/api/race'], raceRouter);
 app.use(['/api/recipient', '/api/recipients'], recipientRouter);
@@ -99,7 +94,8 @@ app.use(['/api/serviceUnits', '/api/serviceUnit'], serviceUnitsRouter);
 app.use(['/api/status', '/api/statuses'], statusRouter);
 app.use(['/api/map', '/api/maps'], mapsRouter);
 
-app.use((err, req, res, next) => {// eslint-disable-line
+app.use((err, req, res, next) => {
+  // eslint-disable-line
   res.status(err.status || 500).json({
     message: err.message,
     // when actually deployed for use do not
