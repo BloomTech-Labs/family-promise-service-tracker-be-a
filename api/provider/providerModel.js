@@ -115,7 +115,7 @@ const updateProvider = async (id, change) => {
     }
   }
 
-  let { programs, ...rest } = change;
+  let { programs, ...rest } = change; // eslint-disable-line
   const insertObj = {
     ...rest,
     updated_at: knex.fn.now(),

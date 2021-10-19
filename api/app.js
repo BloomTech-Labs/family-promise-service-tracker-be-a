@@ -94,8 +94,7 @@ app.use(['/api/serviceUnits', '/api/serviceUnit'], serviceUnitsRouter);
 app.use(['/api/status', '/api/statuses'], statusRouter);
 app.use(['/api/map', '/api/maps'], mapsRouter);
 
-app.use((err, req, res, next) => {
-  // eslint-disable-line
+app.use((err, req, res, next) => { // eslint-disable-line
   res.status(err.status || 500).json({
     message: err.message,
     // when actually deployed for use do not
