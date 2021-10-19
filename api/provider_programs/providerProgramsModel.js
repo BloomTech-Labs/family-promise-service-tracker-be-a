@@ -67,7 +67,24 @@ const findById = async (id) => {
   return finalArray[0];
 };
 
-const update = async (id, change) => {
+const addProvider = async (provider) => {
+  const { programs, ...rest } = provider;
+  const newProviderId = await knex('providers').insert(rest, ['provider_id']);
+  console.log(newProviderId);
+  for (const i in programs) {
+    const programId = await knex('programs as p')
+      .where('p.program_name', programs[i])
+      .select('p.program_id');
+    console.log(programId);
+    await knex('provider_programs').insert({
+      provider_id: newProviderId,
+      program_id: programId[0].program_id,
+    });
+  }
+  return newProviderId;
+};
+
+const updateProvider = async (id, change) => {
   const old = await findById(id);
   if (old.programs !== change.programs) {
     // Program has been deleted
@@ -130,6 +147,7 @@ const removeProvider = async (id) => {
 module.exports = {
   findAll,
   findById,
-  update,
+  updateProvider,
   removeProvider,
+  addProvider,
 };

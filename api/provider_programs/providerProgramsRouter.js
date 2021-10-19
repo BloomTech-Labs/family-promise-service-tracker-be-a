@@ -79,10 +79,13 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
-router.post('/', (req, res, next) => {
-  ProviderPrograms.create()
-    .then((res) => {
-      res.status(201).json(`New provider created with id: ${res.provider_id}`);
+router.post('/', async (req, res, next) => {
+  ProviderPrograms.addProvider(req.body)
+    .then((provider) => {
+      res.status(201).json({
+        message: `Provider created with id: ${provider.provider_id}`,
+        provider,
+      });
     })
     .catch(next);
 });
@@ -115,7 +118,7 @@ router.post('/', (req, res, next) => {
  */
 router.put('/:id', (req, res, next) => {
   const id = String(req.params.id);
-  ProviderPrograms.update(id, req.body)
+  ProviderPrograms.updateProvider(id, req.body)
     .then((updatedProvider) => {
       if (updatedProvider) {
         res.status(200).json(updatedProvider);
