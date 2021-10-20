@@ -48,7 +48,10 @@ const updateServiceType = async (id, updates) => {
 
 // things are not usually deleted, but marked as inactive
 const removeServiceType = async (id) => {
-  return await knex('service_types').where('service_type_id', id).del();
+  return await knex('service_types')
+    .where('service_type_id', id)
+    .update({ service_type_is_active: false });
+  // return await knex('service_types').where('service_type_id', id).del();
   //  TO-DO:  also need to remove associations in junction table
 };
 
