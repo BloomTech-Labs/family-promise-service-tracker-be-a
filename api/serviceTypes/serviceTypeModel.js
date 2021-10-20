@@ -54,12 +54,11 @@ const removeServiceType = async (id) => {
   return await knex('service_types')
     .where('service_type_id', id)
     .update({ service_type_is_active: false });
+  // sets active flag to false instead of delete keeping next line for ref
   // return await knex('service_types').where('service_type_id', id).del();
-  //  TO-DO:  also need to remove associations in junction table
 };
 
 module.exports = {
-  knex, //why?
   findAll,
   findById,
   createServiceType,

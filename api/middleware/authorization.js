@@ -63,17 +63,7 @@ const canCrudServiceType = async (req, res, next) => {
     // program managers can only create service types for
     // programs they are associated with
   } else if (req.profile.provider_role_id == 2) {
-    // if (req.method == 'DELETE') {
-    //   serviceTypeProgramIds.map((programId) => {
-    //     if (providerProgramIds.includes(programId)) {
-    //       //
-    //     }
-    //   });
-    // }
-    // if this is create, the program is in req body
-    // otherwise need to look up the service_type to
     //provider id from profile
-    //
     const providerId = req.profile.provider_id;
     let providerProgramIds = await getProviderProgramIds(providerId);
     let serviceTypeProgramIds = [];
