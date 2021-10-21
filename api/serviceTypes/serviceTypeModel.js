@@ -41,19 +41,16 @@ const createServiceType = async (newServiceType) => {
 };
 
 const updateServiceType = async (id, updates) => {
-  const success = await knex('service_types')
-    .where('service_type_id', id)
-    .update(updates);
-  if (success > 0) {
-    return findById(id);
-  }
+  await knex('service_types').where('service_type_id', id).update(updates);
+  return findById(id);
 };
 
 // things are not usually deleted, but marked as inactive
 const removeServiceType = async (id) => {
-  return await knex('service_types')
+  await knex('service_types')
     .where('service_type_id', id)
     .update({ service_type_is_active: false });
+  return findById(id);
   // sets active flag to false instead of delete keeping next line for ref
   // return await knex('service_types').where('service_type_id', id).del();
 };
