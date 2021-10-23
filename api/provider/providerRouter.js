@@ -161,13 +161,12 @@ router.post('/', async (req, res, next) => {
  *    parameters:
  *      - $ref: '#/components/parameters/provider_id'
  *    requestBody:
- *      description: Provider object to to be updated
+ *      description: Provider object to to be updated. Can be 1 change.
  *      content:
  *        application/json:
  *          schema:
  *           type: object
  *           example:
- *            provider_id: ''
  *            provider_role_id: ''
  *            employee_id: ''
  *            provider_first_name: ''
