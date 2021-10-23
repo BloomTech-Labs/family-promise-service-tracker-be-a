@@ -197,16 +197,10 @@ router.put('/:id', canCrudServiceType, (req, res, next) => {
 router.delete('/:id', canCrudServiceType, (req, res, next) => {
   const { id } = req.params;
   ServiceTypes.removeServiceType(id)
-    .then((count) => {
-      if (count > 0) {
-        res
-          .status(200)
-          .json({ message: `Service Type ${id} has been removed` });
-      } else {
-        res
-          .status(404)
-          .json({ message: `Service Type ${id} could not be found` });
-      }
+    .then((result) => {
+      res
+        .status(200)
+        .json({ message: `Service Type ${id} has been removed`, result });
     })
     .catch(next);
 });

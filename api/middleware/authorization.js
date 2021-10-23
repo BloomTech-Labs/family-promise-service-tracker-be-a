@@ -1,6 +1,10 @@
 const createError = require('http-errors');
 const knex = require('../../data/db-config');
-const { isAssignedToProgram, getProgramFromServiceType } = require('./models');
+const {
+  isAssignedToProgram,
+  getServiceTypeProgramIds,
+  getProviderProgramIds,
+} = require('./authMiddlewareUtil');
 
 // Requires role of admin to apply
 const requireAdmin = (req, res, next) => {
@@ -59,27 +63,46 @@ const canCrudServiceType = async (req, res, next) => {
     // program managers can only create service types for
     // programs they are associated with
   } else if (req.profile.provider_role_id == 2) {
-    try {
-      // if this is create, the program is in req body
-      // otherwise need to look up the service_type to
-      // get the program id
-      const program = req.body.program_id
-        ? [req.body.program_id]
-        : getProgramFromServiceType(req.params.id); // THIS NEEDS ATTENTION/FIXES
-
-      const canCrud = await isAssignedToProgram(req.profile, program[0]); // THIS MAY NEED FIXES OR BE OUTDATED
-      canCrud
-        ? next()
-        : next(
-            createError(
-              401,
-              'User not authorized to update services on this program'
-            )
-          );
-      // since multiple areas could fail here, pass it along directly
-    } catch (err) {
-      next(createError(500, err));
+    //provider id from profile
+    const providerId = req.profile.provider_id;
+    let providerProgramIds = await getProviderProgramIds(providerId);
+    let serviceTypeProgramIds = [];
+    if (req.body.program_id) {
+      //post will have program id
+      serviceTypeProgramIds = req.body.program_id;
+    } else {
+      //put will have service type id in params
+      serviceTypeProgramIds = await getServiceTypeProgramIds(req.params.id);
     }
+
+    const notAssociated = [];
+    serviceTypeProgramIds
+      ? serviceTypeProgramIds.map((programId) => {
+          if (!providerProgramIds.includes(programId)) {
+            notAssociated.push(programId);
+          }
+        })
+      : next(createError(400, 'User is not associated to any programs!'));
+
+    //if not associated then return sophisticated error string
+    if (notAssociated.length > 0) {
+      let errorStr = '';
+      for await (let noAss of notAssociated) {
+        const programObj = await knex('programs')
+          .where('program_id', noAss)
+          .first();
+        const name = programObj.program_name;
+        errorStr += `[${noAss}: ${name}], `;
+      }
+      errorStr = errorStr.slice(0, -2);
+      next(
+        createError(
+          401,
+          `User ${providerId} is not connected with programs: ${errorStr}`
+        )
+      );
+    }
+    next();
   } else {
     // no other user role can create or edit service types
     next(
