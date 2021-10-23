@@ -1,7 +1,8 @@
 const express = require('express');
+const Provider = require('./providerModel');
 const router = express.Router();
-const Providers = require('./providerModel');
-const { requireAdmin, canEditProfile } = require('../middleware/authorization');
+// const { canCrudProgram } = require('../middleware/authorization');
+// const { requireAdmin, canEditProfile } = require('../middleware/authorization');
 
 /**
  * @swagger
@@ -12,9 +13,9 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *    properties:
  *     provider_id:
  *      type: string
- *      description: This is provided by Okta
+ *      description: This is provided by Okta, user should copy and paste
  *     provider_role_id:
- *      type: string
+ *      type: integer
  *      description: Foreign key from provider_roles table
  *     employee_id:
  *      type: string
@@ -36,6 +37,9 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *     updated_at:
  *      type: string
  *      format: date-time
+ *     programs:
+ *      type: array
+ *      description: an array of programs from the provider_programs table
  *    required:
  *    - provider_id
  *    - provider_role_id
@@ -57,9 +61,9 @@ const { requireAdmin, canEditProfile } = require('../middleware/authorization');
  *        $ref: '#/components/responses/UnauthorizedError'
  */
 router.get('/', (req, res, next) => {
-  Providers.findAll()
-    .then((providers) => {
-      res.status(200).json(providers);
+  Provider.findAll()
+    .then((programs) => {
+      res.status(200).json(programs);
     })
     .catch(next);
 });
@@ -94,13 +98,9 @@ router.get('/', (req, res, next) => {
  */
 router.get('/:id', (req, res, next) => {
   const id = String(req.params.id);
-  Providers.findById(id)
+  Provider.findById(id)
     .then((provider) => {
-      if (provider) {
-        res.status(200).json(provider);
-      } else {
-        res.status(404).json({ error: 'Provider Not Found' });
-      }
+      res.status(200).json(provider);
     })
     .catch(next);
 });
@@ -129,6 +129,7 @@ router.get('/:id', (req, res, next) => {
  *            provider_email: ''
  *            provider_phone_number: ''
  *            provider_avatar_url: ''
+ *            programs: []
  *    responses:
  *      400:
  *        $ref: '#/components/responses/BadRequest'
@@ -138,16 +139,19 @@ router.get('/:id', (req, res, next) => {
  *        description: A newly created provider in the system.
  */
 router.post('/', async (req, res, next) => {
-  Providers.addProvider(req.body)
-    .then((providers) => {
-      res.status(201).json({ message: 'Provider created', providers });
+  Provider.addProvider(req.body)
+    .then((provider) => {
+      res.status(201).json({
+        message: `Provider created with id: ${provider.provider_id}`,
+        provider,
+      });
     })
     .catch(next);
 });
 
 /**
  * @swagger
- * /api/provider/{provider_id}:
+ * /api/providers/{provider_id}:
  *  put:
  *    summary: Update a provider
  *    security:
@@ -171,6 +175,7 @@ router.post('/', async (req, res, next) => {
  *            provider_email: ''
  *            provider_phone_number: ''
  *            provider_avatar_url: ''
+ *            programs: []
  *    responses:
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
@@ -179,38 +184,24 @@ router.post('/', async (req, res, next) => {
  *      200:
  *        description: The updated provider object
  */
-router.put('/:id', canEditProfile, (req, res, next) => {
-  const update = req.body;
-  const { id } = req.params;
-  if (update) {
-    Providers.findById(id)
-      .then(
-        Providers.updateProvider(id, update)
-          .then((updated) => {
-            res
-              .status(200)
-              .json({ message: 'Provider updated', provider: updated });
-          })
-          .catch((err) => {
-            res.status(500).json({
-              message: `Could not update provider '${id}'`,
-              error: err.message,
-            });
-          })
-      )
-      .catch(next);
-  } else {
-    res.status(500).json({
-      message: `Could not update provider '${id}'`,
-    });
-  }
+router.put('/:id', (req, res, next) => {
+  const id = String(req.params.id);
+  Provider.updateProvider(id, req.body)
+    .then((updatedProvider) => {
+      if (updatedProvider) {
+        res.status(200).json(updatedProvider);
+      } else {
+        res.status(404).json({ error: `Entry ${id} not found` });
+      }
+    })
+    .catch(next);
 });
 
 /**
  * @swagger
- * /api/provider/{provider_id}:
+ * /api/providers/{provider_id}:
  *  delete:
- *   summary: Delete a provider
+ *   summary: Delete a provider (changes provider_is_active to false)
  *   security:
  *    - okta: []
  *   tags:
@@ -223,17 +214,16 @@ router.put('/:id', canEditProfile, (req, res, next) => {
  *    404:
  *     $ref: '#/components/responses/NotFound'
  *    200:
- *     description: The deleted provider object
+ *     description: The provider is no longer active + the deleted provider object
  */
-router.delete('/:id', requireAdmin, (req, res, next) => {
-  const { id } = req.params;
-  Providers.removeProvider(id)
-    .then((count) => {
-      if (count > 0) {
-        res.status(200).json({ message: `Provider ${id} has been removed` });
-      } else {
-        res.status(404).json({ message: `Provider ${id} could not be found` });
-      }
+router.delete('/:id', (req, res, next) => {
+  const id = String(req.params.id);
+  Provider.removeProvider(id)
+    .then((result) => {
+      res.status(200).json({
+        message: `Provider ${result.provider_id} is no longer active`,
+        result,
+      });
     })
     .catch(next);
 });
